@@ -1,0 +1,193 @@
+# If you come from bash you might have to change your $PATH.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=/usr/local/sbin:$PATH
+export PATH=/usr/local/opt/ncurses/bin:$PATH
+export PATH=/usr/local/opt/apr/bin:$PATH
+export PATH=/usr/local/opt/apr-util/bin:$PATH
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export PATH=$JAVA_HOME/bin:$PATH
+export M2_HOME=/usr/local/opt/maven/libexec
+export PATH=$M2_HOME/bin:$PATH
+export GRADLE_HOME=/usr/local/opt/gradle/libexec
+export GROOVY_HOME=/usr/local/opt/groovy/libexec
+#export JBOSS_HOME=/usr/local/opt/jboss-as/libexec
+#export JBOSS_HOME=/Users/zafarm/Documents/JBossEAP6
+export PATH=${PATH}:${JBOSS_HOME}/bin
+export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export GOPATH=$HOME/Documents/Go
+export PATH=/usr/local/opt/gettext/bin:$PATH
+export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
+#export TILLER_NAMESPACE=tiller-deploy
+
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+# ZSH_THEME="robbyrussell"
+
+# This section is for Powerlevel9k theme. Comment the above 
+# line "ZSH_THEME=...." and uncomment all these lines below
+
+ZSH_THEME="powerlevel9k/powerlevel9k"
+POWERLEVEL9K_MODE="nerdfont-complete"
+##POWERLEVEL9K_DISABLE_RPROMPT=true
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon user dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status command_execution_time root_indicator background_jobs time)
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500%F{white}"
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{white} "
+#POWERLEVEL9K_USER_ICON="\uF415" # 
+POWERLEVEL9K_ROOT_ICON="\uF09C"
+#POWERLEVEL9K_SUDO_ICON=$'\uF09C' # 
+POWERLEVEL9K_TIME_FORMAT="%D{%d/%m/%Y %l:%M %p}"
+POWERLEVEL9K_VCS_BRANCH_ICON=$'\uF126 '
+POWERLEVEL9K_VCS_GIT_ICON='\uF408 '
+POWERLEVEL9K_VCS_GIT_GITHUB_ICON='\uF408 '
+
+# POWERLEVEL9K_MODE='nerdfont-complete'
+# #POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
+# #POWERLEVEL9K_SHORTEN_DELIMITER=""
+# #POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+# POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+# POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
+# POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
+# POWERLEVEL9K_LEFT_SUBSEGMENT_SEPARATOR=''
+# POWERLEVEL9K_RIGHT_SUBSEGMENT_SEPARATOR=''
+# POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX="%F{blue}\u256D\u2500%F{white}"
+# POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="%F{blue}\u2570\uf460%F{white} "
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(root_indicator dir dir_writable_joined)
+# POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(command_execution_time
+#                                     vcs background_jobs_joined time_joined)
+# POWERLEVEL9K_VCS_MODIFIED_BACKGROUND="clear"
+# POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND="clear"
+# POWERLEVEL9K_VCS_MODIFIED_FOREGROUND="yellow"
+# POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND="yellow"
+# POWERLEVEL9K_DIR_HOME_BACKGROUND="clear"
+# POWERLEVEL9K_DIR_HOME_FOREGROUND="blue"
+# POWERLEVEL9K_DIR_HOME_SUBFOLDER_BACKGROUND="clear"
+# POWERLEVEL9K_DIR_HOME_SUBFOLDER_FOREGROUND="blue"
+# POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="clear"
+# POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="red"
+# POWERLEVEL9K_DIR_DEFAULT_BACKGROUND="clear"
+# POWERLEVEL9K_DIR_DEFAULT_FOREGROUND="white"
+# POWERLEVEL9K_ROOT_INDICATOR_BACKGROUND="red"
+# POWERLEVEL9K_ROOT_INDICATOR_FOREGROUND="white"
+# POWERLEVEL9K_STATUS_OK_BACKGROUND="clear"
+# POWERLEVEL9K_STATUS_OK_FOREGROUND="green"
+# POWERLEVEL9K_STATUS_ERROR_BACKGROUND="clear"
+# POWERLEVEL9K_STATUS_ERROR_FOREGROUND="red"
+# POWERLEVEL9K_TIME_BACKGROUND="clear"
+# POWERLEVEL9K_TIME_FOREGROUND="cyan"
+# POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND='clear'
+# POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND='magenta'
+# POWERLEVEL9K_BACKGROUND_JOBS_BACKGROUND='clear'
+# POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND='green'
+
+# End Powerlevel9k configuration
+
+ZSH_DISABLE_COMPFIX=true
+
+# Uncomment the following line to use case-sensitive completion.
+# CASE_SENSITIVE="true"
+
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
+# DISABLE_AUTO_UPDATE="true"
+
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
+
+# Uncomment the following line to disable colors in ls.
+# DISABLE_LS_COLORS="true"
+
+# Uncomment the following line to disable auto-setting terminal title.
+# DISABLE_AUTO_TITLE="true"
+
+# Uncomment the following line to enable command auto-correction.
+ENABLE_CORRECTION="true"
+
+# Uncomment the following line to display red dots whilst waiting for completion.
+COMPLETION_WAITING_DOTS="true"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git brew npm heroku mvn node npm gradle docker docker-compose ng svn ssh-agent kubectl minikube helm)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+
+# export MANPATH="/usr/local/man:$MANPATH"
+
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+
+# Compilation flags
+export ARCHFLAGS="-arch x86_64"
+
+# ssh
+export SSH_KEY_PATH="~/.ssh/rsa_id"
+
+# CPPFLAGS and LDFLAGS
+export CPPFLAGS="-I/usr/local/opt/gettext/include"
+export LDFLAGS="-L/usr/local/opt/gettext/lib"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+alias ltr="ll -altr"
+
+# For Z for completion
+. `brew --prefix`/etc/profile.d/z.sh
+
+# For Syntax Highlighting
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# For Auto Suggestions
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# -------------------------------------------------------------------
+# Functions for convenience
+# -------------------------------------------------------------------
+# set JAVA_HOME -- pass java version as argument e.g. 1.8, 9, 10, 11 etc
+function set_java_to() {
+    java_home=$(/usr/libexec/java_home -v $1)
+    export JAVA_HOME=$java_home
+    export PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/Java/ {next} {print}' | sed 's/:*$//')
+    export PATH=$JAVA_HOME/bin:$PATH
+    echo "Current Java Home: $JAVA_HOME"
+}
