@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=/usr/local/bin:$HOME/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=/usr/local/opt/ncurses/bin:$PATH
 export PATH=/usr/local/opt/apr/bin:$PATH
@@ -13,7 +13,7 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 #export JBOSS_HOME=/usr/local/opt/jboss-as/libexec
 #export JBOSS_HOME=/Users/zafarm/Documents/JBossEAP6
 export PATH=${PATH}:${JBOSS_HOME}/bin
-export PATH=$PATH:/usr/local/opt/go/libexec/bin
+export PATH=/usr/local/opt/go/libexec/bin:$PATH
 export GOPATH=$HOME/Documents/Go
 export PATH=/usr/local/opt/gettext/bin:$PATH
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
@@ -168,6 +168,7 @@ export LDFLAGS="-L/usr/local/opt/gettext/lib"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ltr="ll -altr"
+alias grep="grep -inrF --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
 
 # For Z for completion
 . `brew --prefix`/etc/profile.d/z.sh
@@ -177,6 +178,9 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # For Auto Suggestions
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# For Ruby environment initialization
+eval "$(rbenv init -)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -191,3 +195,11 @@ function set_java_to() {
     export PATH=$JAVA_HOME/bin:$PATH
     echo "Current Java Home: $JAVA_HOME"
 }
+
+# -------------------------------------------------------------------
+# Function to check if port is used 
+# -------------------------------------------------------------------
+function port() {
+    lsof -n -i4TCP:$1 | grep LISTEN
+}
+
