@@ -16,8 +16,8 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'kien/ctrlp.vim'
-Plug 'Lokaltog/vim-powerline'
 Plug 'mattn/emmet-vim'
+Plug 'vim-airline/vim-airline'
 Plug 'godlygeek/tabular'
 Plug 'msanders/snipmate.vim'
 Plug 'ecomba/vim-ruby-refactoring'
@@ -173,7 +173,7 @@ nmap <leader>i <Plug>yankstack_substitute_newer_paste
 inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
 "set global variable
-let g:Powerline_symbols = 'unicode'
+let g:Powerline_symbols = 'fancy'
 let g:Tlist_Show_One_File = 1
 let g:Tlist_Use_Right_Window = 1
 let g:Tlist_GainFocus_On_ToggleOpen = 1
