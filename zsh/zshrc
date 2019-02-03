@@ -130,7 +130,7 @@ POWERLEVEL9K_VCS_GIT_GITHUB_ICON='\uF408 '
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew npm heroku mvn node npm gradle docker docker-compose ng svn ssh-agent kubectl minikube helm)
+plugins=(git brew npm heroku mvn node npm gradle docker docker-compose ng svn kubectl minikube helm)
 
 source $ZSH/oh-my-zsh.sh
 
