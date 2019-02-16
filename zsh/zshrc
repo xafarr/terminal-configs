@@ -189,6 +189,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # -------------------------------------------------------------------
 # set JAVA_HOME -- pass java version as argument e.g. 1.8, 9, 10, 11 etc
 function set_java_to() {
+    # For Ubuntu - java_home=$(find /usr/lib/jvm -maxdepth 1 -type d -name "*$1*" | sort -r | head -n 1)
     java_home=$(/usr/libexec/java_home -v $1)
     export JAVA_HOME=$java_home
     export PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/Java/ {next} {print}' | sed 's/:*$//')
