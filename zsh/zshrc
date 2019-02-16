@@ -197,6 +197,14 @@ function set_java_to() {
     echo "Current Java Home: $JAVA_HOME"
 }
 
+## Fot Ubuntu java home setting
+#function set_java_to(){
+#    java_home=$(find /usr/lib/jvm -maxdepth 1 -type d -name "*$1*" | sort -r | head -n 1)
+#    export JAVA_HOME=$java_home
+#    export PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/jvm/ {next} {print}' | sed 's/:*$//')
+#    export PATH=$JAVA_HOME/bin:$PATH
+#    echo "Current Java Home: $JAVA_HOME"
+
 # -------------------------------------------------------------------
 # Function to check if port is used 
 # -------------------------------------------------------------------
