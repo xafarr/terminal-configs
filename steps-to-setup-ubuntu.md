@@ -39,3 +39,23 @@
 - install gnome-tweak-tool
     ```
     $ sudo apt install gnome-tweak-tool -y
+- install 'chrome-gnome-shell' and 'gTile' for window tiling (similar to Magnet in macOS)
+    ```
+    $ sudo apt-get install chrome-gnome-shell
+    ```
+    - install gnome extension from [here](https://extensions.gnome.org/extension/28/gtile/)
+    - change keybinding from `Super+Enter(keypad)` to `Super+return`
+
+- install Terminator if desired
+    ```
+    $ sudo apt-get install -y terminator
+
+    ### To install Smyck theme
+    $ sudo apt-get install -y python-requests
+    $ mkdir -p $HOME/.config/terminator/plugins
+    $ wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
+    ```
+    - to activate plugin, check the TerminatorThemes option under `terminator > preferences > plugins`
+    - open the terminator context menu and select `Themes`
+    - select theme and install
+    - to make the newly installed theme default, replace the `[[default]]` theme with your preferred theme under the `[profiles]` in `~/.config/terminator/config`
