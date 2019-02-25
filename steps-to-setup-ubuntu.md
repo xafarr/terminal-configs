@@ -49,8 +49,9 @@
 - install Terminator if desired
     ```
     $ sudo apt-get install -y terminator
-
-    ### To install Smyck theme
+    ```
+    - To install Smyck theme for terminator go to [terminator-themes site](https://github.com/EliverLara/terminator-themes) for reference
+    ```
     $ sudo apt-get install -y python-requests
     $ mkdir -p $HOME/.config/terminator/plugins
     $ wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
