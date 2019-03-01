@@ -4,17 +4,12 @@ export PATH=/usr/local/sbin:$PATH
 export PATH=/usr/local/opt/ncurses/bin:$PATH
 export PATH=/usr/local/opt/apr/bin:$PATH
 export PATH=/usr/local/opt/apr-util/bin:$PATH
-## For Ubuntu JAVA_HOME
-  #eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-  #export JAVA_HOME="/usr/lib/jvm/jdk1.8.0_202"
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 export PATH=$JAVA_HOME/bin:$PATH
-export M2_HOME=/usr/local/opt/maven/libexec
+export M2_HOME=/usr/local/opt/maven@3.5/libexec
 export PATH=$M2_HOME/bin:$PATH
 export GRADLE_HOME=/usr/local/opt/gradle/libexec
 export GROOVY_HOME=/usr/local/opt/groovy/libexec
-export JBOSS_HOME=/usr/local/opt/jboss-as/libexec
-export PATH=${PATH}:${JBOSS_HOME}/bin
 export PATH=/usr/local/opt/go/libexec/bin:$PATH
 export GOPATH=$HOME/Documents/Go
 export PATH=/usr/local/opt/gettext/bin:$PATH
@@ -134,7 +129,7 @@ POWERLEVEL9K_VCS_GIT_GITHUB_ICON='\uF408 '
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew npm heroku mvn node npm gradle docker docker-compose ng svn kubectl minikube helm ssh-agent)
+plugins=(git brew npm heroku mvn node npm gradle docker docker-compose ng svn kubectl minikube helm ssh-agent ansible zsh-completions)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -171,7 +166,7 @@ export LDFLAGS="-L/usr/local/opt/gettext/lib"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ltr="ll -altr"
-alias grep="grep -inrF --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
+alias grep="grep -in --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
 
 # For Z for completion
 . `brew --prefix`/etc/profile.d/z.sh
@@ -199,14 +194,6 @@ function set_java_to() {
     export PATH=$JAVA_HOME/bin:$PATH
     echo "Current Java Home: $JAVA_HOME"
 }
-
-## Fot Ubuntu java home setting
-#function set_java_to(){
-#    java_home=$(find /usr/lib/jvm -maxdepth 1 -type d -name "*$1*" | sort -r | head -n 1)
-#    export JAVA_HOME=$java_home
-#    export PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/jvm/ {next} {print}' | sed 's/:*$//')
-#    export PATH=$JAVA_HOME/bin:$PATH
-#    echo "Current Java Home: $JAVA_HOME"
 
 # -------------------------------------------------------------------
 # Function to check if port is used 
