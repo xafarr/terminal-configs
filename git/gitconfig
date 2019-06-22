@@ -1,0 +1,9 @@
+[alias]
+	hist = log --all --graph --decorate --oneline
+[user]
+	email = xafarr@gmail.com
+	name = Muhammad Zafar
+[pull]
+	rebase = true
+[core]
+  editor = vim
