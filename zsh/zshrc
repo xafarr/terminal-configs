@@ -176,6 +176,7 @@ alias ltr="ll -altr"
 alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
 # Use MacVim vim and enable ctrl-s in terminal
 alias vim="stty stop '' -ixoff; /Applications/MacVim.app/Contents/MacOS/Vim"
+alias ssh-keygen="ssh-keygen -m PEM"
 
 # For Z for completion
 . `brew --prefix`/etc/profile.d/z.sh
