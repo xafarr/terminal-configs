@@ -34,7 +34,12 @@ set background=light
 colorscheme PaperColor
 
 let mapleader = "," "Set leader key to comma (,)
+" Set vim settings
 set clipboard=unnamed,unnamedplus
+" Keeps the cursor 5 lines above/below when z <cr>
+set scrolloff=5
+" Show incomplete command in status line
+set showcmd
 set noshowmode
 set laststatus=2
 set autoread "Set to auto read when a file is changed from the outside
@@ -42,20 +47,21 @@ set autowrite
 set wrap
 set cmdheight=2 "command bar is 2 high
 set backspace=indent,eol,start "set backspace function
-set gdefault  " Never have to type /g at the end of search / replace again
-set hlsearch "highlight searched things
+" Set searching options
+set nohlsearch "highlight searched things
 set incsearch "incremental search
 set ignorecase "ignore case
-set smartcase
+set smartcase "ignore ignorecase if search pattern contains uppercase
+
 set nolazyredraw
 set magic
 set textwidth=80
 set ruler "show current position
 set number relativenumber
 set showmatch "show maching braces
-set shiftwidth=2
-set softtabstop=2
-set tabstop=2
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
 set expandtab
 set smartindent
 set autoindent
@@ -63,19 +69,19 @@ set cursorline
 set listchars=eol:¬
 set showbreak=\
 set wildmode=list:longest,full
+" Shows menu when using tab completion
 set wildmenu
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set splitbelow
 set splitright
 
-"Use enter to create new lines w/o entering insert mode
-"nnoremap <CR> o<Esc>
+" Use enter to create new lines w/o entering insert mode
+" nnoremap <CR> o<Esc>
+" Below is to fix issues with the ABOVE mappings in quickfix window
+" autocmd CmdwinEnter * nnoremap <CR> <CR>
+" autocmd BufReadPost quickfix nnoremap <CR> <CR>
 
-"Below is to fix issues with the ABOVE mappings in quickfix window
-autocmd CmdwinEnter * nnoremap <CR> <CR>
-autocmd BufReadPost quickfix nnoremap <CR> <CR>
-
-"Map Ctrl + S to save in any mode
+" Map Ctrl + S to save in any mode
 noremap <silent> <c-s>          :w<CR>
 vnoremap <silent> <c-s>         <ESC>:w<CR>
 inoremap <silent> <c-s>         <Esc>:w<CR>l
@@ -84,6 +90,8 @@ inoremap <silent> <c-s>         <Esc>:w<CR>l
 nnoremap <silent> <leader>t :%s/\s\+$//e<cr>
 " toggle wrapping
 nnoremap <leader>tw :set wrap! wrap?<cr>
+" toggle hlsearch
+nnoremap <silent> <leader>hl :set hls!<cr>
 
 " --- backup and swap files ---
 set nobackup
@@ -139,7 +147,7 @@ let g:airline_powerline_fonts = 1
 
 " NERDTree settings
 map <C-n> :NERDTreeToggle<CR>
-"Reveal file in NerdTree
+" Reveal file in NerdTree
 map <Leader>R :NERDTreeFind<cr>
 
 autocmd StdinReadPre * let s:std_in=1
@@ -195,5 +203,5 @@ au FocusLost,WinLeave * :silent! wa
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
-"set up path to editorconfig
+" set up path to editorconfig
 let g:EditorConfig_exec_path = findfile('.editorconfig', '.;')
