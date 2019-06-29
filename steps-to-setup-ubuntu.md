@@ -12,6 +12,8 @@
 - install powerlevel9k
 - install Hack Nerd Fonts, download [here](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf)
 - change font with dconf editor
+- install fd using brew (fd is alternate to find)
+- install fzf using brew (fuzzy finder)
 - install zsh-autosuggestion using brew
 - install zsh-syntax-highlighting using brew
 - install zsh-completions using brew
