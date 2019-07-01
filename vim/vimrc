@@ -23,6 +23,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'ervandew/supertab'
 Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'terryma/vim-multiple-cursors'
 " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -36,10 +37,11 @@ let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
 
 let mapleader = "," "Set leader key to comma (,)
+let localleader = "," " leader is comma
 " Set vim settings
-set clipboard=unnamed,unnamedplus
+set clipboard=unnamed,unnamedplus " Integrate with system clipboard
 " Keeps the cursor 5 lines above/below when z <cr>
-set scrolloff=5
+set scrolloff=5 " 5 line above/below cursor when scrolling
 " Show incomplete command in status line
 set showcmd
 set noshowmode
@@ -78,6 +80,7 @@ set wildmenu
 set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set splitbelow
 set splitright
+set hidden
 
 " Map Ctrl + S to save in any mode
 noremap <silent> <c-s>          :w<CR>
@@ -87,9 +90,11 @@ inoremap <silent> <c-s>         <Esc>:w<CR>l
 " trim whitespace
 nnoremap <silent> <leader>t :%s/\s\+$//e<cr>
 " toggle wrapping
-nnoremap <leader>tw :set wrap! wrap?<cr>
+nnoremap <silent> <leader>tw :set wrap! wrap?<cr>
 " toggle hlsearch
 nnoremap <silent> <leader>hl :set hls!<cr>
+" toggle relative line number
+nnoremap <silent> <leader>n :set rnu!<cr>
 
 " --- backup and swap files ---
 set nobackup
@@ -130,10 +135,10 @@ map <leader>fj :%!python -m json.tool<CR>
 map <leader>fx :%!xmllint % --format<CR>
 
 " Move between splits (windows)
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 
 " move line up and down
 " nnoremap <S-Up>   :<C-u>silent! move-2<CR>==
