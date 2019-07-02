@@ -5,6 +5,7 @@
 - install build-essential curl file git dconf-cli vim
 - install Smyck color scheme from [here](https://github.com/Mayccoll/Gogh). Change background to #002833
 - install linuxbrew
+- run `git -C "$(brew --repo homebrew/core)" fetch --unshallow`
 - install zsh using brew and execute following
     ```
     $ sudo usermod -s /home/linuxbrew/.linuxbrew/bin/zsh <username>
