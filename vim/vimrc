@@ -36,8 +36,8 @@ colorscheme gruvbox
 let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
 
-let mapleader = "," "Set leader key to comma (,)
-let localleader = "," " leader is comma
+let mapleader = "," "Set Leader key to comma (,)
+let localleader = "," " Leader is comma
 " Set vim settings
 set clipboard=unnamed,unnamedplus " Integrate with system clipboard
 " Keeps the cursor 5 lines above/below when z <cr>
@@ -88,13 +88,13 @@ vnoremap <silent> <c-s>         <ESC>:w<CR>
 inoremap <silent> <c-s>         <Esc>:w<CR>l
 
 " trim whitespace
-nnoremap <silent> <leader>t :%s/\s\+$//e<cr>
+nnoremap <silent> <Leader>t :%s/\s\+$//e<cr>
 " toggle wrapping
-nnoremap <silent> <leader>tw :set wrap! wrap?<cr>
+nnoremap <silent> <Leader>tw :set wrap! wrap?<cr>
 " toggle hlsearch
-nnoremap <silent> <leader>hl :set hls!<cr>
+nnoremap <silent> <Leader>hl :set hls!<cr>
 " toggle relative line number
-nnoremap <silent> <leader>n :set rnu!<cr>
+nnoremap <silent> <Leader>n :set rnu!<cr>
 
 " --- backup and swap files ---
 set nobackup
@@ -102,7 +102,7 @@ set nowritebackup
 set noswapfile
 
 " toggle list (special chars)
-nnoremap <leader>l :set list! list?<cr>
+nnoremap <Leader>l :set list! list?<cr>
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
@@ -112,15 +112,15 @@ nnoremap N Nzzzv
 set ttyfast
 
 " Clear search
-nnoremap <leader>, :let @/=''<cr>:noh<cr>
+nnoremap <Leader>, :let @/=''<cr>:noh<cr>
 
 " Reformat code
-nnoremap <leader>rf gg=G``<cr>
+nnoremap <Leader>rf gg=G``<cr>
 
 " Split horizontally with new file
-nnoremap <silent> <leader>d :split<CR>
-nnoremap <silent> <leader>D :vsplit<CR>
-nnoremap <silent> <leader>w :close<CR>
+nnoremap <silent> <Leader>d :split<CR>
+nnoremap <silent> <Leader>D :vsplit<CR>
+nnoremap <silent> <Leader>w :close<CR>
 
 " Faster scrolling
 nnoremap <C-e> 3<C-e>
@@ -130,9 +130,9 @@ inoremap <C-Space> <C-x><C-o>
 " Select whole file
 map <C-a> <esc>ggVG<CR>
 " Format JSON
-map <leader>fj :%!python -m json.tool<CR>
+map <Leader>fj :%!python -m json.tool<CR>
 " Format XML
-map <leader>fx :%!xmllint % --format<CR>
+map <Leader>fx :%!xmllint % --format<CR>
 
 " Move between splits (windows)
 nmap <C-h> <C-w>h
@@ -172,8 +172,8 @@ let g:DevIconsEnableFolderExtensionPatternMatching = 1
 
 " FZF settings
 " This is the default extra key bindings
-nnoremap <silent> <leader>f :FZF<cr>
-nnoremap <silent> <leader>F :FZF ~<cr>
+nnoremap <silent> <Leader>f :FZF<cr>
+nnoremap <silent> <Leader>F :FZF ~<cr>
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-x': 'split',
