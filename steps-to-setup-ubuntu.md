@@ -1,14 +1,16 @@
 - install ubuntu drivers with following command
-    ```
+    ```shell
     $ ubuntu-drivers devices
     $ sudo ubuntu-drivers autoinstall
+    ```
 - install build-essential curl file git dconf-cli vim
 - install Smyck color scheme from [here](https://github.com/Mayccoll/Gogh). Change background to #002833
 - install linuxbrew
 - run `git -C "$(brew --repo homebrew/core)" fetch --unshallow`
 - install zsh using brew and execute following
-    ```
+    ```shell
     $ sudo usermod -s /home/linuxbrew/.linuxbrew/bin/zsh <username>
+    ```
 - install oh-my-zsh
 - install powerlevel9k
 - install Hack Nerd Fonts, download [here](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf)
@@ -19,8 +21,9 @@
 - install zsh-syntax-highlighting using brew
 - install zsh-completions using brew
 - setup zsh-completions by putting following in zshrc
-    ```
+    ```shell
     $ echo 'fpath=($HOMEBREW_PREFIX/share/zsh-completions $fpath)' >> ~/.zshrc
+    ```
 - install vscode snap
 - install intellij snap
 - install oracle jdk manually
@@ -29,37 +32,40 @@
 - install grunt-cli through npm
 - install docker with installation instruction [here](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04) 
     - run following commands to use docker without sudo
-    ```
+    ```shell
     $ sudo usermod -aG docker $USER
     $ newgrp docker
     
     ## check user groups ##
     $ id -nG
+    ```
 - install stacer from [here](https://github.com/oguzhaninan/Stacer)
 - install gnome-shell-extensions
-    ```
+    ```shell
     $ sudo apt install gnome-shell-extensions -y
+    ```
 - install gnome-tweak-tool
-    ```
+    ```shell
     $ sudo apt install gnome-tweak-tool -y
+    ```
 - install 'chrome-gnome-shell' and 'gTile' for window tiling (similar to Magnet in macOS)
-    ```
+    ```shell
     $ sudo apt-get install chrome-gnome-shell
-    ```
-    - install gnome extension from [here](https://extensions.gnome.org/extension/28/gtile/)
-    - change keybinding from `Super+Enter(keypad)` to `Super+return`
+```
+- install gnome extension from [here](https://extensions.gnome.org/extension/28/gtile/)
+- change keybinding from `super+enter(keypad)` to `super+return`
 
-- install Terminator if desired
-    ```
+- install terminator if desired
+    ```shell
     $ sudo apt-get install -y terminator
     ```
-    - To install Smyck theme for terminator go to [terminator-themes site](https://github.com/EliverLara/terminator-themes) for reference
-    ```
+- to install smyck theme for terminator go to [terminator-themes site](https://github.com/eliverlara/terminator-themes) for reference
+    ```shell
     $ sudo apt-get install -y python-requests
-    $ mkdir -p $HOME/.config/terminator/plugins
-    $ wget https://git.io/v5Zww -O $HOME"/.config/terminator/plugins/terminator-themes.py"
+    $ mkdir -p $home/.config/terminator/plugins
+    $ wget https://git.io/v5zww -o $home"/.config/terminator/plugins/terminator-themes.py"
     ```
-    - to activate plugin, check the TerminatorThemes option under `terminator > preferences > plugins`
-    - open the terminator context menu and select `Themes`
-    - select theme and install
-    - to make the newly installed theme default, replace the `[[default]]` theme with your preferred theme under the `[profiles]` in `~/.config/terminator/config`
+- to activate plugin, check the terminatorthemes option under `terminator > preferences > plugins`
+- open the terminator context menu and select `Themes`
+- select theme and install
+- to make the newly installed theme default, replace the `[[default]]` theme with your preferred theme under the `[profiles]` in `~/.config/terminator/config`
