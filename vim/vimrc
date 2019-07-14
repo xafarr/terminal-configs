@@ -54,7 +54,7 @@ set wrap
 set cmdheight=2 "command bar is 2 high
 set backspace=indent,eol,start "set backspace function
 " Set searching options
-set nohlsearch "highlight searched things
+set hlsearch "highlight searched things
 set incsearch "incremental search
 set ignorecase "ignore case
 set smartcase "ignore ignorecase if search pattern contains uppercase
@@ -62,6 +62,7 @@ set smartcase "ignore ignorecase if search pattern contains uppercase
 set nolazyredraw
 set magic
 set textwidth=80
+set formatoptions-=t
 set ruler "show current position
 set number relativenumber
 set showmatch "show maching braces
