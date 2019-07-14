@@ -1,7 +1,6 @@
+let mapleader = "," " Set leader key to comma (,)
 set nocompatible
 set encoding=utf8
-let mapleader = "," " Set leader key to comma (,)
-let localleader = "," " leader is comma
 set number relativenumber
 set clipboard=unnamed,unnamedplus " Integrate with system clipboard
 set showcmd
