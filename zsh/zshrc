@@ -55,9 +55,9 @@ POWERLEVEL9K_VCS_GIT_ICON='\uF408 '
 POWERLEVEL9K_VCS_GIT_GITHUB_ICON='\uF408 '
 
 # POWERLEVEL9K_MODE='nerdfont-complete'
-# #POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-# #POWERLEVEL9K_SHORTEN_DELIMITER=""
-# #POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_SHORTEN_DELIMITER=".."
+# POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 # POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 # POWERLEVEL9K_LEFT_SEGMENT_SEPARATOR=''
 # POWERLEVEL9K_RIGHT_SEGMENT_SEPARATOR=''
@@ -100,7 +100,7 @@ POWERLEVEL9K_VCS_GIT_GITHUB_ICON='\uF408 '
 
 # Uncomment the following line to use hyphen-insensitive completion. Case
 # sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
@@ -118,7 +118,7 @@ POWERLEVEL9K_VCS_GIT_GITHUB_ICON='\uF408 '
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+# COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -179,6 +179,9 @@ alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
 # Use MacVim vim and enable ctrl-s in terminal
 alias vim="stty stop '' -ixoff; `brew --prefix`/bin/vim"
 alias ssh-keygen="ssh-keygen -m PEM"
+alias brew-update="brew update; brew doctor; brew upgrade; brew cask upgrade; brew cleanup"
+# alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
+# alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 
 # For Z for completion
 . `brew --prefix`/etc/profile.d/z.sh
