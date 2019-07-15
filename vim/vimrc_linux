@@ -1,0 +1,227 @@
+set nocompatible
+syntax on
+set encoding=utf8
+filetype off
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-fugitive'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'morhetz/gruvbox'
+Plug 'scrooloose/nerdtree'
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+Plug '/home/linuxbrew/.linuxbrew/opt/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'ervandew/supertab'
+Plug 'tpope/vim-surround'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'terryma/vim-multiple-cursors'
+" All of your Plugins must be added before the following line
+call plug#end()
+
+filetype plugin indent on
+set t_Co=256
+set background=dark
+colorscheme gruvbox
+" Airline theme
+" let g:airline_theme='powerlineish'
+let g:airline_theme='gruvbox'
+let g:airline_powerline_fonts = 1
+
+let mapleader = "," "Set Leader key to comma (,)
+let localleader = "," " Leader is comma
+" Set vim settings
+set clipboard=unnamed,unnamedplus " Integrate with system clipboard
+" Keeps the cursor 5 lines above/below when z <cr>
+set scrolloff=5 " 5 line above/below cursor when scrolling
+" Show incomplete command in status line
+set showcmd
+set noshowmode
+" True colors support (need vim to be compiled with +termguicolors)
+" set termguicolors
+set laststatus=2
+set autoread "Set to auto read when a file is changed from the outside
+set autowrite
+set wrap
+set cmdheight=2 "command bar is 2 high
+set backspace=indent,eol,start "set backspace function
+" Set searching options
+set hlsearch "highlight searched things
+set incsearch "incremental search
+set ignorecase "ignore case
+set smartcase "ignore ignorecase if search pattern contains uppercase
+
+set nolazyredraw
+set magic
+set textwidth=80
+set formatoptions-=t
+set ruler "show current position
+set number relativenumber
+set showmatch "show maching braces
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+set expandtab
+set smartindent
+set autoindent
+set cursorline
+set listchars=eol:¬
+set showbreak=\
+set wildmode=list:longest,full
+" Shows menu when using tab completion
+set wildmenu
+set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
+set splitbelow
+set splitright
+set hidden
+
+" Map Ctrl + S to save in any mode
+noremap <silent> <c-s>          :w<CR>
+vnoremap <silent> <c-s>         <ESC>:w<CR>
+inoremap <silent> <c-s>         <Esc>:w<CR>l
+
+" Force saving files that require root permission 
+cnoremap w!! w !sudo tee > /dev/null %
+
+" trim whitespace
+" nnoremap <silent> <Leader>t :%s/\s\+$//e<cr>
+" toggle wrapping
+nnoremap <silent> <Leader>tw :set wrap! wrap?<cr>
+" toggle hlsearch
+nnoremap <silent> <Leader>hl :set hls!<cr>
+" toggle relative line number
+nnoremap <silent> <Leader>n :set rnu!<cr>
+
+" --- backup and swap files ---
+set nobackup
+set nowritebackup
+set noswapfile
+
+" toggle list (special chars)
+nnoremap <Leader>l :set list! list?<cr>
+
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" faster redrawing
+set ttyfast
+
+" Clear search
+nnoremap <silent> <Leader>, :let @/=''<cr>:noh<cr>
+
+" Reformat code
+nnoremap <Leader>rf gg=G``<cr>
+
+" Split horizontally with new file
+nnoremap <silent> <Leader>d :split<CR>
+nnoremap <silent> <Leader>D :vsplit<CR>
+nnoremap <silent> <Leader>w :close<CR>
+
+" Faster scrolling
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+" Context and programming language aware omni-completion
+inoremap <C-Space> <C-x><C-o>
+" Select whole file
+map <C-a> <esc>ggVG<CR>
+" Format JSON
+map <Leader>fj :%!python -m json.tool<CR>
+" Format XML
+map <Leader>fx :%!xmllint % --format<CR>
+
+map - <C-w>-
+map + <C-w>+
+
+" Rotate split windows
+nnoremap <Leader>h <C-w>H
+nnoremap <Leader>j <C-w>J
+nnoremap <Leader>k <C-w>K
+nnoremap <Leader>l <C-w>L
+
+" Move betLeadern splits (windows)
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" move line up and down
+" nnoremap <S-Up>   :<C-u>silent! move-2<CR>==
+" nnoremap <S-Down> :<C-u>silent! move+<CR>==
+" Alt-j <A-j> mapped to j
+" Alt-k <A-k> mapped to k
+nnoremap j :m .+1<CR>==
+nnoremap k :m .-2<CR>==
+inoremap j <Esc>:m .+1<CR>==gi
+inoremap k <Esc>:m .-2<CR>==gi
+vnoremap j :m '>+1<CR>gv=gv
+vnoremap k :m '<-2<CR>gv=gv
+
+" NERDTree settings
+map <C-n> :NERDTreeToggle<CR>
+" Reveal file in NerdTree
+map <Leader>R :NERDTreeFind<cr>
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+" Close vim if only NERDTree is open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeShowHidden=1
+" Dev Icons settings
+" enable folder/directory glyph flag (disabled by default with 0)
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+" enable file extension pattern matching glyphs on folder/directory (disabled by default with 0)
+let g:DevIconsEnableFolderExtensionPatternMatching = 1
+
+" FZF settings
+" This is the default extra key bindings
+nnoremap <silent> <Leader>f :FZF<cr>
+nnoremap <silent> <Leader>F :FZF ~<cr>
+let g:fzf_action = {
+      \ 'ctrl-t': 'tab split',
+      \ 'ctrl-x': 'split',
+      \ 'ctrl-v': 'vsplit' }
+
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+      \ { 'fg':      ['fg', 'Normal'],
+      \ 'bg':      ['bg', 'Normal'],
+      \ 'hl':      ['fg', 'Comment'],
+      \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+      \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+      \ 'hl+':     ['fg', 'Statement'],
+      \ 'info':    ['fg', 'PreProc'],
+      \ 'border':  ['fg', 'Ignore'],
+      \ 'prompt':  ['fg', 'Conditional'],
+      \ 'pointer': ['fg', 'Exception'],
+      \ 'marker':  ['fg', 'Keyword'],
+      \ 'spinner': ['fg', 'Label'],
+      \ 'header':  ['fg', 'Comment'] }
+
+" Enable per-command history.
+" CTRL-N and CTRL-P will be automatically bound to next-history and
+" previous-history instead of down and up. If you don't like the change,
+" explicitly bind the keys to down and up in your $FZF_DEFAULT_OPTS.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+" AUTOCOMMANDS - Do stuff
+
+" Save whenever switching windows or leaving vim. This is useful when running
+" the tests inside vim without having to save all files first.
+au FocusLost,WinLeave * :silent! wa
+
+" automatically rebalance windows on vim resize
+autocmd VimResized * :wincmd =
+
+" set up path to editorconfig
+let g:EditorConfig_exec_path = findfile('.editorconfig', '.;')
