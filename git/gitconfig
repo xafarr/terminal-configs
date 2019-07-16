@@ -6,4 +6,23 @@
 [pull]
 	rebase = true
 [core]
-  editor = vim
+    editor = vim
+[merge]
+    ff = only
+[branch "master"]
+    mergeOptions = --ff-only
+[diff]
+	tool = meld
+[difftool]
+	prompt = false
+[difftool "meld"]
+    cmd = meld "$LOCAL" "$REMOTE"
+[merge]
+	tool = meld
+[mergetool]
+	keepBackup = false
+	prompt = false
+[mergetool "meld"]
+    # Choose one of these 2 lines (not both!)
+    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
+    #cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
