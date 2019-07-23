@@ -1,0 +1,49 @@
+let mapleader = ","
+set nocompatible
+set encoding=utf8
+set number relativenumber
+set clipboard=unnamed,unnamedplus
+set showcmd
+set scrolloff=5
+set incsearch 
+set ignorecase
+set smartcase
+set surround
+set multiple-cursors
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+" set expandtab
+set cursorline
+filetype indent on
+set wildmenu
+set showmatch
+set hidden
+set laststatus=2
+set hlsearch
+
+" toggle hlsearch
+nnoremap <silent> <Leader>hl :set hls!<cr>
+" --- backup and swap files ---
+set nobackup
+set nowritebackup
+set noswapfile
+
+" Clear search
+nnoremap <Leader>, :let @/=''<cr>:noh<cr>
+" Faster scrolling
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+
+" toggle relative line number
+nnoremap <silent> <Leader>n :set rnu!<cr>
+
+" Alt-j <A-j> mapped to j
+" Alt-k <A-k> mapped to k
+nnoremap j :m .+1<CR>==
+nnoremap k :m .-2<CR>==
+inoremap j <Esc>:m .+1<CR>==gi
+inoremap k <Esc>:m .-2<CR>==gi
+vnoremap j :m '>+1<CR>gv=gv
+vnoremap k :m '<-2<CR>gv=gv
+
