@@ -3,6 +3,7 @@
     $ ubuntu-drivers devices
     $ sudo ubuntu-drivers autoinstall
     ```
+- install build-essential curl file git dconf-cli vim-gnome
 - Remove Super+Number binding by executing following
 ```shell
 # For 18.04 and 19.04
@@ -19,7 +20,12 @@ gsettings set org.gnome.shell.keybindings switch-to-application-7 []
 gsettings set org.gnome.shell.keybindings switch-to-application-8 []
 gsettings set org.gnome.shell.keybindings switch-to-application-9 []
 ```
-- install build-essential curl file git dconf-cli vim-gnome
+- Remove bell sound by turning it of through dconf `org/gnome/settings-daemon/peripherals/keyboard/bell-mode`
+- Turn on locate pointer through dconf `org/gnome/settings-daemon/peripherals/mouse`
+- Remove Super key as mouse modifier through dconf `org/gnome/desktop/wm/preferences/mouse-button-modifier`
+- Remove Super-d and Ctrl-Alt-d mapping through dconf `org/gnome/desktop/wm/keybindings/show-desktop`
+- Remove Super-p keybinding through dconf `org/gnome/mutter/keybindings/switch-monitor`
+- Set orientation setting to false in dconf `org/gnome/settings-daemon/plugins/orientation/active`
 - install Smyck color scheme from [here](https://github.com/Mayccoll/Gogh). Change background to #002833
 - install linuxbrew
 - run `git -C "$(brew --repo homebrew/core)" fetch --unshallow`
@@ -67,6 +73,8 @@ gsettings set org.gnome.shell.keybindings switch-to-application-9 []
     ```shell
     $ sudo apt install gnome-tweak-tool -y
     ```
+- Change left win key to act as Meta in keyboard option of tweak tool
+- Change Caps Lock to act as second Esc in keyboard option of tweak tool
 - install 'chrome-gnome-shell' and 'gTile' for window tiling (similar to Magnet in macOS)
     ```shell
     $ sudo apt-get install chrome-gnome-shell
