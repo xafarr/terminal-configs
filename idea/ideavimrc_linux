@@ -19,6 +19,8 @@ filetype indent on
 set wildmenu
 set showmatch
 set hidden
+set splitbelow
+set splitright
 set laststatus=2
 set hlsearch
 
@@ -37,6 +39,21 @@ nnoremap <C-y> 3<C-y>
 
 " toggle relative line number
 nnoremap <silent> <Leader>n :set rnu!<cr>
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+" Split horizontally with new file
+nnoremap <silent> <Leader>d :split<CR>
+nnoremap <silent> <Leader>D :vsplit<CR>
+nnoremap <silent> <Leader>w :close<CR>
+" Faster scrolling
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+" Move between splits (windows)
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Alt-j <A-j> mapped to J
 " Alt-k <A-k> mapped to K
