@@ -3,6 +3,22 @@
     $ ubuntu-drivers devices
     $ sudo ubuntu-drivers autoinstall
     ```
+- Remove Super+Number binding by executing following
+```shell
+# For 18.04 and 19.04
+gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false
+
+# Additional only for 19.04
+gsettings set org.gnome.shell.keybindings switch-to-application-1 []
+gsettings set org.gnome.shell.keybindings switch-to-application-2 []
+gsettings set org.gnome.shell.keybindings switch-to-application-3 []
+gsettings set org.gnome.shell.keybindings switch-to-application-4 []
+gsettings set org.gnome.shell.keybindings switch-to-application-5 []
+gsettings set org.gnome.shell.keybindings switch-to-application-6 []
+gsettings set org.gnome.shell.keybindings switch-to-application-7 []
+gsettings set org.gnome.shell.keybindings switch-to-application-8 []
+gsettings set org.gnome.shell.keybindings switch-to-application-9 []
+```
 - install build-essential curl file git dconf-cli vim-gnome
 - install Smyck color scheme from [here](https://github.com/Mayccoll/Gogh). Change background to #002833
 - install linuxbrew
@@ -13,8 +29,11 @@
     ```
 - install oh-my-zsh
 - install powerlevel9k
-- install Hack Nerd Fonts, download [here](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf)
+- install Hack Nerd Fonts, download [here](https://github.com/ryanoasis/nerd-fonts/blob/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf) or "MesloLGLDZ Nerd Font" from repository
 - change font with dconf editor
+    - Create new profile in terminal preferences and delete old one
+    - Open dconf-editor and go to org/gnome/terminal/legacy/profiles/<profile-id>/font
+    - Change font value to "MesloLGLDZ Nerd Font 14"
 - install fd using brew (fd is alternate to find)
 - install fzf using brew (fuzzy finder)
 - install zsh-autosuggestion using brew
