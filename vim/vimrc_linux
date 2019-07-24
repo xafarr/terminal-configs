@@ -147,7 +147,7 @@ nnoremap <Leader>j <C-w>J
 nnoremap <Leader>k <C-w>K
 nnoremap <Leader>l <C-w>L
 
-" Move betLeadern splits (windows)
+" Move between splits (windows)
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
