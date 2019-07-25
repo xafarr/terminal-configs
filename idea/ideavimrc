@@ -23,6 +23,8 @@ set splitbelow
 set splitright
 set laststatus=2
 set hlsearch
+set visualbell
+set noerrorbells
 
 " toggle hlsearch
 nnoremap <silent> <Leader>hl :set hls!<cr>

@@ -82,6 +82,8 @@ set wildignore=log/**,node_modules/**,target/**,tmp/**,*.rbc
 set splitbelow
 set splitright
 set hidden
+set visualbell
+set noerrorbells
 
 " Map Ctrl + S to save in any mode
 noremap <silent> <c-s>          :w<CR>
