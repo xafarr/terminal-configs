@@ -90,7 +90,7 @@ vnoremap <silent> <c-s>         <ESC>:w<CR>
 inoremap <silent> <c-s>         <Esc>:w<CR>l
 
 " Force saving files that require root permission 
-cnoremap w!! w !sudo tee > /dev/null %
+cmap w!! w !sudo tee > /dev/null %
 
 " trim whitespace
 " nnoremap <silent> <Leader>t :%s/\s\+$//e<cr>
