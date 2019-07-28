@@ -26,6 +26,7 @@ gsettings set org.gnome.shell.keybindings switch-to-application-9 []
 - Remove Super-d and Ctrl-Alt-d mapping through dconf `org/gnome/desktop/wm/keybindings/show-desktop`
 - Remove Super-p keybinding through dconf `org/gnome/mutter/keybindings/switch-monitor`
 - Set orientation setting to false in dconf `org/gnome/settings-daemon/plugins/orientation/active`
+- Replace Super+L with Ctrl+Super+q (same as Mac) to lock screen in dconf `org/gnome/settings-daemon/plugins/media-keys/screensaver`
 - install Smyck color scheme from [here](https://github.com/Mayccoll/Gogh). Change background to #002833
 - install linuxbrew
 - run `git -C "$(brew --repo homebrew/core)" fetch --unshallow`
