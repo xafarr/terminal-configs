@@ -27,6 +27,7 @@ gsettings set org.gnome.shell.keybindings switch-to-application-9 []
 - Remove Super-p keybinding through dconf `org/gnome/mutter/keybindings/switch-monitor`
 - Set orientation setting to false in dconf `org/gnome/settings-daemon/plugins/orientation/active`
 - Replace Super+L with Ctrl+Super+q (same as Mac) to lock screen in dconf `org/gnome/settings-daemon/plugins/media-keys/screensaver`
+- Remove Alt+F8 shorcut for intellij. In dconf remove value of `org/gnome/desktop/wm/keybindings/begin-resize`
 - Disable touch screen in xorg conf file
     - Check input devices with command `xinput`
     - Add `Option "Ignore" "on"` in touchscreen section of libinput/evdev file in directory `/usr/share/X11/xorg.conf.d`
