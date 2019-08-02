@@ -54,7 +54,7 @@ set wrap
 set cmdheight=2 "command bar is 2 high
 set backspace=indent,eol,start "set backspace function
 " Set searching options
-set hlsearch "highlight searched things
+" set hlsearch "highlight searched things
 set incsearch "incremental search
 set ignorecase "ignore case
 set smartcase "ignore ignorecase if search pattern contains uppercase
