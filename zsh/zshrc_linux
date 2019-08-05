@@ -24,6 +24,8 @@ export FZF_CTRL_T_COMMAND="fd $FD_OPTIONS"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 export FZF_DEFAULT_OPTS="--no-mouse --height 40% --layout=reverse --border --multi --inline-info --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -500' --preview-window='right:hidden:wrap' --bind='f3:execute(bat --style=numbers {} || less -f {}),f2:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)'" 
 export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOQUIT=true
 
 ZSH_DISABLE_COMPFIX=true
 zstyle :omz:plugins:ssh-agent agent-forwarding on
@@ -138,7 +140,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew npm heroku mvn node npm gradle docker docker-compose ng svn kubectl minikube helm ssh-agent z fzf)
+plugins=(git brew npm heroku mvn node npm gradle docker docker-compose ng svn kubectl minikube helm ssh-agent z fzf tmux)
 
 source $ZSH/oh-my-zsh.sh
 
