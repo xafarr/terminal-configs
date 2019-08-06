@@ -37,7 +37,7 @@ let g:airline_theme='gruvbox'
 let g:airline_powerline_fonts = 1
 
 let mapleader = "," "Set Leader key to comma (,)
-let localleader = "," " Leader is comma
+let maplocalleader = "," " Leader is comma
 " Set vim settings
 set clipboard=unnamed,unnamedplus " Integrate with system clipboard
 " Keeps the cursor 5 lines above/below when z <cr>
@@ -51,6 +51,7 @@ set laststatus=2
 set autoread "Set to auto read when a file is changed from the outside
 set autowrite
 set wrap
+set matchpairs+=<:>
 set cmdheight=2 "command bar is 2 high
 set backspace=indent,eol,start "set backspace function
 " Set searching options
@@ -84,6 +85,10 @@ set splitright
 set hidden
 set noerrorbells
 
+" Open new line below and above current line
+nnoremap <leader>o o<esc>
+nnoremap <leader>O O<esc>
+
 " Map Ctrl + S to save in any mode
 noremap <silent> <c-s>          :w<CR>
 vnoremap <silent> <c-s>         <ESC>:w<CR>
@@ -99,7 +104,7 @@ nnoremap <silent> <Leader>tw :set wrap! wrap?<cr>
 " toggle hlsearch
 nnoremap <silent> <Leader>hl :set hls!<cr>
 " toggle relative line number
-nnoremap <silent> <Leader>n :set rnu!<cr>
+nnoremap <silent> <Leader>rn :set rnu!<cr>
 
 " --- backup and swap files ---
 set nobackup
@@ -139,8 +144,19 @@ map <Leader>fj :%!python -m json.tool<CR>
 " Format XML
 map <Leader>fx :%!xmllint % --format<CR>
 
+" Make Y behave like other capitals
+nnoremap Y y$
+
+" Prevent x from overriding what's in the clipboard.
+noremap x "_x
+noremap X "_x
+
 map - <C-w>-
 map + <C-w>+
+
+" Circular windows navigation
+nnoremap <tab>   <c-w>w
+nnoremap <S-tab> <c-w>W
 
 " Rotate split windows
 nnoremap <Leader>h <C-w>H
@@ -153,6 +169,13 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" Movement in insert mode
+inoremap <C-h> <C-o>h
+inoremap <C-l> <C-o>a
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-^> <C-o><C-^>
 
 " move line up and down
 " nnoremap <S-Up>   :<C-u>silent! move-2<CR>==
@@ -167,10 +190,9 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " NERDTree settings
-" map <C-n> :NERDTreeToggle<CR>
-map n :NERDTreeToggle<CR>
+nnoremap <Leader>n :NERDTreeToggle<CR>
 " Reveal file in NerdTree
-map <Leader>R :NERDTreeFind<cr>
+nnoremap <Leader>R :NERDTreeFind<cr>
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif

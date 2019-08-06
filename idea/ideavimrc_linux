@@ -2,6 +2,7 @@ let mapleader = ","
 set nocompatible
 set encoding=utf8
 set number relativenumber
+set matchpairs+=<:>
 set clipboard=unnamed,unnamedplus,ideaput
 set showcmd
 set scrolloff=5
@@ -26,6 +27,10 @@ set laststatus=2
 set visualbell
 set noerrorbells
 
+" Open new line below and above current line
+nnoremap <leader>o o<esc>
+nnoremap <leader>O O<esc>
+
 " toggle hlsearch
 nnoremap <silent> <Leader>hl :set hls!<cr>
 " --- backup and swap files ---
@@ -40,7 +45,7 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
 " toggle relative line number
-nnoremap <silent> <Leader>n :set rnu!<cr>
+nnoremap <silent> <Leader>rn :set rnu!<cr>
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
 nnoremap N Nzzzv
@@ -51,11 +56,26 @@ nnoremap <silent> <Leader>w :close<CR>
 " Faster scrolling
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
+
+" Make Y behave like other capitals
+nnoremap Y y$
+
+" Prevent x from overriding what's in the clipboard.
+noremap x "_x
+noremap X "_x
+
 " Move between splits (windows)
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
+" Movement in insert mode
+inoremap <C-h> <C-o>h
+inoremap <C-l> <C-o>a
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+inoremap <C-^> <C-o><C-^>
 
 " Alt-j <A-j> mapped to J
 " Alt-k <A-k> mapped to K
