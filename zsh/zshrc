@@ -1,4 +1,7 @@
 export TERM="xterm-256color"
+export HOMEBREW_PREFIX="/usr/local"
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew"
 export PATH=/usr/local/bin:$HOME/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=/usr/local/opt/ncurses/bin:$PATH
