@@ -105,6 +105,8 @@ nnoremap <silent> <Leader>tw :set wrap! wrap?<cr>
 nnoremap <silent> <Leader>hl :set hls!<cr>
 " toggle relative line number
 nnoremap <silent> <Leader>rn :set rnu!<cr>
+" search occurrence count in file
+nnoremap <Leader>* *<C-O>:%s///gn<CR>``
 
 " --- backup and swap files ---
 set nobackup

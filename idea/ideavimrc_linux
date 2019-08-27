@@ -38,6 +38,9 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+" search occurrence count in file
+nnoremap <Leader>* *<C-O>:%s///gn<CR>``
+
 " Clear search
 nnoremap <Leader>, :let @/=''<cr>:noh<cr>
 " Faster scrolling
