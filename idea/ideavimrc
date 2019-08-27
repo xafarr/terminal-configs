@@ -31,8 +31,6 @@ set noerrorbells
 nnoremap <leader>o o<esc>
 nnoremap <leader>O O<esc>
 
-" toggle hlsearch
-nnoremap <silent> <Leader>hl :set hls!<cr>
 " --- backup and swap files ---
 set nobackup
 set nowritebackup
@@ -40,7 +38,9 @@ set noswapfile
 
 " search occurrence count in file
 nnoremap <Leader>* *<C-O>:%s///gn<CR>``
-"
+" toggle hlsearch
+nnoremap <silent> <Leader><space> :set hls!<cr>
+
 " Clear search
 nnoremap <Leader>, :let @/=''<cr>:noh<cr>
 " Faster scrolling
@@ -53,8 +53,8 @@ nnoremap <silent> <Leader>rn :set rnu!<cr>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 " Split horizontally with new file
-nnoremap <silent> <Leader>d :split<CR>
-nnoremap <silent> <Leader>D :vsplit<CR>
+nnoremap <silent> <Leader>h :split<CR>
+nnoremap <silent> <Leader>v :vsplit<CR>
 nnoremap <silent> <Leader>w :close<CR>
 " Faster scrolling
 nnoremap <C-e> 3<C-e>
@@ -66,6 +66,10 @@ nnoremap Y y$
 " Prevent x from overriding what's in the clipboard.
 noremap x "_x
 noremap X "_x
+
+" Circular windows navigation
+nnoremap <tab>   <C-w>w
+nnoremap <S-tab> <C-w>W
 
 " Move between splits (windows)
 nnoremap <C-h> <C-w>h

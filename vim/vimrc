@@ -101,12 +101,12 @@ cmap w!! w !sudo tee > /dev/null %
 " nnoremap <silent> <Leader>t :%s/\s\+$//e<cr>
 " toggle wrapping
 nnoremap <silent> <Leader>tw :set wrap! wrap?<cr>
-" toggle hlsearch
-nnoremap <silent> <Leader>hl :set hls!<cr>
 " toggle relative line number
 nnoremap <silent> <Leader>rn :set rnu!<cr>
 " search occurrence count in file
 nnoremap <Leader>* *<C-O>:%s///gn<CR>``
+" toggle hlsearch
+nnoremap <silent> <Leader><space> :set hls!<cr>
 
 " --- backup and swap files ---
 set nobackup
@@ -130,8 +130,8 @@ nnoremap <silent> <Leader>, :let @/=''<cr>:noh<cr>
 nnoremap <Leader>rf gg=G``<cr>
 
 " Split horizontally with new file
-nnoremap <silent> <Leader>d :split<CR>
-nnoremap <silent> <Leader>D :vsplit<CR>
+nnoremap <silent> <Leader>h :split<CR>
+nnoremap <silent> <Leader>v :vsplit<CR>
 nnoremap <silent> <Leader>w :close<CR>
 
 " Faster scrolling
@@ -161,10 +161,10 @@ nnoremap <tab>   <c-w>w
 nnoremap <S-tab> <c-w>W
 
 " Rotate split windows
-nnoremap <Leader>h <C-w>H
-nnoremap <Leader>j <C-w>J
-nnoremap <Leader>k <C-w>K
-nnoremap <Leader>l <C-w>L
+nnoremap <Leader><C-h> <C-w>H
+nnoremap <Leader><C-j> <C-w>J
+nnoremap <Leader><C-k> <C-w>K
+nnoremap <Leader><C-l> <C-w>L
 
 " Move between splits (windows)
 nnoremap <C-h> <C-w>h
@@ -215,7 +215,7 @@ nnoremap <silent> <Leader>f :FZF<cr>
 nnoremap <silent> <Leader>F :FZF ~<cr>
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
+      \ 'ctrl-h': 'split',
       \ 'ctrl-v': 'vsplit' }
 
 " Customize fzf colors to match your color scheme
