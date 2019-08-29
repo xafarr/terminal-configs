@@ -185,6 +185,7 @@ alias grep="grep -inF --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
 alias ifconfig="ip -c a"
 alias ssh-keygen="ssh-keygen -m PEM"
 alias brew-update="brew update; brew doctor; brew upgrade; brew cleanup"
+alias pbcopy="xclip -sel clip"
 
 # For Z for completion
 #. `brew --prefix`/etc/profile.d/z.sh
