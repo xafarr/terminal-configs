@@ -71,6 +71,12 @@ noremap X "_x
 nnoremap <tab>   <C-w>w
 nnoremap <S-tab> <C-w>W
 
+" Rotate split windows
+nnoremap <Leader><C-h> <C-w>H
+nnoremap <Leader><C-j> <C-w>J
+nnoremap <Leader><C-k> <C-w>K
+nnoremap <Leader><C-l> <C-w>L
+
 " Move between splits (windows)
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -82,7 +88,6 @@ inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
-inoremap <C-^> <C-o><C-^>
 
 " Alt-j <A-j> mapped to ∆
 " Alt-k <A-k> mapped to ˚

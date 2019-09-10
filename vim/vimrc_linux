@@ -177,7 +177,6 @@ inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
-inoremap <C-^> <C-o><C-^>
 
 " move line up and down
 " nnoremap <S-Up>   :<C-u>silent! move-2<CR>==
