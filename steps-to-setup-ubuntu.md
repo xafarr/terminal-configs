@@ -48,7 +48,7 @@ gsettings set org.gnome.shell.keybindings switch-to-application-9 []
     - Change font value to "MesloLGLDZ Nerd Font 14"
 - install fd using brew (fd is alternate to find)
 - install fzf using brew (fuzzy finder)
-- install zsh-autosuggestion using brew
+- install zsh-autosuggestions using brew
 - install zsh-syntax-highlighting using brew
 - install zsh-completions using brew
 - setup zsh-completions by putting following in zshrc
