@@ -8,6 +8,10 @@
     ```shell
     $ sudo apt-get install network-manager-openconnect-gnome
     ```
+- install OpenVPN gnome and if .ovpn is available then import file through network setup
+    ```shell
+    $ sudo apt install openvpn network-manager-openvpn network-manager-openvpn-gnome
+    ```
 - Remove Super+Number binding by executing following
 ```shell
 # For 18.04 and 19.04
