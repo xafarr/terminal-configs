@@ -4,6 +4,10 @@
     $ sudo ubuntu-drivers autoinstall
     ```
 - install build-essential curl file git dconf-cli vim-gnome
+- install Cisco Anyconnect compatible VPN client
+    ```shell
+    $ sudo apt-get install network-manager-openconnect-gnome
+    ```
 - Remove Super+Number binding by executing following
 ```shell
 # For 18.04 and 19.04
