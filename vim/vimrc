@@ -248,5 +248,8 @@ au FocusLost,WinLeave * :silent! wa
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
+" prevent clearing clipboard on exit
+autocmd VimLeave * call system("xclip -o | xclip -selection c")
+
 " set up path to editorconfig
 let g:EditorConfig_exec_path = findfile('.editorconfig', '.;')
