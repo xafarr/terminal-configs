@@ -211,7 +211,7 @@ let g:DevIconsEnableFolderExtensionPatternMatching = 1
 " FZF settings
 " This is the default extra key bindings
 nnoremap <silent> <C-f> :FZF<cr>
-nnoremap <silent> <C-F> :FZF ~<cr>
+nnoremap <silent> <Leader><C-f> :FZF ~<cr>
 nnoremap <silent> <C-g> :Rg<cr>
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
