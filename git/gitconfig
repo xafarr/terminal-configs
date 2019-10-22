@@ -17,17 +17,16 @@
 [branch "master"]
     mergeOptions = --ff-only
 [diff]
-	tool = meld
+	tool = vimdiff
 [difftool]
 	prompt = false
-[difftool "meld"]
-    cmd = meld "$LOCAL" "$REMOTE"
+[difftool "vimdiff"]
+    cmd = vimdiff "$LOCAL" "$REMOTE"
 [merge]
-	tool = meld
+	tool = vimdiff
+	conflictStyle = diff3
 [mergetool]
 	keepBackup = false
 	prompt = false
-[mergetool "meld"]
-    # Choose one of these 2 lines (not both!)
-    cmd = meld "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
-    #cmd = meld "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED"
+[mergetool "vimdiff"]
+    cmd = vimdiff "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
