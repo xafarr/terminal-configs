@@ -20,13 +20,9 @@
 	tool = vimdiff
 [difftool]
 	prompt = false
-[difftool "vimdiff"]
-    cmd = vimdiff "$LOCAL" "$REMOTE"
 [merge]
 	tool = vimdiff
 	conflictStyle = diff3
 [mergetool]
 	keepBackup = false
 	prompt = false
-[mergetool "vimdiff"]
-    cmd = vimdiff "$LOCAL" "$MERGED" "$REMOTE" --output "$MERGED"
