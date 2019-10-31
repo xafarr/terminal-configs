@@ -11,7 +11,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -30,13 +29,13 @@ call plug#end()
 
 filetype plugin indent on
 set t_Co=256
-set background=dark
-colorscheme onehalflight
-" colorscheme gruvbox
+set background=light
+colorscheme gruvbox
+let g:gruvbox_contrast_light='hard'
+" colorscheme onehalflight
 " Airline theme
-" let g:airline_theme='powerlineish'
-" let g:airline_theme='gruvbox'
-let g:airline_theme='onehalfdark'
+let g:airline_theme='gruvbox'
+" let g:airline_theme='onehalfdark'
 let g:airline_powerline_fonts = 1
 
 let mapleader = "," "Set Leader key to comma (,)
