@@ -5,6 +5,20 @@
 	st = status
 	co = checkout
 	last = log -1 HEAD
+    fetch = fetch --all --prune
+    show-commits-of = log --first-parent --no-merges
+    delete-tag = "!f() { \
+            echo 'Deleting tag' $1 'from local'; \
+            git tag -d $1; \
+            echo 'Deleting tag' $1 'from remote/origin'; \
+            git push origin :refs/tags/$1; \
+        }; f"
+    delete-branch = "!f() { \
+            echo 'Deleting branch' $1 'from local'; \
+            git branch -D $1; \
+            echo 'Deleting branch' $1 'from remote/origin'; \
+            git push origin --delete $1; \
+        }; f"
 [user]
 	email = xafarr@gmail.com
 	name = Muhammad Zafar
