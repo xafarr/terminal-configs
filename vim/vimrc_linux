@@ -24,6 +24,7 @@ Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'pearofducks/ansible-vim'
+Plug 'dense-analysis/ale'
 " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -41,7 +42,7 @@ let g:airline_powerline_fonts = 1
 let mapleader = "," "Set Leader key to comma (,)
 let maplocalleader = "," " Leader is comma
 " Set vim settings
-set clipboard=unnamed,unnamedplus " Integrate with system clipboard
+set clipboard=unnamedplus " Integrate with system clipboard
 " Keeps the cursor 5 lines above/below when z <cr>
 set scrolloff=5 " 5 line above/below cursor when scrolling
 " Show incomplete command in status line
@@ -262,7 +263,9 @@ au FocusLost,WinLeave * :silent! wa
 autocmd VimResized * :wincmd =
 
 " prevent clearing clipboard on exit
-autocmd VimLeave * call system("xclip -o | xclip -selection c")
+autocmd VimLeave * call system("xclip -o | xclip -sel clip")
 
 " set up path to editorconfig
 let g:EditorConfig_exec_path = findfile('.editorconfig', '.;')
+" set Jenkinsfile identified as Groovy syntax
+au BufNewFile,BufRead Jenkinsfile setf groovy
