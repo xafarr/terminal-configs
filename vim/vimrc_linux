@@ -214,6 +214,7 @@ let g:DevIconsEnableFolderExtensionPatternMatching = 1
 nnoremap <silent> <C-f> :FZF<cr>
 nnoremap <silent> <Leader><C-f> :FZF ~<cr>
 nnoremap <silent> <C-g> :Rg<cr>
+nnoremap <silent> <C-b> :Buffers<cr>
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-h': 'split',
