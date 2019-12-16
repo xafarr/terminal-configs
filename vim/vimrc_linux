@@ -208,6 +208,21 @@ let g:NERDTreeShowHidden=1
 let g:WebDevIconsUnicodeDecorateFolderNodes = 1
 " enable file extension pattern matching glyphs on folder/directory (disabled by default with 0)
 let g:DevIconsEnableFolderExtensionPatternMatching = 1
+" Check if NERDTree is open or active
+function! IsNERDTreeOpen()
+  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
+endfunction
+
+" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
+" file, and we're not in vimdiff
+function! SyncTree()
+  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+    wincmd p
+  endif
+endfunction
+" Highlight currently open buffer in NERDTree
+autocmd BufEnter * call SyncTree()
 
 " FZF settings
 " This is the default extra key bindings
@@ -287,6 +302,8 @@ let g:coc_global_extensions = [
   \ 'coc-python', 
   \ 'coc-mardownlint'
   \ ]
+
+let g:coc_node_path='/home/mzafar/.nvm/versions/node/v12.13.0/bin/node'
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
