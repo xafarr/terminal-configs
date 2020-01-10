@@ -1,0 +1,8 @@
+gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver '<Primary><Super>q'
+gsettings set org.gnome.mutter.keybindings switch-monitor []
+gsettings set org.gnome.settings-daemon.peripherals.mouse locate-pointer true
+gsettings set org.gnome.settings-daemon.peripherals mouse 'on'
+gsettings set org.gnome.settings-daemon.peripherals.keyboard bell-mode 'off'
+gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier ''
+gsettings set org.gnome.desktop.wm.keybindings begin-resize ['']
+
