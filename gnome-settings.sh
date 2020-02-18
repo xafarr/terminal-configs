@@ -1,3 +1,4 @@
+#!/bin/bash
 gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver '<Primary><Super>q' &&
 gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Primary><Super>d']" &&
 gsettings set org.gnome.mutter.keybindings switch-monitor [] &&
