@@ -303,7 +303,7 @@ let g:coc_global_extensions = [
   \ 'coc-mardownlint'
   \ ]
 
-let g:coc_node_path='/home/mzafar/.nvm/versions/node/v12.13.0/bin/node'
+let g:coc_node_path='/home/linuxbrew/.linuxbrew/bin/node'
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
