@@ -30,8 +30,8 @@ if [ -f ~/.additional-env-config ]; then
     source $HOME/.additional-env-config
 fi
 
-ZSH_TMUX_AUTOSTART=true
-ZSH_TMUX_AUTOQUIT=true
+ZSH_TMUX_AUTOSTART=false
+ZSH_TMUX_AUTOQUIT=false
 
 ZSH_DISABLE_COMPFIX=true
 zstyle :omz:plugins:ssh-agent agent-forwarding on
@@ -205,8 +205,8 @@ source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # For Ruby environment initialization
 eval "$(rbenv init -)"
 
-[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion" ] && . "/home/linuxbrew/.linuxbrew/opt/nvm/etc/bash_completion"  # This loads nvm bash_completion
+[ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"  # This loads nvm
+[ -s "$(brew --prefix nvm)/etc/bash_completion" ] && . "$(brew --prefix nvm)/etc/bash_completion"  # This loads nvm bash_completion
 
 # -------------------------------------------------------------------
 # Functions for convenience
