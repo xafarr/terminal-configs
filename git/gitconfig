@@ -40,3 +40,5 @@
 [mergetool]
 	keepBackup = false
 	prompt = false
+[http]
+	sslVerify = true
