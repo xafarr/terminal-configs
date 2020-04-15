@@ -200,7 +200,7 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 " NERDTree settings
-nnoremap <Leader>n :NERDTreeToggle<CR>
+nnoremap <Leader>e :NERDTreeToggle<CR>
 " Reveal file in NerdTree
 nnoremap <Leader>R :NERDTreeFind<cr>
 
