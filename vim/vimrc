@@ -93,13 +93,7 @@ set splitright
 set hidden
 set noerrorbells
 
-if has("gui_running")
-  if has("gui_gtk3")
-    set guifont=FuraCode\ Nerd\ Font\ Regular\ 14
-  elseif has("gui_macvim")
-    set guifont=FuraCode\ Nerd\ Font\ Regular\ 14
-  endif
-endif
+set guifont=FuraCode\ Nerd\ Font\ Regular:h15
 
 " Open new line below and above current line
 nnoremap <leader>o o<esc>
