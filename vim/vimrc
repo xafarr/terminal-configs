@@ -93,7 +93,8 @@ set splitright
 set hidden
 set noerrorbells
 
-set guifont=FuraCode\ Nerd\ Font\ Regular:h15
+set macligatures
+set guifont=FuraCodeNerdFontComplete-Regular:h15
 
 " Open new line below and above current line
 nnoremap <leader>o o<esc>
