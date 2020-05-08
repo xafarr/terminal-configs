@@ -45,7 +45,8 @@ gsettings set org.gnome.shell.keybindings switch-to-application-9 []
 - run `git -C "$(brew --repo homebrew/core)" fetch --unshallow`
 - install zsh using brew and execute following
     ```shell
-    $ sudo usermod -s /home/linuxbrew/.linuxbrew/bin/zsh <username>
+    $ echo '/home/linuxbrew/.linuxbrew/bin/zsh' | sudo tee -a /etc/shells
+    $ chsh -s /home/linuxbrew/.linuxbrew/bin/zsh <username>
     ```
 - install oh-my-zsh
 - install powerlevel9k
