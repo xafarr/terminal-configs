@@ -32,12 +32,12 @@ call plug#end()
 filetype plugin indent on
 set t_Co=256
 set background=light
-colorscheme gruvbox
-let g:gruvbox_contrast_light='hard'
-" colorscheme onehalflight
+" colorscheme gruvbox
+" let g:gruvbox_contrast_light='hard'
+colorscheme onehalflight
 " Airline theme
-let g:airline_theme='gruvbox'
-" let g:airline_theme='onehalfdark'
+" let g:airline_theme='gruvbox'
+let g:airline_theme='onehalfdark'
 let g:airline_powerline_fonts = 1
 
 let mapleader = "," "Set Leader key to comma (,)
@@ -92,6 +92,7 @@ set splitbelow
 set splitright
 set hidden
 set noerrorbells
+set spell
 
 set macligatures
 set guifont=FuraCodeNerdFontComplete-Regular:h15

@@ -1,7 +1,7 @@
 let mapleader = ","
 set nocompatible
 set encoding=utf8
-set number relativenumber
+set number
 set matchpairs+=<:>
 set clipboard=unnamed,unnamedplus,ideaput
 set showcmd
