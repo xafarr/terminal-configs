@@ -303,8 +303,7 @@ let g:coc_global_extensions = [
   \ 'coc-json', 
   \ 'coc-xml', 
   \ 'coc-html', 
-  \ 'coc-python', 
-  \ 'coc-mardownlint'
+  \ 'coc-python'
   \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
