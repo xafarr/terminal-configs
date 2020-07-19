@@ -16,7 +16,7 @@ Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
