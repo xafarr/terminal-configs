@@ -145,10 +145,11 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 " Select whole file
 map <C-a> <esc>ggVG<CR>
+"
 " Format JSON
-map <Leader>fj :%!python -m json.tool<CR>
+" map <Leader>fj :%!python -m json.tool<CR>
 " Format XML
-map <Leader>fx :%!xmllint % --format<CR>
+" map <Leader>fx :%!xmllint % --format<CR>
 
 " Make Y behave like other capitals
 nnoremap Y y$
@@ -295,7 +296,6 @@ set signcolumn=yes
 
 let g:coc_global_extensions = [
   \ 'coc-snippets',
-  \ 'coc-pairs',
   \ 'coc-tsserver',
   \ 'coc-eslint', 
   \ 'coc-prettier', 
