@@ -5,6 +5,7 @@ export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew"
 export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
 export MANPATH="$HOMEBREW_PREFIX/share/man:$MANPATH"
 export INFOPATH="$HOMEBREW_PREFIX/share/info:$INFOPATH"
+export POWERLINE_STATUS_PREFIX="$(pip3 show powerline-status | grep Location | awk '{print $2}')"
 
 ## For Ubuntu JAVA_HOME
   #eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
