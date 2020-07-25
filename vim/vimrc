@@ -25,6 +25,13 @@ Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'pearofducks/ansible-vim'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
+" --------------------------------------------------
+" Plugins for file types
+" --------------------------------------------------
+
+
 " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -134,6 +141,7 @@ cmap w!! w !sudo tee > /dev/null %
 
 " trim whitespace
 " nnoremap <silent> <Leader>t :%s/\s\+$//e<cr>
+
 " toggle wrapping
 nnoremap <silent> <Leader>tw :set wrap! wrap?<cr>
 " toggle relative line number
@@ -174,11 +182,6 @@ nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 " Select whole file
 map <C-a> <esc>ggVG<CR>
-
-" Format JSON
-" map <Leader>fj :%!python -m json.tool<CR>
-" Format XML
-" map <Leader>fx :%!xmllint % --format<CR>
 
 " Make Y behave like other capitals
 nnoremap Y y$
