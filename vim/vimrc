@@ -92,6 +92,7 @@ let &statusline = s:statusline_expr()
 "-----------------------------------
 set laststatus=2
 set autoread "Set to auto read when a file is changed from the outside
+set autowrite "buffers are automatically saved when switching to another buffer
 set wrap
 set matchpairs+=<:> " Use % to jump between pairs
 set cmdheight=2 "command bar is 2 high
