@@ -26,8 +26,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'pearofducks/ansible-vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-" Automatically show Vim's complete menu while typing.
-Plug 'vim-scripts/AutoComplPop'
 
 " --------------------------------------------------
 " Plugins for file types
