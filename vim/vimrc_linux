@@ -54,7 +54,7 @@ let g:airline_powerline_fonts = 1
 let mapleader = "," "Set Leader key to comma (,)
 let maplocalleader = "," " Leader is comma
 " Set vim settings
-set clipboard=unnamedplus " Integrate with system clipboard
+set clipboard=unnamed,unnamedplus " Integrate with system clipboard
 " Keeps the cursor 5 lines above/below when z <cr>
 set scrolloff=5 " 5 line above/below cursor when scrolling
 " Show incomplete command in status line
