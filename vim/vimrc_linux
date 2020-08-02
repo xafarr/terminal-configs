@@ -28,10 +28,11 @@ Plug 'pearofducks/ansible-vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 " Automatically show Vim's complete menu while typing.
 Plug 'vim-scripts/AutoComplPop'
+
 " --------------------------------------------------
 " Plugins for file types
 " --------------------------------------------------
-
+Plug 'rust-lang/rust.vim'
 
 " All of your Plugins must be added before the following line
 call plug#end()
