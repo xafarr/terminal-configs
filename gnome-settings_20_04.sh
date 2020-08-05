@@ -2,7 +2,7 @@
 gsettings set org.gnome.settings-daemon.plugins.media-keys screensaver "['<Primary><Super>q']" &&
 gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Primary><Super>d']" &&
 gsettings set org.gnome.mutter.keybindings switch-monitor "[]" &&
-#gsettings set org.gnome.settings-daemon.peripherals.mouse locate-pointer true &&
+gsettings set org.gnome.desktop.interface locate-pointer true &&
 gsettings set org.gnome.settings-daemon.peripherals.keyboard bell-mode 'off' &&
 gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '' &&
 gsettings set org.gnome.desktop.wm.keybindings begin-resize "['']" &&
@@ -29,7 +29,7 @@ gsettings set org.gnome.mutter.keybindings toggle-tiled-right "[]" &&
 gsettings set org.gnome.mutter.keybindings switch-monitor "['XF86Display']" &&
 gsettings set org.gnome.desktop.peripherals.mouse natural-scroll true &&
 gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true &&
-#gsettings set org.gnome.settings-daemon.peripherals.keyboard numlock-state 'on' &&
+gsettings set org.gnome.desktop.peripherals.keyboard numlock-state true &&
 gsettings set org.gtk.Settings.FileChooser clock-format '12h' &&
 gsettings set org.gnome.desktop.interface clock-format '12h' &&
 gsettings set org.gnome.desktop.interface clock-show-date true &&
@@ -43,5 +43,14 @@ gsettings set org.gnome.shell.keybindings toggle-message-tray "[]" &&
 gsettings set org.gnome.shell disable-user-extensions false &&
 gsettings set org.gnome.shell enabled-extensions "['gTile@vibou']" &&
 gsettings set org.gnome.shell.extensions.dash-to-dock hot-keys false &&
-gsettings set org.gnome.mutter overlay-key 'Super_R'
+gsettings set org.gnome.mutter overlay-key 'Super_R' &&
+gsettings set org.gnome.shell.keybindings switch-to-application-1 "['']" &&
+gsettings set org.gnome.shell.keybindings switch-to-application-2 "['']" &&
+gsettings set org.gnome.shell.keybindings switch-to-application-3 "['']" &&
+gsettings set org.gnome.shell.keybindings switch-to-application-4 "['']" &&
+gsettings set org.gnome.shell.keybindings switch-to-application-5 "['']" &&
+gsettings set org.gnome.shell.keybindings switch-to-application-6 "['']" &&
+gsettings set org.gnome.shell.keybindings switch-to-application-7 "['']" &&
+gsettings set org.gnome.shell.keybindings switch-to-application-8 "['']" &&
+gsettings set org.gnome.shell.keybindings switch-to-application-9 "['']"
 
