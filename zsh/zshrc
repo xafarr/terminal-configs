@@ -184,11 +184,22 @@ export LDFLAGS="-L/usr/local/opt/gettext/lib"
 alias ltr="ll -altr"
 alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
 # Use MacVim vim and enable ctrl-s in terminal
-alias vim="stty stop '' -ixoff; `brew --prefix`/bin/vim"
+#alias vim="stty stop '' -ixoff; `brew --prefix`/bin/vim"
 alias ssh-keygen="ssh-keygen -m PEM"
 alias brew-update="brew update; brew doctor; brew upgrade; brew cask upgrade; brew cleanup"
 # alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 # alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
+
+# use gui version of vim if available
+if command -v mvim &> /dev/null
+then
+    alias vim="mvim"
+fi
+# use gui version of vimdiff if available
+if command -v mvim &> /dev/null
+then
+    alias vimdiff="mvimdiff"
+fi
 
 # For Z for completion
 . `brew --prefix`/etc/profile.d/z.sh

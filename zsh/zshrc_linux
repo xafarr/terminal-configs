@@ -190,6 +190,17 @@ alias ssh-keygen="ssh-keygen -m PEM"
 alias brew-update="brew update; brew doctor; brew upgrade; brew cleanup"
 alias pbcopy="xclip -sel clip"
 
+# use gui version of vim if available
+if command -v gvim &> /dev/null
+then
+    alias vim="gvim"
+fi
+# use gui version of vimdiff if available
+if command -v gvim &> /dev/null
+then
+    alias vimdiff="gvimdiff"
+fi
+
 # For Z for completion
 #. `brew --prefix`/etc/profile.d/z.sh
 
