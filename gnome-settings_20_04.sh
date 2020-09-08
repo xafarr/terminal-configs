@@ -52,5 +52,7 @@ gsettings set org.gnome.shell.keybindings switch-to-application-5 "['']" &&
 gsettings set org.gnome.shell.keybindings switch-to-application-6 "['']" &&
 gsettings set org.gnome.shell.keybindings switch-to-application-7 "['']" &&
 gsettings set org.gnome.shell.keybindings switch-to-application-8 "['']" &&
-gsettings set org.gnome.shell.keybindings switch-to-application-9 "['']"
+gsettings set org.gnome.shell.keybindings switch-to-application-9 "['']" &&
+gsettings set org.gnome.settings-daemon.plugins.media-keys rotate-video-lock-static "['']" &&
+gsettings set org.gnome.settings-daemon.plugins.media-keys help "['']"
 
