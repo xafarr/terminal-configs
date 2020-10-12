@@ -144,9 +144,9 @@ cmap w!! w !sudo tee > /dev/null %
 " nnoremap <silent> <Leader>t :%s/\s\+$//e<cr>
 
 " toggle wrapping
-nnoremap <silent> <Leader>tw :set wrap! wrap?<cr>
+" nnoremap <silent> <Leader>tw :set wrap! wrap?<cr>
 " toggle relative line number
-nnoremap <silent> <Leader>rn :set rnu!<cr>
+" nnoremap <silent> <Leader>rn :set rnu!<cr>
 " search occurrence count in file
 nnoremap <Leader>* *<C-O>:%s///gn<CR>``
 " toggle hlsearch
@@ -158,7 +158,12 @@ set nowritebackup
 set noswapfile
 
 " toggle list (special chars)
-nnoremap <Leader>l :set list! list?<cr>
+" nnoremap <Leader>l :set list! list?<cr>
+
+" Type a replacement term and press . to repeat the replacement again. Useful
+" for replacing a few instances of the term (comparable to multiple cursors).
+nnoremap <silent> s* :let @/='\<'.expand('<cword>').'\>'<CR>cgn
+xnoremap <silent> s* "sy:let @/=@s<CR>cgn
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
@@ -171,7 +176,7 @@ set ttyfast
 nnoremap <silent> <Leader>, :let @/=''<cr>:noh<cr>
 
 " Reformat code
-nnoremap <Leader>rf gg=G``<cr>
+" nnoremap <Leader>rf gg=G``<cr>
 
 " Split horizontally with new file
 nnoremap <silent> <Leader>h :split<CR>
@@ -294,10 +299,13 @@ nnoremap <silent> <C-f> :FZF<cr>
 nnoremap <silent> <Leader><C-f> :FZF ~<cr>
 nnoremap <silent> <C-g> :Rg<cr>
 nnoremap <silent> <C-b> :Buffers<cr>
+nnoremap <silent> <Leader>l :Lines<CR>
+
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-h': 'split',
-      \ 'ctrl-v': 'vsplit' }
+      \ 'ctrl-v': 'vsplit',
+      \ 'ctrl-y': {lines -> setreg('*', join(lines, "\n"))}}
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =
