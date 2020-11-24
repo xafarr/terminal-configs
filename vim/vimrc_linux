@@ -12,8 +12,8 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -26,7 +26,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'pearofducks/ansible-vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-
+Plug 'doums/darcula'
+Plug 'itchyny/lightline.vim'
 " --------------------------------------------------
 " Plugins for file types
 " --------------------------------------------------
@@ -36,20 +37,27 @@ Plug 'rust-lang/rust.vim'
 call plug#end()
 
 filetype plugin indent on
-set t_Co=256
-set background=dark
+if !has('gui_running')
+  set t_Co=256
+endif
+" set background=dark
 
 "--------------------------------------------------
 " Color Scheme
 "--------------------------------------------------
-let g:gruvbox_italic=1
-colorscheme gruvbox
-let g:gruvbox_contrast_dark='soft'
+" let g:gruvbox_italic=1
+" colorscheme gruvbox
+" let g:gruvbox_contrast_dark='soft'
 " colorscheme onehalflight
+colorscheme darcula
+"
 " Airline theme
-let g:airline_theme='gruvbox'
+" let g:airline_theme='gruvbox'
 " let g:airline_theme='onehalfdark'
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
+let g:lightline = {
+      \ 'colorscheme': 'darculaOriginal',
+      \ }
 
 let mapleader = "," "Set Leader key to comma (,)
 let maplocalleader = "," " Leader is comma
@@ -132,6 +140,10 @@ set shortmess+=c
 set spelllang=en_us
 
 set guifont=FuraCode\ Nerd\ Font\ Regular\ 13
+
+" Setting the grep program to ripgrep
+set grepprg=rg\ --vimgrep
+set grepformat^=%f:%l:%c:%m
 
 " Open new line below and above current line
 nnoremap <leader>o o<esc>
@@ -277,7 +289,7 @@ autocmd BufEnter * call SyncTree()
 "-------------------------------------------------- 
 " NerdTree GIT Plugin
 "-------------------------------------------------- 
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
@@ -289,7 +301,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Ignored"   : "☒",
     \ "Unknown"   : "?"
     \ }
-let g:NERDTreeShowIgnoredStatus = 1
+let g:NERDTreeGitStatusShowIgnored = 1
 
 " -------------------------------------------------- 
 " FZF settings
