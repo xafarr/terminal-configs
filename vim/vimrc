@@ -12,8 +12,8 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -26,7 +26,8 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'pearofducks/ansible-vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-
+Plug 'doums/darcula'
+Plug 'itchyny/lightline.vim'
 " --------------------------------------------------
 " Plugins for file types
 " --------------------------------------------------
@@ -36,25 +37,32 @@ Plug 'rust-lang/rust.vim'
 call plug#end()
 
 filetype plugin indent on
-set t_Co=256
-set background=dark
+if !has('gui_running')
+  set t_Co=256
+endif
+" set background=dark
 
 "--------------------------------------------------
 " Color Scheme
 "--------------------------------------------------
-let g:gruvbox_italic=1
-colorscheme gruvbox
-let g:gruvbox_contrast_dark='soft'
+" let g:gruvbox_italic=1
+" colorscheme gruvbox
+" let g:gruvbox_contrast_dark='soft'
 " colorscheme onehalflight
+colorscheme darcula
+"
 " Airline theme
-let g:airline_theme='gruvbox'
+" let g:airline_theme='gruvbox'
 " let g:airline_theme='onehalfdark'
-let g:airline_powerline_fonts = 1
+" let g:airline_powerline_fonts = 1
+let g:lightline = {
+      \ 'colorscheme': 'darculaOriginal',
+      \ }
 
 let mapleader = "," "Set Leader key to comma (,)
 let maplocalleader = "," " Leader is comma
 " Set vim settings
-set clipboard=unnamed " Integrate with system clipboard
+set clipboard=unnamed,unnamedplus " Integrate with system clipboard
 " Keeps the cursor 5 lines above/below when z <cr>
 set scrolloff=5 " 5 line above/below cursor when scrolling
 " Show incomplete command in status line
@@ -131,8 +139,11 @@ set completeopt=menuone,longest
 set shortmess+=c
 set spelllang=en_us
 
-set macligatures
 set guifont=FuraCodeNerdFontComplete-Regular:h15
+
+" Setting the grep program to ripgrep
+set grepprg=rg\ --vimgrep
+set grepformat^=%f:%l:%c:%m
 
 " Open new line below and above current line
 nnoremap <leader>o o<esc>
@@ -275,11 +286,10 @@ endfunction
 " Highlight currently open buffer in NERDTree
 autocmd BufEnter * call SyncTree()
 
-
 "-------------------------------------------------- 
 " NerdTree GIT Plugin
 "-------------------------------------------------- 
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
     \ "Untracked" : "✭",
@@ -291,7 +301,7 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Ignored"   : "☒",
     \ "Unknown"   : "?"
     \ }
-let g:NERDTreeShowIgnoredStatus = 1
+let g:NERDTreeGitStatusShowIgnored = 1
 
 " -------------------------------------------------- 
 " FZF settings
@@ -302,6 +312,7 @@ nnoremap <silent> <Leader><C-f> :FZF ~<cr>
 nnoremap <silent> <C-g> :Rg<cr>
 nnoremap <silent> <C-b> :Buffers<cr>
 nnoremap <silent> <Leader>l :Lines<CR>
+
 let g:fzf_action = {
       \ 'ctrl-t': 'tab split',
       \ 'ctrl-h': 'split',
@@ -350,7 +361,7 @@ autocmd VimResized * :wincmd =
 
 " set up path to editorconfig
 let g:EditorConfig_exec_path = findfile('.editorconfig', '.;')
-"
+
 " set Jenkinsfile identified as Groovy syntax
 au BufNewFile,BufRead Jenkinsfile setf groovy
 
