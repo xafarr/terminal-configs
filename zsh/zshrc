@@ -26,6 +26,15 @@ export GOPATH=$HOME/Documents/Go
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=/usr/local/opt/gettext/bin:$PATH
 export NVM_DIR="$HOME/.nvm"
+export PATH="$(brew --prefix bzip2)/bin:$PATH"
+
+# Pyenv path
+export PYENV_ROOT=$HOME/.pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
+
+# virtualenvwrapper
+export WORKON_HOME=$HOME/.local/share/virtualenvs
+
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=/usr/local/share/zsh-syntax-highlighting/highlighters
 export FZF_BASE="$HOMEBREW_PREFIX/opt/fzf"
 FD_OPTIONS="--follow --hidden --exclude .git --exclude node_modules"
@@ -178,8 +187,8 @@ export ARCHFLAGS="-arch x86_64"
 #export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # CPPFLAGS and LDFLAGS
-export CPPFLAGS="-I/usr/local/opt/gettext/include"
-export LDFLAGS="-L/usr/local/opt/gettext/lib"
+export CPPFLAGS="-I$(brew --prefix gettext)/include -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(brew --prefix zlib)/include -I$(xcrun --show-sdk-path)/usr/include"
+export LDFLAGS="-L$(brew --prefix gettext)/lib -L$(brew --prefix openssl)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib -L$(brew --prefix readline)/lib -L/usr/local/lib"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -269,6 +278,9 @@ _fzf_compgen_dir() {
 if [ -f ~/.additional-env-config ]; then
     source $HOME/.additional-env-config
 fi
+
+# Virtualenvwrapper script
+source $(brew --prefix virtualenvwrapper)/bin/virtualenvwrapper.sh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
