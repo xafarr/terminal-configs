@@ -11,10 +11,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-fugitive'
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'ryanoasis/vim-devicons'
@@ -26,12 +22,22 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'pearofducks/ansible-vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
-Plug 'doums/darcula'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --all' }
+Plug 'christoomey/vim-tmux-navigator'
 " --------------------------------------------------
 " Plugins for file types
 " --------------------------------------------------
 Plug 'rust-lang/rust.vim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+" --------------------------------------------------
+" Color Schemes
+" --------------------------------------------------
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'morhetz/gruvbox'
+Plug 'lifepillar/vim-solarized8'
+Plug 'vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -40,34 +46,7 @@ filetype plugin indent on
 if !has('gui_running')
   set t_Co=256
 endif
-" set background=dark
 
-"--------------------------------------------------
-" Color Scheme
-"--------------------------------------------------
-" let g:gruvbox_italic=1
-" colorscheme gruvbox
-" let g:gruvbox_contrast_dark='soft'
-" colorscheme onehalflight
-colorscheme darcula
-"
-" Airline theme
-" let g:airline_theme='gruvbox'
-" let g:airline_theme='onehalfdark'
-" let g:airline_powerline_fonts = 1
-let g:lightline = {
-      \ 'colorscheme': 'darculaOriginal',
-      \ }
-
-let mapleader = "," "Set Leader key to comma (,)
-let maplocalleader = "," " Leader is comma
-" Set vim settings
-set clipboard=unnamed,unnamedplus " Integrate with system clipboard
-" Keeps the cursor 5 lines above/below when z <cr>
-set scrolloff=5 " 5 line above/below cursor when scrolling
-" Show incomplete command in status line
-set showcmd
-set noshowmode
 " True colors support (need vim to be compiled with +termguicolors)
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -75,48 +54,107 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
+" Automatically reloading of .vimrc
+autocmd! bufwritepost $MYVIMRC source $MYVIMRC
+
+"--------------------------------------------------
+" Color Scheme
+"--------------------------------------------------
+" let g:gruvbox_italic=1
+" let g:gruvbox_contrast_dark='medium'
+set background=light
+colorscheme solarized8_high
+
 " -----------------------------------------------------------------------------
 " Status line
 " -----------------------------------------------------------------------------
-
-" Heavily inspired by: https://github.com/junegunn/dotfiles/blob/master/vimrc
-function! s:statusline_expr()
-  let mod = "%{&modified ? '[+] ' : !&modifiable ? '[x] ' : ''}"
-  let ro  = "%{&readonly ? '[RO] ' : ''}"
-  let ft  = "%{len(&filetype) ? '['.&filetype.'] ' : ''}"
-  let fug = "%{exists('g:loaded_fugitive') ? fugitive#statusline() : ''}"
-  let sep = ' %= '
-  let pos = ' %-12(%l : %c%V%) '
-  let pct = ' %P'
-
-  return '[%n] %f %<'.mod.ro.ft.fug.sep.pos.'%*'.pct
-endfunction
-
-let &statusline = s:statusline_expr()
+" Enable extensions
+" let g:airline_extensions= ['branch', 'fzf', 'ycm', 'tabline', 'nerdtree']
+" Enable tabline extension
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+" Update section z to just have line number/total lines:column
+let g:airline_section_z = airline#section#create(['linenr', '/%1L', ':%1v'])
+" Do not draw separators for empty sections (only for the active window) >
+let g:airline_skip_empty_sections = 1
+" Custom setup that removes filetype/whitespace from default vim airline bar
+let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'z', 'warning', 'error']]
+" Customize vim airline per filetype
+let g:airline_filetype_overrides = {
+      \ 'coc-explorer':  [ 'CoC Explorer', '' ],
+      \ 'defx':  ['defx', '%{b:defx.paths[0]}'],
+      \ 'fugitive': ['fugitive', '%{airline#util#wrap(airline#extensions#branch#get_head(),80)}'],
+      \ 'gundo': [ 'Gundo', '' ],
+      \ 'help':  [ 'Help', '%f' ],
+      \ 'minibufexpl': [ 'MiniBufExplorer', '' ],
+      \ 'nerdtree': [ get(g:, 'NERDTreeStatusline', 'NERD'), '' ],
+      \ 'startify': [ 'startify', '' ],
+      \ 'vim-plug': [ 'Plugins', '' ],
+      \ 'vimfiler': [ 'vimfiler', '%{vimfiler#get_status_string()}' ],
+      \ 'vimshell': ['vimshell','%{vimshell#get_status_string()}'],
+      \ 'vaffle' : [ 'Vaffle', '%{b:vaffle.dir}' ],
+      \ }
+" Enable powerline fonts
+let g:airline_powerline_fonts = 1
+" Enable caching of syntax highlighting groups
+let g:airline_highlighting_cache = 1
+" enable/disable showing a summary of changed hunks under source control. >
+let g:airline#extensions#hunks#enabled = 0
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+" set error count prefix >
+let g:airline#extensions#ycm#error_symbol = 'E:'
+" set warning count prefix >
+let g:airline#extensions#ycm#warning_symbol = 'W:'
+" Vim airline theme
+let g:airline_theme='solarized'
 
 "-----------------------------------
 " General settings
 "-----------------------------------
+"Set Leader key to comma (,)
+let mapleader = ","
+" Leader is comma
+let maplocalleader = ","
+" Set vim settings
+" Integrate with system clipboard
+set clipboard=unnamed,unnamedplus
+" Keeps the cursor 5 lines above/below when z <cr>
+set scrolloff=5
+" Show incomplete command in status line
+set showcmd
+set noshowmode
 set laststatus=2
-set autoread "Set to auto read when a file is changed from the outside
-set autowrite "buffers are automatically saved when switching to another buffer
+"Set to auto read when a file is changed from the outside
+set autoread
+"buffers are automatically saved when switching to another buffer
+set autowrite
 set wrap
-set matchpairs+=<:> " Use % to jump between pairs
-set cmdheight=2 "command bar is 2 high
-set backspace=indent,eol,start "set backspace function
+" Use % to jump between pairs
+set matchpairs+=<:>
+"command bar is 2 high
+set cmdheight=2
+"set backspace function
+set backspace=indent,eol,start
 " Set searching options
 " set hlsearch "highlight searched things
-set incsearch "incremental search
-set ignorecase "ignore case
-set smartcase "ignore ignorecase if search pattern contains uppercase
+"incremental search
+set incsearch
+"ignore case
+set ignorecase
+"ignore ignorecase if search pattern contains uppercase
+set smartcase
 
 set nolazyredraw
 set magic
 set textwidth=80
 set formatoptions-=t
-set ruler "show current position
+"show current position
+set ruler
 set number relativenumber
-set showmatch "show maching braces
+"show maching braces
+set showmatch
 set shiftwidth=4
 set softtabstop=4
 set tabstop=4
@@ -139,7 +177,7 @@ set completeopt=menuone,longest
 set shortmess+=c
 set spelllang=en_us
 
-set guifont=FuraCodeNerdFontComplete-Regular:h15
+set guifont=MesloLGS-NF-Regular:h15
 
 " Setting the grep program to ripgrep
 set grepprg=rg\ --vimgrep
@@ -149,8 +187,12 @@ set grepformat^=%f:%l:%c:%m
 nnoremap <leader>o o<esc>
 nnoremap <leader>O O<esc>
 
-" Force saving files that require root permission 
+" Force saving files that require root permission
 cmap w!! w !sudo tee > /dev/null %
+
+" easier moving of code blocks
+vnoremap < <gv
+vnoremap > >gv
 
 " trim whitespace
 " nnoremap <silent> <Leader>t :%s/\s\+$//e<cr>
@@ -163,6 +205,19 @@ cmap w!! w !sudo tee > /dev/null %
 nnoremap <Leader>* *<C-O>:%s///gn<CR>``
 " toggle hlsearch
 nnoremap <silent> <Leader><space> :set hls!<cr>
+
+" Search for selected text, forwards or backwards.
+" https://vim.fandom.com/wiki/Search_for_visually_selected_text
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
 
 " --- backup and swap files ---
 set nobackup
@@ -187,8 +242,8 @@ set ttyfast
 " Clear search
 nnoremap <silent> <Leader>, :let @/=''<cr>:noh<cr>
 
-" Reformat code
-" nnoremap <Leader>rf gg=G``<cr>
+" Prettier mapping
+nmap <D-¬> <Plug>(PrettierAsync)
 
 " Split horizontally with new file
 nnoremap <silent> <Leader>h :split<CR>
@@ -222,10 +277,18 @@ nnoremap <Leader><C-k> <C-w>K
 nnoremap <Leader><C-l> <C-w>L
 
 " Move between splits (windows)
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-l> <C-w>l
+
+" Tmux Navigator mappings
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <M-Left> :TmuxNavigateLeft<cr>
+nnoremap <silent> <M-Down> :TmuxNavigateDown<cr>
+nnoremap <silent> <M-Up> :TmuxNavigateUp<cr>
+nnoremap <silent> <M-Right> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-\> :TmuxNavigatePrevious<cr>
 
 " Movement in insert mode
 inoremap <C-h> <C-o>h
@@ -246,49 +309,51 @@ vnoremap ∆ :m '>+1<CR>gv=gv
 vnoremap ˚ :m '<-2<CR>gv=gv
 
 " --------------------------------------------
+" YouCompleteMe settings
+" --------------------------------------------
+let g:ycm_python_interpreter_path = 'python3'
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_warning_symbol = '⚠'
+let g:ycm_error_symbol = '>>'
+nnoremap <D-b> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <D-∫> :YcmCompleter GoToImplementation<CR>
+nmap <F1> <plug>(YCMHover)
+
+" --------------------------------------------
 " NERDTree settings
 " --------------------------------------------
-" nnoremap <Leader>e :NERDTreeToggle<CR>
-" Reveal file in NerdTree
-" nnoremap <Leader>R :NERDTreeFind<cr>
-
-" Open nerd tree at the current file or close nerd tree if pressed again.
-nnoremap <silent> <expr> <Leader>e g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
-
-" Open NERDTree automatically when vim starts up if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-
-" Close vim if only NERDTree is open
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+nnoremap <leader>e :NERDTreeToggle<CR>
 
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeShowHidden=1
+" Remove bookmarks and help text from NERDTree
+let g:NERDTreeMinimalUI = 1
 
-" enable folder/directory glyph flag (disabled by default with 0)
-let g:WebDevIconsUnicodeDecorateFolderNodes = 1
-" enable file extension pattern matching glyphs on folder/directory (disabled by default with 0)
-let g:DevIconsEnableFolderExtensionPatternMatching = 1
-" Check if NERDTree is open or active
-function! IsNERDTreeOpen()
-  return exists("t:NERDTreeBufName") && (bufwinnr(t:NERDTreeBufName) != -1)
-endfunction
+" If you are using vim-plug, you'll also need to add these lines to avoid crashes
+" when calling vim-plug functions while the cursor is on the NERDTree window:
+let g:plug_window = 'noautocmd vertical topleft new'
 
-" Call NERDTreeFind iff NERDTree is active, current window contains a modifiable
-" file, and we're not in vimdiff
-function! SyncTree()
-  if &modifiable && IsNERDTreeOpen() && strlen(expand('%')) > 0 && !&diff
-    NERDTreeFind
-    wincmd p
-  endif
-endfunction
-" Highlight currently open buffer in NERDTree
-autocmd BufEnter * call SyncTree()
+" Start NERDTree when Vim is started without file arguments.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
 
-"-------------------------------------------------- 
+" Start NERDTree when Vim starts with a directory argument.
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | endif
+
+" Exit Vim if NERDTree is the only window left.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
+    \ quit | endif
+
+" If another buffer tries to replace NERDTree, put it in the other window, and bring back NERDTree.
+autocmd BufEnter * if bufname('#') =~ 'NERD_tree_\d\+' && bufname('%') !~ 'NERD_tree_\d\+' && winnr('$') > 1 |
+    \ let buf=bufnr() | buffer# | execute "normal! \<C-W>w" | execute 'buffer'.buf | endif
+
+"--------------------------------------------------
 " NerdTree GIT Plugin
-"-------------------------------------------------- 
+"--------------------------------------------------
 let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "✹",
     \ "Staged"    : "✚",
@@ -303,10 +368,10 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ }
 let g:NERDTreeGitStatusShowIgnored = 1
 
-" -------------------------------------------------- 
+" --------------------------------------------------
 " FZF settings
 " This is the default extra key bindings
-" -------------------------------------------------- 
+" --------------------------------------------------
 nnoremap <silent> <C-f> :FZF<cr>
 nnoremap <silent> <Leader><C-f> :FZF ~<cr>
 nnoremap <silent> <C-g> :Rg<cr>
@@ -355,9 +420,6 @@ au FocusLost,WinLeave * :silent! wa
 
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
-
-" prevent clearing clipboard on exit
-" autocmd VimLeave * call system("xclip -o | xclip -sel clip")
 
 " set up path to editorconfig
 let g:EditorConfig_exec_path = findfile('.editorconfig', '.;')
