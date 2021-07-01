@@ -26,12 +26,14 @@
 	rebase = true
 [core]
     editor = vim
+    pager = delta
 [merge]
     ff = only
 [branch "master"]
     mergeOptions = --ff-only
 [diff]
 	tool = vimdiff
+    colorMoved = default
 [difftool]
     # Be able to abort all diffs with `:cq` or `:cquit`
     trustExitCode = true
@@ -45,21 +47,30 @@
 [http]
 	sslVerify = true
 
-[pager]
-    diff = delta --light
-    log = delta
-    reflog = delta
-    show = delta
-
 [interactive]
     diffFilter = delta --color-only
 
 [delta]
-    features = side-by-side line-numbers decorations
+    features = line-numbers hoopoe
     whitespace-error-style = 22 reverse
 
-[delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
-
+[delta "hoopoe"]
+    # author: https://github.com/dandavison
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
+    light = true
+    minus-emph-style = normal "#ffc0c0"
+    minus-empty-line-marker-style = normal "#ffe0e0"
+    minus-non-emph-style = normal "#ffe0e0"
+    minus-style = normal "#ffe0e0"
+    plus-emph-style = syntax "#a0efa0"
+    plus-empty-line-marker-style = normal "#d0ffd0"
+    plus-non-emph-style = syntax "#d0ffd0"
+    plus-style = syntax "#d0ffd0"
+    syntax-theme = GitHub
+    zero-style = syntax
