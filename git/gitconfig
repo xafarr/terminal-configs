@@ -52,7 +52,10 @@
 
 [delta]
     features = line-numbers hoopoe
+    side-by-side = true
     whitespace-error-style = 22 reverse
+    max-line-length = 0
+    width = variable
 
 [delta "hoopoe"]
     # author: https://github.com/dandavison
