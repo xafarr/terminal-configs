@@ -8,7 +8,7 @@ fi
 export HOMEBREW_PREFIX="/usr/local"
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX/Homebrew"
-export POWERLINE_STATUS_PREFIX="$(pip3 show powerline-status | grep Location | awk '{print $2}')"
+#export POWERLINE_STATUS_PREFIX="$(pip3 show powerline-status | grep Location | awk '{print $2}')"
 export PATH=/usr/local/bin:$HOME/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export PATH=/usr/local/opt/ncurses/bin:$PATH
@@ -28,7 +28,7 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$(brew --prefix bzip2)/bin:$PATH"
 
 # Ensure LESS doesn't wrap long lines
-export LESS=-RS
+#export LESS=-RS
 
 # Pyenv path
 export PYENV_ROOT=$HOME/.pyenv
@@ -122,11 +122,12 @@ export LDFLAGS="-L$(brew --prefix gettext)/lib -L$(brew --prefix openssl)/lib -L
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ltr="ll -altr"
-alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
+alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules,.yarn}"
 # Use MacVim vim and enable ctrl-s in terminal
 #alias vim="stty stop '' -ixoff; `brew --prefix`/bin/vim"
 alias ssh-keygen="ssh-keygen -m PEM"
 alias brew-update="brew update; brew doctor; brew upgrade; brew upgrade --cask; brew cleanup"
+alias wiki="vim -c VimwikiIndex"
 # alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 # alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 
