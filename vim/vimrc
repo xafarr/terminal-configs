@@ -38,6 +38,12 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
 Plug 'lifepillar/vim-solarized8'
 Plug 'vim-airline/vim-airline-themes'
+"Plug 'edkolev/tmuxline.vim'
+" --------------------------------------------------
+" Wiki and notes taking for Vim
+" --------------------------------------------------
+Plug 'vimwiki/vimwiki'
+Plug 'tools-life/taskwiki'
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -152,7 +158,8 @@ set textwidth=80
 set formatoptions-=t
 "show current position
 set ruler
-set number relativenumber
+"set number relativenumber
+set number
 "show maching braces
 set showmatch
 set shiftwidth=4
@@ -243,7 +250,7 @@ set ttyfast
 nnoremap <silent> <Leader>, :let @/=''<cr>:noh<cr>
 
 " Prettier mapping
-nmap <D-¬> <Plug>(PrettierAsync)
+map <D-¬> <Plug>(Prettier)
 
 " Split horizontally with new file
 nnoremap <silent> <Leader>h :split<CR>
@@ -320,9 +327,14 @@ nnoremap <D-∫> :YcmCompleter GoToImplementation<CR>
 nmap <F1> <plug>(YCMHover)
 
 " --------------------------------------------
+" Vimwiki Settings
+" --------------------------------------------
+let g:vimwiki_list = [{'path': '~/Documents/vimwiki/', 'path_html': '~/Documents/vimwiki/vimwiki_html/'}]
+
+" --------------------------------------------
 " NERDTree settings
 " --------------------------------------------
-nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader>e :NERDTreeToggle %<CR>
 
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
