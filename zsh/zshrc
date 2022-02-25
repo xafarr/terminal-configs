@@ -28,7 +28,8 @@ export NVM_DIR="$HOME/.nvm"
 export PATH="$(brew --prefix bzip2)/bin:$PATH"
 
 # Ensure LESS doesn't wrap long lines
-#export LESS=-RS
+export LESS="--MOUSE -rR"
+export BAT_PAGER='less -+X'
 
 # Pyenv path
 export PYENV_ROOT=$HOME/.pyenv
