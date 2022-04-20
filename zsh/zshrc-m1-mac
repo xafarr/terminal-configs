@@ -18,7 +18,8 @@ export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
 export PATH=$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH
-export JAVA_HOME=`/usr/libexec/java_home -v 11`
+#export JAVA_HOME=`/usr/libexec/java_home -v 11`
+#export JAVA_HOME="/Library/Java/JavaVirtualMachines/current/Contents/Home"
 export PATH=$JAVA_HOME/bin:$PATH
 export M2_HOME=$HOMEBREW_PREFIX/opt/maven/libexec
 export PATH=$M2_HOME/bin:$PATH
@@ -171,12 +172,19 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # set JAVA_HOME -- pass java version as argument e.g. 1.8, 9, 10, 11 etc
 function set_java_to() {
     # For Ubuntu - java_home=$(find /usr/lib/jvm -maxdepth 1 -type d -name "*$1*" | sort -r | head -n 1)
-    java_home=$(/usr/libexec/java_home -v $1)
+    #java_home=$(/usr/libexec/java_home -v $1)
+    java_home=/Library/Java/JavaVirtualMachines/$1/Contents/Home
     export JAVA_HOME=$java_home
     export PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/Java/ {next} {print}' | sed 's/:*$//')
     export PATH=$JAVA_HOME/bin:$PATH
     echo "Current Java Home: $JAVA_HOME"
 }
+
+function _set_java_to(){
+    ( cd /Library/Java/JavaVirtualMachines; printf "%s\n" "$2"* )
+}
+# Autocomplete JDK versions
+complete -o nospace -C _set_java_to set_java_to
 
 # -------------------------------------------------------------------
 # Function to check if port is used
@@ -213,3 +221,7 @@ source $(brew --prefix virtualenvwrapper)/bin/virtualenvwrapper.sh
 #--------------------------------------------------
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C $(brew --prefix vault)/bin/vault vault
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
