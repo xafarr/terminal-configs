@@ -55,10 +55,10 @@
     anaconda                # conda environment (https://conda.io/)
     pyenv                   # python environment (https://github.com/pyenv/pyenv)
     goenv                   # go environment (https://github.com/syndbg/goenv)
-    nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
-    nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
-    nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
-    # node_version          # node.js version
+    #nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
+    #nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
+    #nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
+    node_version          # node.js version
     # go_version            # go version (https://golang.org)
     # rust_version          # rustc version (https://www.rust-lang.org)
     # dotnet_version        # .NET version (https://dotnet.microsoft.com)
@@ -98,7 +98,7 @@
     todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
-    time                    # current time
+    #time                    # current time
     # =========================[ Line #2 ]=========================
     newline
     # ip                    # ip address and bandwidth usage for a specified network interface
@@ -482,7 +482,7 @@
   # Show status of repositories of these types. You can add svn and/or hg if you are
   # using them. If you do, your prompt may become slow even when your current directory
   # isn't in an svn or hg reposotiry.
-  typeset -g POWERLEVEL9K_VCS_BACKENDS=(git)
+  typeset -g POWERLEVEL9K_VCS_BACKENDS=(git hg)
 
   # These settings are used for repositories other than Git or when gitstatusd fails and
   # Powerlevel10k has to fall back to using vcs_info.
@@ -864,7 +864,7 @@
   # Python virtual environment color.
   typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=37
   # Don't show Python version next to the virtual environment name.
-  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
+  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
   # If set to "false", won't show virtualenv if pyenv is already shown.
   # If set to "if-different", won't show virtualenv if it's the same as pyenv.
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_WITH_PYENV=false
@@ -1590,6 +1590,9 @@
 
 # Tell `p10k configure` which file it should overwrite.
 typeset -g POWERLEVEL9K_CONFIG_FILE=${${(%):-%x}:a}
+
+# LESS Colours
+export LS_COLORS='rs=0:no=00:mi=00:mh=00:ln=01;36:or=01;31:di=01;34:ow=04;01;34:st=34:tw=04;34:pi=01;33:so=01;33:do=01;33:bd=01;33:cd=01;33:su=01;35:sg=01;35:ca=01;35:ex=01;32:'
 
 (( ${#p10k_config_opts} )) && setopt ${p10k_config_opts[@]}
 'builtin' 'unset' 'p10k_config_opts'
