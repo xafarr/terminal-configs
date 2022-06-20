@@ -8,19 +8,20 @@ fi
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# Platform and architecture
+system=$(uname -ms)
+platform=$(echo "$system" | awk '{print $1}')
+arch=$(echo "$system" | awk '{print $2}')
+
 export HOMEBREW_PREFIX="/opt/homebrew";
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar";
 export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX";
 export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}";
 export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
 export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
-#export POWERLINE_STATUS_PREFIX="$(pip3 show powerline-status | grep Location | awk '{print $2}')"
 export PATH=$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH
-#export JAVA_HOME=`/usr/libexec/java_home -v 11`
-#export JAVA_HOME="/Library/Java/JavaVirtualMachines/current/Contents/Home"
-export PATH=$JAVA_HOME/bin:$PATH
 export M2_HOME=$HOMEBREW_PREFIX/opt/maven/libexec
 export PATH=$M2_HOME/bin:$PATH
 export GRADLE_HOME=$HOMEBREW_PREFIX/opt/gradle/libexec
@@ -39,10 +40,12 @@ export DOTNET_ROOT="$(brew --prefix dotnet)/libexec"
 
 # Ensure LESS doesn't wrap long lines
 export LESS="--MOUSE -rR"
+export LS_COLORS="rs=0:no=00:mi=00:mh=00:ln=01;36:or=01;31:di=01;34:ow=04;01;34:st=34:tw=04;34:pi=01;33:so=01;33:do=01;33:bd=01;33:cd=01;33:su=01;35:sg=01;35:ca=01;35:ex=01;32:"
 
 # Pyenv path
 export PYENV_ROOT=$HOME/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
+eval "$(pyenv init -)"
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.local/share/virtualenvs
@@ -110,7 +113,7 @@ export VISUAL=vim
 export EDITOR=$VISUAL
 
 # Compilation flags
-export ARCHFLAGS="-arch x86_64"
+export ARCHFLAGS="-arch $(arch)"
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
@@ -161,6 +164,7 @@ source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 # For Ruby environment initialization
 eval "$(rbenv init -)"
 
+# Installs Shell Integration for iTerm2.
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 [ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"  # This loads nvm
@@ -169,22 +173,9 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # -------------------------------------------------------------------
 # Functions for convenience
 # -------------------------------------------------------------------
-# set JAVA_HOME -- pass java version as argument e.g. 1.8, 9, 10, 11 etc
-function set_java_to() {
-    # For Ubuntu - java_home=$(find /usr/lib/jvm -maxdepth 1 -type d -name "*$1*" | sort -r | head -n 1)
-    #java_home=$(/usr/libexec/java_home -v $1)
-    java_home=/Library/Java/JavaVirtualMachines/$1/Contents/Home
-    export JAVA_HOME=$java_home
-    export PATH=$(echo ${PATH} | awk -v RS=: -v ORS=: '/Java/ {next} {print}' | sed 's/:*$//')
-    export PATH=$JAVA_HOME/bin:$PATH
-    echo "Current Java Home: $JAVA_HOME"
+function java_props() {
+    echo $(java -XshowSettings:properties -version)
 }
-
-function _set_java_to(){
-    ( cd /Library/Java/JavaVirtualMachines; printf "%s\n" "$2"* )
-}
-# Autocomplete JDK versions
-complete -o nospace -C _set_java_to set_java_to
 
 # -------------------------------------------------------------------
 # Function to check if port is used
@@ -222,6 +213,7 @@ source $(brew --prefix virtualenvwrapper)/bin/virtualenvwrapper.sh
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C $(brew --prefix vault)/bin/vault vault
 
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="/Users/zafar/.sdkman"
+[[ -s "/Users/zafar/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/zafar/.sdkman/bin/sdkman-init.sh"
