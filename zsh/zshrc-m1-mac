@@ -22,10 +22,6 @@ export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
 export PATH=$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH
-export M2_HOME=$HOMEBREW_PREFIX/opt/maven/libexec
-export PATH=$M2_HOME/bin:$PATH
-export GRADLE_HOME=$HOMEBREW_PREFIX/opt/gradle/libexec
-export GROOVY_HOME=$HOMEBREW_PREFIX/opt/groovy/libexec
 export PATH=$HOMEBREW_PREFIX/opt/go/libexec/bin:$PATH
 export GOPATH=$HOME/Documents/Go
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -46,6 +42,7 @@ export LS_COLORS="rs=0:no=00:mi=00:mh=00:ln=01;36:or=01;31:di=01;34:ow=04;01;34:
 export PYENV_ROOT=$HOME/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
 eval "$(pyenv init -)"
+export PYTHON_CONFIGURE_OPTS="--enable-framework"
 
 # virtualenvwrapper
 export WORKON_HOME=$HOME/.local/share/virtualenvs
@@ -134,7 +131,7 @@ export LDFLAGS="-L$(brew --prefix gettext)/lib -L$(brew --prefix openssl)/lib -L
 alias ltr="ll -altr"
 alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules,.yarn}"
 # Use MacVim vim and enable ctrl-s in terminal
-#alias vim="stty stop '' -ixoff; `brew --prefix`/bin/vim"
+alias vim="nvim"
 alias ssh-keygen="ssh-keygen -m PEM"
 alias brew-update="brew update; brew doctor; brew upgrade; brew upgrade --cask; brew cleanup"
 alias wiki="vim -c VimwikiIndex"
