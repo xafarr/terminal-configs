@@ -27,9 +27,10 @@ export GOPATH=$HOME/Documents/Go
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$HOMEBREW_PREFIX/opt/gettext/bin:$PATH
 export PATH="$(brew --prefix bzip2)/bin:$PATH"
+
 export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+[ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"  # This loads nvm
+[ -s "$(brew --prefix nvm)/etc/bash_completion" ] && . "$(brew --prefix nvm)/etc/bash_completion"  # This loads nvm bash_completion
 
 # Dotnet root (.NET Core)
 export DOTNET_ROOT="$(brew --prefix dotnet)/libexec"
@@ -135,6 +136,8 @@ alias vim="nvim"
 alias ssh-keygen="ssh-keygen -m PEM"
 alias brew-update="brew update; brew doctor; brew upgrade; brew upgrade --cask; brew cleanup"
 alias wiki="vim -c VimwikiIndex"
+# To avoid warnings in brew doctor
+alias brew='env PATH="${PATH//$(pyenv root)\/shims:/}" brew'
 # alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 # alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 
@@ -163,9 +166,6 @@ eval "$(rbenv init -)"
 
 # Installs Shell Integration for iTerm2.
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-[ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"  # This loads nvm
-[ -s "$(brew --prefix nvm)/etc/bash_completion" ] && . "$(brew --prefix nvm)/etc/bash_completion"  # This loads nvm bash_completion
 
 # -------------------------------------------------------------------
 # Functions for convenience
@@ -212,5 +212,5 @@ complete -o nospace -C $(brew --prefix vault)/bin/vault vault
 
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/zafar/.sdkman"
-[[ -s "/Users/zafar/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/zafar/.sdkman/bin/sdkman-init.sh"
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
