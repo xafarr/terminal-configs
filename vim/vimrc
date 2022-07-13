@@ -3,13 +3,14 @@ syntax on
 set encoding=utf8
 filetype off
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
+
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -23,26 +24,33 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'pearofducks/ansible-vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'vim-airline/vim-airline'
-Plug 'ycm-core/YouCompleteMe', { 'do': 'python3 install.py --all' }
 Plug 'christoomey/vim-tmux-navigator'
+
 " --------------------------------------------------
 " Plugins for file types
 " --------------------------------------------------
 Plug 'rust-lang/rust.vim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'https://github.com/preservim/tagbar'
+
 " --------------------------------------------------
 " Color Schemes
 " --------------------------------------------------
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
-Plug 'lifepillar/vim-solarized8'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'https://github.com/ap/vim-css-color'
+Plug 'https://github.com/rafi/awesome-vim-colorschemes'
 "Plug 'edkolev/tmuxline.vim'
+
 " --------------------------------------------------
 " Wiki and notes taking for Vim
 " --------------------------------------------------
 Plug 'vimwiki/vimwiki'
+
+" --------------------------------------------------
+" For autocomplete
+" --------------------------------------------------
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " All of your Plugins must be added before the following line
 call plug#end()
@@ -325,6 +333,16 @@ let g:ycm_disable_for_files_larger_than_kb = 10240
 nnoremap <D-b> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <D-∫> :YcmCompleter GoToImplementation<CR>
 nmap <F1> <plug>(YCMHover)
+
+" --------------------------------------------
+" CoC settings
+" --------------------------------------------
+" Use <c-space> to trigger completion.
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
 
 " --------------------------------------------
 " Vimwiki Settings
