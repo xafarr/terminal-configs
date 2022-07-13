@@ -151,8 +151,6 @@ fi
 # Vault autocompletion configuration
 #--------------------------------------------------
 autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C $(brew --prefix vault)/bin/vault vault
-
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
