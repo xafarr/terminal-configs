@@ -78,3 +78,5 @@
     plus-style = syntax "#d0ffd0"
     syntax-theme = GitHub
     zero-style = syntax
+[push]
+	autoSetupRemote = true
