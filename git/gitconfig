@@ -25,7 +25,7 @@
 [pull]
 	rebase = true
 [core]
-    editor = vim
+    editor = nvim
     pager = delta
 [merge]
     ff = only
