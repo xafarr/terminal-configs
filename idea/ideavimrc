@@ -1,4 +1,5 @@
-let mapleader = ","
+nnoremap <SPACE> <Nop>
+let mapleader = " "
 set nocompatible
 set encoding=utf8
 " set number relativenumber
