@@ -79,5 +79,9 @@ return packer.startup(function(use)
   use("hrsh7th/cmp-nvim-lua")
   use("L3MON4D3/LuaSnip")
   use("saadparwaiz1/cmp_luasnip")
+  use("rafamadriz/friendly-snippets") -- Collection of snippet
+
+  -- Terminal
+  use("akinsho/toggleterm.nvim")
 
 end)

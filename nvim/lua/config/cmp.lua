@@ -1,6 +1,9 @@
 local cmp = require("cmp")
 local luasnip = require("luasnip")
 
+-- Load collection of snippets from plugin "rafamadriz/friendly-snippets"
+require("luasnip.loaders.from_vscode").lazy_load()
+
 local check_backspace = function()
   local col = vim.fn.col "." - 1
   return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
@@ -34,6 +37,7 @@ local kind_icons = {
   Operator = "",
   TypeParameter = "",
 }
+
 cmp.setup {
   snippet = {
     expand = function(args)

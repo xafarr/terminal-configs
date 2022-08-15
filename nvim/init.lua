@@ -9,4 +9,5 @@ require("config.telescope")
 require("config.blankline")
 require("config.lsp")
 require("config.cmp")
+require("config.toggleterm")
 
