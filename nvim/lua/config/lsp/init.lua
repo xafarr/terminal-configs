@@ -10,6 +10,8 @@ local servers = {
   "dockerls",
   "bashls",
   "terraformls",
+  "kotlin_language_server",
+  "pyright",
 }
 
 lsp_installer.setup({

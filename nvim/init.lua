@@ -8,3 +8,5 @@ require("config.autopairs")
 require("config.telescope")
 require("config.blankline")
 require("config.lsp")
+require("config.cmp")
+
