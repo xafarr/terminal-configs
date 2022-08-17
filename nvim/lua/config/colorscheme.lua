@@ -12,6 +12,13 @@ nightfox.setup({
       search = true,
       match_paren = true,
     },
+    modules = {
+      cmp = true,
+      gitsigns = true,
+      nvimtree = true,
+      treesitter = true,
+      telescope = true,
+    }
   },
 })
 
