@@ -30,12 +30,28 @@ neoclip.setup {
 
 telescope.setup {
   defaults = {
-    prompt_prefix = " ",
+    prompt_prefix = " ", -- 🔍
     selection_caret = " ",
     path_display = { "smart" },
+    sorting_strategy = "ascending",
+    layout_strategy = "horizontal",
     layout_config = {
       preview_width = 80,
       scroll_speed = 5,
+      prompt_position = "top",
+    },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--glob",
+      "!.git/*",
+      "--glob",
+      "!node_modules/*",
     },
     mappings = {
       i = {
@@ -44,9 +60,33 @@ telescope.setup {
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-u>"] = actions.preview_scrolling_up,
         ["<C-d>"] = actions.preview_scrolling_down,
+        ["<C-e>"] = actions.results_scrolling_down,
+        ["<C-y>"] = actions.results_scrolling_up,
         ["<C-v]"] = actions.select_vertical,
         ["<C-x]"] = actions.select_horizontal,
         ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+      },
+    },
+  },
+  pickers = {
+    find_files = {
+      -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
+      find_command = {
+        "rg",
+        "--files",
+        "--hidden",
+        "--no-ignore",
+        "--follow",
+        "--smart-case",
+        "--glob",
+        "!.git/*",
+        "--glob",
+        "!node_modules/*",
+      },
+    },
+    live_grep = {
+      mappings = {
+        i = { ["<c-f>"] = actions.to_fuzzy_refine },
       },
     },
   },
@@ -65,4 +105,3 @@ telescope.setup {
 telescope.load_extension("fzf")
 telescope.load_extension("neoclip")
 telescope.load_extension("macroscope")
-
