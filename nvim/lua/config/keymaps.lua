@@ -27,6 +27,10 @@ keymap("n", "<Leader>O", "O<Esc>", opts)
 
 keymap('n', '*', '*zz', opts)
 
+-- Faster scrolling
+keymap("n", "<C-e>", "3<C-e>", opts)
+keymap("n", "<C-y>", "3<C-y>", opts)
+
 -- search occurrence count in file
 keymap("n", "<leader>*", "*<C-O>:%s///gn<CR>``", opts)
 
@@ -50,7 +54,7 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Telescope Keymaps
 keymap("n", "<leader>f", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>g", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>g", ":Telescope grep_string search=<CR>", opts)
 keymap("n", "<leader>b", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>\"", ":Telescope neoclip<CR>", opts)
 keymap("n", "<leader>q", ":Telescope macroscope<CR>", opts)
@@ -80,4 +84,3 @@ keymap("v", "p", '"_dP', opts)
 -- Move text up and down
 keymap("x", "∆", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "˚", ":move '<-2<CR>gv-gv", opts)
-
