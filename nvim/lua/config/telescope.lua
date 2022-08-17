@@ -84,11 +84,6 @@ telescope.setup {
         "!node_modules/*",
       },
     },
-    live_grep = {
-      mappings = {
-        i = { ["<c-f>"] = actions.to_fuzzy_refine },
-      },
-    },
   },
   extensions = {
     fzf = {
