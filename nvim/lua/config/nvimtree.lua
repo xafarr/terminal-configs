@@ -1,6 +1,12 @@
 local nvim_tree = require("nvim-tree")
+local nvim_tree_config = require("nvim-tree.config")
+
+local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup {
+  remove_keymaps = { "<Tab>" },
+  create_in_closed_folder = true,
+  open_on_setup = true,
   update_focused_file = {
     enable = true,
     update_cwd = true,
@@ -37,5 +43,17 @@ nvim_tree.setup {
     open_file = {
       resize_window = true,
     },
-  }
+  },
+
+  view = {
+    width = 30,
+    height = 30,
+    side = "left",
+    mappings = {
+      list = {
+        { key = { "<CR>" }, cb = tree_cb "edit"  },
+        { key = "<C-v>", cb = tree_cb "vsplit"  },
+      },
+    },
+  },
 }

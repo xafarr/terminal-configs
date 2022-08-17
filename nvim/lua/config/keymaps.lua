@@ -41,10 +41,19 @@ keymap("n", "˚", ":m .-2<CR>==", opts)
 keymap("n", "<leader>*", "*<C-O>:%s///gn<CR>``", opts)
 
 -- Windows navigation
+keymap("n", "<S-Tab>", "<C-w>W", opts)
+keymap("n", "<Tab>", "<C-w>w", opts)
 keymap("n", "<C-h>", "<C-w>h", opts)
 keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
+
+-- Telescope Keymaps
+keymap("n", "<leader>f", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader>g", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>b", ":Telescope buffers<CR>", opts)
+keymap("n", "<leader>\"", ":Telescope neoclip<CR>", opts)
+keymap("n", "<leader>q", ":Telescope macroscope<CR>", opts)
 
 -- Insert --
 -- move line up and down in insert mode

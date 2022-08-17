@@ -65,8 +65,8 @@ local on_attach = function(client, bufnr)
 
   illuminate.on_attach(client)
 
-  local function buf_set_keymap(...)
-    vim.api.nvim_buf_set_keymap(bufnr, ...)
+  local function keymap(...)
+    vim.keymap.set(...)
   end
 
   local function buf_set_option(...)
@@ -75,21 +75,21 @@ local on_attach = function(client, bufnr)
 
   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 
-  local opts = { noremap = true, silent = true }
+  local opts = { noremap = true, silent = true, buffer = bufnr }
 
-  buf_set_keymap("n", "gD", ":lua vim.lsp.buf.declaration()<CR>", opts)
-  buf_set_keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts)
-  buf_set_keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", opts)
-  buf_set_keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", opts)
-  buf_set_keymap("n", "<C-k>", ":lua vim.lsp.buf.signature_help()<CR>", opts)
-  buf_set_keymap("n", "<leader>rn", ":lua vim.lsp.util.rename()<CR>", opts)
-  buf_set_keymap("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>", opts)
-  buf_set_keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)
-  buf_set_keymap("n", "<leader>D", ":lua vim.lsp.buf.type_definition()<CR>", opts)
-  buf_set_keymap("n", "<leader>ld", ":lua vim.diagnostic.open_float()<CR>", opts)
-  buf_set_keymap("n", "[d", ":lua vim.diagnostic.goto_prev()<CR>", opts)
-  buf_set_keymap("n", "]d", ":lua vim.diagnostic.goto_next()<CR>", opts)
-  buf_set_keymap("n", "<leader>lq", ":lua vim.diagnostic.setloclist()<CR>", opts)
+  keymap("n", "gD", ":lua vim.lsp.buf.declaration()<CR>", opts)
+  keymap("n", "gd", ":lua vim.lsp.buf.definition()<CR>", opts)
+  keymap("n", "K", ":lua vim.lsp.buf.hover()<CR>", opts)
+  keymap("n", "gi", ":lua vim.lsp.buf.implementation()<CR>", opts)
+  keymap("n", "<C-k>", ":lua vim.lsp.buf.signature_help()<CR>", opts)
+  keymap("n", "<leader>rn", ":lua vim.lsp.buf.rename()<CR>", opts)
+  keymap("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>", opts)
+  keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)
+  keymap("n", "<leader>D", ":lua vim.lsp.buf.type_definition()<CR>", opts)
+  keymap("n", "<leader>ld", ":lua vim.diagnostic.open_float()<CR>", opts)
+  keymap("n", "[d", ":lua vim.diagnostic.goto_prev()<CR>", opts)
+  keymap("n", "]d", ":lua vim.diagnostic.goto_next()<CR>", opts)
+  keymap("n", "<leader>lq", ":lua vim.diagnostic.setloclist()<CR>", opts)
   vim.cmd([[ command! Format execute 'lua vim.lsp.buf.formatting()' ]])
 end
 

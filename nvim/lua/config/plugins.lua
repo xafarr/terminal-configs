@@ -53,7 +53,7 @@ return packer.startup(function(use)
   use("EdenEast/nightfox.nvim")
 
   -- Treesitter for code highlight
-  use("nvim-treesitter/nvim-treesitter")
+  use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
   -- Status line
   use("nvim-lualine/lualine.nvim")
@@ -63,6 +63,8 @@ return packer.startup(function(use)
 
   -- Fuzzy finder
   use("nvim-telescope/telescope.nvim")
+  use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+  use("AckslD/nvim-neoclip.lua")
 
   -- Nvim LSP
   use("williamboman/nvim-lsp-installer")
@@ -83,5 +85,8 @@ return packer.startup(function(use)
 
   -- Terminal
   use("akinsho/toggleterm.nvim")
+
+  -- Git
+  use("lewis6991/gitsigns.nvim")
 
 end)

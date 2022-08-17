@@ -59,6 +59,7 @@ end
 
 local filename = {
   "filename",
+  path = 1,
 }
 
 -- cool function for progress
