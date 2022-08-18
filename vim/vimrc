@@ -125,7 +125,7 @@ let g:airline#extensions#ycm#error_symbol = 'E:'
 " set warning count prefix >
 let g:airline#extensions#ycm#warning_symbol = 'W:'
 " Vim airline theme
-let g:airline_theme='gruvbox8'
+let g:airline_theme='gruvbox'
 
 "-----------------------------------
 " General settings
@@ -283,8 +283,8 @@ map - <C-w>-
 map + <C-w>+
 
 " Circular windows navigation
-nnoremap <tab>   <c-w>w
-nnoremap <S-tab> <c-w>W
+"nnoremap <tab>   <c-w>w
+"nnoremap <S-tab> <c-w>W
 
 " Rotate split windows
 nnoremap <Leader><C-h> <C-w>H
@@ -293,10 +293,10 @@ nnoremap <Leader><C-k> <C-w>K
 nnoremap <Leader><C-l> <C-w>L
 
 " Move between splits (windows)
-"nnoremap <C-h> <C-w>h
-"nnoremap <C-j> <C-w>j
-"nnoremap <C-k> <C-w>k
-"nnoremap <C-l> <C-w>l
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 
 " Tmux Navigator mappings
 let g:tmux_navigator_no_mappings = 1
@@ -338,10 +338,10 @@ nmap <leader>f  <Plug>(coc-format-selected)
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ CheckBackspace() ? "\<TAB>" :
-      \ coc#refresh()
+"inoremap <silent><expr> <TAB>
+"      \ pumvisible() ? "\<C-n>" :
+"      \ CheckBackspace() ? "\<TAB>" :
+"      \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! CheckBackspace() abort
@@ -351,8 +351,7 @@ endfunction
 
 " Make <CR> auto-select the first completion item and notify coc.nvim to
 " format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+"inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
