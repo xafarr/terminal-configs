@@ -42,7 +42,7 @@ telescope.setup {
     },
     vimgrep_arguments = {
       "rg",
-      "--color=never",
+      "--color=never", -- color other than 'never' is not supported yet
       "--no-heading",
       "--with-filename",
       "--line-number",
@@ -52,6 +52,8 @@ telescope.setup {
       "!.git/*",
       "--glob",
       "!node_modules/*",
+      "--glob",
+      "!target/*",
     },
     mappings = {
       i = {
@@ -75,13 +77,13 @@ telescope.setup {
         "rg",
         "--files",
         "--hidden",
-        "--no-ignore",
-        "--follow",
         "--smart-case",
         "--glob",
         "!.git/*",
         "--glob",
         "!node_modules/*",
+        "--glob",
+        "!target/*",
       },
     },
   },
