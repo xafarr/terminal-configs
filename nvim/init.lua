@@ -12,4 +12,4 @@ require("config.lsp")
 require("config.cmp")
 require("config.toggleterm")
 require("config.gitsigns")
-
+require("config.comment")

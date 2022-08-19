@@ -47,6 +47,7 @@ return packer.startup(function(use)
   use("windwp/nvim-autopairs") -- Autopairs, integrated with both cmp and treesitter
   use("kyazdani42/nvim-web-devicons") -- icons support
   use("lukas-reineke/indent-blankline.nvim") -- indentation guides to all lines
+  use("numToStr/Comment.nvim")
 
   -- Colorschemes
   use("lifepillar/vim-gruvbox8")
