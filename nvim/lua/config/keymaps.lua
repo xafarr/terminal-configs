@@ -54,7 +54,7 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Telescope Keymaps
 keymap("n", "<leader>f", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>g", ":Telescope grep_string search=<CR>", opts)
+keymap("n", "<leader>g", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>b", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>\"", ":Telescope neoclip<CR>", opts)
 keymap("n", "<leader>q", ":Telescope macroscope<CR>", opts)

@@ -40,6 +40,7 @@ telescope.setup {
       scroll_speed = 5,
       prompt_position = "top",
     },
+    file_ignore_patterns = { "^.git/", "^target/", "^node_modules/" },
     vimgrep_arguments = {
       "rg",
       "--color=never", -- color other than 'never' is not supported yet
@@ -72,19 +73,9 @@ telescope.setup {
   },
   pickers = {
     find_files = {
-      -- `hidden = true` will still show the inside of `.git/` as it's not `.gitignore`d.
-      find_command = {
-        "rg",
-        "--files",
-        "--hidden",
-        "--smart-case",
-        "--glob",
-        "!.git/*",
-        "--glob",
-        "!node_modules/*",
-        "--glob",
-        "!target/*",
-      },
+      hidden = true,
+      no_ignore = true,
+      no_ignore_parent = true,
     },
   },
   extensions = {
