@@ -41,21 +41,6 @@ telescope.setup {
       prompt_position = "top",
     },
     file_ignore_patterns = { "^.git/", "^target/", "^node_modules/" },
-    vimgrep_arguments = {
-      "rg",
-      "--color=never", -- color other than 'never' is not supported yet
-      "--no-heading",
-      "--with-filename",
-      "--line-number",
-      "--column",
-      "--smart-case",
-      "--glob",
-      "!.git/*",
-      "--glob",
-      "!node_modules/*",
-      "--glob",
-      "!target/*",
-    },
     mappings = {
       i = {
         ["<Esc>"] = actions.close,
@@ -86,7 +71,6 @@ telescope.setup {
       case_mode = "smart_case", -- or "ignore_case" or "respect_case"
       -- the default case_mode is "smart_case"
     },
-    neoclip = {},
   }
 }
 
