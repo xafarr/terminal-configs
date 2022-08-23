@@ -59,6 +59,9 @@ keymap("n", "<leader>b", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>\"", ":Telescope neoclip<CR>", opts)
 keymap("n", "<leader>q", ":Telescope macroscope<CR>", opts)
 
+-- NvimTree Keymaps
+keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
+
 -- Insert --
 -- move line up and down in insert mode
 keymap("i", "∆", "<Esc>:m .+1<CR>==gi", opts)

@@ -41,6 +41,22 @@ telescope.setup {
       prompt_position = "top",
     },
     file_ignore_patterns = { "^.git/", "^target/", "^node_modules/" },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--trim",
+      "--glob",
+      "!.git/*",
+      "--glob",
+      "!node_modules/*",
+      "--glob",
+      "!target/*",
+    },
     mappings = {
       i = {
         ["<Esc>"] = actions.close,
@@ -58,6 +74,7 @@ telescope.setup {
   },
   pickers = {
     find_files = {
+      find_command = { "rg", "--files", "--hidden", "--glob", "!.git/*", "--glob", "!node_modules/*", "--glob", "!target/*" },
       hidden = true,
     },
   },
