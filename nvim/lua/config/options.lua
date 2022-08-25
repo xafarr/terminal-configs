@@ -10,6 +10,9 @@ vim.cmd([[
   augroup end
 ]])
 
+-- Colorscheme
+set.background = "dark"
+
 -- General Options
 set.backup = false -- creates a backup file
 set.clipboard = { "unnamed", "unnamedplus" } -- allows neovim to access the system clipboard
