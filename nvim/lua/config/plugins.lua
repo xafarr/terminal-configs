@@ -50,7 +50,6 @@ return packer.startup(function(use)
     use("numToStr/Comment.nvim")
 
     -- Colorschemes
-    use("lifepillar/vim-gruvbox8")
     use("EdenEast/nightfox.nvim")
 
     -- Treesitter for code highlight
