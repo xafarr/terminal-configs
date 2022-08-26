@@ -19,6 +19,9 @@ lsp_installer.setup({
 })
 
 local on_attach = function(client, bufnr)
+  if client.name == "tsserver" or client.name == "sumneko_lua" then
+    client.resolved_capabilities.document_formatting = false
+  end
 
   local signs = {
     { name = "DiagnosticSignError", text = "" },
@@ -98,7 +101,6 @@ local lsp_flags = {
   debounce_text_changes = 150,
 }
 
----@diagnostic disable-next-line: undefined-global
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 

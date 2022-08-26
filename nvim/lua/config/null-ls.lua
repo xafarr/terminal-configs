@@ -7,9 +7,9 @@ local sources = {
 	formatting.black,
 	formatting.stylua,
 	formatting.clang_format,
-  formatting.prettier,
-  formatting.ktlint,
-  formatting.terraform_fmt,
+	formatting.prettier,
+	formatting.ktlint,
+	formatting.terraform_fmt,
 }
 
 null_ls.setup({
