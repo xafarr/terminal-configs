@@ -10,6 +10,9 @@ local sources = {
     formatting.prettier,
     formatting.ktlint,
     formatting.terraform_fmt,
+    formatting.jq,
+    formatting.xmllint,
+    formatting.google_java_format,
 }
 
 null_ls.setup({
