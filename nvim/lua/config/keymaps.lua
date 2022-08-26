@@ -25,7 +25,7 @@ keymap("", "<C-a>", "<esc>ggVG<CR>", opts)
 keymap("n", "<Leader>o", "o<Esc>", opts)
 keymap("n", "<Leader>O", "O<Esc>", opts)
 
-keymap('n', '*', '*zz', opts)
+keymap("n", "*", "*zz", opts)
 
 -- Faster scrolling
 keymap("n", "<C-e>", "3<C-e>", opts)
@@ -56,7 +56,7 @@ keymap("n", "<C-l>", "<C-w>l", opts)
 keymap("n", "<leader>f", ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>g", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>b", ":Telescope buffers<CR>", opts)
-keymap("n", "<leader>\"", ":Telescope neoclip<CR>", opts)
+keymap("n", '<leader>"', ":Telescope neoclip<CR>", opts)
 keymap("n", "<leader>q", ":Telescope macroscope<CR>", opts)
 
 -- NvimTree Keymaps

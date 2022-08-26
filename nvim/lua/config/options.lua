@@ -1,7 +1,6 @@
 local set = vim.opt
 
 vim.cmd([[
-  set expandtab
   augroup _general_settings
     autocmd!
     autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR> 
