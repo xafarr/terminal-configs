@@ -19,7 +19,7 @@ lsp_installer.setup({
 })
 
 local on_attach = function(client, bufnr)
-  if client.name == "tsserver" or client.name == "sumneko_lua" then
+  if client.name == "tsserver" or client.name == "sumneko_lua" or client.name == "jsonls" then
     client.resolved_capabilities.document_formatting = false
   end
 
@@ -89,7 +89,7 @@ local on_attach = function(client, bufnr)
   keymap("n", "<leader>ca", ":lua vim.lsp.buf.code_action()<CR>", opts)
   keymap("n", "gr", ":lua vim.lsp.buf.references()<CR>", opts)
   keymap("n", "<leader>D", ":lua vim.lsp.buf.type_definition()<CR>", opts)
-  keymap("n", "<leader>ld", ":lua vim.diagnostic.open_float()<CR>", opts)
+  keymap("n", "<leader>gl", '<cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>', opts)
   keymap("n", "[d", ":lua vim.diagnostic.goto_prev()<CR>", opts)
   keymap("n", "]d", ":lua vim.diagnostic.goto_next()<CR>", opts)
   keymap("n", "<leader>lq", ":lua vim.diagnostic.setloclist()<CR>", opts)
