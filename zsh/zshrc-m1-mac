@@ -24,6 +24,7 @@ export PATH=$HOMEBREW_PREFIX/opt/apr/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/go/libexec/bin:$PATH
 export GOPATH=$HOME/Documents/Go
+export PATH=$GOPATH/bin:$PATH
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$HOMEBREW_PREFIX/opt/gettext/bin:$PATH
 export PATH="$(brew --prefix bzip2)/bin:$PATH"
