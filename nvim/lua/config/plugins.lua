@@ -85,6 +85,7 @@ return packer.startup(function(use)
 
     -- Terminal
     use("akinsho/toggleterm.nvim")
+    use("alexghergh/nvim-tmux-navigation")
 
     -- Git
     use("lewis6991/gitsigns.nvim")
