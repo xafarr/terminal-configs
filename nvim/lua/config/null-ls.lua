@@ -13,6 +13,7 @@ local sources = {
     formatting.jq,
     formatting.xmllint,
     formatting.google_java_format,
+    formatting.yamlfmt,
 }
 
 null_ls.setup({
