@@ -12,6 +12,7 @@ local servers = {
     "terraformls",
     "kotlin_language_server",
     "pyright",
+    "gopls",
 }
 
 lsp_installer.setup({
@@ -93,7 +94,6 @@ local on_attach = function(client, bufnr)
     keymap("n", "[d", ':lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
     keymap("n", "]d", ':lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
     keymap("n", "<leader>lq", ":lua vim.diagnostic.setloclist()<CR>", opts)
-    keymap("n", "", ":lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
 local lsp_flags = {

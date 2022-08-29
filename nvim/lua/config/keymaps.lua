@@ -62,6 +62,9 @@ keymap("n", "<leader>q", ":Telescope macroscope<CR>", opts)
 -- NvimTree Keymaps
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
+-- Formatting
+keymap("n", "", ":lua vim.lsp.buf.formatting()<CR>", opts)
+
 -- Insert --
 -- move line up and down in insert mode
 keymap("i", "∆", "<Esc>:m .+1<CR>==gi", opts)
