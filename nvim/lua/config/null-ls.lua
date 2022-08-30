@@ -14,6 +14,7 @@ local sources = {
     formatting.xmllint,
     formatting.google_java_format,
     formatting.yamlfmt,
+    formatting.beautysh,
 }
 
 null_ls.setup({
