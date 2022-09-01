@@ -1,15 +1,5 @@
 local set = vim.opt
 
-vim.cmd([[
-  augroup _general_settings
-    autocmd!
-    autocmd FileType qf,help,man,lspinfo nnoremap <silent> <buffer> q :close<CR> 
-    autocmd TextYankPost * silent!lua require('vim.highlight').on_yank({higroup = 'Visual', timeout = 200}) 
-    autocmd BufWinEnter * :set fo-=c fo-=r fo-=o
-    autocmd FileType qf set nobuflisted
-  augroup end
-]])
-
 -- Colorscheme
 set.background = "dark"
 
@@ -72,4 +62,4 @@ set.grepprg = "rg --vimgrep"
 set.grepformat = "%f:%l:%c:%m"
 set.shortmess:append("c")
 set.ttyfast = true
-set.guifont = "MesloLGS-NF-Regular:h17" -- the font used in graphical neovim applications
+set.guifont = "MesloLGS-NF-Regular:h15" -- the font used in graphical neovim applications
