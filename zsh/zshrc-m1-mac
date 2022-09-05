@@ -2,7 +2,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -12,13 +12,18 @@ fi
 system=$(uname -ms)
 platform=$(echo "$system" | awk '{print $1}')
 arch=$(echo "$system" | awk '{print $2}')
-
-export HOMEBREW_PREFIX="/opt/homebrew";
-export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar";
-export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX";
-export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}";
-export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:";
-export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}";
+echo $platform
+if [ "$platform" = "Linux" ]
+then
+    export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+else
+    export HOMEBREW_PREFIX="/opt/homebrew"
+fi
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
+export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
+export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 export PATH=$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH
@@ -187,12 +192,12 @@ function port() {
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
 _fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
+    fd --hidden --follow --exclude ".git" . "$1"
 }
 
 # Use fd to generate the list for directory completion
 _fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
+    fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
