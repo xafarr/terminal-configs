@@ -12,7 +12,7 @@ fi
 system=$(uname -ms)
 platform=$(echo "$system" | awk '{print $1}')
 arch=$(echo "$system" | awk '{print $2}')
-echo $platform
+
 if [ "$platform" = "Linux" ]
 then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
