@@ -102,7 +102,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 # Forgit is a custom plugin
-plugins=(docker forgit docker-compose autoupdate)
+plugins=(docker docker-compose autoupdate)
 
 source $ZSH/oh-my-zsh.sh
 
