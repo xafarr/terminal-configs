@@ -62,11 +62,16 @@ export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$HOMEBREW_PREFIX/share/zsh-syntax-highligh
 export FZF_BASE="$HOMEBREW_PREFIX/opt/fzf"
 FD_OPTIONS="--follow --hidden --exclude .git --exclude node_modules"
 # Use ripgrep to find files
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --smart-case --hidden --follow -g "!{.git,node_modules}/*" 2> /dev/null'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --smart-case --hidden --follow --glob "!.git" --glob "!node_modules" 2> /dev/null'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 export FZF_DEFAULT_OPTS="--no-mouse --height 80% --layout=reverse --border --multi --inline-info --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -500' --preview-window='right:hidden:nowrap' --bind='f3:execute(bat --style=numbers {} || less -f {}),f2:toggle-preview,ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)'"
 export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' 
+--color=fg:#4b505b,bg:#fafafa,hl:#5079be 
+--color=fg+:#4b505b,bg+:#fafafa,hl+:#3a8b84 
+--color=info:#88909f,prompt:#d05858,pointer:#b05ccc 
+--color=marker:#608e32,spinner:#d05858,header:#3a8b84'
 
 #--------------------------------------------------
 # zsh-completions settings
