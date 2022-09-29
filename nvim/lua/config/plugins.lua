@@ -51,6 +51,7 @@ return packer.startup(function(use)
 
     -- Colorschemes
     use("EdenEast/nightfox.nvim")
+    use("sainnhe/edge")
 
     -- Treesitter for code highlight
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })

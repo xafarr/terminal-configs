@@ -23,4 +23,4 @@ nightfox.setup({
 })
 
 -- Colorscheme
-vim.cmd("colorscheme nordfox")
+vim.cmd("colorscheme edge")
