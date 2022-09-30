@@ -5,6 +5,7 @@ M.format = function(bufnr)
         filter = function(client)
             return client.name == "null-ls"
         end,
+        async = true,
     })
 end
 return M
