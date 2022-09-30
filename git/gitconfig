@@ -43,10 +43,11 @@
   prompt = false
 [merge]
   tool = vimdiff
-  conflictStyle = diff3
 [mergetool]
   keepBackup = false
   prompt = false
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [http]
   sslVerify = true
 
