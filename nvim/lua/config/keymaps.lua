@@ -21,6 +21,10 @@ vim.g.maplocalleader = " "
 keymap("", "<C-a>", "<esc>ggVG<CR>", opts)
 
 -- Normal
+
+-- Format command for non LSP
+vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format{async=true}' ]])
+
 -- Open new line below and above current line
 keymap("n", "<Leader>o", "o<Esc>", opts)
 keymap("n", "<Leader>O", "O<Esc>", opts)
