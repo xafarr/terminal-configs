@@ -9,6 +9,7 @@ configs.setup({
     ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
     context_commentstring = {
         enable = true,
+        enable_autocmd = false,
     },
     highlight = {
         enable = true, -- false will disable the whole extension
