@@ -1,5 +1,6 @@
 local lspconfig = require("lspconfig")
-local lsp_installer = require("nvim-lsp-installer")
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
 local illuminate = require("illuminate")
 
 local servers = {
@@ -15,7 +16,15 @@ local servers = {
     "gopls",
 }
 
-lsp_installer.setup({
+mason.setup({
+    ui = {
+        icons = {
+            package_installed = "✓",
+        },
+    },
+})
+
+mason_lspconfig.setup({
     ensure_installed = servers,
 })
 
