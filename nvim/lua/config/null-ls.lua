@@ -21,6 +21,7 @@ local sources = {
 
     -- Diagnostics
     diagnostics.markdownlint,
+    diagnostics.ansiblelint,
 }
 
 null_ls.setup({
