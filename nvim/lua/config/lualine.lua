@@ -59,7 +59,8 @@ end
 
 local filename = {
     "filename",
-    path = 1,
+    path = 3,
+    shorting_target = 120,
 }
 
 -- cool function for progress
