@@ -1,6 +1,7 @@
 local telescope = require("telescope")
 local actions = require("telescope.actions")
 local neoclip = require("neoclip")
+local trouble = require("trouble.providers.telescope")
 
 neoclip.setup({
     default_register = { "+", "*" },
@@ -69,6 +70,10 @@ telescope.setup({
                 ["<C-v]"] = actions.select_vertical,
                 ["<C-x]"] = actions.select_horizontal,
                 ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                ["<C-t>"] = trouble.open_with_trouble,
+            },
+            n = {
+                ["<C-t>"] = trouble.open_with_trouble,
             },
         },
     },

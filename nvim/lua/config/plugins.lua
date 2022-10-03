@@ -77,6 +77,7 @@ return packer.startup(function(use)
     use("neovim/nvim-lspconfig")
     use("jose-elias-alvarez/null-ls.nvim")
     use("RRethy/vim-illuminate")
+    use("folke/trouble.nvim")
 
     -- Code autocompletion plugins
     use("hrsh7th/cmp-nvim-lsp")
