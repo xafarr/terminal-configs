@@ -7,6 +7,9 @@ install.update({ with_sync = true })
 configs.setup({
     ensure_installed = "all", -- one of "all" or a list of languages
     ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
+    context_commentstring = {
+        enable = true,
+    },
     highlight = {
         enable = true, -- false will disable the whole extension
         disable = {}, -- list of language that will be disabled

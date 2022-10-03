@@ -8,9 +8,7 @@ comment.setup({
     },
 
     pre_hook = function(ctx)
-        -- dasnjknas
-        local U = require("Comment.utils") -- nsjandjaks
-        -- asnjaksnksja
+        local U = require("Comment.utils")
 
         local location = nil
         if ctx.ctype == U.ctype.block then
