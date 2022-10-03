@@ -18,6 +18,7 @@ local sources = {
     formatting.yamlfmt,
     formatting.beautysh,
     formatting.markdownlint,
+    formatting.gofmt,
 
     -- Diagnostics
     diagnostics.markdownlint,
