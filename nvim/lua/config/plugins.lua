@@ -89,7 +89,7 @@ return packer.startup(function(use)
     use("rafamadriz/friendly-snippets") -- Collection of snippet
 
     -- Terminal
-    use("akinsho/toggleterm.nvim")
+    use({ "akinsho/toggleterm.nvim", tag = "*" })
     use("alexghergh/nvim-tmux-navigation")
 
     -- Git
