@@ -6,7 +6,7 @@ local diagnostics = null_ls.builtins.diagnostics
 local sources = {
     -- Formatting
     formatting.eslint,
-    formatting.black,
+    formatting.black.with({ extra_args = { "--fast" } }),
     formatting.stylua,
     formatting.clang_format,
     formatting.prettier,
