@@ -2,6 +2,7 @@ local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 local illuminate = require("illuminate")
+local null_ls = require("config.null-ls")
 
 local servers = {
     "sumneko_lua",
@@ -110,12 +111,15 @@ local lsp_flags = {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
+local opts = {
+    on_attach = on_attach,
+    capabilities = capabilities,
+    flags = lsp_flags,
+}
+
+null_ls.setup(opts)
+
 for _, server in pairs(servers) do
-    local opts = {
-        on_attach = on_attach,
-        capabilities = capabilities,
-        flags = lsp_flags,
-    }
     local has_custom_opts, server_custom_opts = pcall(require, "config.lsp.settings." .. server)
     if has_custom_opts then
         opts = vim.tbl_deep_extend("force", opts, server_custom_opts)

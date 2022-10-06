@@ -33,6 +33,11 @@ local sources = {
     code_actions.gitsigns,
 }
 
-null_ls.setup({
-    sources = sources,
-})
+M = {}
+M.setup = function(opts)
+    null_ls.setup({
+        on_attach = opts.on_attach,
+        sources = sources,
+    })
+end
+return M
