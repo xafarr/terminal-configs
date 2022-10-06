@@ -59,7 +59,7 @@ end
 
 local filename = {
     "filename",
-    path = 3,
+    path = 1,
     shorting_target = 120,
 }
 
