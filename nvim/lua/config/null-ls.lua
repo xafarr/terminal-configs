@@ -24,6 +24,10 @@ local sources = {
     -- Diagnostics
     diagnostics.markdownlint,
     diagnostics.ansiblelint,
+    diagnostics.flake8,
+    diagnostics.ktlint,
+    diagnostics.shellcheck,
+    diagnostics.tsc,
 
     -- Code Actions
     code_actions.gitsigns,
