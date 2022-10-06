@@ -2,7 +2,7 @@ local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 local illuminate = require("illuminate")
-local null_ls = require("config.null-ls")
+local null_ls = require("config.lsp.null-ls")
 
 local servers = {
     "sumneko_lua",

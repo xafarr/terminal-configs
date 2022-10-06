@@ -1,7 +1,6 @@
 require("config.plugins")
 require("config.options")
 require("config.autocommands")
-require("config.custom-functions")
 require("config.keymaps")
 require("config.colorscheme")
 require("config.orgmode")
