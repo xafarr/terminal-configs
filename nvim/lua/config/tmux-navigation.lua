@@ -6,7 +6,7 @@ tmux_navigation.setup({
         down = "<M-Down>",
         up = "<M-Up>",
         right = "<M-Right>",
-        last_active = "<C-\\>",
+        last_active = "<C-def>",
         next = "<C-abc>",
     },
 })
