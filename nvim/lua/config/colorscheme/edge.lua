@@ -18,9 +18,13 @@ vim.cmd([[
       " the fourth parameter is for UI highlighting which is optional,
       " and the last parameter is for `guisp` which is also optional.
       " See `autoload/edge.vim` for the format of `l:palette`.
-      call edge#highlight('CurrentWord', l:palette.none, ['#e3e4e5', '237'])
-      call edge#highlight('Visual', l:palette.none, ['#cbe5f8', '237'])
-      call edge#highlight('VisualNOS', l:palette.none, ['#cbe5f8', '237'], 'underline')
+      " call edge#highlight('CurrentWord', l:palette.none, ['#e3e4e5', '253'])
+      call edge#highlight('CurrentWord', l:palette.none, ['#e5e5ff', '253'])
+      call edge#highlight('Visual', l:palette.none, ['#cbe5f8', '253'])
+      call edge#highlight('VisualNOS', l:palette.none, ['#cbe5f8', '253'], 'underline')
+      call edge#highlight('NvimTreeNormal', l:palette.none, ['#f3f4f4', '253'])
+      call edge#highlight('GitSignsCurrentLineBlame', l:palette.grey_dim, l:palette.none)
+      call edge#highlight('CursorLine', l:palette.none, ['#f3f5f7', '255'])
     endfunction
     
     augroup EdgeCustom
@@ -28,6 +32,5 @@ vim.cmd([[
       autocmd ColorScheme edge call s:edge_custom()
     augroup END
 
-    let g:edge_style = 'aura'
     let g:edge_better_performance = 1
 ]])
