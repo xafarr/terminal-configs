@@ -3,10 +3,6 @@ local comment = require("Comment")
 comment.setup({
     ignore = "^$",
 
-    mappings = {
-        extended = true,
-    },
-
     pre_hook = function(ctx)
         local U = require("Comment.utils")
 
