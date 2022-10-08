@@ -25,6 +25,8 @@ vim.cmd([[
       call edge#highlight('NvimTreeNormal', l:palette.none, ['#f3f4f4', '253'])
       call edge#highlight('GitSignsCurrentLineBlame', l:palette.grey_dim, l:palette.none)
       call edge#highlight('CursorLine', l:palette.none, ['#f3f5f7', '255'])
+      call edge#highlight('Folded', l:palette.grey, ['#e9f5e6', 'NONE'])
+      call edge#highlight('Todo', ['#008dde', '167'], l:palette.none, 'italic')
     endfunction
     
     augroup EdgeCustom
