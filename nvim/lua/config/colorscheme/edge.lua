@@ -18,35 +18,55 @@ vim.cmd([[
       " the fourth parameter is for UI highlighting which is optional,
       " and the last parameter is for `guisp` which is also optional.
       " See `autoload/edge.vim` for the format of `l:palette`.
+      call edge#highlight('Green', ['#067d17', '107'], l:palette.none)
+      call edge#highlight('Field', ['#871094', '68'], l:palette.none)
+      call edge#highlight('Constant', ['#871094', '68'], l:palette.none, 'italic')
+      call edge#highlight('Annotation', ['#9E880D', '134'], l:palette.none)
+      call edge#highlight('Method', ['#00627A', '68'], l:palette.none)
+      call edge#highlight('Number', ['#1750EB', '68'], l:palette.none)
+      call edge#highlight('Keyword', ['#0033B3', '134'], l:palette.none)
+      call edge#highlight('Attribute', ['#174AD4', '172'], l:palette.none)
+      call edge#highlight('Comment', ['#8C8C8C', '172'], l:palette.none, 'italic')
+      call edge#highlight('CurrentWord', l:palette.none, ['#e5e5ff', '253'])
+      call edge#highlight('Visual', l:palette.none, ['#cbe5f8', '253'])
+      call edge#highlight('VisualNOS', l:palette.none, ['#cbe5f8', '253'], 'underline')
+      call edge#highlight('NvimTreeNormal', l:palette.none, ['#f3f4f4', '253'])
+      call edge#highlight('GitSignsCurrentLineBlame', l:palette.grey_dim, l:palette.none)
+      call edge#highlight('CursorLine', l:palette.none, ['#f3f5f7', '255'])
+      call edge#highlight('Folded', l:palette.grey, ['#e9f5e6', 'NONE'])
+      call edge#highlight('Todo', ['#008dde', '167'], l:palette.none, 'italic')
+      call edge#highlight('StringEscape', ['#0037A6', '172'], l:palette.none)
+      call edge#highlight('StringRegex', l:palette.none, ['#EDFCED', '172'])
+
       call edge#highlight('TSStrong', l:palette.none, l:palette.none, 'bold')
       call edge#highlight('TSEmphasis', l:palette.none, l:palette.none, 'italic')
       call edge#highlight('TSUnderline', l:palette.none, l:palette.none, 'underline')
       call edge#highlight('TSNote', l:palette.bg0, l:palette.blue, 'bold')
-      call edge#highlight('TSWarning', l:palette.bg0, l:palette.yellow, 'bold')
+      call edge#highlight('TSWarning', l:palette.bg0, ['#F5EAC1', '172'], 'bold')
       call edge#highlight('TSDanger', l:palette.bg0, l:palette.red, 'bold')
-      highlight! link TSAnnotation Purple
-      highlight! link TSAttribute Yellow
+      highlight! link TSAnnotation Annotation
+      highlight! link TSAttribute Attribute
       highlight! link TSBoolean Green
       highlight! link TSCharacter Green
       highlight! link TSComment Comment
       highlight! link TSConditional Purple
-      highlight! link TSConstBuiltin CyanItalic
-      highlight! link TSConstMacro CyanItalic
-      highlight! link TSConstant RedItalic
+      highlight! link TSConstBuiltin Constant
+      highlight! link TSConstMacro Constant
+      highlight! link TSConstant Constant
       highlight! link TSConstructor Blue
       highlight! link TSException Purple
-      highlight! link TSField Blue
-      highlight! link TSFloat Green
-      highlight! link TSFuncBuiltin Blue
-      highlight! link TSFuncMacro Blue
-      highlight! link TSFunction Blue
+      highlight! link TSField Field
+      highlight! link TSFloat Number
+      highlight! link TSFuncBuiltin Method
+      highlight! link TSFuncMacro Method
+      highlight! link TSFunction Method
       highlight! link TSInclude Purple
-      highlight! link TSKeyword Purple
-      highlight! link TSKeywordFunction Purple
-      highlight! link TSKeywordOperator Purple
+      highlight! link TSKeyword Keyword
+      highlight! link TSKeywordFunction Keyword
+      highlight! link TSKeywordOperator Keyword
       highlight! link TSLabel Purple
-      highlight! link TSMethod Blue
-      highlight! link TSNamespace Yellow
+      highlight! link TSMethod Method 
+      highlight! link TSNamespace Field
       highlight! link TSNone Fg
       highlight! link TSNumber Number
       highlight! link TSOperator Purple
@@ -59,14 +79,15 @@ vim.cmd([[
       highlight! link TSRepeat Purple
       highlight! link TSStorageClass Purple
       highlight! link TSString Green
-      highlight! link TSStringEscape Yellow
-      highlight! link TSStringRegex Yellow
+      highlight! link TSStringEscape StringEscape
+      highlight! link TSStringRegex StringRegex
       highlight! link TSSymbol Red
       highlight! link TSTag RedItalic
       highlight! link TSTagDelimiter Purple
       highlight! link TSText Green
       highlight! link TSStrike Grey
       highlight! link TSMath Green
+      highlight! link TSTodo Todo
       highlight! link TSType Yellow
       highlight! link TSTypeBuiltin Yellow
       highlight! link TSURI markdownUrl
@@ -116,20 +137,13 @@ vim.cmd([[
         highlight! link @text TSText
         highlight! link @strike TSStrike
         highlight! link @math TSMath
+        highlight! link @todo TSTodo
         highlight! link @type TSType
         highlight! link @type.builtin TSTypeBuiltin
         highlight! link @uri TSURI
         highlight! link @variable TSVariable
         highlight! link @variable.builtin TSVariableBuiltin
       endif
-      call edge#highlight('CurrentWord', l:palette.none, ['#e5e5ff', '253'])
-      call edge#highlight('Visual', l:palette.none, ['#cbe5f8', '253'])
-      call edge#highlight('VisualNOS', l:palette.none, ['#cbe5f8', '253'], 'underline')
-      call edge#highlight('NvimTreeNormal', l:palette.none, ['#f3f4f4', '253'])
-      call edge#highlight('GitSignsCurrentLineBlame', l:palette.grey_dim, l:palette.none)
-      call edge#highlight('CursorLine', l:palette.none, ['#f3f5f7', '255'])
-      call edge#highlight('Folded', l:palette.grey, ['#e9f5e6', 'NONE'])
-      call edge#highlight('Todo', ['#008dde', '167'], l:palette.none, 'italic')
     endfunction
     
     augroup EdgeCustom
