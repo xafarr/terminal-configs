@@ -10,7 +10,7 @@ vim.cmd([[
       " The first parameter is a valid value for `g:edge_style`,
       " the second parameter is a valid value for `g:edge_dim_foreground`,
       " and the third parameter is a valid value for `g:edge_colors_override`.
-      let l:palette = edge#get_palette('aura', 0, {})
+      let l:palette = edge#get_palette('', 0, {})
       " Define a highlight group.
       " The first parameter is the name of a highlight group,
       " the second parameter is the foreground color,
@@ -18,7 +18,110 @@ vim.cmd([[
       " the fourth parameter is for UI highlighting which is optional,
       " and the last parameter is for `guisp` which is also optional.
       " See `autoload/edge.vim` for the format of `l:palette`.
-      " call edge#highlight('CurrentWord', l:palette.none, ['#e3e4e5', '253'])
+      call edge#highlight('TSStrong', l:palette.none, l:palette.none, 'bold')
+      call edge#highlight('TSEmphasis', l:palette.none, l:palette.none, 'italic')
+      call edge#highlight('TSUnderline', l:palette.none, l:palette.none, 'underline')
+      call edge#highlight('TSNote', l:palette.bg0, l:palette.blue, 'bold')
+      call edge#highlight('TSWarning', l:palette.bg0, l:palette.yellow, 'bold')
+      call edge#highlight('TSDanger', l:palette.bg0, l:palette.red, 'bold')
+      highlight! link TSAnnotation Purple
+      highlight! link TSAttribute Yellow
+      highlight! link TSBoolean Green
+      highlight! link TSCharacter Green
+      highlight! link TSComment Comment
+      highlight! link TSConditional Purple
+      highlight! link TSConstBuiltin CyanItalic
+      highlight! link TSConstMacro CyanItalic
+      highlight! link TSConstant RedItalic
+      highlight! link TSConstructor Blue
+      highlight! link TSException Purple
+      highlight! link TSField Blue
+      highlight! link TSFloat Green
+      highlight! link TSFuncBuiltin Blue
+      highlight! link TSFuncMacro Blue
+      highlight! link TSFunction Blue
+      highlight! link TSInclude Purple
+      highlight! link TSKeyword Purple
+      highlight! link TSKeywordFunction Purple
+      highlight! link TSKeywordOperator Purple
+      highlight! link TSLabel Purple
+      highlight! link TSMethod Blue
+      highlight! link TSNamespace Yellow
+      highlight! link TSNone Fg
+      highlight! link TSNumber Number
+      highlight! link TSOperator Purple
+      highlight! link TSParameter RedItalic
+      highlight! link TSParameterReference RedItalic
+      highlight! link TSProperty RedItalic
+      highlight! link TSPunctBracket Grey
+      highlight! link TSPunctDelimiter Grey
+      highlight! link TSPunctSpecial Yellow
+      highlight! link TSRepeat Purple
+      highlight! link TSStorageClass Purple
+      highlight! link TSString Green
+      highlight! link TSStringEscape Yellow
+      highlight! link TSStringRegex Yellow
+      highlight! link TSSymbol Red
+      highlight! link TSTag RedItalic
+      highlight! link TSTagDelimiter Purple
+      highlight! link TSText Green
+      highlight! link TSStrike Grey
+      highlight! link TSMath Green
+      highlight! link TSType Yellow
+      highlight! link TSTypeBuiltin Yellow
+      highlight! link TSURI markdownUrl
+      highlight! link TSVariable RedItalic
+      highlight! link TSVariableBuiltin CyanItalic
+      if has('nvim-0.8.0')
+        highlight! link @annotation TSAnnotation
+        highlight! link @attribute TSAttribute
+        highlight! link @boolean TSBoolean
+        highlight! link @character TSCharacter
+        highlight! link @comment TSComment
+        highlight! link @conditional TSConditional
+        highlight! link @constant TSConstant
+        highlight! link @constant.builtin TSConstBuiltin
+        highlight! link @constant.macro TSConstMacro
+        highlight! link @constructor TSConstructor
+        highlight! link @exception TSException
+        highlight! link @field TSField
+        highlight! link @float TSFloat
+        highlight! link @function TSFunction
+        highlight! link @function.builtin TSFuncBuiltin
+        highlight! link @function.macro TSFuncMacro
+        highlight! link @include TSInclude
+        highlight! link @keyword TSKeyword
+        highlight! link @keyword.function TSKeywordFunction
+        highlight! link @keyword.operator TSKeywordOperator
+        highlight! link @label TSLabel
+        highlight! link @method TSMethod
+        highlight! link @namespace TSNamespace
+        highlight! link @none TSNone
+        highlight! link @number TSNumber
+        highlight! link @operator TSOperator
+        highlight! link @parameter TSParameter
+        highlight! link @parameter.reference TSParameterReference
+        highlight! link @property TSProperty
+        highlight! link @punctuation.bracket TSPunctBracket
+        highlight! link @punctuation.delimiter TSPunctDelimiter
+        highlight! link @punctuation.special TSPunctSpecial
+        highlight! link @repeat TSRepeat
+        highlight! link @storageclass TSStorageClass
+        highlight! link @string TSString
+        highlight! link @string.escape TSStringEscape
+        highlight! link @string.regex TSStringRegex
+        highlight! link @symbol TSSymbol
+        highlight! link @tag TSTag
+        highlight! link @tag.delimiter TSTagDelimiter
+        highlight! link @text TSText
+        highlight! link @strike TSStrike
+        highlight! link @math TSMath
+        highlight! link @type TSType
+        highlight! link @type.builtin TSTypeBuiltin
+        highlight! link @uri TSURI
+        highlight! link @variable TSVariable
+        highlight! link @variable.builtin TSVariableBuiltin
+      endif
       call edge#highlight('CurrentWord', l:palette.none, ['#e5e5ff', '253'])
       call edge#highlight('Visual', l:palette.none, ['#cbe5f8', '253'])
       call edge#highlight('VisualNOS', l:palette.none, ['#cbe5f8', '253'], 'underline')
