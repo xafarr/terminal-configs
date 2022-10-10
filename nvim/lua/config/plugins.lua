@@ -79,6 +79,7 @@ return packer.startup(function(use)
     use("jose-elias-alvarez/null-ls.nvim")
     use("RRethy/vim-illuminate")
     use("folke/trouble.nvim")
+    use("brenoprata10/nvim-highlight-colors")
 
     -- Code autocompletion plugins
     use("hrsh7th/cmp-nvim-lsp")
