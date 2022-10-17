@@ -2,7 +2,7 @@ local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 local illuminate = require("illuminate")
-local null_ls = require("config.lsp.null-ls")
+require("config.lsp.null-ls")
 
 local servers = {
     "sumneko_lua",
@@ -116,8 +116,6 @@ local opts = {
     capabilities = capabilities,
     flags = lsp_flags,
 }
-
-null_ls.setup(opts)
 
 for _, server in pairs(servers) do
     local has_custom_opts, server_custom_opts = pcall(require, "config.lsp.settings." .. server)

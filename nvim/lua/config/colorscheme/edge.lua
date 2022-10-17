@@ -20,6 +20,7 @@ vim.cmd([[
       " See `autoload/edge.vim` for the format of `l:palette`.
       call edge#highlight('Green', ['#067d17', '107'], l:palette.none)
       call edge#highlight('Field', ['#871094', '68'], l:palette.none)
+      call edge#highlight('FieldItalic', ['#871094', '68'], l:palette.none, 'italic')
       call edge#highlight('Constant', ['#871094', '68'], l:palette.none, 'italic')
       call edge#highlight('Annotation', ['#9E880D', '134'], l:palette.none)
       call edge#highlight('Method', ['#00627A', '68'], l:palette.none)
@@ -28,8 +29,8 @@ vim.cmd([[
       call edge#highlight('Attribute', ['#174AD4', '172'], l:palette.none)
       call edge#highlight('Comment', ['#8C8C8C', '172'], l:palette.none, 'italic')
       call edge#highlight('CurrentWord', l:palette.none, ['#e5e5ff', '253'])
-      call edge#highlight('Visual', l:palette.none, ['#cbe5f8', '253'])
-      call edge#highlight('VisualNOS', l:palette.none, ['#cbe5f8', '253'], 'underline')
+      call edge#highlight('Visual', l:palette.none, ['#A6D2FF', '253'])
+      call edge#highlight('VisualNOS', l:palette.none, ['#A6D2FF', '253'], 'underline')
       call edge#highlight('NvimTreeNormal', l:palette.none, ['#f3f4f4', '253'])
       call edge#highlight('GitSignsCurrentLineBlame', l:palette.grey_dim, l:palette.none)
       call edge#highlight('CursorLine', l:palette.none, ['#f3f5f7', '255'])
@@ -37,6 +38,8 @@ vim.cmd([[
       call edge#highlight('Todo', ['#008dde', '167'], l:palette.none, 'italic')
       call edge#highlight('StringEscape', ['#0037A6', '172'], l:palette.none)
       call edge#highlight('StringRegex', l:palette.none, ['#EDFCED', '172'])
+      call edge#highlight('Black', ['#000000', '240'], l:palette.none)
+      call edge#highlight('Link', ['#4585BE', '167'], l:palette.none)
 
       call edge#highlight('TSStrong', l:palette.none, l:palette.none, 'bold')
       call edge#highlight('TSEmphasis', l:palette.none, l:palette.none, 'italic')
@@ -70,9 +73,9 @@ vim.cmd([[
       highlight! link TSNone Fg
       highlight! link TSNumber Number
       highlight! link TSOperator Purple
-      highlight! link TSParameter RedItalic
-      highlight! link TSParameterReference RedItalic
-      highlight! link TSProperty RedItalic
+      highlight! link TSParameter Black
+      highlight! link TSParameterReference Black
+      highlight! link TSProperty Field
       highlight! link TSPunctBracket Grey
       highlight! link TSPunctDelimiter Grey
       highlight! link TSPunctSpecial Yellow
@@ -81,18 +84,19 @@ vim.cmd([[
       highlight! link TSString Green
       highlight! link TSStringEscape StringEscape
       highlight! link TSStringRegex StringRegex
-      highlight! link TSSymbol Red
-      highlight! link TSTag RedItalic
+      highlight! link TSSymbol Attribute 
+      highlight! link TSTag Keyword
+      highlight! link TSTagAttribute Attribute
       highlight! link TSTagDelimiter Purple
       highlight! link TSText Green
       highlight! link TSStrike Grey
       highlight! link TSMath Green
       highlight! link TSTodo Todo
-      highlight! link TSType Yellow
-      highlight! link TSTypeBuiltin Yellow
-      highlight! link TSURI markdownUrl
-      highlight! link TSVariable RedItalic
-      highlight! link TSVariableBuiltin CyanItalic
+      highlight! link TSType Black
+      highlight! link TSTypeBuiltin Keyword
+      highlight! link TSURI Link
+      highlight! link TSVariable Black
+      highlight! link TSVariableBuiltin FieldItalic
       if has('nvim-0.8.0')
         highlight! link @annotation TSAnnotation
         highlight! link @attribute TSAttribute
@@ -152,4 +156,5 @@ vim.cmd([[
     augroup END
 
     let g:edge_better_performance = 1
+    let g:edge_colors_override = {'bg0': ['#ffffff', '234'], 'fg0': ['#000000', '240']}
 ]])
