@@ -23,7 +23,8 @@ keymap("", "<C-a>", "<esc>ggVG<CR>", opts)
 -- Normal
 
 -- Format command for non LSP
-vim.cmd([[ command! Format execute 'lua require("config.custom-functions").format(0)' ]])
+vim.cmd([[ command! Format execute 'lua vim.lsp.buf.format({async=true})' ]])
+keymap("n", "<leader>,", ":Format<CR>", opts)
 
 -- Open new line below and above current line
 keymap("n", "<Leader>o", "o<Esc>", opts)
