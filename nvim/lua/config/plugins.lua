@@ -59,6 +59,7 @@ return packer.startup(function(use)
 
     -- Treesitter for code highlight
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+    use({ "nvim-treesitter/playground" })
 
     -- Status line
     use("nvim-lualine/lualine.nvim")
