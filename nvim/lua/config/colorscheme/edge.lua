@@ -24,6 +24,8 @@ vim.cmd([[
       call edge#highlight('Constant', ['#871094', '68'], l:palette.none, 'italic')
       call edge#highlight('Annotation', ['#9E880D', '134'], l:palette.none)
       call edge#highlight('Method', ['#00627A', '68'], l:palette.none)
+      call edge#highlight('Function', ['#00627A', '68'], l:palette.none)
+      call edge#highlight('FuncItalic', ['#00627A', '68'], l:palette.none, 'italic')
       call edge#highlight('Number', ['#1750EB', '68'], l:palette.none)
       call edge#highlight('Keyword', ['#0033B3', '134'], l:palette.none)
       call edge#highlight('Attribute', ['#174AD4', '172'], l:palette.none)
@@ -33,13 +35,18 @@ vim.cmd([[
       call edge#highlight('VisualNOS', l:palette.none, ['#A6D2FF', '253'], 'underline')
       call edge#highlight('NvimTreeNormal', l:palette.none, ['#f3f4f4', '253'])
       call edge#highlight('GitSignsCurrentLineBlame', l:palette.grey_dim, l:palette.none)
-      call edge#highlight('CursorLine', l:palette.none, ['#f3f5f7', '255'])
+      call edge#highlight('CursorLine', l:palette.none, ['#fcfaed', '255'])
       call edge#highlight('Folded', l:palette.grey, ['#e9f5e6', 'NONE'])
       call edge#highlight('Todo', ['#008dde', '167'], l:palette.none, 'italic')
       call edge#highlight('StringEscape', ['#0037A6', '172'], l:palette.none)
       call edge#highlight('StringRegex', l:palette.none, ['#EDFCED', '172'])
       call edge#highlight('Black', ['#000000', '240'], l:palette.none)
+      call edge#highlight('BlackItalic', ['#000000', '240'], l:palette.none, 'italic')
       call edge#highlight('Link', ['#4585BE', '167'], l:palette.none)
+      call edge#highlight('Label', ['#4A86E8', '167'], l:palette.none)
+      call edge#highlight('IndentChar', ['#e6e6e6', '240'], l:palette.none)
+      call edge#highlight('IndentContextChar', ['#8c8c8c', '240'], l:palette.none)
+      call edge#highlight('IndentContextStart', l:palette.none, l:palette.none, 'underline', ['#8c8c8c', '240'])
 
       call edge#highlight('TSStrong', l:palette.none, l:palette.none, 'bold')
       call edge#highlight('TSEmphasis', l:palette.none, l:palette.none, 'italic')
@@ -47,39 +54,60 @@ vim.cmd([[
       call edge#highlight('TSNote', l:palette.bg0, l:palette.blue, 'bold')
       call edge#highlight('TSWarning', l:palette.bg0, ['#F5EAC1', '172'], 'bold')
       call edge#highlight('TSDanger', l:palette.bg0, l:palette.red, 'bold')
+
+      " Indent Blankline
+      highlight! link IndentBlanklineChar IndentChar
+      highlight! link IndentBlanklineContextChar IndentContextChar
+      highlight! link IndentBlanklineContextStart IndentContextStart
+
+      " XML highlight
+      highlight! link xmlTag Black
+      highlight! link xmlEndTag Black
+      highlight! link xmlTagName Keyword
+      highlight! link xmlEqual Black
+      highlight! link xmlAttrib Attribute
+      highlight! link xmlEntity Keyword
+      highlight! link xmlEntityPunct Purple
+      highlight! link xmlDocTypeDecl Comment
+      highlight! link xmlDocTypeKeyword PurpleItalic
+      highlight! link xmlCdataStart Comment
+      highlight! link xmlCdataCdata Yellow
+      highlight! link xmlString Green
+      highlight! link xmlProcessingDelim BlackItalic
+
       highlight! link TSAnnotation Annotation
-      highlight! link TSAttribute Attribute
-      highlight! link TSBoolean Green
+      highlight! link TSAttribute Annotation
+      highlight! link TSBoolean Keyword
       highlight! link TSCharacter Green
       highlight! link TSComment Comment
-      highlight! link TSConditional Purple
-      highlight! link TSConstBuiltin Constant
+      highlight! link TSConditional Keyword
+      highlight! link TSConstBuiltin Keyword
       highlight! link TSConstMacro Constant
       highlight! link TSConstant Constant
-      highlight! link TSConstructor Blue
-      highlight! link TSException Purple
+      highlight! link TSConstructor Black
+      highlight! link TSException Keyword
       highlight! link TSField Field
       highlight! link TSFloat Number
-      highlight! link TSFuncBuiltin Method
-      highlight! link TSFuncMacro Method
-      highlight! link TSFunction Method
-      highlight! link TSInclude Purple
+      highlight! link TSFuncBuiltin Keyword
+      highlight! link TSFuncMacro FuncItalic
+      highlight! link TSFunction Function
+      highlight! link TSInclude Keyword
       highlight! link TSKeyword Keyword
       highlight! link TSKeywordFunction Keyword
       highlight! link TSKeywordOperator Keyword
-      highlight! link TSLabel Purple
+      highlight! link TSLabel Label
       highlight! link TSMethod Method 
-      highlight! link TSNamespace Field
+      highlight! link TSNamespace Keyword
       highlight! link TSNone Fg
       highlight! link TSNumber Number
-      highlight! link TSOperator Purple
+      highlight! link TSOperator Black
       highlight! link TSParameter Black
-      highlight! link TSParameterReference Black
+      highlight! link TSParameterReference Field
       highlight! link TSProperty Field
-      highlight! link TSPunctBracket Grey
-      highlight! link TSPunctDelimiter Grey
+      highlight! link TSPunctBracket Black
+      highlight! link TSPunctDelimiter Black
       highlight! link TSPunctSpecial Yellow
-      highlight! link TSRepeat Purple
+      highlight! link TSRepeat Keyword
       highlight! link TSStorageClass Purple
       highlight! link TSString Green
       highlight! link TSStringEscape StringEscape
@@ -87,7 +115,7 @@ vim.cmd([[
       highlight! link TSSymbol Attribute 
       highlight! link TSTag Keyword
       highlight! link TSTagAttribute Attribute
-      highlight! link TSTagDelimiter Purple
+      highlight! link TSTagDelimiter Black
       highlight! link TSText Green
       highlight! link TSStrike Grey
       highlight! link TSMath Green
@@ -96,7 +124,7 @@ vim.cmd([[
       highlight! link TSTypeBuiltin Keyword
       highlight! link TSURI Link
       highlight! link TSVariable Black
-      highlight! link TSVariableBuiltin FieldItalic
+      highlight! link TSVariableBuiltin Keyword
       if has('nvim-0.8.0')
         highlight! link @annotation TSAnnotation
         highlight! link @attribute TSAttribute
@@ -112,18 +140,22 @@ vim.cmd([[
         highlight! link @field TSField
         highlight! link @float TSFloat
         highlight! link @function TSFunction
+        highlight! link @function.call Black
         highlight! link @function.builtin TSFuncBuiltin
         highlight! link @function.macro TSFuncMacro
         highlight! link @include TSInclude
         highlight! link @keyword TSKeyword
+        highlight! link @keyword.return TSKeyword
         highlight! link @keyword.function TSKeywordFunction
         highlight! link @keyword.operator TSKeywordOperator
         highlight! link @label TSLabel
         highlight! link @method TSMethod
+        highlight! link @method.call Black
         highlight! link @namespace TSNamespace
         highlight! link @none TSNone
         highlight! link @number TSNumber
         highlight! link @operator TSOperator
+        highlight! link @operator.bracket TSOperator
         highlight! link @parameter TSParameter
         highlight! link @parameter.reference TSParameterReference
         highlight! link @property TSProperty
@@ -155,6 +187,6 @@ vim.cmd([[
       autocmd ColorScheme edge call s:edge_custom()
     augroup END
 
-    let g:edge_better_performance = 1
+    "let g:edge_better_performance = 1
     let g:edge_colors_override = {'bg0': ['#ffffff', '234'], 'fg0': ['#000000', '240']}
 ]])

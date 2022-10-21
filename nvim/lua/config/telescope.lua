@@ -37,7 +37,7 @@ telescope.setup({
         sorting_strategy = "ascending",
         layout_strategy = "horizontal",
         layout_config = {
-            preview_width = 80,
+            preview_width = 0.7,
             scroll_speed = 5,
             prompt_position = "top",
         },
