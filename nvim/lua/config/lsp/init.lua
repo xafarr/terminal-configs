@@ -73,7 +73,12 @@ local on_attach = function(client, bufnr)
         width = 60,
     })
 
-    illuminate.on_attach(client)
+    illuminate.configure({
+        delay = 1000,
+        filetypes_denylist = {
+            "TelescopePrompt",
+        },
+    })
 
     local function keymap(...)
         vim.keymap.set(...)
