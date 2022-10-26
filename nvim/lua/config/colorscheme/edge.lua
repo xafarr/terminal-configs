@@ -33,9 +33,12 @@ vim.cmd([[
       call edge#highlight('CurrentWord', l:palette.none, ['#e5e5ff', '253'])
       call edge#highlight('Visual', l:palette.none, ['#A6D2FF', '253'])
       call edge#highlight('VisualNOS', l:palette.none, ['#A6D2FF', '253'], 'underline')
-      call edge#highlight('NvimTreeNormal', l:palette.none, ['#f3f4f4', '253'])
+      call edge#highlight('SignColumn', l:palette.none, ['#f3f4f4', '253'])
+      call edge#highlight('LineNr', l:palette.none, ['#f3f4f4', '253'])
       call edge#highlight('GitSignsCurrentLineBlame', l:palette.grey_dim, l:palette.none)
       call edge#highlight('CursorLine', l:palette.none, ['#fcfaed', '255'])
+      call edge#highlight('CursorLineNr', l:palette.none, ['#fcfaed', '255'])
+      call edge#highlight('CursorLineSign', l:palette.none, ['#fcfaed', '255'])
       call edge#highlight('Folded', l:palette.grey, ['#e9f5e6', 'NONE'])
       call edge#highlight('Todo', ['#008dde', '167'], l:palette.none, 'italic')
       call edge#highlight('StringEscape', ['#0037A6', '172'], l:palette.none)
@@ -47,6 +50,8 @@ vim.cmd([[
       call edge#highlight('IndentChar', ['#e6e6e6', '240'], l:palette.none)
       call edge#highlight('IndentContextChar', ['#8c8c8c', '240'], l:palette.none)
       call edge#highlight('IndentContextStart', l:palette.none, l:palette.none, 'underline', ['#8c8c8c', '240'])
+      call edge#highlight('GreenSign', ['#C9DEC1', '107'], ['#f3f4f4', '253'])
+      call edge#highlight('BlueSign', ['#C3D6E8', '68'], ['#f3f4f4', '253'])
 
       call edge#highlight('TSStrong', l:palette.none, l:palette.none, 'bold')
       call edge#highlight('TSEmphasis', l:palette.none, l:palette.none, 'italic')
@@ -55,10 +60,25 @@ vim.cmd([[
       call edge#highlight('TSWarning', l:palette.bg0, ['#F5EAC1', '172'], 'bold')
       call edge#highlight('TSDanger', l:palette.bg0, l:palette.red, 'bold')
 
+      " NvimTree
+      highlight! link NvimTreeGitIgnored Conceal
+
       " Indent Blankline
       highlight! link IndentBlanklineChar IndentChar
       highlight! link IndentBlanklineContextChar IndentContextChar
       highlight! link IndentBlanklineContextStart IndentContextStart
+
+      " Gitsigns
+      highlight! link GitSignsAdd GreenSign
+      highlight! link GitSignsChange BlueSign
+      highlight! link GitSignsDelete RedSign
+      highlight! link GitSignsAddNr Green
+      highlight! link GitSignsChangeNr Blue
+      highlight! link GitSignsDeleteNr Red
+      highlight! link GitSignsAddLn DiffAdd
+      highlight! link GitSignsChangeLn DiffChange
+      highlight! link GitSignsDeleteLn DiffDelete
+      highlight! link GitSignsCurrentLineBlame Grey
 
       " XML highlight
       highlight! link xmlTag Black
@@ -67,9 +87,9 @@ vim.cmd([[
       highlight! link xmlEqual Black
       highlight! link xmlAttrib Attribute
       highlight! link xmlEntity Keyword
-      highlight! link xmlEntityPunct Purple
+      highlight! link xmlEntityPunct Field
       highlight! link xmlDocTypeDecl Comment
-      highlight! link xmlDocTypeKeyword PurpleItalic
+      highlight! link xmlDocTypeKeyword FieldItalic
       highlight! link xmlCdataStart Comment
       highlight! link xmlCdataCdata Yellow
       highlight! link xmlString Green
@@ -125,6 +145,7 @@ vim.cmd([[
       highlight! link TSURI Link
       highlight! link TSVariable Black
       highlight! link TSVariableBuiltin Keyword
+
       if has('nvim-0.8.0')
         highlight! link @annotation TSAnnotation
         highlight! link @attribute TSAttribute
@@ -171,6 +192,7 @@ vim.cmd([[
         highlight! link @tag TSTag
         highlight! link @tag.delimiter TSTagDelimiter
         highlight! link @text TSText
+        highlight! link @text.note TSTodo
         highlight! link @strike TSStrike
         highlight! link @math TSMath
         highlight! link @todo TSTodo
