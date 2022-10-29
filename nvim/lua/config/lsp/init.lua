@@ -74,7 +74,7 @@ local on_attach = function(client, bufnr)
     })
 
     illuminate.configure({
-        delay = 1000,
+        delay = 2000,
         filetypes_denylist = {
             "TelescopePrompt",
         },
