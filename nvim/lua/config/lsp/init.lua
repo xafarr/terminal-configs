@@ -1,8 +1,6 @@
 local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
-local illuminate = require("illuminate")
-require("config.lsp.null-ls")
 
 local servers = {
     "sumneko_lua",
@@ -71,13 +69,6 @@ local on_attach = function(client, bufnr)
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
         border = "rounded",
         width = 60,
-    })
-
-    illuminate.configure({
-        delay = 2000,
-        filetypes_denylist = {
-            "TelescopePrompt",
-        },
     })
 
     local function keymap(...)

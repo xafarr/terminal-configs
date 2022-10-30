@@ -20,6 +20,7 @@ local sources = {
     formatting.beautysh,
     formatting.markdownlint,
     formatting.gofmt,
+    formatting.sql_formatter,
 
     -- Diagnostics
     diagnostics.markdownlint,
