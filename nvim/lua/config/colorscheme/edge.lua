@@ -34,8 +34,7 @@ vim.cmd([[
       call edge#highlight('Visual', l:palette.none, ['#A6D2FF', '253'])
       call edge#highlight('VisualNOS', l:palette.none, ['#A6D2FF', '253'], 'underline')
       call edge#highlight('SignColumn', l:palette.none, ['#f3f4f4', '253'])
-      call edge#highlight('LineNr', l:palette.none, ['#f3f4f4', '253'])
-      call edge#highlight('GitSignsCurrentLineBlame', l:palette.grey_dim, l:palette.none)
+      call edge#highlight('LineNr', l:palette.grey, ['#f3f4f4', '253'])
       call edge#highlight('CursorLine', l:palette.none, ['#fcfaed', '255'])
       call edge#highlight('CursorLineNr', l:palette.none, ['#fcfaed', '255'])
       call edge#highlight('CursorLineSign', l:palette.none, ['#fcfaed', '255'])
@@ -78,7 +77,7 @@ vim.cmd([[
       highlight! link GitSignsAddLn DiffAdd
       highlight! link GitSignsChangeLn DiffChange
       highlight! link GitSignsDeleteLn DiffDelete
-      highlight! link GitSignsCurrentLineBlame Grey
+      call edge#highlight('GitSignsCurrentLineBlame', l:palette.grey_dim, l:palette.none)
 
       " XML highlight
       highlight! link xmlTag Black
