@@ -18,6 +18,8 @@ then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
 else
     export HOMEBREW_PREFIX="/opt/homebrew"
+    export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+    export CPPFLAGS="-I$(xcrun --show-sdk-path)/usr/include"
 fi
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
@@ -69,17 +71,17 @@ export FZF_DEFAULT_OPTS="--no-mouse --height 80% --layout=reverse --border --mul
 export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
 
 # For Edge light theme
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' 
---color=fg:#4b505b,bg:#fafafa,hl:#5079be 
---color=fg+:#4b505b,bg+:#fafafa,hl+:#3a8b84 
---color=info:#88909f,prompt:#d05858,pointer:#b05ccc 
+export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+--color=fg:#4b505b,bg:#fafafa,hl:#5079be
+--color=fg+:#4b505b,bg+:#fafafa,hl+:#3a8b84
+--color=info:#88909f,prompt:#d05858,pointer:#b05ccc
 --color=marker:#608e32,spinner:#d05858,header:#3a8b84'
 
 # For Edge dark theme
-#export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS' 
-#--color=fg:#c5cdd9,bg:#262729,hl:#6cb6eb 
-#--color=fg+:#c5cdd9,bg+:#262729,hl+:#5dbbc1 
-#--color=info:#88909f,prompt:#ec7279,pointer:#d38aea 
+#export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+#--color=fg:#c5cdd9,bg:#262729,hl:#6cb6eb
+#--color=fg+:#c5cdd9,bg+:#262729,hl+:#5dbbc1
+#--color=info:#88909f,prompt:#ec7279,pointer:#d38aea
 #--color=marker:#a0c980,spinner:#ec7279,header:#5dbbc1'
 
 #--------------------------------------------------
@@ -137,8 +139,7 @@ export ARCHFLAGS="-arch $(arch)"
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # CPPFLAGS and LDFLAGS
-export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
-export CPPFLAGS="-I$(brew --prefix gettext)/include -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(brew --prefix zlib)/include -I$(xcrun --show-sdk-path)/usr/include"
+export CPPFLAGS="-I$(brew --prefix gettext)/include -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(brew --prefix zlib)/include $CPPFLAGS"
 export LDFLAGS="-L$(brew --prefix gettext)/lib -L$(brew --prefix openssl)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib -L$(brew --prefix readline)/lib -L$HOMEBREW_PREFIX/lib"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
