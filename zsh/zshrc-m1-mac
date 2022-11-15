@@ -138,6 +138,9 @@ export ARCHFLAGS="-arch $(arch)"
 # ssh
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 
+# GPG
+export GPG_TTY=$(tty)
+
 # CPPFLAGS and LDFLAGS
 export CPPFLAGS="-I$(brew --prefix gettext)/include -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(brew --prefix zlib)/include $CPPFLAGS"
 export LDFLAGS="-L$(brew --prefix gettext)/lib -L$(brew --prefix openssl)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib -L$(brew --prefix readline)/lib -L$HOMEBREW_PREFIX/lib"
