@@ -87,8 +87,13 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
 #--------------------------------------------------
 # zsh-completions settings
 #--------------------------------------------------
-autoload -Uz compinit
-compinit
+if type brew &>/dev/null
+then
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+    autoload -Uz compinit
+    compinit
+fi
 
 ZSH_TMUX_AUTOSTART=false
 ZSH_TMUX_AUTOQUIT=false
@@ -186,6 +191,9 @@ source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # For Auto Suggestions
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=247'
+
+# For asdf
+source $(brew --prefix asdf)/libexec/asdf.sh
 
 # For Ruby environment initialization
 eval "$(rbenv init -)"
