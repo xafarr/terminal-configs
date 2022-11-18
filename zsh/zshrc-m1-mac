@@ -192,12 +192,6 @@ source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=247'
 
-# For asdf
-source $(brew --prefix asdf)/libexec/asdf.sh
-
-# For Ruby environment initialization
-eval "$(rbenv init -)"
-
 # Installs Shell Integration for iTerm2.
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
@@ -234,6 +228,9 @@ _fzf_compgen_dir() {
 if [ -f ~/.additional-env-config ]; then
     source $HOME/.additional-env-config
 fi
+
+# For asdf
+source $(brew --prefix asdf)/libexec/asdf.sh
 
 # Virtualenvwrapper script
 source $(brew --prefix virtualenvwrapper)/bin/virtualenvwrapper.sh
