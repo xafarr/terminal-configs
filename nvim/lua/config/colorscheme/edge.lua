@@ -30,6 +30,7 @@ vim.cmd([[
       call edge#highlight('Keyword', ['#0033B3', '134'], l:palette.none)
       call edge#highlight('Attribute', ['#174AD4', '172'], l:palette.none)
       call edge#highlight('Comment', ['#8C8C8C', '172'], l:palette.none, 'italic')
+      call edge#highlight('PreProc', ['#8C8C8C', '172'], l:palette.none, 'bold,italic')
       call edge#highlight('CurrentWord', l:palette.none, ['#e5e5ff', '253'])
       call edge#highlight('Visual', l:palette.none, ['#A6D2FF', '253'])
       call edge#highlight('VisualNOS', l:palette.none, ['#A6D2FF', '253'], 'underline')
