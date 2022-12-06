@@ -35,6 +35,7 @@ vim.cmd([[
       call edge#highlight('Visual', l:palette.none, ['#A6D2FF', '253'])
       call edge#highlight('VisualNOS', l:palette.none, ['#A6D2FF', '253'], 'underline')
       call edge#highlight('SignColumn', l:palette.none, ['#f3f4f4', '253'])
+      call edge#highlight('VertSplit', ['#f3f4f4', '253'], ['#f3f4f4', '253'])
       call edge#highlight('LineNr', l:palette.grey, ['#f3f4f4', '253'])
       call edge#highlight('CursorLine', l:palette.none, ['#fcfaed', '255'])
       call edge#highlight('CursorLineNr', l:palette.none, ['#fcfaed', '255'])
