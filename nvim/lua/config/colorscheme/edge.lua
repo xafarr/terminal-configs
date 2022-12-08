@@ -212,4 +212,5 @@ vim.cmd([[
 
     "let g:edge_better_performance = 1
     let g:edge_colors_override = {'bg0': ['#ffffff', '234'], 'fg0': ['#000000', '240']}
+    let g:edge_transparent_background = 1
 ]])
