@@ -5,7 +5,6 @@ local tree_cb = nvim_tree_config.nvim_tree_callback
 
 nvim_tree.setup({
     remove_keymaps = { "<Tab>" },
-    create_in_closed_folder = true,
     open_on_setup = true,
     update_focused_file = {
         enable = true,
