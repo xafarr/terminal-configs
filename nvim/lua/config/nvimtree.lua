@@ -1,3 +1,7 @@
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 local nvim_tree = require("nvim-tree")
 local nvim_tree_config = require("nvim-tree.config")
 
@@ -14,6 +18,7 @@ nvim_tree.setup({
         ignore = false,
     },
     renderer = {
+        highlight_git = true,
         indent_markers = {
             enable = true,
         },
@@ -30,6 +35,15 @@ nvim_tree.setup({
                     empty_open = "",
                     symlink = "",
                     symlink_open = "",
+                },
+                git = {
+                    unstaged = "✗",
+                    staged = "✓",
+                    unmerged = "",
+                    renamed = "➜",
+                    untracked = "★",
+                    deleted = "",
+                    ignored = "",
                 },
             },
         },
