@@ -102,4 +102,7 @@ return packer.startup(function(use)
 
     -- Org Mode (Like Emac's org mode)
     use("nvim-orgmode/orgmode")
+
+    -- Github Copilot
+    use("github/copilot.vim")
 end)
