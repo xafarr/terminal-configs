@@ -99,6 +99,7 @@ return packer.startup(function(use)
 
     -- Git
     use("lewis6991/gitsigns.nvim")
+    use("tpope/vim-fugitive")
 
     -- Org Mode (Like Emac's org mode)
     use("nvim-orgmode/orgmode")
