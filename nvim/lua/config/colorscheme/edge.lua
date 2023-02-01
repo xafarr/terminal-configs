@@ -148,6 +148,7 @@ vim.cmd([[
       highlight! link @math Green
       highlight! link @todo Todo
       highlight! link @type Black
+      highlight! link @type.definition Black
       highlight! link @type.builtin Keyword
       highlight! link @uri Link
       highlight! link @variable Black
