@@ -29,6 +29,7 @@ local servers = {
     "sqlls",
     "terraformls",
     "tsserver",
+    "vimls",
     "vuels",
     "lemminx",
     "yamlls",
