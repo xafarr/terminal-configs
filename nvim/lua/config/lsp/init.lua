@@ -3,16 +3,16 @@ local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
 
 local servers = {
-    "ansiblels",
     "angularls",
+    "ansiblels",
     "bashls",
     "clangd",
-    "csharp_ls",
     "cmake",
+    "csharp_ls",
     "cssls",
     "cucumber_language_server",
-    "dockerls",
     "docker_compose_language_service",
+    "dockerls",
     "golangci_lint_ls",
     "gopls",
     "gradle_ls",
@@ -22,6 +22,7 @@ local servers = {
     "jdtls",
     "jsonls",
     "kotlin_language_server",
+    "lemminx",
     "lua_ls",
     "pyright",
     "ruby_ls",
@@ -31,7 +32,6 @@ local servers = {
     "tsserver",
     "vimls",
     "vuels",
-    "lemminx",
     "yamlls",
 }
 
