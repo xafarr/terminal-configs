@@ -81,6 +81,7 @@ return packer.startup(function(use)
     use("RRethy/vim-illuminate")
     use("folke/trouble.nvim")
     use("brenoprata10/nvim-highlight-colors")
+    use("mfussenegger/nvim-dap")
 
     -- Code autocompletion plugins
     use("hrsh7th/cmp-nvim-lsp")
