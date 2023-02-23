@@ -6,7 +6,7 @@ install.update({ with_sync = true })
 
 configs.setup({
     ensure_installed = "all", -- one of "all" or a list of languages
-    ignore_install = { "phpdoc" }, -- List of parsers to ignore installing
+    ignore_install = { "phpdoc", "smali" }, -- List of parsers to ignore installing
     context_commentstring = {
         enable = true,
         enable_autocmd = false,

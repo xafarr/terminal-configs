@@ -1,110 +1,124 @@
-local fn = vim.fn
+-- Set <space> as the leader key
+-- See `:help mapleader`
+--  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
--- Automatically install packer
-local install_path = fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if fn.empty(fn.glob(install_path)) > 0 then
-    PACKER_BOOTSTRAP = fn.system({
+-- Automatically install lazy plugin manager
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system({
         "git",
         "clone",
-        "--depth",
-        "1",
-        "https://github.com/wbthomason/packer.nvim",
-        install_path,
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
     })
-    print("Installing packer close and reopen Neovim...")
-    vim.cmd([[packadd packer.nvim]])
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
-
--- Use a protected call so we don't error out on first use
-local status_ok, packer = pcall(require, "packer")
-if not status_ok then
-    return
-end
-
--- Have packer use a popup window
-packer.init({
-    display = {
-        open_fn = function()
-            return require("packer.util").float({ border = "rounded" })
-        end,
-    },
-})
+vim.opt.rtp:prepend(lazypath)
 
 -- Install your plugins here
-return packer.startup(function(use)
+require("lazy").setup({
     -- My plugins here
     -- General plugins
-    use("wbthomason/packer.nvim") -- Have packer manage itself
-    use("nvim-lua/plenary.nvim") -- Useful lua functions used by lots of plugins
-    use("windwp/nvim-autopairs") -- Autopairs, integrated with both cmp and treesitter
-    use("kyazdani42/nvim-web-devicons") -- icons support
-    use("lukas-reineke/indent-blankline.nvim") -- indentation guides to all lines
+    "nvim-lua/plenary.nvim", -- Useful lua functions used by lots of plugins
+    "windwp/nvim-autopairs", -- Autopairs, integrated with both cmp and treesitter
+    "kyazdani42/nvim-web-devicons", -- icons support
+    "lukas-reineke/indent-blankline.nvim", -- indentation guides to all lines
 
     -- Code commenting plugins
-    use("numToStr/Comment.nvim")
-    use("JoosepAlviste/nvim-ts-context-commentstring")
+    "numToStr/Comment.nvim",
+    "JoosepAlviste/nvim-ts-context-commentstring",
 
     -- Colorschemes
-    use("EdenEast/nightfox.nvim")
-    use("sainnhe/edge")
-    use("projekt0n/github-nvim-theme")
+    "EdenEast/nightfox.nvim",
+    "sainnhe/edge",
+    "projekt0n/github-nvim-theme",
 
     -- Treesitter for code highlight
-    use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-    use({ "nvim-treesitter/playground" })
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = function()
+            pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+        end,
+        dependencies = {
+            "nvim-treesitter/nvim-treesitter-textobjects",
+        },
+    },
+    "nvim-treesitter/playground",
 
     -- Status line
-    use("nvim-lualine/lualine.nvim")
-    use("akinsho/bufferline.nvim")
+    "nvim-lualine/lualine.nvim",
+    "akinsho/bufferline.nvim",
 
     -- File Explorer
-    use("kyazdani42/nvim-tree.lua")
+    "kyazdani42/nvim-tree.lua",
 
     -- Fuzzy finder
-    use("nvim-telescope/telescope.nvim")
-    use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-    use("AckslD/nvim-neoclip.lua")
+    "nvim-telescope/telescope.nvim",
+    {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make",
+        cond = function()
+            return vim.fn.executable("make") == 1
+        end,
+    },
+    "AckslD/nvim-neoclip.lua",
 
     -- Nvim LSP
-    use("williamboman/mason.nvim")
-    use("williamboman/mason-lspconfig.nvim")
-    use("neovim/nvim-lspconfig")
-    use("jose-elias-alvarez/null-ls.nvim")
-    use("RRethy/vim-illuminate")
-    use("folke/trouble.nvim")
-    use("brenoprata10/nvim-highlight-colors")
-    use("mfussenegger/nvim-dap")
+    {
+        "neovim/nvim-lspconfig",
+        dependencies = {
+            -- Automatically install LSPs to stdpath for neovim
+            "williamboman/mason.nvim",
+            "williamboman/mason-lspconfig.nvim",
+
+            -- Useful status updates for LSP
+            -- NOTE: `opts = {}` is the same as calling `require("fidget").setup({})`
+            { "j-hui/fidget.nvim", opts = {} },
+
+            -- Additional lua configuration, makes nvim stuff amazing!
+            "folke/neodev.nvim",
+        },
+    },
+
+    "jose-elias-alvarez/null-ls.nvim",
+    "RRethy/vim-illuminate",
+    "folke/trouble.nvim",
+    "brenoprata10/nvim-highlight-colors",
+    "mfussenegger/nvim-dap",
 
     -- Code autocompletion plugins
-    use("hrsh7th/cmp-nvim-lsp")
-    use("hrsh7th/cmp-buffer")
-    use("hrsh7th/cmp-path")
-    use("hrsh7th/cmp-cmdline")
-    use("hrsh7th/nvim-cmp")
-    use("hrsh7th/cmp-nvim-lua")
-    use("L3MON4D3/LuaSnip")
-    use("saadparwaiz1/cmp_luasnip")
-    use("rafamadriz/friendly-snippets") -- Collection of snippet
+    {
+        "hrsh7th/nvim-cmp",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-path",
+            "hrsh7th/cmp-cmdline",
+            "hrsh7th/nvim-cmp",
+            "hrsh7th/cmp-nvim-lua",
+            "L3MON4D3/LuaSnip",
+            "saadparwaiz1/cmp_luasnip",
+            "rafamadriz/friendly-snippets", -- Collection of snippet
+        },
+    },
 
     -- Terminal
-    use({ "akinsho/toggleterm.nvim", tag = "*" })
-    use("alexghergh/nvim-tmux-navigation")
+    { "akinsho/toggleterm.nvim", version = "*" },
+    "alexghergh/nvim-tmux-navigation",
 
     -- Git
-    use("lewis6991/gitsigns.nvim")
-    use("tpope/vim-fugitive")
+    "lewis6991/gitsigns.nvim",
+    "tpope/vim-fugitive",
+    "tpope/vim-rhubarb",
 
-    -- Org Mode (Like Emac's org mode)
-    use("nvim-orgmode/orgmode")
+    -- Org Mode (Like Emac's org mode,
+    "nvim-orgmode/orgmode",
 
     -- Github Copilot
-    use("github/copilot.vim")
-end)
+    "github/copilot.vim",
+})

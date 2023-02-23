@@ -1,3 +1,6 @@
+-- Setup neovim lua configuration
+require('neodev').setup()
+
 local lspconfig = require("lspconfig")
 local mason = require("mason")
 local mason_lspconfig = require("mason-lspconfig")
