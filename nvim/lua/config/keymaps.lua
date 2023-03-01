@@ -62,6 +62,13 @@ keymap("n", "<leader>q", ":Telescope macroscope<CR>", opts)
 -- NvimTree Keymaps
 keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 
+-- Jump to last changed position across buffers
+-- Refer to autocommands.lua for InsertChange event
+keymap("n", "<BS>", "`I", opts)
+
+-- vim help for word under cursor
+keymap("n", "<F1>", ":h <C-r><C-w><cr>", opts)
+
 -- Insert --
 -- move line up and down in insert mode
 keymap("i", "∆", "<Esc>:m .+1<CR>==gi", opts)
