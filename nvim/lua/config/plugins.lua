@@ -109,6 +109,8 @@ require("lazy").setup({
 
     -- Terminal
     { "akinsho/toggleterm.nvim", version = "*" },
+
+    -- Neovim tmux navigation
     "alexghergh/nvim-tmux-navigation",
 
     -- Git
