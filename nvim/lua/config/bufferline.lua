@@ -12,8 +12,8 @@ bufferline.setup({
         -- and so changing this is NOT recommended, this is intended
         -- as an escape hatch for people who cannot bear it for whatever reason
         indicator = {
-            icon = "▎", -- this should be omitted if indicator style is not 'icon'
-            style = "icon",
+            -- icon = "▎", -- this should be omitted if indicator style is not 'icon'
+            style = "none",
         },
         buffer_close_icon = "",
         modified_icon = "●",
@@ -35,7 +35,7 @@ bufferline.setup({
         tab_size = 18,
         diagnostics = "nvim_lsp",
         diagnostics_update_in_insert = false,
-        offsets = { { filetype = "NvimTree", text = "File Explorer", text_align = "center" } },
+        offsets = { { filetype = "NvimTree", text = "File Explorer", text_align = "center", separator = false } },
         color_icons = true, -- whether or not to add the filetype icon highlights
         show_buffer_icons = true, -- disable filetype icons for buffers
         show_buffer_close_icons = true,
@@ -52,5 +52,171 @@ bufferline.setup({
         --  -- add custom logic
         --  return buffer_a.modified > buffer_b.modified
         --end
+    },
+    highlights = {
+        fill = {
+            bg = "#f3f4f4",
+        },
+        background = {
+            bg = "#f3f4f4",
+        },
+        tab = {
+            bg = "#f3f4f4",
+        },
+        tab_selected = {
+            bg = "#f3f4f4",
+        },
+        tab_close = {
+            bg = "#f3f4f4",
+        },
+        close_button = {
+            bg = "#f3f4f4",
+        },
+        close_button_visible = {
+            bg = "#f3f4f4",
+        },
+        close_button_selected = {
+            bg = "#f3f4f4",
+        },
+        buffer_visible = {
+            bg = "#f3f4f4",
+        },
+        buffer_selected = {
+            bg = "#f3f4f4",
+        },
+        numbers = {
+            bg = "#f3f4f4",
+        },
+        numbers_visible = {
+            bg = "#f3f4f4",
+        },
+        numbers_selected = {
+            bg = "#f3f4f4",
+        },
+        diagnostic = {
+            bg = "#f3f4f4",
+        },
+        diagnostic_visible = {
+            bg = "#f3f4f4",
+        },
+        diagnostic_selected = {
+            bg = "#f3f4f4",
+        },
+        hint = {
+            bg = "#f3f4f4",
+        },
+        hint_visible = {
+            bg = "#f3f4f4",
+        },
+        hint_selected = {
+            bg = "#f3f4f4",
+        },
+        hint_diagnostic = {
+            bg = "#f3f4f4",
+        },
+        hint_diagnostic_visible = {
+            bg = "#f3f4f4",
+        },
+        hint_diagnostic_selected = {
+            bg = "#f3f4f4",
+        },
+        info = {
+            bg = "#f3f4f4",
+        },
+        info_visible = {
+            bg = "#f3f4f4",
+        },
+        info_selected = {
+            bg = "#f3f4f4",
+        },
+        info_diagnostic = {
+            bg = "#f3f4f4",
+        },
+        info_diagnostic_visible = {
+            bg = "#f3f4f4",
+        },
+        info_diagnostic_selected = {
+            bg = "#f3f4f4",
+        },
+        warning = {
+            bg = "#f3f4f4",
+        },
+        warning_visible = {
+            bg = "#f3f4f4",
+        },
+        warning_selected = {
+            bg = "#f3f4f4",
+        },
+        warning_diagnostic = {
+            bg = "#f3f4f4",
+        },
+        warning_diagnostic_visible = {
+            bg = "#f3f4f4",
+        },
+        warning_diagnostic_selected = {
+            bg = "#f3f4f4",
+        },
+        error = {
+            bg = "#f3f4f4",
+        },
+        error_visible = {
+            bg = "#f3f4f4",
+        },
+        error_selected = {
+            bg = "#f3f4f4",
+        },
+        error_diagnostic = {
+            bg = "#f3f4f4",
+        },
+        error_diagnostic_visible = {
+            bg = "#f3f4f4",
+        },
+        error_diagnostic_selected = {
+            bg = "#f3f4f4",
+        },
+        modified = {
+            bg = "#f3f4f4",
+        },
+        modified_visible = {
+            bg = "#f3f4f4",
+        },
+        modified_selected = {
+            bg = "#f3f4f4",
+        },
+        duplicate_selected = {
+            bg = "#f3f4f4",
+        },
+        duplicate_visible = {
+            bg = "#f3f4f4",
+        },
+        duplicate = {
+            bg = "#f3f4f4",
+        },
+        separator_selected = {
+            bg = "#f3f4f4",
+        },
+        separator_visible = {
+            bg = "#f3f4f4",
+        },
+        separator = {
+            fg = "#8c8c8c",
+            bg = "#f3f4f4",
+        },
+        indicator_selected = {
+            bg = "#f3f4f4",
+        },
+        pick_selected = {
+            bg = "#f3f4f4",
+        },
+        pick_visible = {
+            bg = "#f3f4f4",
+        },
+        pick = {
+            bg = "#f3f4f4",
+        },
+        offset_separator = {
+            fg = "#8c8c8c",
+            bg = "#f3f4f4",
+        },
     },
 })

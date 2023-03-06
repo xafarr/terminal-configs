@@ -54,6 +54,8 @@ vim.cmd([[
       call edge#highlight('IndentContextStart', l:palette.none, l:palette.none, 'underline', ['#8c8c8c', '240'])
       call edge#highlight('GreenSign', ['#C9DEC1', '107'], ['#f3f4f4', '253'])
       call edge#highlight('BlueSign', ['#C3D6E8', '68'], ['#f3f4f4', '253'])
+      call edge#highlight('RedSign', ['#D05858', '167'], ['#f3f4f4', '253'])
+      call edge#highlight('YellowSign', ['#be7e05', '172'], ['#f3f4f4', '253'])
 
       call edge#highlight('TSStrong', l:palette.none, l:palette.none, 'bold')
       call edge#highlight('TSEmphasis', l:palette.none, l:palette.none, 'italic')
@@ -74,9 +76,9 @@ vim.cmd([[
       highlight! link GitSignsAdd GreenSign
       highlight! link GitSignsChange BlueSign
       highlight! link GitSignsDelete RedSign
-      highlight! link GitSignsAddNr Green
-      highlight! link GitSignsChangeNr Blue
-      highlight! link GitSignsDeleteNr Red
+      highlight! link GitSignsAddNr GreenSign
+      highlight! link GitSignsChangeNr BlueSign
+      highlight! link GitSignsDeleteNr RedSign
       highlight! link GitSignsAddLn DiffAdd
       highlight! link GitSignsChangeLn DiffChange
       highlight! link GitSignsDeleteLn DiffDelete
