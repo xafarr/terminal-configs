@@ -27,6 +27,15 @@ keymap("n", "<Leader>O", "O<Esc>", opts)
 
 keymap("n", "*", "*zz", opts)
 
+-- Better viewing
+keymap("n", "n", "nzzzv", opts)
+keymap("n", "N", "Nzzzv", opts)
+keymap("n", "g,", "g,zvzz", opts)
+keymap("n", "g;", "g;zvzz", opts)
+
+-- Paste over currently selected text without yanking it
+keymap("v", "p", '"_dP', opts)
+
 -- Faster scrolling
 keymap("n", "<C-e>", "3<C-e>", opts)
 keymap("n", "<C-y>", "3<C-y>", opts)
@@ -94,3 +103,10 @@ keymap("v", "p", '"_dP', opts)
 -- Move text up and down
 keymap("x", "∆", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "˚", ":move '<-2<CR>gv-gv", opts)
+
+-- Termianl --
+-- Cursor movement among windows in terminal mode
+keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", opts)
+keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", opts)
+keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", opts)
+keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", opts)
