@@ -64,7 +64,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         tab_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         tab_close = {
             bg = "#f3f4f4",
@@ -76,13 +76,13 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         close_button_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         buffer_visible = {
             bg = "#f3f4f4",
         },
         buffer_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         numbers = {
             bg = "#f3f4f4",
@@ -91,7 +91,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         numbers_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         diagnostic = {
             bg = "#f3f4f4",
@@ -100,7 +100,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         diagnostic_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         hint = {
             bg = "#f3f4f4",
@@ -109,7 +109,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         hint_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         hint_diagnostic = {
             bg = "#f3f4f4",
@@ -118,7 +118,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         hint_diagnostic_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         info = {
             bg = "#f3f4f4",
@@ -127,7 +127,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         info_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         info_diagnostic = {
             bg = "#f3f4f4",
@@ -136,7 +136,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         info_diagnostic_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         warning = {
             bg = "#f3f4f4",
@@ -145,7 +145,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         warning_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         warning_diagnostic = {
             bg = "#f3f4f4",
@@ -154,7 +154,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         warning_diagnostic_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         error = {
             bg = "#f3f4f4",
@@ -163,7 +163,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         error_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         error_diagnostic = {
             bg = "#f3f4f4",
@@ -172,7 +172,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         error_diagnostic_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         modified = {
             bg = "#f3f4f4",
@@ -181,10 +181,10 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         modified_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         duplicate_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         duplicate_visible = {
             bg = "#f3f4f4",
@@ -193,20 +193,20 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         separator_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         separator_visible = {
             bg = "#f3f4f4",
         },
         separator = {
-            fg = "#8c8c8c",
+            fg = "#c2c3c3",
             bg = "#f3f4f4",
         },
         indicator_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         pick_selected = {
-            bg = "#f3f4f4",
+            bg = "#c2c3c3",
         },
         pick_visible = {
             bg = "#f3f4f4",
@@ -215,7 +215,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         offset_separator = {
-            fg = "#8c8c8c",
+            fg = "#c2c3c3",
             bg = "#f3f4f4",
         },
     },
