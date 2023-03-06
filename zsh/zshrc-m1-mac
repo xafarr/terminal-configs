@@ -35,6 +35,8 @@ export PATH=$GOPATH/bin:$PATH
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$HOMEBREW_PREFIX/opt/gettext/bin:$PATH
 export PATH="$(brew --prefix bzip2)/bin:$PATH"
+export DOTNET_ROOT=$(dirname $(which dotnet))
+export PATH=$DOTNET_ROOT:$DOTNET_ROOT/tools:$PATH
 
 # Ensure LESS doesn't wrap long lines
 export LESS="--MOUSE -rR"
