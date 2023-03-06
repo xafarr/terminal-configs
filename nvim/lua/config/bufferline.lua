@@ -35,7 +35,9 @@ bufferline.setup({
         tab_size = 18,
         diagnostics = "nvim_lsp",
         diagnostics_update_in_insert = false,
-        offsets = { { filetype = "NvimTree", text = "File Explorer", text_align = "center", separator = false } },
+        offsets = {
+            { filetype = "NvimTree", text = "File Explorer", highlight = "LineNr", text_align = "center", separator = "█" },
+        },
         color_icons = true, -- whether or not to add the filetype icon highlights
         show_buffer_icons = true, -- disable filetype icons for buffers
         show_buffer_close_icons = true,
@@ -215,8 +217,8 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         offset_separator = {
-            fg = "#c2c3c3",
-            bg = "#f3f4f4",
+            fg = "#dadbdb",
+            bg = "#dadbdb",
         },
     },
 })
