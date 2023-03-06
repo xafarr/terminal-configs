@@ -66,7 +66,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         tab_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         tab_close = {
             bg = "#f3f4f4",
@@ -78,13 +78,13 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         close_button_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         buffer_visible = {
             bg = "#f3f4f4",
         },
         buffer_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         numbers = {
             bg = "#f3f4f4",
@@ -93,7 +93,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         numbers_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         diagnostic = {
             bg = "#f3f4f4",
@@ -102,7 +102,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         diagnostic_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         hint = {
             bg = "#f3f4f4",
@@ -111,7 +111,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         hint_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         hint_diagnostic = {
             bg = "#f3f4f4",
@@ -120,7 +120,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         hint_diagnostic_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         info = {
             bg = "#f3f4f4",
@@ -129,7 +129,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         info_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         info_diagnostic = {
             bg = "#f3f4f4",
@@ -138,7 +138,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         info_diagnostic_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         warning = {
             bg = "#f3f4f4",
@@ -147,7 +147,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         warning_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         warning_diagnostic = {
             bg = "#f3f4f4",
@@ -156,7 +156,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         warning_diagnostic_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         error = {
             bg = "#f3f4f4",
@@ -165,7 +165,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         error_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         error_diagnostic = {
             bg = "#f3f4f4",
@@ -174,7 +174,7 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         error_diagnostic_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         modified = {
             bg = "#f3f4f4",
@@ -183,10 +183,10 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         modified_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         duplicate_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         duplicate_visible = {
             bg = "#f3f4f4",
@@ -195,20 +195,20 @@ bufferline.setup({
             bg = "#f3f4f4",
         },
         separator_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         separator_visible = {
             bg = "#f3f4f4",
         },
         separator = {
-            fg = "#c2c3c3",
+            fg = "#dadbdb",
             bg = "#f3f4f4",
         },
         indicator_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         pick_selected = {
-            bg = "#c2c3c3",
+            bg = "#dadbdb",
         },
         pick_visible = {
             bg = "#f3f4f4",
