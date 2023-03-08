@@ -63,3 +63,11 @@ set.grepformat = "%f:%l:%c:%m"
 set.shortmess:append("c")
 set.ttyfast = true
 set.guifont = "MesloLGS-NF-Regular:h15" -- the font used in graphical neovim applications
+
+-- Set <space> as the leader key
+-- See `:help mapleader`
+--  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+

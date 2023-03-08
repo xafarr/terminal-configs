@@ -1,25 +1,47 @@
-require("config.plugins")
 require("config.options")
-require("config.autocmds")
-require("config.keymaps")
-require("config.colorscheme")
-require("config.orgmode")
-require("config.treesitter")
-require("config.lualine")
-require("config.bufferline")
-require("config.nvimtree")
-require("config.autopairs")
-require("config.telescope")
-require("config.blankline")
-require("config.null-ls")
-require("config.illuminate")
-require("config.lsp")
-require("config.cmp")
-require("config.toggleterm")
-require("config.gitsigns")
-require("config.comment")
-require("config.tmux-navigation")
-require("config.trouble")
-require("config.highlight-colors")
-require("config.custom-functions")
-require("config.debug-adapters")
+
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "--single-branch",
+    "https://github.com/folke/lazy.nvim.git",
+    lazypath,
+  })
+end
+
+vim.opt.runtimepath:prepend(lazypath)
+
+require("lazy").setup("plugins", {
+  defaults = { lazy = true },
+  install = { colorscheme = { "edge" } },
+  checker = { enabled = true },
+  change_detection = {
+    notify = false,
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
+  },
+  -- debug = true,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VeryLazy",
+  callback = function()
+    require("config.keymaps")
+    require("config.autocmds")
+  end,
+})

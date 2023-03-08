@@ -61,16 +61,6 @@ keymap("n", "<C-j>", "<C-w>j", opts)
 keymap("n", "<C-k>", "<C-w>k", opts)
 keymap("n", "<C-l>", "<C-w>l", opts)
 
--- Telescope Keymaps
-keymap("n", "<leader>f", ":Telescope find_files<CR>", opts)
-keymap("n", "<leader>g", ":Telescope live_grep<CR>", opts)
-keymap("n", "<leader>b", ":Telescope buffers<CR>", opts)
-keymap("n", '<leader>"', ":Telescope neoclip<CR>", opts)
-keymap("n", "<leader>q", ":Telescope macroscope<CR>", opts)
-
--- NvimTree Keymaps
-keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
-
 -- Jump to last changed position across buffers
 -- Refer to autocommands.lua for InsertChange event
 keymap("n", "<BS>", "`I", opts)
