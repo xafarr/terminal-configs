@@ -19,7 +19,6 @@ return {
             require("neodev").setup()
 
             local lspconfig = require("lspconfig")
-            local mason = require("mason")
             local mason_lspconfig = require("mason-lspconfig")
 
             local servers = {
@@ -28,7 +27,6 @@ return {
                 "bashls",
                 "clangd",
                 "cmake",
-                "csharp_ls",
                 "cssls",
                 "cucumber_language_server",
                 "docker_compose_language_service",
@@ -44,6 +42,7 @@ return {
                 "kotlin_language_server",
                 "lemminx",
                 "lua_ls",
+                "omnisharp",
                 "pyright",
                 "ruby_ls",
                 "rust_analyzer",
@@ -55,19 +54,11 @@ return {
                 "yamlls",
             }
 
-            mason.setup({
-                ui = {
-                    icons = {
-                        package_installed = "✓",
-                    },
-                },
-            })
-
             mason_lspconfig.setup({
                 ensure_installed = servers,
             })
 
-            local on_attach = function(client, bufnr)
+            local on_attach = function(_, bufnr)
                 local signs = {
                     { name = "DiagnosticSignError", text = "" },
                     { name = "DiagnosticSignWarn", text = "" },
@@ -156,29 +147,19 @@ return {
             end
         end,
     },
-    -- {
-    --   "williamboman/mason.nvim",
-    --   cmd = "Mason",
-    --   keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
-    --   opts = {
-    --     ensure_installed = {
-    --       "stylua",
-    --       "ruff",
-    --       "debugpy",
-    --       "codelldb",
-    --     },
-    --   },
-    --   config = function(_, opts)
-    --     require("mason").setup()
-    --     local mr = require "mason-registry"
-    --     for _, tool in ipairs(opts.ensure_installed) do
-    --       local p = mr.get_package(tool)
-    --       if not p:is_installed() then
-    --         p:install()
-    --       end
-    --     end
-    --   end,
-    -- },
+    {
+        "williamboman/mason.nvim",
+        cmd = "Mason",
+        config = function()
+            require("mason").setup({
+                ui = {
+                    icons = {
+                        package_installed = "✓",
+                    },
+                },
+            })
+        end,
+    },
     {
         "jose-elias-alvarez/null-ls.nvim",
         event = "BufReadPre",
