@@ -17,7 +17,9 @@ return {
         },
         config = function()
             -- Setup neovim lua configuration
-            require("neodev").setup()
+            require("neodev").setup({
+                library = { plugins = { "nvim-dap-ui" }, types = true },
+            })
 
             local lspconfig = require("lspconfig")
             local mason_lspconfig = require("mason-lspconfig")
