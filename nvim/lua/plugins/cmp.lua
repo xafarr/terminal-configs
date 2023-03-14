@@ -17,6 +17,7 @@ return {
             local luasnip = require("luasnip")
             local icons = require("config.icons")
             local compare = require("cmp.config.compare")
+            local cmp_window = require("cmp.config.window")
 
             -- Load collection of snippets from plugin "rafamadriz/friendly-snippets"
             require("luasnip.loaders.from_vscode").lazy_load()
@@ -109,7 +110,7 @@ return {
                         if max_width ~= 0 and #item.abbr > max_width then
                             item.abbr = string.sub(item.abbr, 1, max_width - 1) .. icons.ui.Ellipsis
                         end
-                        item.kind = string.format('%s %s', icons.kind[item.kind], item.kind) -- This concatonates the icons with the name of the item kind
+                        item.kind = string.format("%s %s", icons.kind[item.kind], item.kind) -- This concatonates the icons with the name of the item kind
                         item.menu = source_names[entry.source.name]
                         item.dup = duplicates[entry.source.name] or duplicates_default
                         return item
@@ -128,9 +129,8 @@ return {
                     select = false,
                 },
                 window = {
-                    documentation = {
-                        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-                    },
+                    completion = cmp_window.bordered(),
+                    documentation = cmp_window.bordered(),
                 },
             })
 
