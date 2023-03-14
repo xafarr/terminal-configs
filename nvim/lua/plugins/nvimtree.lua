@@ -49,7 +49,7 @@ return {
                                 staged = icons.git.Staged,
                                 unmerged = icons.git.Unmerged,
                                 renamed = icons.git.Renamed,
-                                untracked = icons.git.Untracked,
+                                untracked = icons.ui.SmallStar,
                                 deleted = icons.git.Deleted,
                                 ignored = "",
                             },
