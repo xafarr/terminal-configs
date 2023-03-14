@@ -28,6 +28,9 @@ return {
             end
 
             cmp.setup({
+                completion = {
+                    autocomplete = false,
+                },
                 snippet = {
                     expand = function(args)
                         luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -57,6 +60,14 @@ return {
                         i = cmp.mapping.abort(),
                         c = cmp.mapping.close(),
                     }),
+                    -- Copilot integration
+                    ["<C-g>"] = cmp.mapping(function(fallback)
+                        vim.api.nvim_feedkeys(
+                            vim.fn["copilot#Accept"](vim.api.nvim_replace_termcodes("<Tab>", true, true, true)),
+                            "n",
+                            true
+                        )
+                    end),
                     -- Accept currently selected item. If none selected, `select` first item.
                     -- Set `select` to `false` to only confirm explicitly selected items.
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
@@ -131,6 +142,9 @@ return {
                 window = {
                     completion = cmp_window.bordered(),
                     documentation = cmp_window.bordered(),
+                },
+                experimental = {
+                    ghost_text = false, -- this feature conflict with copilot.vim's preview.
                 },
             })
 
