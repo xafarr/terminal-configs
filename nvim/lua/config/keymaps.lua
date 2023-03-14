@@ -54,8 +54,8 @@ keymap("n", "˚", ":m .-2<CR>==", opts)
 keymap("n", "<leader>*", "*<C-O>:%s///gn<CR>``", opts)
 
 -- Windows navigation
-keymap("n", "<S-Tab>", "<C-w>W", opts)
-keymap("n", "<Tab>", "<C-w>w", opts)
+-- keymap("n", "<S-Tab>", "<C-w>W", opts)
+-- keymap("n", "<Tab>", "<C-w>w", opts)
 -- keymap("n", "<C-h>", "<C-w>h", opts)
 -- keymap("n", "<C-j>", "<C-w>j", opts)
 -- keymap("n", "<C-k>", "<C-w>k", opts)
