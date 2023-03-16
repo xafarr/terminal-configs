@@ -28,7 +28,7 @@ return {
                 "angularls",
                 "ansiblels",
                 "bashls",
-                "bicep-lsp",
+                "bicep",
                 "clangd",
                 "cmake",
                 "cssls",
