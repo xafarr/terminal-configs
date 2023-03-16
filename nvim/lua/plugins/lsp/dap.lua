@@ -36,17 +36,26 @@ return {
             })
 
             local dap, dapui = require("dap"), require("dapui")
-            dapui.setup({})
+            local icons = require("config.icons")
+            dapui.setup({
+                icons = { expanded = "▾", collapsed = "▸", current_frame = "*" },
+                controls = {
+                    icons = {
+                        pause = icons.dap.Pause,
+                        play = icons.dap.Play,
+                        step_into = icons.dap.StepInto,
+                        step_over = icons.dap.StepOver,
+                        step_out = icons.dap.StepOut,
+                        step_back = icons.dap.StepBack,
+                        run_last = icons.dap.RunLast,
+                        terminate = icons.dap.Terminate,
+                    },
+                },
+            })
 
-            dap.listeners.after.event_initialized["dapui_config"] = function()
-                dapui.open()
-            end
-            dap.listeners.before.event_terminated["dapui_config"] = function()
-                dapui.close()
-            end
-            dap.listeners.before.event_exited["dapui_config"] = function()
-                dapui.close()
-            end
+            dap.listeners.after.event_initialized["dapui_config"] = dapui.open
+            dap.listeners.before.event_terminated["dapui_config"] = dapui.close
+            dap.listeners.before.event_exited["dapui_config"] = dapui.close
         end,
     },
     {
@@ -72,6 +81,9 @@ return {
                     require("mason-nvim-dap.automatic_setup")(source_name)
                 end,
             })
+
+            -- Setup golang dap specific config
+            require("dap-go").setup()
         end,
     },
 }

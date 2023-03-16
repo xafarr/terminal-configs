@@ -63,6 +63,16 @@ return {
         Value = "",
         Variable = "",
     },
+    dap = {
+        Pause = "⏸",
+        Play = "▶",
+        StepInto = "⏎",
+        StepOver = "⏭",
+        StepOut = "⏮",
+        StepBack = "b",
+        RunLast = "▶▶",
+        Terminate = "⏹",
+    },
     git = {
         Branch = "",
         Deleted = "",
