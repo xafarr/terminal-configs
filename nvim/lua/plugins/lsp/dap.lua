@@ -76,7 +76,7 @@ return {
                 automatic_installation = false,
                 automatic_setup = true, -- Recommended, but optional
             })
-            require("mason-nvim-dap").setup_handlers() -- if automatic setup is true
+            -- require("mason-nvim-dap").setup_handlers() -- if automatic setup is true
 
             -- Setup golang dap specific config
             require("dap-go").setup()

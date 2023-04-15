@@ -32,7 +32,7 @@ return {
                 automatic_installation = false,
                 automatic_setup = true, -- Recommended, but optional
             })
-            require("mason-null-ls").setup_handlers() -- If `automatic_setup` is true.
+            -- require("mason-null-ls").setup_handlers() -- If `automatic_setup` is true.
         end,
     },
     {
