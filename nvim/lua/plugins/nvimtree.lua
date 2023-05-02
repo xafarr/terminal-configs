@@ -104,7 +104,6 @@ return {
 
             nvim_tree.setup({
                 on_attach = on_attach,
-                -- remove_keymaps = { "<Tab>" },
                 update_focused_file = {
                     enable = true,
                     update_cwd = true,
