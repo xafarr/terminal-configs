@@ -59,7 +59,7 @@ vim.cmd([[
       call s:highlight_custom('TSStrong', s:palette.none, s:palette.none, 'bold')
       call s:highlight_custom('TSEmphasis', s:palette.none, s:palette.none, 'italic')
       call s:highlight_custom('TSUnderline', s:palette.none, s:palette.none, 'underline')
-      call s:highlight_custom('TSNote', s:palette.blue, s:palette.bg0, 'bold,italic')
+      call s:highlight_custom('TSNote', ['#008DDE', '68'], s:palette.bg0, 'bold,italic')
       call s:highlight_custom('TSWarning', s:palette.bg0, ['#F5EAC1', '172'], 'bold')
       call s:highlight_custom('TSDanger', s:palette.bg0, s:palette.red, 'bold')
 
@@ -318,6 +318,17 @@ vim.cmd([[
          \  'none':       ['NONE',      'NONE']
     \ }
 
-    let g:edge_colors_override = s:palette
+    let g:edge_colors_override = { 
+         \  'black':      ['#000000',   '253'],
+         \  'bg_dim':     ['#e8ebf0',   '254'],
+         \  'bg0':        ['#ffffff',   '231'],
+         \  'bg1':        ['#fafafa',   '231'],
+         \  'bg2':        ['#eef1f4',   '255'],
+         \  'bg3':        ['#e8ebf0',   '254'],
+         \  'bg4':        ['#dde2e7',   '253'],
+         \  'fg':         ['#000000',   '240'],
+         \  'purple':     ['#871094',   '134'],
+         \  'none':       ['NONE',      'NONE']
+    \}
     let g:edge_transparent_background = 1
 ]])
