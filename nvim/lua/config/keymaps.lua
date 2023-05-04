@@ -27,6 +27,10 @@ keymap("n", "<Leader>O", "O<Esc>", opts)
 
 keymap("n", "*", "*zz", opts)
 
+-- Delete a word backwards
+keymap("n", "<M-BS>", "<Esc>db", opts)
+keymap("n", "<M-BS>", "<Esc>db", opts)
+
 -- Better viewing
 keymap("n", "n", "nzzzv", opts)
 keymap("n", "N", "Nzzzv", opts)
