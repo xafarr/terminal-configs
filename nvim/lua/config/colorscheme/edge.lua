@@ -283,11 +283,6 @@ vim.cmd([[
         " }}}
     endfunction
 
-    augroup EdgeCustom
-      autocmd!
-      autocmd ColorScheme edge call s:edge_custom()
-    augroup END
-
     "let g:edge_better_performance = 1
     let s:palette = {
          \  'black':      ['#000000',   '253'],
@@ -318,7 +313,7 @@ vim.cmd([[
          \  'none':       ['NONE',      'NONE']
     \ }
 
-    let g:edge_colors_override = { 
+    let g:edge_colors_override = {
          \  'black':      ['#000000',   '253'],
          \  'bg_dim':     ['#e8ebf0',   '254'],
          \  'bg0':        ['#ffffff',   '231'],
@@ -326,9 +321,19 @@ vim.cmd([[
          \  'bg2':        ['#eef1f4',   '255'],
          \  'bg3':        ['#e8ebf0',   '254'],
          \  'bg4':        ['#dde2e7',   '253'],
+         \  'bg_grey':    ['#bcc5cf',   '246'],
+         \  'grey':       ['#8C8C8C',   '245'],
+         \  'grey_dim':   ['#C5C5C5',   '249'],
          \  'fg':         ['#000000',   '240'],
          \  'purple':     ['#871094',   '134'],
          \  'none':       ['NONE',      'NONE']
     \}
+
     let g:edge_transparent_background = 1
+
+    augroup EdgeCustom
+      autocmd!
+      autocmd ColorScheme edge call s:edge_custom()
+    augroup END
+
 ]])
