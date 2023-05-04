@@ -1,7 +1,7 @@
 return {
     {
         "jay-babu/mason-null-ls.nvim",
-        event = "BufRead",
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = {
             "williamboman/mason.nvim",
             "jose-elias-alvarez/null-ls.nvim",
@@ -30,9 +30,8 @@ return {
                     "yamlfmt",
                 },
                 automatic_installation = false,
-                automatic_setup = true, -- Recommended, but optional
+                handlers = {},
             })
-            -- require("mason-null-ls").setup_handlers() -- If `automatic_setup` is true.
         end,
     },
     {
