@@ -17,49 +17,49 @@ vim.cmd([[
     endfunction
 
     function! s:edge_custom() abort
-      call s:highlight_custom('Green', ['#067d17', '107'], s:palette.none)
-      call s:highlight_custom('Field', ['#871094', '68'], s:palette.none)
-      call s:highlight_custom('FieldItalic', ['#871094', '68'], s:palette.none, 'italic')
-      call s:highlight_custom('Constant', ['#871094', '68'], s:palette.none, 'italic')
+      call s:highlight_custom('Green', s:palette.green, s:palette.none)
+      call s:highlight_custom('Field', s:palette.purple, s:palette.none)
+      call s:highlight_custom('FieldItalic', s:palette.purple, s:palette.none, 'italic')
+      call s:highlight_custom('Constant', s:palette.purple, s:palette.none, 'italic')
       call s:highlight_custom('Annotation', ['#9E880D', '134'], s:palette.none)
-      call s:highlight_custom('Method', ['#00627A', '68'], s:palette.none)
-      call s:highlight_custom('MethodItalic', ['#00627A', '68'], s:palette.none, 'italic')
-      call s:highlight_custom('Function', ['#871094', '68'], s:palette.none)
-      call s:highlight_custom('FuncItalic', ['#871094', '68'], s:palette.none, 'italic')
+      call s:highlight_custom('Method', s:palette.cyan, s:palette.none)
+      call s:highlight_custom('MethodItalic', s:palette.cyan, s:palette.none, 'italic')
+      call s:highlight_custom('Function', s:palette.purple, s:palette.none)
+      call s:highlight_custom('FuncItalic', s:palette.purple, s:palette.none, 'italic')
       call s:highlight_custom('Number', ['#1750EB', '68'], s:palette.none)
       call s:highlight_custom('Keyword', ['#0033B3', '134'], s:palette.none)
       call s:highlight_custom('Attribute', ['#174AD4', '172'], s:palette.none)
-      call s:highlight_custom('Comment', ['#8C8C8C', '172'], s:palette.none, 'italic')
-      call s:highlight_custom('PreProc', ['#8C8C8C', '172'], s:palette.none, 'bold,italic')
+      call s:highlight_custom('Comment', s:palette.grey, s:palette.none, 'italic')
+      call s:highlight_custom('PreProc', s:palette.grey, s:palette.none, 'bold,italic')
       call s:highlight_custom('CurrentWord', s:palette.none, ['#e5e5ff', '253'])
       call s:highlight_custom('Visual', s:palette.none, ['#A6D2FF', '253'])
       call s:highlight_custom('VisualNOS', s:palette.none, ['#A6D2FF', '253'], 'underline')
       call s:highlight_custom('SignColumn', s:palette.none, ['#f3f4f4', '253'])
       call s:highlight_custom('VertSplit', ['#f3f4f4', '253'], ['#f3f4f4', '253'])
-      call s:highlight_custom('LineNr', ['#8C8C8C', '172'], ['#f3f4f4', '253'])
+      call s:highlight_custom('LineNr', s:palette.grey, ['#f3f4f4', '253'])
       call s:highlight_custom('CursorLine', s:palette.none, ['#fcfaed', '255'])
       call s:highlight_custom('CursorLineNr', s:palette.none, ['#fcfaed', '255'])
       call s:highlight_custom('CursorLineSign', s:palette.none, ['#fcfaed', '255'])
-      call s:highlight_custom('Folded', ['#8C8C8C', '172'], ['#e9f5e6', '172'])
-      call s:highlight_custom('Todo', ['#008dde', '167'], s:palette.none, 'bold,italic')
+      call s:highlight_custom('Folded', s:palette.grey, ['#e9f5e6', '172'])
+      call s:highlight_custom('Todo', s:palette.blue, s:palette.none, 'bold,italic')
       call s:highlight_custom('StringEscape', ['#0037A6', '172'], s:palette.none)
-      call s:highlight_custom('StringRegex', s:palette.none, ['#EDFCED', '107'])
-      call s:highlight_custom('Black', ['#000000', '240'], s:palette.none)
-      call s:highlight_custom('BlackItalic', ['#000000', '240'], s:palette.none, 'italic')
+      call s:highlight_custom('StringRegex', s:palette.none, s:palette.diff_green)
+      call s:highlight_custom('Black', s:palette.black, s:palette.none)
+      call s:highlight_custom('BlackItalic', s:palette.black, s:palette.none, 'italic')
       call s:highlight_custom('Link', ['#4585BE', '167'], s:palette.none)
       call s:highlight_custom('Label', ['#4A86E8', '167'], s:palette.none)
       call s:highlight_custom('IndentChar', ['#e6e6e6', '240'], s:palette.none)
-      call s:highlight_custom('IndentContextChar', ['#8c8c8c', '240'], s:palette.none)
-      call s:highlight_custom('IndentContextStart', s:palette.none, s:palette.none, 'underline', ['#8c8c8c', '240'])
+      call s:highlight_custom('IndentContextChar', s:palette.grey, s:palette.none)
+      call s:highlight_custom('IndentContextStart', s:palette.none, s:palette.none, 'underline', s:palette.grey)
       call s:highlight_custom('GreenSign', ['#C9DEC1', '107'], ['#f3f4f4', '253'])
-      call s:highlight_custom('BlueSign', ['#C3D6E8', '68'], ['#f3f4f4', '253'])
-      call s:highlight_custom('RedSign', ['#D05858', '167'], ['#f3f4f4', '253'])
-      call s:highlight_custom('YellowSign', ['#be7e05', '172'], ['#f3f4f4', '253'])
+      call s:highlight_custom('BlueSign', s:palette.diff_blue, ['#f3f4f4', '253'])
+      call s:highlight_custom('RedSign', s:palette.red, ['#f3f4f4', '253'])
+      call s:highlight_custom('YellowSign', s:palette.yellow, ['#f3f4f4', '253'])
 
       call s:highlight_custom('TSStrong', s:palette.none, s:palette.none, 'bold')
       call s:highlight_custom('TSEmphasis', s:palette.none, s:palette.none, 'italic')
       call s:highlight_custom('TSUnderline', s:palette.none, s:palette.none, 'underline')
-      call s:highlight_custom('TSNote', ['#008DDE', '68'], s:palette.bg0, 'bold,italic')
+      call s:highlight_custom('TSNote', s:palette.blue, s:palette.bg0, 'bold,italic')
       call s:highlight_custom('TSWarning', s:palette.bg0, ['#F5EAC1', '172'], 'bold')
       call s:highlight_custom('TSDanger', s:palette.bg0, s:palette.red, 'bold')
 
@@ -314,19 +314,19 @@ vim.cmd([[
     \ }
 
     let g:edge_colors_override = {
-         \  'black':      ['#000000',   '253'],
-         \  'bg_dim':     ['#e8ebf0',   '254'],
-         \  'bg0':        ['#ffffff',   '231'],
-         \  'bg1':        ['#fafafa',   '231'],
-         \  'bg2':        ['#eef1f4',   '255'],
-         \  'bg3':        ['#e8ebf0',   '254'],
-         \  'bg4':        ['#dde2e7',   '253'],
-         \  'bg_grey':    ['#bcc5cf',   '246'],
-         \  'grey':       ['#8C8C8C',   '245'],
-         \  'grey_dim':   ['#C5C5C5',   '249'],
-         \  'fg':         ['#000000',   '240'],
-         \  'purple':     ['#871094',   '134'],
-         \  'none':       ['NONE',      'NONE']
+         \  'black':      s:palette.black,
+         \  'bg_dim':     s:palette.bg_dim,
+         \  'bg0':        s:palette.bg0,
+         \  'bg1':        s:palette.bg1,
+         \  'bg2':        s:palette.bg2,
+         \  'bg3':        s:palette.bg3,
+         \  'bg4':        s:palette.bg4,
+         \  'bg_grey':    s:palette.bg_grey,
+         \  'grey':       s:palette.grey,
+         \  'grey_dim':   s:palette.grey_dim,
+         \  'fg':         s:palette.fg,
+         \  'purple':     s:palette.purple,
+         \  'none':       s:palette.none
     \}
 
     let g:edge_transparent_background = 1
