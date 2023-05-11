@@ -7,7 +7,31 @@ return {
             "jose-elias-alvarez/null-ls.nvim",
         },
         config = function()
-            require("mason-null-ls").setup({
+            local null_ls = require("null-ls")
+            local mason_null_ls = require("mason-null-ls")
+
+            local formatting = null_ls.builtins.formatting
+            local diagnostics = null_ls.builtins.diagnostics
+            local code_actions = null_ls.builtins.code_actions
+
+            local sources = {
+                -- Formatting
+                formatting.terraform_fmt,
+                formatting.xmllint,
+                formatting.gofmt,
+
+                -- Diagnostics
+                diagnostics.tsc,
+
+                -- Code Actions
+                code_actions.gitsigns,
+            }
+
+            null_ls.setup({
+                sources = sources,
+            })
+
+            mason_null_ls.setup({
                 ensure_installed = {
                     -- Opt to list sources here, when available in mason.
                     "ansible-lint",
@@ -30,36 +54,13 @@ return {
                     "yamlfmt",
                 },
                 automatic_installation = false,
-                handlers = {},
-            })
-        end,
-    },
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-        event = "BufReadPre",
-        dependencies = { "williamboman/mason.nvim" },
-        config = function()
-            local null_ls = require("null-ls")
-
-            local formatting = null_ls.builtins.formatting
-            local diagnostics = null_ls.builtins.diagnostics
-            local code_actions = null_ls.builtins.code_actions
-
-            local sources = {
-                -- Formatting
-                formatting.terraform_fmt,
-                formatting.xmllint,
-                formatting.gofmt,
-
-                -- Diagnostics
-                diagnostics.tsc,
-
-                -- Code Actions
-                code_actions.gitsigns,
-            }
-
-            null_ls.setup({
-                sources = sources,
+                handlers = {
+                    markdownlint = function()
+                        null_ls.register(null_ls.builtins.diagnostics.markdownlint.with({
+                            extra_args = {},
+                        }))
+                    end,
+                },
             })
         end,
     },
