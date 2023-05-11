@@ -44,7 +44,7 @@ set.cursorline = true -- highlight the current line
 set.hidden = true
 set.showmatch = true
 set.magic = true
-set.textwidth = 0
+set.textwidth = 120
 set.backspace = { "indent", "eol", "start" }
 set.list = true
 set.listchars = { tab = "..", eol = "↩" }
