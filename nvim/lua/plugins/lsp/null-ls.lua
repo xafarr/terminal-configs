@@ -57,7 +57,10 @@ return {
                 handlers = {
                     markdownlint = function()
                         null_ls.register(null_ls.builtins.diagnostics.markdownlint.with({
-                            extra_args = {},
+                            extra_args = function(params)
+                                local configPath = vim.fn.stdpath("config") .. "/markdownlint.json"
+                                return { "--config", configPath }
+                            end,
                         }))
                     end,
                 },
