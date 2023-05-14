@@ -279,7 +279,7 @@ vim.cmd([[
         highlight! link TSModuleInfoBad Red
         " }}}
         " github/copilot.vim {{{
-        highlight! link CopilotSuggestion Grey
+        highlight! link CopilotSuggestion Conceal
         " }}}
     endfunction
 
