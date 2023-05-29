@@ -75,7 +75,11 @@ api.nvim_create_autocmd("FileType", {
 -- Change shiftwidth when changing filetypes
 api.nvim_create_autocmd("FileType", {
     pattern = { "markdown", "json", "yaml" },
-    command = "setlocal shiftwidth=2 softtabstop=2 tabstop=2",
+    callback = function()
+        vim.opt_local.shiftwidth = 2
+        vim.opt_local.tabstop = 2
+        vim.opt_local.softtabstop = 2
+    end,
 })
 
 -- show cursor line only in active window
