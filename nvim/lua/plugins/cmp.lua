@@ -61,7 +61,7 @@ return {
                         c = cmp.mapping.close(),
                     }),
                     -- Copilot integration
-                    ["<C-g>"] = cmp.mapping(function(fallback)
+                    ["<C-g>"] = cmp.mapping(function()
                         vim.api.nvim_feedkeys(
                             vim.fn["copilot#Accept"](vim.api.nvim_replace_termcodes("<Tab>", true, true, true)),
                             "n",
