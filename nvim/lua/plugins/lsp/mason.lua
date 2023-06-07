@@ -101,4 +101,9 @@ return {
             { "<leader>cD", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Diagnostics" },
         },
     },
+    {
+        "mfussenegger/nvim-jdtls",
+        ft = "java",
+        config = function() end,
+    },
 }
