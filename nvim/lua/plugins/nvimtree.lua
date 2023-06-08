@@ -144,7 +144,7 @@ return {
                 },
                 diagnostics = {
                     enable = true,
-                    show_on_dirs = true,
+                    show_on_dirs = false,
                 },
                 actions = {
                     open_file = {

@@ -34,9 +34,9 @@ vim.cmd([[
       call s:highlight_custom('CurrentWord', s:palette.none, ['#e5e5ff', '253'])
       call s:highlight_custom('Visual', s:palette.none, ['#A6D2FF', '253'])
       call s:highlight_custom('VisualNOS', s:palette.none, ['#A6D2FF', '253'], 'underline')
-      call s:highlight_custom('SignColumn', s:palette.none, ['#f3f4f4', '253'])
+      "call s:highlight_custom('SignColumn', s:palette.none, ['#f3f4f4', '253'])
       call s:highlight_custom('VertSplit', ['#f3f4f4', '253'], ['#f3f4f4', '253'])
-      call s:highlight_custom('LineNr', s:palette.grey, ['#f3f4f4', '253'])
+      "call s:highlight_custom('LineNr', s:palette.grey, ['#f3f4f4', '253'])
       call s:highlight_custom('CursorLine', s:palette.none, ['#fcfaed', '255'])
       call s:highlight_custom('CursorLineNr', s:palette.none, ['#fcfaed', '255'])
       call s:highlight_custom('CursorLineSign', s:palette.none, ['#fcfaed', '255'])
@@ -51,10 +51,10 @@ vim.cmd([[
       call s:highlight_custom('IndentChar', ['#e6e6e6', '240'], s:palette.none)
       call s:highlight_custom('IndentContextChar', s:palette.grey, s:palette.none)
       call s:highlight_custom('IndentContextStart', s:palette.none, s:palette.none, 'underline', s:palette.grey)
-      call s:highlight_custom('GreenSign', ['#C9DEC1', '107'], ['#f3f4f4', '253'])
-      call s:highlight_custom('BlueSign', s:palette.diff_blue, ['#f3f4f4', '253'])
-      call s:highlight_custom('RedSign', s:palette.red, ['#f3f4f4', '253'])
-      call s:highlight_custom('YellowSign', s:palette.yellow, ['#f3f4f4', '253'])
+      call s:highlight_custom('GreenSign', ['#C9DEC1', '107'], s:palette.none)
+      call s:highlight_custom('BlueSign', s:palette.diff_blue, s:palette.none)
+      call s:highlight_custom('RedSign', s:palette.red, s:palette.none)
+      call s:highlight_custom('YellowSign', s:palette.yellow, s:palette.none)
 
       call s:highlight_custom('TSStrong', s:palette.none, s:palette.none, 'bold')
       call s:highlight_custom('TSEmphasis', s:palette.none, s:palette.none, 'italic')
@@ -65,6 +65,8 @@ vim.cmd([[
 
       " NvimTree
       highlight! link NvimTreeGitIgnored Conceal
+      highlight! NvimTreeNormal guibg=#f3f4f4
+      highlight! NvimTreeWinSeperator guibg=#f3f4f4
 
       " Indent Blankline
       highlight! link IndentBlanklineChar IndentChar

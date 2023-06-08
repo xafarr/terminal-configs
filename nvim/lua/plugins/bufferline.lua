@@ -24,7 +24,7 @@ return {
                         {
                             filetype = "NvimTree",
                             text = "File Explorer",
-                            highlight = "LineNr",
+                            highlight = "NvimTreeNormal",
                             text_align = "center",
                             separator = "█",
                         },
