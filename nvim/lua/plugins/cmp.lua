@@ -27,6 +27,15 @@ return {
                 return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
             end
 
+            local has_words_before = function()
+                if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+                    return false
+                end
+                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                return col ~= 0
+                    and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
+            end
+
             cmp.setup({
                 completion = {
                     autocomplete = false,
@@ -39,14 +48,18 @@ return {
                 sorting = {
                     priority_weight = 2,
                     comparators = {
-                        compare.score,
-                        compare.recently_used,
-                        compare.offset,
-                        compare.exact,
-                        compare.kind,
-                        compare.sort_text,
-                        compare.length,
-                        compare.order,
+                        require("copilot_cmp.comparators").prioritize,
+                        -- Below is the default comparitor list and order for nvim-cmp
+                        cmp.config.compare.offset,
+                        -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
+                        cmp.config.compare.exact,
+                        cmp.config.compare.score,
+                        cmp.config.compare.recently_used,
+                        cmp.config.compare.locality,
+                        cmp.config.compare.kind,
+                        cmp.config.compare.sort_text,
+                        cmp.config.compare.length,
+                        cmp.config.compare.order,
                     },
                 },
                 mapping = {
@@ -60,20 +73,12 @@ return {
                         i = cmp.mapping.abort(),
                         c = cmp.mapping.close(),
                     }),
-                    -- Copilot integration
-                    ["<C-g>"] = cmp.mapping(function()
-                        vim.api.nvim_feedkeys(
-                            vim.fn["copilot#Accept"](vim.api.nvim_replace_termcodes("<Tab>", true, true, true)),
-                            "n",
-                            true
-                        )
-                    end),
                     -- Accept currently selected item. If none selected, `select` first item.
                     -- Set `select` to `false` to only confirm explicitly selected items.
                     ["<CR>"] = cmp.mapping.confirm({ select = true }),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
+                    ["<Tab>"] = vim.schedule_wrap(function(fallback)
+                        if cmp.visible() and has_words_before() then
+                            cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
                         elseif luasnip.expandable() then
                             luasnip.expand()
                         elseif luasnip.expand_or_jumpable() then
@@ -83,28 +88,23 @@ return {
                         else
                             fallback()
                         end
-                    end, {
-                        "i",
-                        "s",
-                    }),
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
+                    end),
+                    ["<S-Tab>"] = vim.schedule_wrap(function(fallback)
+                        if cmp.visible() and has_words_before() then
+                            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Select })
                         elseif luasnip.jumpable(-1) then
                             luasnip.jump(-1)
                         else
                             fallback()
                         end
-                    end, {
-                        "i",
-                        "s",
-                    }),
+                    end),
                 },
                 formatting = {
                     fields = { "abbr", "kind", "menu" },
                     format = function(entry, item)
                         local max_width = 0
                         local source_names = {
+                            copilot = "(Copilot)",
                             nvim_lsp = "(LSP)",
                             luasnip = "(Snippet)",
                             buffer = "(Buffer)",
@@ -128,6 +128,7 @@ return {
                     end,
                 },
                 sources = {
+                    { name = "copilot" },
                     { name = "nvim_lsp_signature_help" },
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
