@@ -50,16 +50,16 @@ return {
                     comparators = {
                         require("copilot_cmp.comparators").prioritize,
                         -- Below is the default comparitor list and order for nvim-cmp
-                        cmp.config.compare.offset,
+                        compare.offset,
                         -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-                        cmp.config.compare.exact,
-                        cmp.config.compare.score,
-                        cmp.config.compare.recently_used,
-                        cmp.config.compare.locality,
-                        cmp.config.compare.kind,
-                        cmp.config.compare.sort_text,
-                        cmp.config.compare.length,
-                        cmp.config.compare.order,
+                        compare.exact,
+                        compare.score,
+                        compare.recently_used,
+                        compare.locality,
+                        compare.kind,
+                        compare.sort_text,
+                        compare.length,
+                        compare.order,
                     },
                 },
                 mapping = {
@@ -100,7 +100,7 @@ return {
                     end),
                 },
                 formatting = {
-                    fields = { "abbr", "kind", "menu" },
+                    fields = { "abbr", "kind" },
                     format = function(entry, item)
                         local max_width = 0
                         local source_names = {
@@ -121,9 +121,7 @@ return {
                         if max_width ~= 0 and #item.abbr > max_width then
                             item.abbr = string.sub(item.abbr, 1, max_width - 1) .. icons.ui.Ellipsis
                         end
-                        item.kind = string.format("%s %s", icons.kind[item.kind], item.kind) -- This concatonates the icons with the name of the item kind
-                        item.menu = source_names[entry.source.name]
-                        item.dup = duplicates[entry.source.name] or duplicates_default
+                        item.kind = string.format("[ %s ] %s", icons.kind[item.kind], item.kind) -- This concatonates the icons with the name of the item kind
                         return item
                     end,
                 },
