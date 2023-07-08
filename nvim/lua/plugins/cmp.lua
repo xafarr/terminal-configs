@@ -69,7 +69,7 @@ return {
                     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
                     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
                     ["<C-y>"] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-                    ["<C-e>"] = cmp.mapping({
+                    ["<Esc>"] = cmp.mapping({
                         i = cmp.mapping.abort(),
                         c = cmp.mapping.close(),
                     }),
@@ -121,7 +121,7 @@ return {
                         if max_width ~= 0 and #item.abbr > max_width then
                             item.abbr = string.sub(item.abbr, 1, max_width - 1) .. icons.ui.Ellipsis
                         end
-                        item.kind = string.format("[ %s ] %s", icons.kind[item.kind], item.kind) -- This concatonates the icons with the name of the item kind
+                        item.kind = string.format(" %s  %s", icons.kind[item.kind], item.kind) -- This concatonates the icons with the name of the item kind
                         return item
                     end,
                 },
