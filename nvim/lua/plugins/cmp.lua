@@ -143,7 +143,7 @@ return {
                     documentation = cmp_window.bordered(),
                 },
                 experimental = {
-                    ghost_text = false, -- this feature conflict with copilot.vim's preview.
+                    ghost_text = true,
                 },
             })
 
