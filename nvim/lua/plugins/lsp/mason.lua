@@ -31,6 +31,7 @@ return {
                 "bicep",
                 "clangd",
                 "cmake",
+                "csharp_ls",
                 "cssls",
                 "dockerls",
                 "golangci_lint_ls",
@@ -44,7 +45,6 @@ return {
                 "kotlin_language_server",
                 "lemminx", -- XML Language Server
                 "lua_ls",
-                "omnisharp",
                 "pyright",
                 "rust_analyzer",
                 "sqlls",
