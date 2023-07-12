@@ -79,7 +79,8 @@ return {
                     "vue",
                     "yaml",
                 },
-                ignore_install = { "phpdoc", "smali" }, -- List of parsers to ignore installing
+                ignore_install = {}, -- List of parsers to ignore installing
+                auto_install = true, -- Install language parsers automatically
                 context_commentstring = {
                     enable = true,
                     enable_autocmd = false,
