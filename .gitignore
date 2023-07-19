@@ -1,3 +1,4 @@
 .DS_Store
 nvim/plugin
 **/lazy-lock.json
+.idea/
