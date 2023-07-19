@@ -130,7 +130,7 @@ export EDITOR=$VISUAL
 export ARCHFLAGS="-arch $(arch)"
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
+export SSH_KEY_PATH="~/.ssh/id_rsa"
 
 # GPG
 export GPG_TTY=$(tty)
@@ -152,7 +152,7 @@ alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modu
 # Use MacVim vim and enable ctrl-s in terminal
 alias vim="nvim"
 alias vimdiff="nvim -d"
-alias ssh-keygen="ssh-keygen -m PEM"
+#alias ssh-keygen="ssh-keygen -m PEM"
 alias brew-update="brew update; brew doctor; brew upgrade; brew upgrade --cask; brew cleanup"
 alias wiki="vim -c VimwikiIndex"
 # alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
