@@ -275,7 +275,7 @@ vim.cmd([[
           highlight! link @lsp.type.type TSType
           highlight! link @lsp.type.typeParameter TSTypeDefinition
           highlight! link @lsp.type.variable TSVariable
-          highlight! link DiagnosticUnnecessary WarningText
+          highlight! link DiagnosticUnnecessary TSWarning
         endif
         highlight! link TSModuleInfoGood Green
         highlight! link TSModuleInfoBad Red
