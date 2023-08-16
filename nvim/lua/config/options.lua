@@ -62,7 +62,7 @@ set.grepprg = "rg --vimgrep"
 set.grepformat = "%f:%l:%c:%m"
 set.shortmess:append("c")
 set.ttyfast = true
-set.guifont = "MesloLGS-NF-Regular:h15" -- the font used in graphical neovim applications
+set.guifont = "FiraCodeNerdFont-Medium:h15" -- the font used in graphical neovim applications
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
