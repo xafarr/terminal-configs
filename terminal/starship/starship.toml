@@ -10,8 +10,21 @@ $directory\
 $git_branch\
 $git_commit\
 $git_status\
+$git_state\
+$battery\
 $fill\
-$all\
+$ansible\
+$java\
+$kotlin\
+$dotnet\
+$python\
+$nodejs\
+$rust\
+$golang\
+$ruby\
+$hostname\
+$jobs\
+$cmd_duration
 [╰─](244)$character"""
 
 
@@ -71,14 +84,14 @@ Windows = " "
 
 # Shows the username
 [username]
-style_user = "white bold"
+style_user = "#008DDE bold"
 style_root = "black bold"
 format = "[$user]($style) "
 disabled = true  # disable in powershell
 show_always = false
 
 [directory]
-truncation_length = 3
+truncation_length = 4
 truncation_symbol = "…/"
 truncate_to_repo = false
 style = "#008DDE"
@@ -87,13 +100,9 @@ read_only_style = "197"
 read_only = "🔒 "
 format = "[$path]($style)[$read_only]($read_only_style) "
 
-[directory.path]
-style = "#008DDE bold" 
-#
-
 [git_branch]
 symbol = "\uF126 "
-format = "[$symbol$branch]($style) "
+format = "[$symbol$branch]($style)"
 style = "#50A45C"
 
 [git_commit]
@@ -102,43 +111,79 @@ tag_disabled = false
 [git_status]
 format = "[$all_status$ahead_behind]($style)"
 style = "#50A45C"
-untracked = "[?${count}](#1750EB)"
-ahead = "⇡${count} "
-diverged = "⇡${ahead_count} ⇣${behind_count} "
-behind = "⇣${count}"
-stashed = "󰏗 ${count} "
-modified = "[!${count}](#be7e05) "
-staged = "[+${count}](#be7e05) "
-renamed = "[»${count}](#1750EB) "
-deleted = "[✗${count}](#d05858) "
+untracked = " [?${count}](#1750EB)"
+ahead = " ⇡${count}"
+diverged = " ⇡${ahead_count} ⇣${behind_count}"
+behind = " ⇣${count}"
+stashed = " 󰏗 ${count}"
+modified = " [!${count}](#be7e05)"
+staged = " [+${count}](#be7e05)"
+renamed = " [»${count}](#1750EB)"
+deleted = " [✗${count}](#d05858)"
+
+# Configure the SSH prompt
+[hostname]
+ssh_only = true
+format = "[ $ssh_symbol$hostname]($style)"
+
+# Configure the background jobs
+[jobs]
+symbol = ""
+
+# Configure the package version
+[package]
+symbol = " "
+style = "dimmed white"
+
+# Configure the .NET module
+[dotnet]
+symbol = " "
+style = "dimmed blue"
+  
+# Configure the Rust module
+[rust]
+symbol = " "
+style = "dimmed red"
+
+# Configure the Node.js module
+[nodejs]
+symbol = " "
+style = "dimmed green"
+
+# Configure the Java module
+[java]
+format = "[  $version]($style)"
+style = "dimmed #871094"
 
 [aws]
 disabled = true
 
 [terraform]
-format = "[ terraform $version]($style) 壟 [$workspace]($style) "
+disabled = false
+format = "[ 󱁢 $version]($style)"
 
 [vagrant]
-format = "[ vagrant $version]($style) "
+format = "[  vagrant $version]($style)"
 
 [docker_context]
-format = "[ $context](bold #1750EB) "
+format = "[  $context](bold #1750EB)"
 
 [helm]
-format = "[ $version](bold #871094) "
+format = "[  $version](bold #871094)"
 
 [python]
-symbol = "󰌠 "
-python_binary = "python3"
-
-[nodejs]
-format = "via [󰎙 $version](bold #50A45C) "
-disabled = true
+format = "[ 󰌠 $version ($virtualenv)]($style)"
 
 [ruby]
-format = "[ $version]($style) "
+format = "[  $version]($style)"
 
 [kubernetes]
-format = 'on [ $context](bold #871094) '
+format = "[ 󱃾 $context](bold #871094)"
 disabled = true
 
+[cmd_duration]
+min_time = 10_000
+format = "[  $duration]($style)"
+
+[kotlin]
+format = "[ 󱈙 $version]($style)"
