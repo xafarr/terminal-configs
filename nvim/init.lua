@@ -54,7 +54,7 @@ if neoconfig.UI.colors_override then
     local colors_override_config = "config.colorscheme." .. neoconfig.UI.colorscheme
     local ok, _ = pcall(require, colors_override_config)
     if not ok then
-        print("Colors override config " .. colors_override_config .. " does not exist")
+        error(string.format('Colors override config "%s" does not exist', colors_override_config))
     end
 end
 
