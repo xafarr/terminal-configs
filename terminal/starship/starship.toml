@@ -3,6 +3,9 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
+# Custom command timeout
+command_timeout = 1000
+
 # Change the default prompt format
 format = """\
 [╭─](244)$os\
@@ -197,6 +200,5 @@ python $HOME/.config/get_git_host.py $PWD
 """
 directories = [".git"]
 when = "git rev-parse --is-inside-work-tree 2> /dev/null"
-shell = ["bash","--norc","--noprofile"]
 style = "#50A45C"
 format = " [$output]($style)"
