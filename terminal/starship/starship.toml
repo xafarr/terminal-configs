@@ -31,10 +31,11 @@ $jobs\
 $cmd_duration
 [╰─](244)$character"""
 
-
+# Fill · in first row between left and right prompt
 [fill]
 symbol = "·"
 style = "244"
+
 # Change the default prompt characters
 [character]
 success_symbol = "[](bold #50A45C)"
