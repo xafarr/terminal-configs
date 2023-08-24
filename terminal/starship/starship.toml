@@ -4,7 +4,7 @@
 add_newline = true
 
 # Custom command timeout
-command_timeout = 1000
+command_timeout = 2000
 
 # Change the default prompt format
 format = """\
