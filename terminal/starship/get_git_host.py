@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import sys
-import os
 import subprocess
 
 
@@ -20,23 +19,16 @@ def get_host_icon(url):
     return icon
 
 
-def is_git_repo(path="."):
-    return os.path.isdir(os.path.join(path, ".git"))
-
-
 def main():
     path = sys.argv[1]
-    if is_git_repo(path):
-        try:
-            url = subprocess.check_output(
-                ["git", "-C", path, "ls-remote", "--get-url"], stderr=subprocess.DEVNULL
-            )
-            url = url.decode("utf-8")
-        except subprocess.CalledProcessError:
-            url = ""
-        print(get_host_icon(url))
-    else:
-        print("Error")
+    try:
+        url = subprocess.check_output(
+            ["git", "-C", path, "ls-remote", "--get-url"], stderr=subprocess.DEVNULL
+        )
+        url = url.decode("utf-8")
+    except subprocess.CalledProcessError:
+        url = ""
+    print(get_host_icon(url))
 
 
 if __name__ == "__main__":
