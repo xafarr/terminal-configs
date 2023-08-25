@@ -61,10 +61,18 @@ function M.trim(s)
     return s:match("^()%s*$") and "" or s:match("^%s*(.*%S)")
 end
 
+function M.is_empty(str)
+    return str == nil or str == ""
+end
+
 function M.git_config()
     local gitDir = require("lualine.components.branch.git_branch").find_git_dir()
-    local configPath = gitDir .. "/config"
     local Config = {}
+    if M.is_empty(gitDir) then
+        return Config
+    end
+
+    local configPath = gitDir .. "/config"
     local Section, Key, Value
 
     for l in io.lines(configPath) do
@@ -95,13 +103,16 @@ function M.git_config()
             Config[Section][Key] = Value
         end
     end -- Lines Loop End
-
     return Config
 end
 
 function M.git_host_icon()
     local config = M.git_config()
     local icon = " "
+    if next(config) == nil or next(config['remote "origin"']) == nil then
+        return icon
+    end
+
     local url = config['remote "origin"'].url
     if string.find(url, "github.com") then
         icon = " "
@@ -114,7 +125,6 @@ function M.git_host_icon()
     elseif string.find(url, "git") then
         icon = " "
     end
-
     return icon
 end
 
