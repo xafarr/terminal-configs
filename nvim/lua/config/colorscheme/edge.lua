@@ -60,8 +60,8 @@ vim.cmd([[
         call s:highlight_custom('TSEmphasis', s:palette.none, s:palette.none, 'italic')
         call s:highlight_custom('TSUnderline', s:palette.none, s:palette.none, 'underline')
         call s:highlight_custom('TSNote', s:palette.blue, s:palette.bg0, 'bold,italic')
-        call s:highlight_custom('TSWarning', s:palette.bg0, ['#F5EAC1', '172'], 'bold')
-        call s:highlight_custom('TSDanger', s:palette.bg0, s:palette.red, 'bold')
+        call s:highlight_custom('TSWarning', s:palette.none, ['#F5EAC1', '172'], 'bold')
+        call s:highlight_custom('TSDanger', s:palette.none, s:palette.red, 'bold')
 
         " NvimTree
         highlight! link NvimTreeGitIgnored Conceal
