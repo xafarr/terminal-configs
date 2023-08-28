@@ -47,7 +47,7 @@ return {
             local branch = {
                 "branch",
                 icons_enabled = true,
-                icon = require("utils").git_host_icon() .. "",
+                icon = neoutils.git_host_icon() .. "",
             }
 
             -- total lines

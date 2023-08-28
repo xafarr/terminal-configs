@@ -17,12 +17,12 @@ return {
         keys = {
             {
                 "<leader><space>",
-                require("utils").find_files,
+                neoutils.find_files,
                 desc = "Find Files",
             },
             {
                 "<leader>ff",
-                require("utils").git_files,
+                neoutils.git_files,
                 desc = "Find Within Git Repository",
             },
             {
