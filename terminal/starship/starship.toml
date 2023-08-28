@@ -15,8 +15,7 @@ $git_branch\
 $git_commit\
 $git_status\
 $git_state\
-$battery\
-$fill\
+$battery $fill\
 $ansible\
 $java\
 $kotlin\
@@ -35,6 +34,12 @@ $cmd_duration
 [fill]
 symbol = "·"
 style = "244"
+
+[battery]
+format = " [$symbol$percentage]($style)"
+
+[git_state]
+format = " [$state($progress_current$progress_total)]($style)"
 
 # Change the default prompt characters
 [character]
