@@ -1,11 +1,30 @@
 local M = {}
 
+M.uname = vim.loop.os_uname()
+M.OS = M.uname.sysname
+
 M.lazy = {
     defaults = {
         lazy = true,
     },
     default_to_current_colorscheme = true,
 }
+
+function M.IS_WINDOWS()
+    return M.OS:find("Windows") and true or false
+end
+
+function M.IS_MAC()
+    return M.OS == "Darwin"
+end
+
+function M.IS_LINUX()
+    return M.OS == "Linux"
+end
+
+function M.IS_WSL()
+    return M.IS_LINUX() and M.uname.release:find("Microsoft") and true or false
+end
 
 M.UI = {
     colorscheme = "edge",

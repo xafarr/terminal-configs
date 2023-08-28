@@ -98,6 +98,12 @@ return {
             local trouble = require("trouble.providers.telescope")
             local icons = require("config.icons")
             local actions_layout = require("telescope.actions.layout")
+
+            -- Path to sqlite3.dll in Windows (Required for Frecency)
+            if neoconfig.IS_WINDOWS() then
+                vim.g.sqlite_clib_path = "C:\\ProgramData\\chocolatey\\lib\\SQLite\\tools\\sqlite3.dll"
+            end
+
             local mappings = {
                 i = {
                     ["<Esc>"] = actions.close,
