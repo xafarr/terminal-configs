@@ -147,6 +147,11 @@ symbol = " "
 style = "dimmed white"
 disabled = true
 
+# Configure the Node.js module
+[nodejs]
+format = " [ 󰎙 $version]($style)"
+style = "dimmed green"
+
 # Configure the .NET module
 [dotnet]
 symbol = " "
@@ -156,11 +161,6 @@ style = "dimmed blue"
 [rust]
 symbol = " "
 style = "dimmed red"
-
-# Configure the Node.js module
-[nodejs]
-symbol = " "
-style = "dimmed green"
 
 # Configure the Java module
 [java]
