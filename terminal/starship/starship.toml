@@ -143,23 +143,23 @@ symbol = ""
 
 # Configure the package version
 [package]
-symbol = " "
+format = "[  $version]($style)"
 style = "dimmed white"
 disabled = true
 
 # Configure the Node.js module
 [nodejs]
-format = " [ 󰎙 $version]($style)"
+format = "[ 󰎙 $version]($style)"
 style = "dimmed green"
 
 # Configure the .NET module
 [dotnet]
-symbol = " "
+format = "[  $version]($style)"
 style = "dimmed blue"
   
 # Configure the Rust module
 [rust]
-symbol = " "
+format = "[  $version]($style)"
 style = "dimmed red"
 
 # Configure the Java module
