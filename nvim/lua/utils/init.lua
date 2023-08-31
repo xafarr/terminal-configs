@@ -109,7 +109,7 @@ end
 function M.git_host_icon()
     local config = M.git_config()
     local icon = " "
-    if next(config) == nil or next(config['remote "origin"']) == nil then
+    if config == nil or config['remote "origin"'] == nil then
         return icon
     end
 
