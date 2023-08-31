@@ -36,7 +36,11 @@ symbol = "·"
 style = "244"
 
 [battery]
-format = " [$symbol$percentage]($style)"
+format = " [ $symbol$percentage]($style)"
+full_symbol = "🔋"
+charging_symbol = "󰂄"
+discharging_symbol = "💀"
+empty_symbol = "󰁺"
 
 [git_state]
 format = " [$state($progress_current$progress_total)]($style)"
