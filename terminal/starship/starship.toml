@@ -36,7 +36,7 @@ symbol = "·"
 style = "244"
 
 [battery]
-format = " [ $symbol$percentage]($style)"
+format = " [$symbol$percentage]($style)"
 full_symbol = "🔋"
 charging_symbol = "󰂄"
 discharging_symbol = "💀"
@@ -100,7 +100,7 @@ Windows = " "
 [username]
 style_user = "#008DDE bold"
 style_root = "black bold"
-format = "[$user]($style) "
+format = " [$user]($style)"
 disabled = true  # disable in powershell
 show_always = false
 
@@ -116,8 +116,8 @@ format = " [$path]($style)[$read_only]($read_only_style)"
 repo_root_format = " [$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style)"
 
 [git_branch]
-symbol = "\uF126 "
-format = " [$symbol$branch]($style)"
+symbol = "\uF126"
+format = " [$symbol $branch]($style)"
 style = "#50A45C"
 
 [git_commit]
