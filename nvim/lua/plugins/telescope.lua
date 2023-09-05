@@ -180,8 +180,9 @@ return {
                         --previewer = false,
                     },
                     buffers = {
-                        -- theme = "dropdown",
-                        --previewer = false,
+                        ignore_current_buffer = true,
+                        -- sort_lastused = true,
+                        sort_mru = true
                     },
                 },
                 extensions = {
