@@ -32,10 +32,10 @@ function M.NvimTreeWidth(percentage)
     if width < 150 then
         return math.floor(vim.go.columns * ratio)
     elseif width < 200 then
-        ratio = (percentage - 10) / 100
+        ratio = (percentage - 5) / 100
         return math.floor(vim.go.columns * ratio)
     else
-        ratio = (percentage - 15) / 100
+        ratio = (percentage - 10) / 100
         return math.floor(vim.go.columns * ratio)
     end
 end
