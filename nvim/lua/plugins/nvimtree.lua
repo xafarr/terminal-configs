@@ -152,7 +152,7 @@ return {
                     },
                 },
                 view = {
-                    width = 30,
+                    width = neoconfig.NvimTreeWidth(neoconfig.editor.nvimtree.width),
                     side = "left",
                 },
             })

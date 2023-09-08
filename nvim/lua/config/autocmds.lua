@@ -108,8 +108,14 @@ api.nvim_create_autocmd("BufWritePre", {
 -- Check if we need to reload the file when it changed
 api.nvim_create_autocmd("FocusGained", { command = "checktime" })
 
--- vim resize event (don't know what it does)
-api.nvim_create_autocmd("VimResized", {
-    pattern = "*",
-    command = "tabdo wincmd =",
+-- Resize NvimTree if window got resized
+vim.api.nvim_create_autocmd({ "VimResized" }, {
+    desc = "Resize nvim-tree if nvim window got resized",
+
+    group = vim.api.nvim_create_augroup("NvimTreeResize", { clear = true }),
+    callback = function()
+        local width = neoconfig.NvimTreeWidth(neoconfig.editor.nvimtree.width)
+        vim.cmd("tabdo wincmd =")
+        vim.cmd("tabdo NvimTreeResize " .. width)
+    end,
 })

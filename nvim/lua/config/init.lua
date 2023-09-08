@@ -26,6 +26,20 @@ function M.IS_WSL()
     return M.IS_LINUX() and M.uname.release:find("Microsoft") and true or false
 end
 
+function M.NvimTreeWidth(percentage)
+    local ratio = percentage / 100
+    local width = vim.go.columns
+    if width < 150 then
+        return math.floor(vim.go.columns * ratio)
+    elseif width < 200 then
+        ratio = (percentage - 10) / 100
+        return math.floor(vim.go.columns * ratio)
+    else
+        ratio = (percentage - 15) / 100
+        return math.floor(vim.go.columns * ratio)
+    end
+end
+
 M.UI = {
     colorscheme = "edge",
     colors_override = {
@@ -235,6 +249,9 @@ M.coding = {
 
 M.editor = {
     enabled = true,
+    nvimtree = {
+        width = 30, -- pecentage wrt neovim window
+    },
     treesitter = {
         parsers = {},
     },
