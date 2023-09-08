@@ -67,6 +67,7 @@ vim.cmd([[
         highlight! link NvimTreeGitIgnored Conceal
         highlight! NvimTreeNormal guibg=#f3f4f4
         highlight! NvimTreeWinSeperator guibg=#f3f4f4
+        highlight! NvimTreeOpenedFile guibg=#fcfaed guifg=#4A86E8
 
         " Indent Blankline
         highlight! link IndentBlanklineChar IndentChar
