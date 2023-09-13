@@ -84,12 +84,14 @@ api.nvim_create_autocmd("FileType", {
 
 -- show cursor line only in active window
 local cursorGrp = api.nvim_create_augroup("CursorLine", { clear = true })
-api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
+api.nvim_create_autocmd({ "InsertLeave", "WinEnter", "BufWinEnter" }, {
     pattern = "*",
-    command = "set cursorline",
+    callback = function()
+        vim.opt.cursorline = true
+    end,
     group = cursorGrp,
 })
-api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
+api.nvim_create_autocmd({ "InsertEnter", "WinLeave", "BufWinLeave"}, {
     pattern = "*",
     callback = function()
         if vim.bo.filetype ~= "NvimTree" then
