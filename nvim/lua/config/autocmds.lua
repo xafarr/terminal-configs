@@ -92,7 +92,7 @@ api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
 api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, {
     pattern = "*",
     callback = function()
-        if not string.find(vim.api.nvim_buf_get_name(0), "NvimTree") then
+        if vim.bo.filetype ~= "NvimTree" then
             vim.opt.cursorline = false
         end
     end,
