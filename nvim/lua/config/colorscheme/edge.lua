@@ -68,10 +68,15 @@ vim.cmd([[
         highlight! NvimTreeNormal guibg=#f3f4f4
         highlight! NvimTreeWinSeperator guibg=#f3f4f4
 
-        " Indent Blankline
+        " Indent Blankline v2
         highlight! link IndentBlanklineChar IndentChar
         highlight! link IndentBlanklineContextChar IndentContextChar
         highlight! link IndentBlanklineContextStart IndentContextStart
+
+        " Indent Blankline v3
+        highlight! link IblIndent IndentChar
+        highlight! link IblWhitespace IndentChar
+        highlight! link IblScope IndentContextChar
 
         " Gitsigns
         highlight! link GitSignsAdd GreenSign

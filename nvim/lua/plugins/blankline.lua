@@ -1,18 +1,26 @@
 return {
-  {
-    "lukas-reineke/indent-blankline.nvim", -- indentation guides to all lines
-    dependencies = {},
-    lazy = false,
-    config = function()
-      local blankline = require("indent_blankline")
+    {
+        "lukas-reineke/indent-blankline.nvim", -- indentation guides to all lines
+        dependencies = {},
+        lazy = false,
+        main = "ibl",
+        config = function()
+            local blankline = require("ibl")
+            local icons = require("config.icons")
 
-      blankline.setup({
-        show_current_context = true,
-        show_current_context_start = true,
-        show_end_of_line = true,
-        space_char_blankline = " ",
-        indent_blankline_use_treesitter = true,
-      })
-    end,
-  },
+            blankline.setup({
+                scope = {
+                    enabled = true,
+                    show_start = true,
+                    show_end = true,
+                    include = {
+                        node_type = { ["*"] = { "*" } },
+                    },
+                },
+                indent = {
+                    char = icons.ui.LineMiddle,
+                },
+            })
+        end,
+    },
 }
