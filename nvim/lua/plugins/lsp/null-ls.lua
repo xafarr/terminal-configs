@@ -51,7 +51,6 @@ return {
                     "sql-formatter",
                     "stylua",
                     "xmlformatter",
-                    "yamlfmt",
                 },
                 automatic_installation = false,
                 handlers = {
