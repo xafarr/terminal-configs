@@ -1,8 +1,8 @@
 return {
     {
         "lukas-reineke/indent-blankline.nvim", -- indentation guides to all lines
+        event = "VeryLazy",
         dependencies = {},
-        lazy = false,
         main = "ibl",
         config = function()
             local blankline = require("ibl")
@@ -12,13 +12,16 @@ return {
                 scope = {
                     enabled = true,
                     show_start = true,
-                    show_end = true,
+                    show_end = false,
                     include = {
                         node_type = { ["*"] = { "*" } },
                     },
                 },
                 indent = {
-                    char = icons.ui.LineMiddle,
+                    char = icons.ui.LineLeft,
+                },
+                whitespace = {
+                    remove_blankline_trail = false,
                 },
             })
         end,

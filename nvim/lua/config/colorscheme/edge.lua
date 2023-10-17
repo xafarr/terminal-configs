@@ -49,7 +49,7 @@ vim.cmd([[
         call s:highlight_custom('Link', ['#4585BE', '167'], s:palette.none)
         call s:highlight_custom('Label', ['#4A86E8', '167'], s:palette.none)
         call s:highlight_custom('IndentChar', ['#e6e6e6', '240'], s:palette.none)
-        call s:highlight_custom('IndentContextChar', s:palette.grey, s:palette.none)
+        call s:highlight_custom('IndentContextChar', s:palette.grey, s:palette.none, 'bold')
         call s:highlight_custom('IndentContextStart', s:palette.none, s:palette.none, 'underline', s:palette.grey)
         call s:highlight_custom('GreenSign', ['#C9DEC1', '107'], s:palette.none)
         call s:highlight_custom('BlueSign', s:palette.diff_blue, s:palette.none)
@@ -74,9 +74,9 @@ vim.cmd([[
         highlight! link IndentBlanklineContextStart IndentContextStart
 
         " Indent Blankline v3
-        highlight! link IblIndent IndentChar
-        highlight! link IblWhitespace IndentChar
-        highlight! link IblScope IndentContextChar
+        highlight! link IblIndent IndentBlanklineChar
+        highlight! link IblWhitespace IndentBlanklineChar
+        highlight! link IblScope IndentBlanklineContextChar
 
         " Gitsigns
         highlight! link GitSignsAdd GreenSign
