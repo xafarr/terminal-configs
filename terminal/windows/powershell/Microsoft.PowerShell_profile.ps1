@@ -1,3 +1,4 @@
+# Execute $PROFILE in PowerShell to know the path of this file
 # Generally found in $HOME\Documents\PowerShell
 
 Set-Alias vim nvim.exe
