@@ -155,6 +155,9 @@ alias vimdiff="nvim -d"
 #alias ssh-keygen="ssh-keygen -m PEM"
 alias brew-update="brew update; brew doctor; brew upgrade; brew upgrade --cask; brew cleanup"
 alias wiki="vim -c VimwikiIndex"
+# Kubernetes aliases
+alias k="kubectl"
+
 # alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
 # alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
 
