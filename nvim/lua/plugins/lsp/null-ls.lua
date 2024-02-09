@@ -41,6 +41,7 @@ return {
                     "eslint",
                     "flake8",
                     "flake8",
+                    "golangci-lint",
                     "google-java-format",
                     "jq",
                     "ktlint",

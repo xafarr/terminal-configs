@@ -34,7 +34,6 @@ return {
                 "csharp_ls",
                 "cssls",
                 "dockerls",
-                "golangci_lint_ls",
                 "gopls",
                 "gradle_ls",
                 "graphql",
