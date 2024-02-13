@@ -51,8 +51,8 @@ require("lazy").setup({
 })
 
 -- Override colors of colorscheme if enabled and available
-if neoconfig.UI.colors_override then
-    local colors_override_config = "config.colorscheme." .. neoconfig.UI.colorscheme
+if neoconfig.UI.colors_override.enabled then
+    local colors_override_config = "config.colorscheme.override" .. neoconfig.UI.colorscheme
     local ok, _ = pcall(require, colors_override_config)
     if not ok then
         error(string.format('Colors override config "%s" does not exist', colors_override_config))

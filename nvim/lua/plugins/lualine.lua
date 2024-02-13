@@ -4,6 +4,7 @@ return {
         lazy = false,
         config = function()
             local lualine = require("lualine")
+            local icons = require("config.icons")
 
             local hide_in_width = function()
                 return vim.fn.winwidth(0) > 80
@@ -13,22 +14,26 @@ return {
                 "diagnostics",
                 sources = { "nvim_diagnostic", "coc" },
                 sections = { "error", "warn" },
-                symbols = { error = " ", warn = " " },
-                colored = false,
+                symbols = { error = icons.diagnostics.BoldError, warn = icons.diagnostics.BoldWarning },
+                colored = true,
                 update_in_insert = false,
                 always_visible = true,
             }
 
             local diff = {
                 "diff",
-                colored = false,
+                colored = true,
                 diff_color = {
                     -- Same color values as the general color option can be used here.
                     added = "DiffAdd", -- Changes the diff's added color
                     modified = "DiffChange", -- Changes the diff's modified color
                     removed = "DiffDelete", -- Changes the diff's removed color you
                 },
-                symbols = { added = " ", modified = " ", removed = " " }, -- changes diff symbols
+                symbols = {
+                    added = icons.git.LineAdded,
+                    modified = icons.git.LineModified,
+                    removed = icons.git.LineRemoved,
+                }, -- changes diff symbols
                 cond = hide_in_width,
             }
 
@@ -47,7 +52,7 @@ return {
             local branch = {
                 "branch",
                 icons_enabled = true,
-                icon = neoutils.git_host_icon() .. "",
+                icon = neoutils.git_host_icon() .. icons.git.Branch,
             }
 
             -- total lines
@@ -59,7 +64,7 @@ return {
             local location = function()
                 local line = vim.fn.line(".")
                 local col = vim.fn.col(".")
-                return string.format("%d:%d/%d", line, col, total_lines())
+                return string.format("ln:%d/%d col:%d", line, total_lines(), col)
             end
 
             local filename = {
