@@ -60,12 +60,19 @@ export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 export FZF_DEFAULT_OPTS="--no-mouse --height 80% --layout=reverse --border --multi --inline-info --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -500' --preview-window='right:hidden:nowrap' --bind='f3:execute(bat --style=numbers {} || less -f {}),f2:toggle-preview,ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)'"
 export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
 
+# For Tokyonight Storm dark theme
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+--color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 \
+--color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
+--color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
+--color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
+
 # For Edge light theme
-export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
---color=fg:#4b505b,bg:#fafafa,hl:#5079be
---color=fg+:#4b505b,bg+:#fafafa,hl+:#3a8b84
---color=info:#88909f,prompt:#d05858,pointer:#b05ccc
---color=marker:#608e32,spinner:#d05858,header:#3a8b84'
+#export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+#--color=fg:#4b505b,bg:#fafafa,hl:#5079be
+#--color=fg+:#4b505b,bg+:#fafafa,hl+:#3a8b84
+#--color=info:#88909f,prompt:#d05858,pointer:#b05ccc
+#--color=marker:#608e32,spinner:#d05858,header:#3a8b84'
 
 # For Edge dark theme
 #export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
