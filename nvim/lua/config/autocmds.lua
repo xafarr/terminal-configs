@@ -91,7 +91,7 @@ api.nvim_create_autocmd({ "InsertLeave", "WinEnter", "BufWinEnter" }, {
     end,
     group = cursorGrp,
 })
-api.nvim_create_autocmd({ "InsertEnter", "WinLeave", "BufWinLeave"}, {
+api.nvim_create_autocmd({ "InsertEnter", "WinLeave", "BufWinLeave" }, {
     pattern = "*",
     callback = function()
         if vim.bo.filetype ~= "NvimTree" then
@@ -128,5 +128,16 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
         local width = neoconfig.NvimTreeWidth(neoconfig.editor.nvimtree.width)
         vim.cmd("tabdo wincmd =")
         vim.cmd("tabdo NvimTreeResize " .. width)
+    end,
+})
+
+-- Colorize the file path in Telescope results
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "TelescopeResults",
+    callback = function(ctx)
+        vim.api.nvim_buf_call(ctx.buf, function()
+            vim.fn.matchadd("TelescopeParent", "\t\t.*$")
+            vim.api.nvim_set_hl(0, "TelescopeParent", { link = "Comment" })
+        end)
     end,
 })

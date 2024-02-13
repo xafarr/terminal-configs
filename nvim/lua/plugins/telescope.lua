@@ -132,11 +132,11 @@ return {
                     border = {},
                     borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
                     color_devicons = true,
-                    path_display = { "smart" },
+                    path_display = neoutils.filename_first,
                     sorting_strategy = "ascending",
                     layout_strategy = "horizontal",
                     layout_config = {
-                        preview_width = 0.7,
+                        preview_width = 0.65,
                         scroll_speed = 5,
                         prompt_position = "top",
                     },
@@ -182,7 +182,7 @@ return {
                     buffers = {
                         ignore_current_buffer = true,
                         -- sort_lastused = true,
-                        sort_mru = true
+                        sort_mru = true,
                     },
                 },
                 extensions = {
