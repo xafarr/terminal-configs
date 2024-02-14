@@ -41,7 +41,7 @@ function M.NvimTreeWidth(percentage)
 end
 
 M.UI = {
-    colorscheme = "tokyonight-storm",
+    colorscheme = "tokyonight",
     colors_override = {
         enabled = false,
     },
