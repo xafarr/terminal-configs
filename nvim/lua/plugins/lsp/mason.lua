@@ -14,6 +14,7 @@ return {
             "williamboman/mason-lspconfig.nvim",
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lsp-signature-help",
+            "WhoIsSethDaniel/mason-tool-installer.nvim",
         },
         config = function()
             -- Setup neovim lua configuration
@@ -23,8 +24,9 @@ return {
 
             local lspconfig = require("lspconfig")
             local mason_lspconfig = require("mason-lspconfig")
+            local mason_tool_installer = require("mason-tool-installer")
 
-            local servers = {
+            local language_servers = {
                 "angularls",
                 "ansiblels",
                 "bashls",
@@ -58,12 +60,14 @@ return {
                 ui = {
                     icons = {
                         package_installed = "✓",
+                        package_pending = "➜",
+                        package_uninstalled = "✗",
                     },
                 },
             })
 
             mason_lspconfig.setup({
-                ensure_installed = servers,
+                ensure_installed = language_servers,
             })
 
             mason_lspconfig.setup_handlers({
@@ -73,7 +77,7 @@ return {
                         capabilities = lsp_utils.capabilities(),
                         on_attach = lsp_utils.on_attach(function(client, buffer)
                             require("plugins.lsp.config.diagnostics").on_attach()
-                            require("plugins.lsp.config.format").on_attach(client, buffer)
+                            --require("plugins.lsp.config.format").on_attach(client, buffer)
                             require("plugins.lsp.config.keymaps").on_attach(client, buffer)
                         end),
                     }
@@ -84,11 +88,36 @@ return {
                     lspconfig[server].setup(lsp_opts)
                 end,
             })
+
+            mason_tool_installer.setup({
+                ensure_installed = {
+                    -- List formatters and linters here, when available in mason.
+                    "ansible-lint",
+                    "beautysh",
+                    "black",
+                    "clang-format",
+                    "eslint_d",
+                    "flake8",
+                    "golangci-lint",
+                    "google-java-format",
+                    "isort",
+                    "jq",
+                    "ktlint",
+                    "markdownlint",
+                    "prettier",
+                    "pylint",
+                    "shellcheck",
+                    "sql-formatter",
+                    "stylua",
+                    "tflint",
+                    "xmlformatter",
+                },
+            })
         end,
     },
     {
         "neovim/nvim-lspconfig",
-        event = "BufReadPre",
+        event = { "BufReadPre", "BufNewFile" },
         dependencies = { "hrsh7th/cmp-nvim-lsp" },
     },
     {

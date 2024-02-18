@@ -17,13 +17,22 @@ keymap("", "<C-a>", "<esc>ggVG<CR>", opts)
 
 -- Normal
 
--- Format command for non LSP
-vim.cmd([[ command! Format execute 'lua require("plugins.lsp.config.format").format()<CR>' ]])
-keymap("n", "<leader>,", ":Format<CR>", opts)
+-- Format file or range keymap
+vim.keymap.set(
+    { "n", "v" },
+    "<leader>,",
+    ":Format<CR>",
+    { noremap = true, desc = "Format file or range (in Visual mode)" }
+)
+
+-- Linting keymap
+vim.keymap.set("n", "<leader>l", function()
+    require("lint").try_lint()
+end, { desc = "Trigger linting for current file" })
 
 -- Open new line below and above current line
-keymap("n", "<Leader>o", "o<Esc>", opts)
-keymap("n", "<Leader>O", "O<Esc>", opts)
+keymap("n", "<leader>o", "o<Esc>", opts)
+keymap("n", "<leader>O", "O<Esc>", opts)
 
 keymap("n", "*", "*zz", opts)
 

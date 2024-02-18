@@ -1,5 +1,4 @@
 return {
-    "kyazdani42/nvim-web-devicons", -- icons support
     {
         "sainnhe/edge",
         lazy = false,

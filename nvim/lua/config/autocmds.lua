@@ -141,3 +141,26 @@ vim.api.nvim_create_autocmd("FileType", {
         end)
     end,
 })
+
+-- Format command
+vim.api.nvim_create_user_command("Format", function(args)
+    local range = nil
+    if args.count ~= -1 then
+        local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+        range = {
+            start = { args.line1, 0 },
+            ["end"] = { args.line2, end_line:len() },
+        }
+    end
+    require("conform").format({ async = true, lsp_fallback = true, range = range })
+end, { range = true })
+
+-- Linting autocmd
+local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+    group = lint_augroup,
+    callback = function()
+        local lint = require("lint")
+        lint.try_lint()
+    end,
+})
