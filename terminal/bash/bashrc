@@ -3,16 +3,6 @@ system=$(uname -ms)
 platform=$(echo "$system" | awk '{print $1}')
 arch=$(echo "$system" | awk '{print $2}')
 
-# Library paths
-gettext_path=$(brew --prefix gettext)
-openssl_path=$(brew --prefix openssl)
-bzip2_path=$(brew --prefix bzip2)
-readline_path=$(brew --prefix readline)
-zlib_path=$(brew --prefix zlib)
-cpp_sdk_path=$(xcrun --show-sdk-path)
-dotnet_root=$(dirname "$(which dotnet)")
-vault_path=$(brew --prefix vault)
-
 if [ "$platform" = "Linux" ]
 then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
@@ -38,6 +28,16 @@ export PATH="$bzip2_path/bin:$PATH"
 export PATH=$HOME/.local/bin:$PATH
 export DOTNET_ROOT=$dotnet_root
 export PATH=$HOME/.dotnet/tools:$PATH
+
+# Library paths
+gettext_path=$(brew --prefix gettext)
+openssl_path=$(brew --prefix openssl)
+bzip2_path=$(brew --prefix bzip2)
+readline_path=$(brew --prefix readline)
+zlib_path=$(brew --prefix zlib)
+cpp_sdk_path=$(xcrun --show-sdk-path)
+dotnet_root=$(dirname "$(which dotnet)")
+vault_path=$(brew --prefix vault)
 
 # Ensure LESS doesn't wrap long lines
 export LESS="--MOUSE -rR"
@@ -192,12 +192,6 @@ fi
 # Virtualenvwrapper script
 virenv_path=$(brew --prefix virtualenvwrapper)
 source $virenv_path/bin/virtualenvwrapper.sh
-
-#--------------------------------------------------
-# Vault autocompletion configuration
-#--------------------------------------------------
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C $vault_path/bin/vault vault
 
 # For asdf
 asdf_path=$(brew --prefix asdf)
