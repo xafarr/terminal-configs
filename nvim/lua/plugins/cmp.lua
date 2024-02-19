@@ -38,7 +38,9 @@ return {
 
             cmp.setup({
                 completion = {
-                    autocomplete = false,
+                    --autocomplete = false,
+                    keyword_length = 2,
+                    keyword_pattern = ".*",
                 },
                 snippet = {
                     expand = function(args)
@@ -102,31 +104,26 @@ return {
                 formatting = {
                     fields = { "abbr", "kind" },
                     format = function(entry, item)
-                        local max_width = 50
-                        local source_names = {
-                            copilot = "(Copilot)",
-                            nvim_lsp = "(LSP)",
-                            luasnip = "(Snippet)",
-                            buffer = "(Buffer)",
-                            nvim_lua = "(Vim)",
-                            path = "(Path)",
-                        }
-                        local duplicates = {
-                            buffer = 1,
-                            path = 1,
-                            nvim_lsp = 0,
-                            luasnip = 1,
-                        }
-                        local duplicates_default = 0
-                        if max_width ~= 0 and #item.abbr > max_width then
-                            item.abbr = string.sub(item.abbr, 1, max_width - 1) .. icons.ui.Ellipsis
+                        local ELLIPSIS_CHAR = icons.ui.Ellipsis
+                        local MAX_LABEL_WIDTH = 40
+                        local MIN_LABEL_WIDTH = 40
+
+                        item.menu = ""
+                        local label = item.abbr
+                        local truncated_label = vim.fn.strcharpart(label, 0, MAX_LABEL_WIDTH)
+
+                        if truncated_label ~= label then
+                            item.abbr = truncated_label .. ELLIPSIS_CHAR
+                        elseif string.len(label) < MIN_LABEL_WIDTH then
+                            local padding = string.rep(" ", MIN_LABEL_WIDTH - string.len(label))
+                            item.abbr = label .. padding
                         end
                         item.kind = string.format(" %s  %s", icons.kind[item.kind], item.kind) -- This concatonates the icons with the name of the item kind
                         return item
                     end,
                 },
                 sources = {
-                    { name = "copilot" },
+                    { name = "copilot", keyword_length = 5 },
                     { name = "nvim_lsp_signature_help" },
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
