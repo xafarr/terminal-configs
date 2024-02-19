@@ -1,0 +1,16 @@
+# Import external configurations
+import = ["~/.config/alacritty/tokyonight-moon.toml"]
+
+[font]
+normal = { family="FiraCode Nerd Font", style="Retina" }
+size = 17.0
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[window]
+decorations = "Full"
+dynamic_padding = true
+decorations_theme_variant = "Dark"
+option_as_alt = "None"
+opacity = 1.0
