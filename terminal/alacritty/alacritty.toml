@@ -2,7 +2,7 @@
 import = ["~/.config/alacritty/tokyonight-moon.toml"]
 
 [font]
-normal = { family="FiraCode Nerd Font", style="Retina" }
+normal = { family="JetBrainsMono Nerd Font", style="Regular" }
 size = 17.0
 
 [colors]
