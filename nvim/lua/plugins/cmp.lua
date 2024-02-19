@@ -102,7 +102,7 @@ return {
                 formatting = {
                     fields = { "abbr", "kind" },
                     format = function(entry, item)
-                        local max_width = 0
+                        local max_width = 50
                         local source_names = {
                             copilot = "(Copilot)",
                             nvim_lsp = "(LSP)",
