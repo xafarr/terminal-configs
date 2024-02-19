@@ -108,8 +108,12 @@ export GPG_TTY=$_tty
 # CPPFLAGS and LDFLAGS
 export CPPFLAGS="-I$gettext_path/include -I$openssl_path/include -I$bzip2_path/include -I$readline_path/include -I$zlib_path/include $CPPFLAGS"
 export LDFLAGS="-L$gettext_path/lib -L$openssl_path/lib -L$zlib_path/lib -L$bzip2_path/lib -L$readline_path/lib -L$HOMEBREW_PREFIX/lib"
+export LS_OPTIONS="--color=auto"
 
-alias ltr="ll -altr"
+alias ls="ls $LS_OPTIONS"
+alias ld="ls -ld"
+alias l="ls -alh"
+alias ltr="ls -altrh"
 alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules,.yarn}"
 alias vim="nvim"
 alias vimdiff="nvim -d"
