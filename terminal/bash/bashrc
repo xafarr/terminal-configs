@@ -1,0 +1,211 @@
+# Platform and architecture
+system=$(uname -ms)
+platform=$(echo "$system" | awk '{print $1}')
+arch=$(echo "$system" | awk '{print $2}')
+
+# Library paths
+gettext_path=$(brew --prefix gettext)
+openssl_path=$(brew --prefix openssl)
+bzip2_path=$(brew --prefix bzip2)
+readline_path=$(brew --prefix readline)
+zlib_path=$(brew --prefix zlib)
+cpp_sdk_path=$(xcrun --show-sdk-path)
+dotnet_root=$(dirname "$(which dotnet)")
+vault_path=$(brew --prefix vault)
+
+if [ "$platform" = "Linux" ]
+then
+    export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
+else
+    export HOMEBREW_PREFIX="/opt/homebrew"
+    export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+    export CPPFLAGS="-I$cpp_sdk_path/usr/include"
+fi
+export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
+export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
+export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
+export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
+export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
+export PATH=$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH
+export PATH=$HOMEBREW_PREFIX/opt/apr/bin:$PATH
+export PATH=$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH
+export PATH=$HOMEBREW_PREFIX/opt/go/libexec/bin:$PATH
+export GOPATH=$HOME/Documents/Go
+export PATH=$GOPATH/bin:$PATH
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH=$HOMEBREW_PREFIX/opt/gettext/bin:$PATH
+export PATH="$bzip2_path/bin:$PATH"
+export PATH=$HOME/.local/bin:$PATH
+export DOTNET_ROOT=$dotnet_root
+export PATH=$HOME/.dotnet/tools:$PATH
+
+# Ensure LESS doesn't wrap long lines
+export LESS="--MOUSE -rR"
+export LS_COLORS="rs=0:no=00:mi=00:mh=00:ln=01;36:or=01;31:di=01;34:ow=04;01;34:st=34:tw=04;34:pi=01;33:so=01;33:do=01;33:bd=01;33:cd=01;33:su=01;35:sg=01;35:ca=01;35:ex=01;32:"
+
+# virtualenvwrapper
+export WORKON_HOME="$HOME/.local/share/virtualenvs"
+
+###################################################
+# FZF Settings
+###################################################
+export FZF_BASE="$HOMEBREW_PREFIX/opt/fzf"
+FD_OPTIONS="--follow --hidden --exclude .git --exclude node_modules"
+# Use ripgrep to find files
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --smart-case --hidden --follow --glob "!.git" --glob "!node_modules" 2> /dev/null'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
+export FZF_DEFAULT_OPTS="--no-mouse --height 80% --layout=reverse --border --multi --inline-info --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -500' --preview-window='right:hidden:nowrap' --bind='f3:execute(bat --style=numbers {} || less -f {}),f2:toggle-preview,ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)'"
+export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
+
+# For Tokyonight Moon dark theme
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+--color=fg:#c8d3f5,bg:#222436,hl:#ff966c \
+--color=fg+:#c8d3f5,bg+:#2f334d,hl+:#ff966c \
+--color=info:#82aaff,prompt:#86e1fc,pointer:#86e1fc \
+--color=marker:#c3e88d,spinner:#c3e88d,header:#c3e88d"
+
+# For Tokyonight Storm dark theme
+#export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+#--color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 \
+#--color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
+#--color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
+#--color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
+
+# For Edge light theme
+#export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+#--color=fg:#4b505b,bg:#fafafa,hl:#5079be
+#--color=fg+:#4b505b,bg+:#fafafa,hl+:#3a8b84
+#--color=info:#88909f,prompt:#d05858,pointer:#b05ccc
+#--color=marker:#608e32,spinner:#d05858,header:#3a8b84'
+
+# For Edge dark theme
+#export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
+#--color=fg:#c5cdd9,bg:#262729,hl:#6cb6eb
+#--color=fg+:#c5cdd9,bg+:#262729,hl+:#5dbbc1
+#--color=info:#88909f,prompt:#ec7279,pointer:#d38aea
+#--color=marker:#a0c980,spinner:#ec7279,header:#5dbbc1'
+
+# User configuration
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+export VISUAL=vim
+export EDITOR=$VISUAL
+
+# Compilation flags
+export ARCHFLAGS="-arch $arch"
+
+# ssh
+export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
+
+# GPG
+_tty=$(tty)
+export GPG_TTY=$_tty
+
+# CPPFLAGS and LDFLAGS
+export CPPFLAGS="-I$gettext_path/include -I$openssl_path/include -I$bzip2_path/include -I$readline_path/include -I$zlib_path/include $CPPFLAGS"
+export LDFLAGS="-L$gettext_path/lib -L$openssl_path/lib -L$zlib_path/lib -L$bzip2_path/lib -L$readline_path/lib -L$HOMEBREW_PREFIX/lib"
+
+alias ltr="ll -altr"
+alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules,.yarn}"
+alias vim="nvim"
+alias vimdiff="nvim -d"
+alias brew-update="brew update; brew doctor; brew upgrade; brew upgrade --cask; brew cleanup"
+alias wiki="vim -c VimwikiIndex"
+# Kubernetes aliases
+alias k="kubectl"
+
+# -------------------------------------------------------------------
+# Functions for convenience
+# -------------------------------------------------------------------
+function java_props() {
+    java_props=$(java -XshowSettings:properties -version)
+    echo $java_props
+}
+
+# -------------------------------------------------------------------
+# Function to get git host icon
+# -------------------------------------------------------------------
+function get_git_host_icon() {
+    if [[ -d .git ]] && [[ $(git rev-parse --is-inside-work-tree) = true ]]; then
+        URL=$(git ls-remote --get-url 2> /dev/null)
+        if [[ $URL = *'github.com'* ]]; then
+            ICON=" "
+        elif [[ $URL = *'gitlab.com'* ]]; then
+            ICON=" "
+        elif [[ $URL = *'bitbucket.com'* ]]; then
+            ICON=" "
+        elif [[ $URL = *'azure.com'* ]] || [[ $URL = *'visualstudio.com'* ]]; then
+            ICON="󰿕 "
+        elif [[ $URL = *'kernel'* ]]; then
+            ICON=" "
+        elif [[ $URL = *'archlinux'* ]]; then
+            ICON=" "
+        elif [[ $URL = *'gnu'* ]]; then
+            ICON=" "
+        elif [[ $URL = *'git'* ]]; then
+            ICON=" "
+        else
+            ICON=" "
+            URL="localhost"
+        fi
+        for PATTERN in "https" "http" "git" "://" "@"; do
+            [[ "$URL" == "$PATTERN"* ]] && URL="${URL##$PATTERN}"
+        done
+        for PATTERN in "/" ".git"; do
+            [[ "$URL" == *"$PATTERN" ]] && URL="${URL%%$PATTERN}"
+        done
+        echo "$ICON"
+    fi
+}
+
+# -------------------------------------------------------------------
+# Function to check if port is used
+# -------------------------------------------------------------------
+function port() {
+    lsof -n -i4TCP:$1 | grep LISTEN
+}
+
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+    fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+    fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+[ -f ~/.fzf.bash ] && source "$HOME/.fzf.bash"
+
+# For oraganization specific extra configuration
+if [ -f ~/.additional-env-config ]; then
+    source "$HOME/.additional-env-config"
+fi
+
+# Virtualenvwrapper script
+virenv_path=$(brew --prefix virtualenvwrapper)
+source $virenv_path/bin/virtualenvwrapper.sh
+
+#--------------------------------------------------
+# Vault autocompletion configuration
+#--------------------------------------------------
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C $vault_path/bin/vault vault
+
+# For asdf
+asdf_path=$(brew --prefix asdf)
+source $asdf_path/libexec/asdf.sh
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Starship terminal prompt
+eval "$(starship init bash)"
