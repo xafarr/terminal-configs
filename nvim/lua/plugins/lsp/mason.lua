@@ -98,6 +98,8 @@ return {
                     "clang-format",
                     "eslint_d",
                     "flake8",
+                    "goimports",
+                    "gofumpt",
                     "golangci-lint",
                     "google-java-format",
                     "isort",
