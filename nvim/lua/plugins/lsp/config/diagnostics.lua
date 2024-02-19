@@ -3,10 +3,10 @@ local icons = require("config.icons")
 
 function M.on_attach()
     local signs = {
-        { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-        { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
-        { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
-        { name = "DiagnosticSignInfo", text = icons.diagnostics.Info },
+        { name = "DiagnosticSignError", text = icons.diagnostics.BoldError },
+        { name = "DiagnosticSignWarn", text = icons.diagnostics.BoldWarning },
+        { name = "DiagnosticSignHint", text = icons.diagnostics.BoldHint },
+        { name = "DiagnosticSignInfo", text = icons.diagnostics.BoldInformation },
     }
 
     for _, sign in ipairs(signs) do
