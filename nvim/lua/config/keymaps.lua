@@ -30,6 +30,9 @@ vim.keymap.set("n", "<leader>l", function()
     require("lint").try_lint()
 end, { desc = "Trigger linting for current file" })
 
+-- Troggle lazygit in terminal
+keymap("n", "<leader>lg", ":lua neoutils.lazygit_toggle()<CR>", { noremap = true, silent = true })
+
 -- Open new line below and above current line
 keymap("n", "<leader>o", "o<Esc>", opts)
 keymap("n", "<leader>O", "O<Esc>", opts)
