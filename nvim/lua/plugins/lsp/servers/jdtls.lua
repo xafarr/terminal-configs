@@ -1,14 +1,21 @@
-local jdtls = require("jdtls")
+local ok, jdtls = pcall(require, "jdtls")
+if not ok then
+    vim.notify("JDTLS not found, install with `:MasonInstall jdtls`")
+    return
+end
+
 local extendedClientCapabilities = jdtls.extendedClientCapabilities
 extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
 
-local config = {
-    cmd = { "/path/to/jdt-language-server/bin/jdtls" },
-    root_dir = vim.fs.dirname(
-        vim.fs.find({ "pom.xml", "build.gradle", "gradlew", ".git", "mvnw" }, { upward = true })[1]
-    ),
+return {
+    -- This is the default if not provided, you can remove it. Or adjust as needed.
+    -- One dedicated LSP server & client will be started per unique root_dir
     settings = {
         java = {
+            home = "/Users/zafar/.sdkman/candidates/java/current",
+            eclipse = {
+                downloadSources = true,
+            },
             configuration = {
                 updateBuildConfiguration = "interactive",
                 runtimes = {
@@ -26,11 +33,11 @@ local config = {
                     },
                 },
             },
-            eclipse = {
-                downloadSources = false,
-            },
             maven = {
-                downloadSources = false,
+                downloadSources = true,
+            },
+            implementationsCodeLens = {
+                enabled = true,
             },
             referencesCodeLens = {
                 enabled = true,
@@ -38,17 +45,31 @@ local config = {
             references = {
                 includeDecompiledSources = true,
             },
-            inlayHints = {
-                parameterNames = {
-                    enabled = "all", -- literals, all, none
-                },
-            },
             format = {
                 enabled = false,
             },
         },
         signatureHelp = { enabled = true },
+        completion = {
+            importOrder = {
+                "java",
+                "javax",
+                "com",
+                "org",
+            },
+        },
         extendedClientCapabilities = extendedClientCapabilities,
+        sources = {
+            organizeImports = {
+                starThreshold = 9999,
+                staticStarThreshold = 9999,
+            },
+        },
+    },
+    flags = {
+        allow_incremental_sync = true,
+    },
+    init_options = {
+        jvm_args = {},
     },
 }
-jdtls.start_or_attach(config)
