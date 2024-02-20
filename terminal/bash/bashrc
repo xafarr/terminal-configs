@@ -91,10 +91,6 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-# Preferred editor for local and remote sessions
-export VISUAL=vim
-export EDITOR=$VISUAL
-
 # Compilation flags
 export ARCHFLAGS="-arch $arch"
 
@@ -121,6 +117,10 @@ alias brew-update="brew update; brew doctor; brew upgrade; brew upgrade --cask; 
 alias wiki="vim -c VimwikiIndex"
 # Kubernetes aliases
 alias k="kubectl"
+
+# Preferred editor for local and remote sessions
+export VISUAL=vim
+export EDITOR=$VISUAL
 
 # -------------------------------------------------------------------
 # Functions for convenience

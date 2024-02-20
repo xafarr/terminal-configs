@@ -129,10 +129,6 @@ export LC_ALL=en_US.UTF-8
 
 source $ZSH/oh-my-zsh.sh
 
-# Preferred editor for local and remote sessions
-export VISUAL=vim
-export EDITOR=$VISUAL
-
 # Compilation flags
 export ARCHFLAGS="-arch $(arch)"
 
@@ -178,6 +174,10 @@ alias k="kubectl"
 #then
 #    alias vimdiff="mvimdiff"
 #fi
+
+# Preferred editor for local and remote sessions
+export VISUAL=vim
+export EDITOR=$VISUAL
 
 # For Z for completion
 . `brew --prefix`/etc/profile.d/z.sh
