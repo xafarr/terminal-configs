@@ -31,17 +31,13 @@ return {
                 if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
                     return false
                 end
-                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+                table.unpack = table.unpack or unpack -- Lua 5.1 compatibility
+                local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
                 return col ~= 0
                     and vim.api.nvim_buf_get_text(0, line - 1, 0, line - 1, col, {})[1]:match("^%s*$") == nil
             end
 
             cmp.setup({
-                completion = {
-                    --autocomplete = false,
-                    keyword_length = 2,
-                    keyword_pattern = ".*",
-                },
                 snippet = {
                     expand = function(args)
                         luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -103,10 +99,10 @@ return {
                 },
                 formatting = {
                     fields = { "abbr", "kind" },
-                    format = function(entry, item)
+                    format = function(_, item)
                         local ELLIPSIS_CHAR = icons.ui.Ellipsis
-                        local MAX_LABEL_WIDTH = 40
-                        local MIN_LABEL_WIDTH = 40
+                        local MAX_LABEL_WIDTH = 50
+                        local MIN_LABEL_WIDTH = 50
 
                         item.menu = ""
                         local label = item.abbr
@@ -123,8 +119,7 @@ return {
                     end,
                 },
                 sources = {
-                    { name = "copilot", keyword_length = 5 },
-                    { name = "nvim_lsp_signature_help" },
+                    { name = "copilot" },
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                     { name = "buffer" },

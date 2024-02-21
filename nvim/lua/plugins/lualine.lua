@@ -2,6 +2,9 @@ return {
     {
         "nvim-lualine/lualine.nvim",
         lazy = false,
+        dependencies = {
+            { "AndreM222/copilot-lualine" },
+        },
         config = function()
             local lualine = require("lualine")
             local icons = require("config.icons")
@@ -18,6 +21,33 @@ return {
                 colored = true,
                 update_in_insert = false,
                 always_visible = true,
+            }
+
+            local copilot = {
+                "copilot",
+                -- Default values
+                symbols = {
+                    status = {
+                        icons = {
+                            enabled = icons.copilot.Enabled,
+                            sleep = icons.copilot.Sleep,
+                            disabled = icons.copilot.Disabled,
+                            warning = icons.copilot.Warning,
+                            unknown = icons.copilot.Unknown,
+                        },
+                        hl = {
+                            enabled = "#50FA7B",
+                            sleep = "#AEB7D0",
+                            disabled = "#6272A4",
+                            warning = "#FFB86C",
+                            unknown = "#FF5555",
+                        },
+                    },
+                    spinners = require("copilot-lualine.spinners").dots,
+                    spinner_color = "#6272A4",
+                },
+                show_colors = true,
+                show_loading = true,
             }
 
             local diff = {
@@ -107,7 +137,7 @@ return {
                     lualine_a = { mode },
                     lualine_b = { branch, diff },
                     lualine_c = { filename },
-                    lualine_x = { diagnostics, spaces, filetype },
+                    lualine_x = { diagnostics, copilot, spaces, filetype },
                     lualine_y = { location },
                     lualine_z = { progress },
                 },

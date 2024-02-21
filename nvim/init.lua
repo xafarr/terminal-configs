@@ -1,11 +1,16 @@
 -- init.lua
 vim.loader.enable()
 
-require("config")
-require("utils")
+require("config.neoconfigs")
+require("utils.neoutils")
 require("config.options")
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+-- For checkhealth warning
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+local lazypath = neoconfigs.stdDataPath .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
         "git",
@@ -27,9 +32,9 @@ require("lazy").setup({
     defaults = { lazy = true },
     install = {
         missing = true,
-        colorscheme = { neoconfig.lazy.default_to_current_colorscheme and neoconfig.UI.colorscheme },
+        colorscheme = { neoconfigs.lazy.default_to_current_colorscheme and neoconfigs.UI.colorscheme },
     },
-    checker = { enabled = true },
+    checker = { enabled = true, notify = false },
     change_detection = {
         notify = false,
     },
@@ -51,8 +56,8 @@ require("lazy").setup({
 })
 
 -- Override colors of colorscheme if enabled and available
-if neoconfig.UI.colors_override.enabled then
-    local colors_override_config = "config.colorscheme.override" .. neoconfig.UI.colorscheme
+if neoconfigs.UI.colors_override.enabled then
+    local colors_override_config = "config.colorscheme.override" .. neoconfigs.UI.colorscheme
     local ok, _ = pcall(require, colors_override_config)
     if not ok then
         error(string.format('Colors override config "%s" does not exist', colors_override_config))
@@ -60,7 +65,7 @@ if neoconfig.UI.colors_override.enabled then
 end
 
 -- Set the colorscheme according to config
-vim.cmd("colorscheme " .. neoconfig.UI.colorscheme)
+vim.cmd("colorscheme " .. neoconfigs.UI.colorscheme)
 
 vim.api.nvim_create_autocmd("User", {
     pattern = "VeryLazy",

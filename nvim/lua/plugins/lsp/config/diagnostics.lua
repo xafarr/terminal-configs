@@ -1,7 +1,7 @@
 local M = {}
 local icons = require("config.icons")
 
-function M.on_attach()
+function M.setup_diagnostics()
     local signs = {
         { name = "DiagnosticSignError", text = icons.diagnostics.BoldError },
         { name = "DiagnosticSignWarn", text = icons.diagnostics.BoldWarning },

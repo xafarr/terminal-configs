@@ -22,16 +22,11 @@ vim.keymap.set(
     { "n", "v" },
     "<leader>,",
     ":Format<CR>",
-    { noremap = true, desc = "Format file or range (in Visual mode)" }
+    { noremap = true, silent = true, desc = "Format file or range (in Visual mode)" }
 )
 
--- Linting keymap
-vim.keymap.set("n", "<leader>l", function()
-    require("lint").try_lint()
-end, { desc = "Trigger linting for current file" })
-
 -- Troggle lazygit in terminal
-keymap("n", "<leader>lg", ":lua neoutils.lazygit_toggle()<CR>", { noremap = true, silent = true })
+keymap("n", "<leader>lg", ":lua neoutils.lazygit_toggle()<CR>", opts)
 
 -- Open new line below and above current line
 keymap("n", "<leader>o", "o<Esc>", opts)

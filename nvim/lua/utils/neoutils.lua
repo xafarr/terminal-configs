@@ -1,5 +1,47 @@
 local M = {}
 
+function M.IS_WINDOWS()
+    return neoconfigs.OS:find("Windows") and true or false
+end
+
+function M.IS_MAC()
+    return neoconfigs.OS == "Darwin"
+end
+
+function M.IS_LINUX()
+    return neoconfigs.OS == "Linux"
+end
+
+function M.IS_WSL()
+    return neoconfigs.IS_LINUX() and neoconfigs.uname.release:find("Microsoft") and true or false
+end
+
+function M.getOS()
+    if M.IS_WINDOWS() or M.IS_WSL() then
+        return "windows"
+    elseif M.IS_MAC() then
+        return "mac"
+    elseif M.IS_LINUX then
+        return "linux"
+    else
+        return "unknown"
+    end
+end
+
+function M.NvimTreeWidth(percentage)
+    local ratio = percentage / 100
+    local width = vim.go.columns
+    if width < 150 then
+        return math.floor(vim.go.columns * ratio)
+    elseif width < 200 then
+        ratio = (percentage - 5) / 100
+        return math.floor(vim.go.columns * ratio)
+    else
+        ratio = (percentage - 10) / 100
+        return math.floor(vim.go.columns * ratio)
+    end
+end
+
 function M.quit()
     local bufnr = vim.api.nvim_get_current_buf()
     local buf_windows = vim.call(vim.win_findbuf(), bufnr)

@@ -125,7 +125,7 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
 
     group = vim.api.nvim_create_augroup("NvimTreeResize", { clear = true }),
     callback = function()
-        local width = neoconfig.NvimTreeWidth(neoconfig.editor.nvimtree.width)
+        local width = neoutils.NvimTreeWidth(neoconfigs.editor.nvimtree.width)
         vim.cmd("tabdo wincmd =")
         vim.cmd("tabdo NvimTreeResize " .. width)
     end,
@@ -152,15 +152,11 @@ vim.api.nvim_create_user_command("Format", function(args)
             ["end"] = { args.line2, end_line:len() },
         }
     end
-    require("conform").format({ async = true, lsp_fallback = true, range = range })
+    require("plugins.lsp.config.formatter").format(nil, range)
 end, { range = true })
 
--- Linting autocmd
-local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-    group = lint_augroup,
-    callback = function()
-        local lint = require("lint")
-        lint.try_lint()
-    end,
-})
+--  Use :AutoFormatToggle to toggle autoformatting on or off
+vim.api.nvim_create_user_command("AutoFormatToggle", function()
+    neoconfigs.format_on_save = not neoconfigs.format_on_save
+    print("Setting autoformatting to: " .. tostring(neoconfigs.format_on_save))
+end, {})

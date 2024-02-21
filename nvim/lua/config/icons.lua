@@ -64,6 +64,13 @@ return {
         Value = "",
         Variable = "",
     },
+    copilot = {
+        Enabled = " ",
+        Sleep = " ",
+        Disabled = " ",
+        Warning = " ",
+        Unknown = " ",
+    },
     dap = {
         Pause = "⏸",
         Play = "▶",
