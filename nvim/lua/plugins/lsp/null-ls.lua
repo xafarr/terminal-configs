@@ -15,51 +15,52 @@ return {
 
             local markdown_extra_args = {
                 extra_args = function(_)
-                    local configPath = neoconfigs.stdConfigPath .. "/markdownlint.json"
-                    return { "--config-path", configPath }
+                    local config = neoconfigs.stdConfigPath .. "/markdownlint.json"
+                    return { "--config", config }
                 end,
             }
 
             local sources = {
                 -- Formatting
-                formatting.terraform_fmt,
-                formatting.xmllint,
-                formatting.gofmt,
-                formatting.black,
-                formatting.isort,
-                formatting.goimports,
-                formatting.gofumpt,
                 formatting.beautysh,
+                formatting.black,
                 formatting.clang_format,
-                formatting.sql_formatter,
-                formatting.xmlformat,
+                formatting.gofmt,
+                formatting.gofumpt,
+                formatting.goimports,
                 formatting.google_java_format,
+                formatting.isort,
                 formatting.markdownlint.with(markdown_extra_args),
                 formatting.prettier.with({
-                    diabled_filetypes = { "markdown" },
+                    disabled_filetypes = { "markdown", "yaml" },
                 }),
+                formatting.sql_formatter,
                 formatting.stylua.with({
                     extra_args = function(_)
                         local configPath = neoconfigs.stdConfigPath .. "/stylua.toml"
                         return { "--config-path", configPath }
                     end,
                 }),
+                formatting.terraform_fmt,
+                formatting.xmlformat,
+                formatting.xmllint,
+                formatting.yamlfmt,
 
                 -- Diagnostics
-                diagnostics.tsc,
-                diagnostics.markdownlint.with(markdown_extra_args),
-                diagnostics.ktlint,
-                diagnostics.eslint_d,
-                diagnostics.shellcheck,
-                diagnostics.golangci_lint,
                 diagnostics.ansiblelint,
+                diagnostics.eslint_d,
                 diagnostics.flake8,
-                diagnostics.yamllint,
+                diagnostics.golangci_lint,
+                diagnostics.ktlint,
+                diagnostics.markdownlint.with(markdown_extra_args),
+                diagnostics.shellcheck,
                 diagnostics.terraform_validate,
+                diagnostics.tsc,
+                --diagnostics.yamllint,
 
                 -- Code Actions
-                code_actions.gitsigns,
                 code_actions.eslint_d,
+                code_actions.gitsigns,
                 code_actions.refactoring,
                 code_actions.shellcheck,
 
