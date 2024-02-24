@@ -81,10 +81,7 @@ return {
                 },
                 ignore_install = {}, -- List of parsers to ignore installing
                 auto_install = true, -- Install language parsers automatically
-                context_commentstring = {
-                    enable = true,
-                    enable_autocmd = false,
-                },
+                enable_autocmd = false,
                 highlight = {
                     enable = true, -- false will disable the whole extension
                     disable = {}, -- list of language that will be disabled
