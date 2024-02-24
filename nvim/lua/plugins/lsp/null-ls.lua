@@ -25,7 +25,6 @@ return {
                 formatting.beautysh,
                 formatting.black,
                 formatting.clang_format,
-                formatting.gofmt,
                 formatting.gofumpt,
                 formatting.goimports,
                 formatting.google_java_format,
