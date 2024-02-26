@@ -14,6 +14,6 @@ return {
           --next = "<C-abc>",
         },
       })
-    end
-  }
+    end,
+  },
 }

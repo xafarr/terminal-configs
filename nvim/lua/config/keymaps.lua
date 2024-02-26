@@ -19,10 +19,10 @@ keymap("", "<C-a>", "<esc>ggVG<CR>", opts)
 
 -- Format file or range keymap
 vim.keymap.set(
-    { "n", "v" },
-    "<leader>,",
-    ":Format<CR>",
-    { noremap = true, silent = true, desc = "Format file or range (in Visual mode)" }
+  { "n", "v" },
+  "<leader>,",
+  ":Format<CR>",
+  { noremap = true, silent = true, desc = "Format file or range (in Visual mode)" }
 )
 
 -- Troggle lazygit in terminal

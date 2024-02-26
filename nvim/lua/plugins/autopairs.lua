@@ -27,7 +27,7 @@ return {
           highlight_grey = "LineNr",
         },
       })
-    end
+    end,
   },
   {
     "kylechui/nvim-surround",
@@ -36,6 +36,6 @@ return {
       require("nvim-surround").setup({
         -- Configuration here, or leave empty to use defaults
       })
-    end
+    end,
   },
 }

@@ -9,6 +9,6 @@ return {
         enable_named_colors = true,
         enable_tailwind = false,
       })
-    end
-  }
+    end,
+  },
 }

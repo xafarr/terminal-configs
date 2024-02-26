@@ -48,7 +48,7 @@ set.textwidth = 120
 set.backspace = { "indent", "eol", "start" }
 set.list = true
 set.listchars = { tab = "..", eol = "↩" }
-set.wildmode = { "list:longest", "full" }
+set.wildmode = "longest:full,full"
 set.showbreak = "\\"
 set.spelllang = "en_us"
 set.number = true -- set numbered lines
@@ -63,6 +63,19 @@ set.grepformat = "%f:%l:%c:%m"
 set.shortmess:append("c")
 set.ttyfast = true
 set.guifont = "FiraCodeNerdFont-Medium:h15" -- the font used in graphical neovim applications
+set.fillchars = {
+  foldopen = "",
+  foldclose = "",
+  -- fold = "⸱",
+  fold = " ",
+  foldsep = " ",
+  diff = "╱",
+  eob = " ",
+}
+
+if vim.fn.has("nvim-0.10") == 1 then
+  set.smoothscroll = true
+end
 
 -- Set <space> as the leader key
 -- See `:help mapleader`

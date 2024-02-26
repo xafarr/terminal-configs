@@ -12,6 +12,6 @@ return {
           "fugitive",
         },
       })
-    end
-  }
+    end,
+  },
 }
