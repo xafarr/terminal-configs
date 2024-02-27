@@ -37,6 +37,7 @@ M.UI = {
 
 M.stdDataPath = vim.fn.stdpath("data")
 M.stdConfigPath = vim.fn.stdpath("config")
+M.stdCachePath = vim.fn.stdpath("cache")
 
 M.language_servers = {
   "angularls",

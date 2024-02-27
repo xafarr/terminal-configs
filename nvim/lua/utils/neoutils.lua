@@ -13,7 +13,7 @@ function M.IS_LINUX()
 end
 
 function M.IS_WSL()
-  return neoconfigs.IS_LINUX() and neoconfigs.uname.release:find("Microsoft") and true or false
+  return M.IS_LINUX() and neoconfigs.uname.release:find("Microsoft") and true or false
 end
 
 function M.getOS()
@@ -21,11 +21,15 @@ function M.getOS()
     return "windows"
   elseif M.IS_MAC() then
     return "mac"
-  elseif M.IS_LINUX then
+  elseif M.IS_LINUX() then
     return "linux"
   else
     return "unknown"
   end
+end
+
+function M.get_augroup(name)
+  return vim.api.nvim_create_augroup("xafarr_" .. name, { clear = true })
 end
 
 ---@param on_attach fun(client, buffer)
@@ -213,6 +217,16 @@ function M.filename_first(_, path)
     return tail
   end
   return string.format("%s\t\t%s", tail, parent)
+end
+
+---@param name string
+function M.opts(name)
+  local plugin = require("lazy.core.config").plugins[name]
+  if not plugin then
+    return {}
+  end
+  local Plugin = require("lazy.core.plugin")
+  return Plugin.values(plugin, "opts", false)
 end
 
 ---@param plugin string
