@@ -1,4 +1,5 @@
-return {
+local M = {}
+local config = {
   settings = {
 
     Lua = {
@@ -15,3 +16,8 @@ return {
     },
   },
 }
+function M.setup_and_get_config()
+  return config
+end
+
+return M

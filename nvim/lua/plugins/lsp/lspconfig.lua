@@ -22,7 +22,7 @@ return {
     local mason_tool_installer = require("mason-tool-installer")
 
     -- import cmp-nvim-lsp plugin
-    local cmp_nvim_lsp = require("cmp_nvim_lsp")
+    local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
     local diagnostics = require("plugins.lsp.config.diagnostics")
     local keymaps = require("plugins.lsp.config.keymaps")
@@ -32,9 +32,14 @@ return {
     diagnostics.setup_diagnostics()
 
     -- Used to enable autocompletion
-    local capabilities = cmp_nvim_lsp.default_capabilities()
+    local capabilities = vim.tbl_deep_extend(
+      "force",
+      {},
+      vim.lsp.protocol.make_client_capabilities(),
+      has_cmp and cmp_nvim_lsp.default_capabilities() or {}
+    )
 
-    -- Setup neovim lua configuration
+    -- Setup neodev lua configuration
     require("neodev").setup({
       library = { plugins = { "nvim-dap-ui" }, types = true },
     })
@@ -60,23 +65,26 @@ return {
         function(server)
           local opts = {
             -- Attach keymaps and formatter to LSP
-            on_attach = function(client, bufnr)
+            on_attach = neoutils.on_attach(function(client, bufnr)
               keymaps.on_attach(client, bufnr)
               formatter.on_attach(client, bufnr)
-            end,
+            end),
             capabilities = capabilities,
             flags = {
               debounce_text_changes = 150,
             },
           }
 
-          local extend, user_opts = pcall(require, "plugins.lsp.servers." .. server)
+          local extend, user_config = pcall(require, "plugins.lsp.servers." .. server)
 
           if extend then
-            opts = vim.tbl_deep_extend("force", opts, user_opts)
+            opts = vim.tbl_deep_extend("force", opts, user_config.setup_and_get_config())
           end
 
           lspconfig[server].setup(opts)
+        end,
+        ["jdtls"] = function()
+          return true
         end,
       },
     })

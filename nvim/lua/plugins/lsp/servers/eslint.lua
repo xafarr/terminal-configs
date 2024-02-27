@@ -1,4 +1,5 @@
-return {
+local M = {}
+local config = {
   settings = {
     validate = "on",
     codeAction = {
@@ -11,3 +12,8 @@ return {
     },
   },
 }
+function M.setup_and_get_config()
+  return config
+end
+
+return M
