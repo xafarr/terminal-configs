@@ -19,7 +19,7 @@ return {
                     javascriptreact = { "prettier" },
                     json = { "prettier" },
                     lua = { "stylua" },
-                    markdown = { "prettier" },
+                    markdown = { "markdownlint" },
                     python = { "isort", "black" },
                     sql = { "sql-formatter" },
                     svelte = { "prettier" },
