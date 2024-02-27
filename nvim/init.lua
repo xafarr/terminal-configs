@@ -1,9 +1,9 @@
 -- init.lua
 vim.loader.enable()
 
+require("config.options")
 require("config.neoconfigs")
 require("utils.neoutils")
-require("config.options")
 
 -- For checkhealth warning
 vim.g.loaded_node_provider = 0
