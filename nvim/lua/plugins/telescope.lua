@@ -21,7 +21,7 @@ return {
         desc = "Find Files",
       },
       {
-        "<leader>ff",
+        "<leader>fg",
         neoutils.git_files,
         desc = "Find Within Git Repository",
       },
@@ -68,7 +68,7 @@ return {
         desc = "List",
       },
       {
-        "<leader>fg",
+        "<leader>/",
         "<cmd>Telescope live_grep<cr>",
         desc = "Workspace",
       },
