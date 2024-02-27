@@ -64,7 +64,7 @@ return {
             compare.order,
           },
         },
-        mapping = {
+        mapping = cmp.mapping.preset.insert({
           ["<C-k>"] = cmp.mapping.select_prev_item(),
           ["<C-j>"] = cmp.mapping.select_next_item(),
           ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
@@ -100,7 +100,7 @@ return {
               fallback()
             end
           end),
-        },
+        }),
         formatting = {
           fields = { "abbr", "kind" },
           format = function(_, item)
@@ -122,15 +122,16 @@ return {
             return item
           end,
         },
-        sources = {
+        sources = cmp.config.sources({
           { name = "copilot" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
+        }, {
           { name = "buffer" },
           { name = "emoji" },
           { name = "nvim_lua" },
           { name = "path" },
-        },
+        }),
         confirm_opts = {
           behavior = cmp.ConfirmBehavior.Replace,
           select = false,
