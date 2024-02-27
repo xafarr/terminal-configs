@@ -156,6 +156,10 @@ disabled = true
 format = "[ 󰎙 $version]($style)"
 style = "dimmed green"
 
+# Configure the golang module
+[golang]
+format = "[  $version]($style)"
+
 # Configure the .NET module
 [dotnet]
 format = "[  $version]($style)"
