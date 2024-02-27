@@ -1,8 +1,5 @@
 local api = vim.api
-
-local function augroup(name)
-  return api.nvim_create_augroup("xafarr_" .. name, { clear = true })
-end
+local augroup = neoutils.get_augroup
 
 -- Check if we need to reload the file when it changed
 api.nvim_create_autocmd({ "FocusGained", "TermClose", "TermLeave" }, {
@@ -78,7 +75,30 @@ api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
-api.nvim_create_autocmd("FileType", { pattern = "cheat", command = [[nnoremap <buffer><silent> q :bdelete!<CR>]] })
+
+-- wrap and check for spell in text filetypes
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("wrap_spell"),
+  pattern = { "gitcommit", "markdown" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+  end,
+})
+
+-- Fix conceallevel for json files
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  group = augroup("json_conceal"),
+  pattern = { "json", "jsonc", "json5" },
+  callback = function()
+    vim.opt_local.conceallevel = 0
+  end,
+})
+
+api.nvim_create_autocmd("FileType", {
+  pattern = "cheat",
+  command = [[nnoremap <buffer><silent> q :bdelete!<CR>]],
+})
 
 -- hidden buffer
 api.nvim_create_autocmd("FileType", {
@@ -90,11 +110,11 @@ api.nvim_create_autocmd("FileType", {
 
 -- Change shiftwidth when changing filetypes
 api.nvim_create_autocmd("FileType", {
-  pattern = { "markdown", "json", "yaml" },
+  pattern = { "java", "csharp" },
   callback = function()
-    vim.opt_local.shiftwidth = 2
-    vim.opt_local.tabstop = 2
-    vim.opt_local.softtabstop = 2
+    vim.opt_local.shiftwidth = 4
+    vim.opt_local.tabstop = 4
+    vim.opt_local.softtabstop = 4
   end,
 })
 
@@ -169,6 +189,14 @@ api.nvim_create_user_command("Format", function(args)
   end
   require("plugins.lsp.config.formatter").format(nil, range)
 end, { range = true })
+
+-- Linting
+api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+  group = neoutils.get_augroup("lint"),
+  callback = function()
+    require("lint").try_lint()
+  end,
+})
 
 --  Use :AutoFormatToggle to toggle autoformatting on or off
 api.nvim_create_user_command("AutoFormatToggle", function()
