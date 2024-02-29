@@ -1,7 +1,7 @@
 return {
   "mfussenegger/nvim-lint",
   lazy = true,
-  events = { "BufWritePost", "BufReadPost", "InsertLeave" },
+  event = { "BufReadPre", "BufNewFile" },
   config = function()
     local lint = require("lint")
     local bufnr = vim.api.nvim_get_current_buf()
