@@ -110,7 +110,7 @@ api.nvim_create_autocmd("FileType", {
 
 -- Change shiftwidth when changing filetypes
 api.nvim_create_autocmd("FileType", {
-  pattern = { "java", "csharp" },
+  pattern = { "java", "csharp", "bash", "sh" },
   callback = function()
     vim.opt_local.shiftwidth = 4
     vim.opt_local.tabstop = 4
