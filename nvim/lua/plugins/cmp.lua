@@ -17,8 +17,8 @@ return {
       local cmp = require("cmp")
       local luasnip = require("luasnip")
       local icons = require("config.icons")
-      local compare = require("cmp.config.compare")
       local cmp_window = require("cmp.config.window")
+      local defaults = require("cmp.config.default")()
 
       -- Load collection of snippets from plugin "rafamadriz/friendly-snippets"
       require("luasnip.loaders.from_vscode").lazy_load()
@@ -47,23 +47,7 @@ return {
             luasnip.lsp_expand(args.body) -- For `luasnip` users.
           end,
         },
-        sorting = {
-          priority_weight = 2,
-          comparators = {
-            require("copilot_cmp.comparators").prioritize,
-            -- Below is the default comparitor list and order for nvim-cmp
-            compare.offset,
-            -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
-            compare.exact,
-            compare.score,
-            compare.recently_used,
-            compare.locality,
-            compare.kind,
-            compare.sort_text,
-            compare.length,
-            compare.order,
-          },
-        },
+        sorting = defaults.sorting,
         mapping = cmp.mapping.preset.insert({
           ["<C-k>"] = cmp.mapping.select_prev_item(),
           ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -124,6 +108,7 @@ return {
         },
         sources = cmp.config.sources({
           { name = "copilot" },
+          { name = "codeium" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
         }, {
