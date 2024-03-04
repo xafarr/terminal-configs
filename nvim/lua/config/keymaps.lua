@@ -57,6 +57,10 @@ keymap("n", "<leader>*", "*<C-O>:%s///gn<CR>``", opts)
 -- Copy until end of line
 keymap("n", "Y", "y$", opts)
 
+-- Do not write to last register when deleting with x
+keymap("n", "x", "\"_x", opts)
+keymap("n", "X", "\"_X", opts)
+
 -- Move text up and down
 keymap("n", "∆", ":m .+1<CR>==", opts)
 keymap("n", "˚", ":m .-2<CR>==", opts)
