@@ -23,7 +23,6 @@ return {
 
       local sources = {
         -- Formatting
-        formatting.beautysh,
         formatting.black,
         formatting.clang_format,
         formatting.gofumpt,
@@ -35,6 +34,7 @@ return {
         formatting.prettier.with({
           disabled_filetypes = { "markdown", "yaml" },
         }),
+        formatting.shfmt,
         formatting.sql_formatter,
         formatting.stylua.with({
           extra_args = function(_)

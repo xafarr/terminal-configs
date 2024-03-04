@@ -72,7 +72,6 @@ M.language_servers = {
 M.formatters_and_linters = {
   -- List formatters and linters here, when available in mason.
   "ansible-lint",
-  "beautysh",
   "black",
   "clang-format",
   "eslint_d",
@@ -88,6 +87,7 @@ M.formatters_and_linters = {
   "prettier",
   "pylint",
   "shellcheck",
+  "shfmt",
   "sql-formatter",
   "stylua",
   "tflint",
