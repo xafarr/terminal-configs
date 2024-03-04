@@ -30,9 +30,9 @@ return {
           typescriptreact = { "prettier" },
           xml = { "xmlformat" },
           yaml = { "yamlfmt" },
-          bash = { "beautysh" },
-          sh = { "beautysh" },
-          zsh = { "beautysh" },
+          bash = { "shfmt" },
+          sh = { "shfmt" },
+          zsh = { "shfmt" },
           csharp = { "csharpier" },
           cs = { "csharpier" },
           kotlin = { "ktlint" },
@@ -41,6 +41,9 @@ return {
         formatters = {
           markdownlint = {
             prepend_args = { "--config", neoconfigs.stdConfigPath .. "/markdownlint.json" },
+          },
+          shfmt = {
+            prepend_args = { "-i", "4" },
           },
         },
       })
