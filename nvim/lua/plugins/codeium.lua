@@ -1,6 +1,8 @@
 return {
   {
     "Exafunction/codeium.nvim",
+    event = { "BufEnter" },
+    cmd = { "Codeium" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",

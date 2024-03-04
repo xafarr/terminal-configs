@@ -30,6 +30,7 @@ return {
   kind = {
     Array = "",
     Boolean = "",
+    Codeium = "󰘦 ",
     Class = "",
     Color = "",
     Constant = "",
@@ -69,6 +70,13 @@ return {
     Sleep = " ",
     Disabled = " ",
     Warning = " ",
+    Unknown = " ",
+  },
+  codeium = {
+    Enabled = "󰘦 ",
+    Sleep = "󰘦 ",
+    Disabled = "󰘦 ",
+    Warning = "󰘦",
     Unknown = " ",
   },
   dap = {
