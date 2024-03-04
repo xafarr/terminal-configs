@@ -137,7 +137,7 @@ return {
           lualine_a = { mode },
           lualine_b = { branch, diff },
           lualine_c = { filename },
-          lualine_x = { diagnostics, copilot, spaces, filetype },
+          lualine_x = { diagnostics, spaces, filetype },
           lualine_y = { location },
           lualine_z = { progress },
         },
