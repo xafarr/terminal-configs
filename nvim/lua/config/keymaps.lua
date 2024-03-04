@@ -58,8 +58,8 @@ keymap("n", "<leader>*", "*<C-O>:%s///gn<CR>``", opts)
 keymap("n", "Y", "y$", opts)
 
 -- Do not write to last register when deleting with x
-keymap("n", "x", "\"_x", opts)
-keymap("n", "X", "\"_X", opts)
+keymap("n", "x", '"_x', opts)
+keymap("n", "X", '"_X', opts)
 
 -- Move text up and down
 keymap("n", "∆", ":m .+1<CR>==", opts)
@@ -115,3 +115,10 @@ keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", opts)
 keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", opts)
 keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", opts)
 keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", opts)
+
+-- Command --
+
+-- Esc in the command mode act as Enter (Accepts the command)
+-- Look at the following link for more info
+-- https://github.com/neovim/neovim/issues/21585
+keymap("c", "<Esc>", "<C-c>", opts)
