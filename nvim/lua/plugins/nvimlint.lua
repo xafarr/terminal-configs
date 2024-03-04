@@ -23,6 +23,7 @@ return {
       go = { "golangcilint" },
       bash = { "shellcheck" },
       sh = { "shellcheck" },
+      zsh = { "shellcheck" },
     }
 
     lint.linters.markdownlint = function()
