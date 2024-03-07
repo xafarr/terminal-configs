@@ -47,8 +47,8 @@ format = " [$state($progress_current$progress_total)]($style)"
 
 # Change the default prompt characters
 [character]
-success_symbol = "[](bold #50A45C)"
-error_symbol = "[](bold #d05858)"
+success_symbol = "[](bold #80a856)"
+error_symbol = "[](bold #bb616b)"
 
 # No need for env variables as starship provides a way to show your current distro
 [os]
@@ -94,11 +94,11 @@ Solus = "󰠳 "
 SUSE = " "
 Ubuntu = " "
 Unknown = " "
-Windows = " "
+Windows = "󰖳 "
 
 # Shows the username
 [username]
-style_user = "#008DDE bold"
+style_user = "#7aa2f7 bold"
 style_root = "black bold"
 format = " [$user]($style)"
 disabled = true  # disable in powershell
@@ -108,8 +108,8 @@ show_always = false
 truncation_length = 4
 truncation_symbol = "…/"
 truncate_to_repo = false
-style = "#008DDE"
-repo_root_style =  "#008DDE bold"
+style = "#7aa2f7"
+repo_root_style =  "#7aa2f7 bold"
 read_only_style = "197"
 read_only = " 🔒"
 format = " [$path]($style)[$read_only]($read_only_style)"
@@ -118,23 +118,23 @@ repo_root_format = " [$before_root_path]($before_repo_root_style)[$repo_root]($r
 [git_branch]
 symbol = "\uF126"
 format = " [$symbol $branch]($style)"
-style = "#50A45C"
+style = "#80a856"
 
 [git_commit]
 tag_disabled = false
 
 [git_status]
 format = "[$all_status$ahead_behind]($style)"
-style = "#50A45C"
-untracked = " [?${count}](#1750EB)"
+style = "#80a856"
+untracked = " [?${count}](#3d59a1)"
 ahead = " ⇡${count}"
 diverged = " ⇡${ahead_count} ⇣${behind_count}"
 behind = " ⇣${count}"
 stashed = " 󰏗 ${count}"
-modified = " [!${count}](#be7e05)"
-staged = " [+${count}](#be7e05)"
-renamed = " [»${count}](#1750EB)"
-deleted = " [✗${count}](#d05858)"
+modified = " [!${count}](#cfa25f)"
+staged = " [+${count}](#cfa25f)"
+renamed = " [»${count}](#3d59a1)"
+deleted = " [✗${count}](#bb616b)"
 
 # Configure the SSH prompt
 [hostname]
@@ -143,7 +143,7 @@ format = "[ $ssh_symbol$hostname]($style)"
 
 # Configure the background jobs
 [jobs]
-symbol = ""
+symbol = " "
 
 # Configure the package version
 [package]
@@ -167,7 +167,7 @@ style = "dimmed blue"
   
 # Configure the Rust module
 [rust]
-format = "[  $version]($style)"
+format = "[  $version]($style)"
 style = "dimmed red"
 
 # Configure the Java module
@@ -203,6 +203,7 @@ disabled = true
 
 [cmd_duration]
 min_time = 10_000
+style = "#cfa25f"
 format = "[  $duration]($style)"
 
 [kotlin]
@@ -214,5 +215,5 @@ python $HOME/.config/get_git_host.py $PWD
 """
 directories = [".git"]
 when = "git rev-parse --is-inside-work-tree"
-style = "#50A45C"
+style = "#80a856"
 format = " [$output]($style)"
