@@ -185,7 +185,11 @@ _fzf_compgen_dir() {
     fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-[ -f ~/.fzf.bash ] && source "$HOME/.fzf.bash"
+# Bash completion
+[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+
+# FZF Completion
+[ -f "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
 
 # For oraganization specific extra configuration
 if [ -f ~/.additional-env-config ]; then
@@ -203,9 +207,6 @@ source "$asdf_path"/libexec/asdf.sh
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# Bash completion
-[[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]] && . "/opt/homebrew/etc/profile.d/bash_completion.sh"
 
 # Starship terminal prompt
 eval "$(starship init bash)"
