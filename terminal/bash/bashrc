@@ -4,6 +4,7 @@
 system=$(uname -ms)
 platform=$(echo "$system" | awk '{print $1}')
 arch=$(echo "$system" | awk '{print $2}')
+cpp_sdk_path=$(xcrun --show-sdk-path)
 
 if [ "$platform" = "Linux" ]; then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
@@ -17,6 +18,15 @@ export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
 export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
 export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
 export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
+
+# Library paths
+gettext_path=$(brew --prefix gettext)
+openssl_path=$(brew --prefix openssl)
+bzip2_path=$(brew --prefix bzip2)
+readline_path=$(brew --prefix readline)
+zlib_path=$(brew --prefix zlib)
+dotnet_root=$(dirname "$(which dotnet)")
+
 export PATH=$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH
@@ -29,15 +39,6 @@ export PATH="$bzip2_path/bin:$PATH"
 export PATH=$HOME/.local/bin:$PATH
 export DOTNET_ROOT=$dotnet_root
 export PATH=$HOME/.dotnet/tools:$PATH
-
-# Library paths
-gettext_path=$(brew --prefix gettext)
-openssl_path=$(brew --prefix openssl)
-bzip2_path=$(brew --prefix bzip2)
-readline_path=$(brew --prefix readline)
-zlib_path=$(brew --prefix zlib)
-cpp_sdk_path=$(xcrun --show-sdk-path)
-dotnet_root=$(dirname "$(which dotnet)")
 
 # Ensure LESS doesn't wrap long lines
 export LESS="--MOUSE -rR"
@@ -59,18 +60,18 @@ export FZF_DEFAULT_OPTS="--no-mouse --height 80% --layout=reverse --border --mul
 export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
 
 # For Tokyonight Moon dark theme
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
---color=fg:#c8d3f5,bg:#222436,hl:#ff966c \
---color=fg+:#c8d3f5,bg+:#2f334d,hl+:#ff966c \
---color=info:#82aaff,prompt:#86e1fc,pointer:#86e1fc \
---color=marker:#c3e88d,spinner:#c3e88d,header:#c3e88d"
+#export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+#--color=fg:#c8d3f5,bg:#222436,hl:#ff966c \
+#--color=fg+:#c8d3f5,bg+:#2f334d,hl+:#ff966c \
+#--color=info:#82aaff,prompt:#86e1fc,pointer:#86e1fc \
+#--color=marker:#c3e88d,spinner:#c3e88d,header:#c3e88d"
 
 # For Tokyonight Storm dark theme
-#export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-#--color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 \
-#--color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
-#--color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
-#--color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+--color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 \
+--color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
+--color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
+--color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
 
 # For Edge light theme
 #export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
@@ -150,7 +151,7 @@ function get_git_host_icon() {
         elif [[ $URL = *'gnu'* ]]; then
             ICON=" "
         elif [[ $URL = *'git'* ]]; then
-            ICON=" "
+            ICON=" "
         else
             ICON=" "
             URL="localhost"

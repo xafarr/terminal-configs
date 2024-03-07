@@ -1,31 +1,30 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-#if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-#    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-#fi
-#
-## To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-#[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 # Platform and architecture
 system=$(uname -ms)
 platform=$(echo "$system" | awk '{print $1}')
 arch=$(echo "$system" | awk '{print $2}')
+cpp_sdk_path=$(xcrun --show-sdk-path)
 
-if [ "$platform" = "Linux" ]
-then
+if [ "$platform" = "Linux" ]; then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
 else
     export HOMEBREW_PREFIX="/opt/homebrew"
     export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
-    export CPPFLAGS="-I$(xcrun --show-sdk-path)/usr/include"
+    export CPPFLAGS="-I$cpp_sdk_path/usr/include"
 fi
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
 export HOMEBREW_REPOSITORY="$HOMEBREW_PREFIX"
 export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
 export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
 export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
+
+# Library paths
+gettext_path=$(brew --prefix gettext)
+openssl_path=$(brew --prefix openssl)
+bzip2_path=$(brew --prefix bzip2)
+readline_path=$(brew --prefix readline)
+zlib_path=$(brew --prefix zlib)
+dotnet_root=$(dirname "$(which dotnet)")
+
 export PATH=$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr/bin:$PATH
 export PATH=$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH
@@ -34,9 +33,9 @@ export GOPATH=$HOME/Documents/Go
 export PATH=$GOPATH/bin:$PATH
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=$HOMEBREW_PREFIX/opt/gettext/bin:$PATH
-export PATH="$(brew --prefix bzip2)/bin:$PATH"
+export PATH="$bzip2_path/bin:$PATH"
 export PATH=$HOME/.local/bin:$PATH
-export DOTNET_ROOT=$(dirname $(which dotnet))
+export DOTNET_ROOT=$dotnet_root
 export PATH=$HOME/.dotnet/tools:$PATH
 
 # Ensure LESS doesn't wrap long lines
@@ -59,6 +58,13 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
 export FZF_DEFAULT_OPTS="--no-mouse --height 80% --layout=reverse --border --multi --inline-info --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -500' --preview-window='right:hidden:nowrap' --bind='f3:execute(bat --style=numbers {} || less -f {}),f2:toggle-preview,ctrl-d:preview-half-page-down,ctrl-u:preview-half-page-up,ctrl-a:select-all+accept,ctrl-y:execute-silent(echo {+} | pbcopy)'"
 export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
+
+# For Tokyonight Moon dark theme
+#export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+#--color=fg:#c8d3f5,bg:#222436,hl:#ff966c \
+#--color=fg+:#c8d3f5,bg+:#2f334d,hl+:#ff966c \
+#--color=info:#82aaff,prompt:#86e1fc,pointer:#86e1fc \
+#--color=marker:#c3e88d,spinner:#c3e88d,header:#c3e88d"
 
 # For Tokyonight Storm dark theme
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
@@ -84,103 +90,49 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 #--------------------------------------------------
 # zsh-completions settings
 #--------------------------------------------------
-if type brew &>/dev/null
-then
+if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
     autoload -Uz compinit
     compinit
 fi
-
-ZSH_TMUX_AUTOSTART=false
-ZSH_TMUX_AUTOQUIT=false
-
-ZSH_DISABLE_COMPFIX=true
-zstyle :omz:plugins:ssh-agent agent-forwarding on
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-
-#--------------------------------------------------
-# ZSH Theme
-#--------------------------------------------------
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-# Forgit is a custom plugin
-plugins=(docker docker-compose autoupdate ssh-agent)
-
 
 # User configuration
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
-source $ZSH/oh-my-zsh.sh
-
 # Compilation flags
-export ARCHFLAGS="-arch $(arch)"
+export ARCHFLAGS="-arch $arch"
 
 # ssh
-export SSH_KEY_PATH="~/.ssh/id_rsa"
+export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 
 # GPG
-export GPG_TTY=$(tty)
+_tty=$(tty)
+export GPG_TTY=$_tty
 
 # CPPFLAGS and LDFLAGS
-export CPPFLAGS="-I$(brew --prefix gettext)/include -I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(brew --prefix zlib)/include $CPPFLAGS"
-export LDFLAGS="-L$(brew --prefix gettext)/lib -L$(brew --prefix openssl)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib -L$(brew --prefix readline)/lib -L$HOMEBREW_PREFIX/lib"
+export CPPFLAGS="-I$gettext_path/include -I$openssl_path/include -I$bzip2_path/include -I$readline_path/include -I$zlib_path/include $CPPFLAGS"
+export LDFLAGS="-L$gettext_path/lib -L$openssl_path/lib -L$zlib_path/lib -L$bzip2_path/lib -L$readline_path/lib -L$HOMEBREW_PREFIX/lib"
+export LS_OPTIONS="--color=auto"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ltr="ll -altr"
+alias ls=ls $LS_OPTIONS
+alias ld="ls -ld"
+alias l="ls -alh"
+alias ltr="ls -altrh"
 alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules,.yarn}"
-# Use MacVim vim and enable ctrl-s in terminal
 alias vim="nvim"
 alias vimdiff="nvim -d"
-#alias ssh-keygen="ssh-keygen -m PEM"
 alias brew-update="brew update; brew doctor; brew upgrade; brew upgrade --cask; brew cleanup"
-alias wiki="vim -c VimwikiIndex"
 # Kubernetes aliases
 alias k="kubectl"
 
-# alias hideFiles='defaults write com.apple.finder AppleShowAllFiles NO; killall Finder /System/Library/CoreServices/Finder.app'
-# alias showFiles='defaults write com.apple.finder AppleShowAllFiles YES; killall Finder /System/Library/CoreServices/Finder.app'
-
-# use gui version of vim if available
-#if command -v mvim &> /dev/null
-#then
-#    alias vim="mvim"
-#fi
-## use gui version of vimdiff if available
-#if command -v mvim &> /dev/null
-#then
-#    alias vimdiff="mvimdiff"
-#fi
-
 # Preferred editor for local and remote sessions
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR=$VISUAL
 
 # For Z for completion
-. `brew --prefix`/etc/profile.d/z.sh
+. $(brew --prefix)/etc/profile.d/z.sh
 
 # For Syntax Highlighting
 source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -196,7 +148,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # Functions for convenience
 # -------------------------------------------------------------------
 function java_props() {
-    echo $(java -XshowSettings:properties -version)
+    java_props=$(java -XshowSettings:properties -version)
+    echo "$java_props"
 }
 
 # -------------------------------------------------------------------
@@ -204,32 +157,32 @@ function java_props() {
 # -------------------------------------------------------------------
 function get_git_host_icon() {
     if [[ -d .git ]] && [[ $(git rev-parse --is-inside-work-tree) = true ]]; then
-        URL=$(git ls-remote --get-url 2> /dev/null)
-        if [[ "$URL" =~ "github.com" ]]; then
+        URL=$(git ls-remote --get-url 2>/dev/null)
+        if [[ $URL = *'github.com'* ]]; then
             ICON=" "
-        elif [[ "$URL" =~ "gitlab.com" ]]; then
+        elif [[ $URL = *'gitlab.com'* ]]; then
             ICON=" "
-        elif [[ "$URL" =~ "bitbucket.com" ]]; then
+        elif [[ $URL = *'bitbucket.com'* ]]; then
             ICON=" "
-        elif [[ "$URL" =~ "azure.com" ]] || [[ "$URL" =~ "visualstudio.com" ]]; then
+        elif [[ $URL = *'azure.com'* ]] || [[ $URL = *'visualstudio.com'* ]]; then
             ICON="󰿕 "
-        elif [[ "$URL" =~ "kernel" ]]; then
+        elif [[ $URL = *'kernel'* ]]; then
             ICON=" "
-        elif [[ "$URL" =~ "archlinux" ]]; then
+        elif [[ $URL = *'archlinux'* ]]; then
             ICON=" "
-        elif [[ "$URL" =~ "gnu" ]]; then
+        elif [[ $URL = *'gnu'* ]]; then
             ICON=" "
-        elif [[ "$URL" =~ "git" ]]; then
-            ICON=" "
+        elif [[ $URL = *'git'* ]]; then
+            ICON=" "
         else
             ICON=" "
             URL="localhost"
         fi
         for PATTERN in "https" "http" "git" "://" "@"; do
-            [[ "$URL" == "$PATTERN"* ]] && URL="${URL##$PATTERN}"
+            [[ "$URL" == "$PATTERN"* ]] && URL="${URL##"$PATTERN"}"
         done
         for PATTERN in "/" ".git"; do
-            [[ "$URL" == *"$PATTERN" ]] && URL="${URL%%$PATTERN}"
+            [[ "$URL" == *"$PATTERN" ]] && URL="${URL%%"$PATTERN"}"
         done
         echo "$ICON"
     fi
@@ -255,28 +208,25 @@ _fzf_compgen_dir() {
     fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# FZF Completion
+[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
 
 # For oraganization specific extra configuration
 if [ -f ~/.additional-env-config ]; then
-    source $HOME/.additional-env-config
+    source "$HOME/.additional-env-config"
 fi
 
 # Virtualenvwrapper script
-source $(brew --prefix virtualenvwrapper)/bin/virtualenvwrapper.sh
-
-#--------------------------------------------------
-# Vault autocompletion configuration
-#--------------------------------------------------
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C $(brew --prefix vault)/bin/vault vault
+virenv_path=$(brew --prefix virtualenvwrapper)
+source "$virenv_path"/bin/virtualenvwrapper.sh
 
 # For asdf
-source $(brew --prefix asdf)/libexec/asdf.sh
+asdf_path=$(brew --prefix asdf)
+source "$asdf_path"/libexec/asdf.sh
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# Starship prompt
+# Starship terminal prompt
 eval "$(starship init zsh)"
