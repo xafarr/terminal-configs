@@ -203,7 +203,7 @@ disabled = true
 
 [cmd_duration]
 min_time = 10_000
-style = "#cfa25f"
+style = "244"
 format = "[  $duration]($style)"
 
 [kotlin]
