@@ -116,6 +116,12 @@ return {
         return "spaces:" .. vim.api.nvim_buf_get_option(0, "shiftwidth")
       end
 
+      local recording = {
+        require("noice").api.statusline.mode.get,
+        cond = require("noice").api.statusline.mode.has,
+        color = { fg = "#ff9e64" },
+      }
+
       lualine.setup({
         options = {
           icons_enabled = true,
@@ -137,7 +143,7 @@ return {
           lualine_a = { mode },
           lualine_b = { branch, diff },
           lualine_c = { filename },
-          lualine_x = { diagnostics, spaces, filetype },
+          lualine_x = { recording, diagnostics, spaces, filetype },
           lualine_y = { location },
           lualine_z = { progress },
         },
