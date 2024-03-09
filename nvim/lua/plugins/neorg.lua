@@ -14,7 +14,9 @@ return {
         ["core.dirman"] = { -- Manages Neorg workspaces
           config = {
             workspaces = {
-              notes = "~/Documents/Notes",
+              notes = "~/Documents/Nextcloud/Neorg/notes",
+              tuts = "~/Documents/Nextcloud/Neorg/tutorials",
+              howtos = "~/Documents/Nextcloud/Neorg/howtos",
             },
           },
         },
