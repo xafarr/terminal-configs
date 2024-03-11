@@ -71,10 +71,10 @@ keymap("n", "<leader>*", "*<C-O>:%s///gn<CR>``", opts)
 -- Windows navigation
 -- keymap("n", "<S-Tab>", "<C-w>W", opts)
 -- keymap("n", "<Tab>", "<C-w>w", opts)
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+-- keymap("n", "<C-h>", "<C-w>h", opts)
+-- keymap("n", "<C-j>", "<C-w>j", opts)
+-- keymap("n", "<C-k>", "<C-w>k", opts)
+-- keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Jump to last changed position across buffers
 -- Refer to autocommands.lua for InsertChange event
