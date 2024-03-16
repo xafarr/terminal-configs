@@ -29,7 +29,7 @@ M.editor = {
 }
 
 M.UI = {
-  colorscheme = "tokyonight",
+  colorscheme = "catppuccin",
   colors_override = {
     enabled = false,
   },

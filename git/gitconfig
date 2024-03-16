@@ -35,6 +35,12 @@
 [merge]
   ff = only
   conflictstyle = diff3
+  tool = vimdiff
+[mergetool]
+  keepBackup = false
+  prompt = false
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [branch "master"]
   mergeOptions = --ff-only
 [diff]
@@ -44,13 +50,6 @@
   # Be able to abort all diffs with `:cq` or `:cquit`
   trustExitCode = true
   prompt = false
-[merge]
-  tool = vimdiff
-[mergetool]
-  keepBackup = false
-  prompt = false
-[mergetool "vimdiff"]
-  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [http]
   sslVerify = true
 
@@ -59,83 +58,13 @@
 [add.interactive]
   useBuiltin = false # required for git 2.37.0
 
+[include]
+  path = ~/.config/delta/themes/catppuccin-macchiato.gitconfig
+
 [delta]
-  features = line-numbers
+  features = catppuccin-macchiato
   side-by-side = true
-  whitespace-error-style = 22 reverse
   max-line-length = 0
   width = variable
   navigate = true
-  file-style = "#434C5E" bold
-  file-decoration-style = "#434C5E" ul
-  file-added-label = [+]
-  file-copied-label = [==]
-  file-modified-label = [*]
-  file-removed-label = [-]
-  file-renamed-label = [->]
-  minus-style                   = syntax "#3f2d3d"
-  minus-non-emph-style          = syntax "#3f2d3d"
-  minus-emph-style              = syntax "#763842"
-  minus-empty-line-marker-style = syntax "#3f2d3d"
-  line-numbers-minus-style      = "#b2555b"
-  plus-style                    = syntax "#283b4d"
-  plus-non-emph-style           = syntax "#283b4d"
-  plus-emph-style               = syntax "#316172"
-  plus-empty-line-marker-style  = syntax "#283b4d"
-  line-numbers-plus-style       = "#266d6a"
-  line-numbers-zero-style       = "#3b4261"
 
-[delta "github"]
-  features = line-numbers
-  syntax-theme = GitHub
-  side-by-side = true
-  whitespace-error-style = 22 reverse
-  max-line-length = 0
-  width = variable
-  navigate = true
-  file-style = "#434C5E" bold
-  file-decoration-style = "#434C5E" ul
-  file-added-label = [+]
-  file-copied-label = [==]
-  file-modified-label = [*]
-  file-removed-label = [-]
-  file-renamed-label = [->]
-
-[delta "chameleon"]
-  #author: https://github.com/AirOnSkin
-  dark = true
-  line-numbers = true
-  side-by-side = true
-  keep-plus-minus-markers = false
-  syntax-theme = Nord
-  file-style = "#434C5E" bold
-  file-decoration-style = "#434C5E" ul
-  file-added-label = [+]
-  file-copied-label = [==]
-  file-modified-label = [*]
-  file-removed-label = [-]
-  file-renamed-label = [->]
-  hunk-header-style = omit
-  line-numbers-left-format = " {nm:>3} │"
-  line-numbers-left-style = red
-  line-numbers-right-format = " {np:>3} │"
-  line-numbers-right-style = green
-  line-numbers-minus-style = red italic black
-  line-numbers-plus-style = green italic black
-  line-numbers-zero-style = "#434C5E" italic
-  minus-style = bold red
-  minus-emph-style = bold "#202020" "#FF5555"
-  minus-non-emph-style = bold
-  plus-style = bold green
-  plus-emph-style = bold "#202020" "#50FA7B"
-  plus-non-emph-style = bold
-  zero-style = syntax
-  blame-code-style = syntax
-  blame-format = "{author:<18} ({commit:>9}) {timestamp:^16}"
-  blame-palette = "#2E3440" "#3B4252" "#434C5E" "#4C566A"
-  merge-conflict-begin-symbol = ~
-  merge-conflict-end-symbol = ~
-  merge-conflict-ours-diff-header-style = "#F1FA8C" bold
-  merge-conflict-ours-diff-header-decoration-style = "#434C5E" box
-  merge-conflict-theirs-diff-header-style = "#F1FA8C" bold
-  merge-conflict-theirs-diff-header-decoration-style = "#434C5E" box
