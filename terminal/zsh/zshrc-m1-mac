@@ -4,6 +4,9 @@ platform=$(echo "$system" | awk '{print $1}')
 arch=$(echo "$system" | awk '{print $2}')
 cpp_sdk_path=$(xcrun --show-sdk-path)
 
+# Default location for user configuration
+export XDG_CONFIG_HOME="$HOME/.config"
+
 if [ "$platform" = "Linux" ]; then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
 else
