@@ -16,14 +16,7 @@ return {
       typescriptreact = { "eslint_d" },
       markdown = { "markdownlint" },
       mdx = { "markdownlint" },
-      svelte = { "eslint_d" },
-      python = { "pylint" },
-      terraform = { "tflint" },
-      tf = { "tflint" },
       go = { "golangcilint" },
-      bash = { "shellcheck" },
-      sh = { "shellcheck" },
-      zsh = { "shellcheck" },
     }
 
     lint.linters.markdownlint = function()
