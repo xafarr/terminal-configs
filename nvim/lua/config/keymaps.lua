@@ -64,6 +64,8 @@ keymap("n", "X", '"_X', opts)
 -- Move text up and down
 keymap("n", "∆", ":m .+1<CR>==", opts)
 keymap("n", "˚", ":m .-2<CR>==", opts)
+keymap("n", "<M-j>", ":m .+1<CR>==", opts)
+keymap("n", "<M-k>", ":m .-2<CR>==", opts)
 
 -- search occurrence count in file
 keymap("n", "<leader>*", "*<C-O>:%s///gn<CR>``", opts)
@@ -71,10 +73,10 @@ keymap("n", "<leader>*", "*<C-O>:%s///gn<CR>``", opts)
 -- Windows navigation
 -- keymap("n", "<S-Tab>", "<C-w>W", opts)
 -- keymap("n", "<Tab>", "<C-w>w", opts)
--- keymap("n", "<C-h>", "<C-w>h", opts)
--- keymap("n", "<C-j>", "<C-w>j", opts)
--- keymap("n", "<C-k>", "<C-w>k", opts)
--- keymap("n", "<C-l>", "<C-w>l", opts)
+keymap("n", "<C-h>", "<C-w>h", opts)
+keymap("n", "<C-j>", "<C-w>j", opts)
+keymap("n", "<C-k>", "<C-w>k", opts)
+keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Jump to last changed position across buffers
 -- Refer to autocommands.lua for InsertChange event
@@ -87,6 +89,8 @@ keymap("n", "<F1>", ":h <C-r><C-w><cr>", opts)
 -- move line up and down in insert mode
 keymap("i", "∆", "<Esc>:m .+1<CR>==gi", opts)
 keymap("i", "˚", "<Esc>:m .-2<CR>==gi", opts)
+keymap("i", "<M-j>", "<Esc>:m .+1<CR>==gi", opts)
+keymap("i", "<M-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 -- Movement in insert mode
 keymap("i", "<C-h>", "<C-o>h", opts)
@@ -102,12 +106,18 @@ keymap("v", ">", ">gv", opts)
 -- Move text up and down
 keymap("v", "∆", ":m '>+1<CR>gv=gv", opts)
 keymap("v", "˚", ":m '<-2<CR>gv=gv", opts)
+keymap("v", "<M-j>", ":m '>+1<CR>gv=gv", opts)
+keymap("v", "<M-k>", ":m '<-2<CR>gv=gv", opts)
+
+-- Do not overwrite clipboard when pasting
 keymap("v", "p", '"_dP', opts)
 
 -- Visual Block --
 -- Move text up and down
 keymap("x", "∆", ":move '>+1<CR>gv-gv", opts)
 keymap("x", "˚", ":move '<-2<CR>gv-gv", opts)
+keymap("x", "<M-j>", ":move '>+1<CR>gv-gv", opts)
+keymap("x", "<M-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Termianl --
 -- Cursor movement among windows in terminal mode
