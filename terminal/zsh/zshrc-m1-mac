@@ -7,6 +7,16 @@ cpp_sdk_path=$(xcrun --show-sdk-path)
 # Default location for user configuration
 export XDG_CONFIG_HOME="$HOME/.config"
 
+# alt left/right in zsh
+builtin bindkey "^[[1;3C" forward-word
+builtin bindkey "^[[1;3D" backward-word
+# ctrl a/e in zsh
+builtin bindkey "^A" beginning-of-line
+builtin bindkey "^E" end-of-line
+# alt backspace in zsh
+builtin bindkey "^[^H" backward-kill-word
+builtin bindkey "^[^?" backward-kill-word
+
 if [ "$platform" = "Linux" ]; then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
 else
