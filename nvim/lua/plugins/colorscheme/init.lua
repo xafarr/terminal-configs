@@ -122,6 +122,7 @@ return {
         custom_highlights = function(colors)
           return {
             NonText = { fg = colors.surface0 },
+            GhostText = { fg = colors.surface1 },
           }
         end,
         integrations = {
