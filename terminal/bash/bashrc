@@ -4,7 +4,6 @@
 system=$(uname -ms)
 platform=$(echo "$system" | awk '{print $1}')
 arch=$(echo "$system" | awk '{print $2}')
-cpp_sdk_path=$(xcrun --show-sdk-path)
 
 # Default location for user configuration
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -24,6 +23,7 @@ if [ "$platform" = "Linux" ]; then
 else
     export HOMEBREW_PREFIX="/opt/homebrew"
     export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+    cpp_sdk_path=$(xcrun --show-sdk-path)
     export CPPFLAGS="-I$cpp_sdk_path/usr/include"
 fi
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"

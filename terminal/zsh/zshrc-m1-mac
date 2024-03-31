@@ -2,7 +2,6 @@
 system=$(uname -ms)
 platform=$(echo "$system" | awk '{print $1}')
 arch=$(echo "$system" | awk '{print $2}')
-cpp_sdk_path=$(xcrun --show-sdk-path)
 
 # Default location for user configuration
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -22,6 +21,7 @@ if [ "$platform" = "Linux" ]; then
 else
     export HOMEBREW_PREFIX="/opt/homebrew"
     export SDKROOT=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk
+    cpp_sdk_path=$(xcrun --show-sdk-path)
     export CPPFLAGS="-I$cpp_sdk_path/usr/include"
 fi
 export HOMEBREW_CELLAR="$HOMEBREW_PREFIX/Cellar"
@@ -138,7 +138,7 @@ export CPPFLAGS="-I$gettext_path/include -I$openssl_path/include -I$bzip2_path/i
 export LDFLAGS="-L$gettext_path/lib -L$openssl_path/lib -L$zlib_path/lib -L$bzip2_path/lib -L$readline_path/lib -L$HOMEBREW_PREFIX/lib"
 export LS_OPTIONS="--color=auto"
 
-alias ls=ls $LS_OPTIONS
+alias ls="ls $LS_OPTIONS"
 alias ld="ls -ld"
 alias l="ls -alh"
 alias ltr="ls -altrh"
