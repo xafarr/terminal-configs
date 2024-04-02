@@ -79,14 +79,14 @@ else
     HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
 fi
 
-BREW_BIN="$HOMEBREW_PREFIX/bin"
-BREW="$BREW_BIN/brew"
-export PATH="$BREW_BIN:$PATH"
-
 # Install Homebrew
 if ! [ -f "$BREW" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
+
+BREW_BIN="$HOMEBREW_PREFIX/bin"
+BREW="$BREW_BIN/brew"
+export PATH="$BREW_BIN:$PATH"
 
 if ! [ -f "$BREW_BIN/git" ]; then
     $BREW install git || true
@@ -166,6 +166,17 @@ fi
 if [[ $($BREW list | grep -iwc bash-completion@2) -eq 0 ]]; then
     $BREW install bash-completion@2 || true
 fi
+
+# Library paths
+gettext_path=$($BREW --prefix gettext)
+openssl_path=$($BREW --prefix openssl)
+bzip2_path=$($BREW --prefix bzip2)
+readline_path=$($BREW --prefix readline)
+zlib_path=$($BREW --prefix zlib)
+llvm_path=$($BREW --prefix llvm)
+
+# Prepend LLVM binaries to PATH
+export PATH="$llvm_path/bin:$PATH"
 
 # Clone terminal-configs
 PROJECTS_DIR="$HOME/Documents/Projects"
@@ -257,14 +268,10 @@ fi
 ln -s "$PROJECTS_DIR/terminal-configs/git/lazygit" "$XDG_CONFIG_HOME/lazygit" && echo "lazygit link created"
 
 # Export CPPFLAGS and LDGLIBS for compiling C programs
-# Library paths
-gettext_path=$($BREW --prefix gettext)
-openssl_path=$($BREW --prefix openssl)
-bzip2_path=$($BREW --prefix bzip2)
-readline_path=$($BREW --prefix readline)
-zlib_path=$($BREW --prefix zlib)
-export CPPFLAGS="-I$gettext_path/include -I$openssl_path/include -I$bzip2_path/include -I$readline_path/include -I$zlib_path/include $HOMEBREW_PREFIX/include $CPPFLAGS"
-export LDFLAGS="-L$gettext_path/lib -L$openssl_path/lib -L$zlib_path/lib -L$bzip2_path/lib -L$readline_path/lib -L$HOMEBREW_PREFIX/lib $LDFLAGS"
+export CPPFLAGS="-I$gettext_path/include -I$openssl_path/include -I$bzip2_path/include -I$readline_path/include -I$zlib_path/include -I$llvm_path/include -I$HOMEBREW_PREFIX/include $CPPFLAGS"
+# LLVM bundled libc++ LDFLAGS
+LLVM_LDFLAGS="-L$llvm_path/lib/c++ -Wl,-rpath,$llvm_path/lib/c++"
+export LDFLAGS="-L$gettext_path/lib -L$openssl_path/lib -L$zlib_path/lib -L$bzip2_path/lib -L$readline_path/lib -L$llvm_path/lib $LLVM_LDFLAGS -L$HOMEBREW_PREFIX/lib $LDFLAGS"
 
 # Install SDKMAN and Java
 echo "Installing SDKMAN"
