@@ -5,7 +5,7 @@ set -e
 # Default location for user configuration
 export XDG_CONFIG_HOME="$HOME/.config"
 
-if [[ -d "${XDG_CONFIG_HOME-}" ]]; then
+if ! [[ -d "${XDG_CONFIG_HOME-}" ]]; then
     mkdir -p "${XDG_CONFIG_HOME}"
 fi
 
@@ -57,6 +57,24 @@ else
     abort "Setup is only supported on macOS and Linux."
 fi
 
+# Install dev tools in linux
+if [ -n "${SETUP_ON_LINUX-}" ]; then
+    if [[ -x "$(command -v apt-get)" ]]; then
+        (sudo apt-get update && sudo apt-get upgrade -y) || true
+        (sudo apt-get install -y build-essential zip unzip make curl wget libssl-dev zlib1g-dev \
+            libbz2-dev libreadline-dev libsqlite3-dev libncursesw5-dev xz-utils tk-dev \
+            libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev) || true
+    elif [[ -x "$(command -v yum)" ]]; then
+        sudo yum upgrade -y || true
+        sudo yum groupinstall 'Development Tools' || true
+        sudo yum install zip unzip curl wget || true
+    elif [[ -x "$(command -v pacman)" ]]; then
+        sudo pacman -S base-devel || true
+    elif [[ -x "$(command -v apk)" ]]; then
+        sudo apk add build-base || true
+    fi
+fi
+
 # Check if curl exists
 if ! command -v curl >/dev/null; then
     abort "You must install cURL before running automated setup."
@@ -82,14 +100,13 @@ BREW="$HOMEBREW_PREFIX/bin/brew"
 BREW_BIN="$HOMEBREW_PREFIX/bin"
 
 # Install Homebrew
-if ! command -v "$BREW" >/dev/null; then
+if ! [ -f "$BREW" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 if ! [ -f "$BREW_BIN/git" ]; then
     $BREW install git || true
 fi
-
 if ! echo "$BREW_BIN/gcc-*" &>/dev/null; then
     $BREW install gcc || true
 fi
@@ -129,13 +146,42 @@ fi
 if ! [ -f "$BREW_BIN/nvim" ]; then
     $BREW install neovim || true
 fi
-if ! [ -f "$BREW_BIN/kitty" ] && [ -z "${SETUP_ON_LINUX-}" ]; then
+if ! [ -f "$BREW_BIN/bat" ]; then
+    $BREW install bat || true
+fi
+if ! [ -f "$BREW_BIN/kitty" ] && [ -n "${SETUP_ON_MACOS-}" ]; then
     $BREW install --cask kitty || true
 fi
+if [[ $($BREW list | grep -iwc bzip2) -eq 0 ]]; then
+    $BREW install bzip2 || true
+fi
+if [[ $($BREW list | grep -iwc zlib) -eq 0 ]]; then
+    $BREW install zlib || true
+fi
+if [[ $($BREW list | grep -iwc readline) -eq 0 ]]; then
+    $BREW install readline || true
+fi
+if [[ $($BREW list | grep -iwc gettext) -eq 0 ]]; then
+    $BREW install gettext || true
+fi
+if [[ $($BREW list | grep -iwc openssl) -eq 0 ]]; then
+    $BREW install openssl || true
+fi
+if [[ $($BREW list | grep -iwc llvm) -eq 0 ]]; then
+    $BREW install llvm || true
+fi
+
 # For zsh
-$BREW install zsh-syntax-highlighting zsh-autosuggestions || true
+if [[ $($BREW list | grep -iwc zsh-syntax-highlighting) -eq 0 ]]; then
+    $BREW install zsh-syntax-highlighting || true
+fi
+if [[ $($BREW list | grep -iwc zsh-autosuggestions) -eq 0 ]]; then
+    $BREW install zsh-autosuggestions || true
+fi
 # For bash
-$BREW install bash-completion || true
+if [[ $($BREW list | grep -iwc bash-completion@2) -eq 0 ]]; then
+    $BREW install bash-completion@2 || true
+fi
 
 # Clone terminal-configs
 PROJECTS_DIR="$HOME/Documents/Projects"
@@ -225,3 +271,30 @@ elif [ -d "$XDG_CONFIG_HOME/lazygit" ]; then
     mv "$XDG_CONFIG_HOME/lazygit" "$XDG_CONFIG_HOME/lazygit.bak"
 fi
 ln -s "$PROJECTS_DIR/terminal-configs/git/lazygit" "$XDG_CONFIG_HOME/lazygit" && echo "lazygit link created"
+
+# Export CPPFLAGS and LDGLIBS for compiling C programs
+# Library paths
+gettext_path=$($BREW --prefix gettext)
+openssl_path=$($BREW --prefix openssl)
+bzip2_path=$($BREW --prefix bzip2)
+readline_path=$($BREW --prefix readline)
+zlib_path=$($BREW --prefix zlib)
+export CPPFLAGS="-I$gettext_path/include -I$openssl_path/include -I$bzip2_path/include -I$readline_path/include -I$zlib_path/include $HOMEBREW_PREFIX/include $CPPFLAGS"
+export LDFLAGS="-L$gettext_path/lib -L$openssl_path/lib -L$zlib_path/lib -L$bzip2_path/lib -L$readline_path/lib -L$HOMEBREW_PREFIX/lib $LDFLAGS"
+
+# Install SDKMAN and Java
+echo "Installing SDKMAN"
+curl -s "https://get.sdkman.io" | bash || true
+source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk version || true
+echo "Installing Java"
+sdk install java || true
+
+# Installing Python, nodejs and Golang using asdf
+ASDF="$BREW_BIN/asdf"
+echo "Installing Python"
+($ASDF plugin-add python && $ASDF install python latest && $ASDF global python latest) || true
+echo "Installing NodeJS"
+($ASDF plugin-add nodejs && $ASDF install nodejs latest:20 && $ASDF global nodejs latest:20) || true
+echo "Installing Golang"
+($ASDF plugin-add golang && $ASDF install golang latest && $ASDF global golang latest) || true
