@@ -30,23 +30,6 @@ if [[ -z "${USER-}" ]]; then
     export USER
 fi
 
-major_minor() {
-    echo "${1%%.*}.$(
-        x="${1#*.}"
-        echo "${x%%.*}"
-    )"
-}
-
-version_gt() {
-    [[ "${1%.*}" -gt "${2%.*}" ]] || [[ "${1%.*}" -eq "${2%.*}" && "${1#*.}" -gt "${2#*.}" ]]
-}
-version_ge() {
-    [[ "${1%.*}" -gt "${2%.*}" ]] || [[ "${1%.*}" -eq "${2%.*}" && "${1#*.}" -ge "${2#*.}" ]]
-}
-version_lt() {
-    [[ "${1%.*}" -lt "${2%.*}" ]] || [[ "${1%.*}" -eq "${2%.*}" && "${1#*.}" -lt "${2#*.}" ]]
-}
-
 # First check OS.
 OS="$(uname)"
 if [[ "${OS}" == "Linux" ]]; then
@@ -96,8 +79,9 @@ else
     HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
 fi
 
-BREW="$HOMEBREW_PREFIX/bin/brew"
 BREW_BIN="$HOMEBREW_PREFIX/bin"
+BREW="$BREW_BIN/brew"
+export PATH="$BREW_BIN:$PATH"
 
 # Install Homebrew
 if ! [ -f "$BREW" ]; then
@@ -292,8 +276,6 @@ sdk install java || true
 
 # Installing Python, nodejs and Golang using asdf
 ASDF="$BREW_BIN/asdf"
-echo "Installing Python"
-($ASDF plugin-add python && $ASDF install python latest && $ASDF global python latest) || true
 echo "Installing NodeJS"
 ($ASDF plugin-add nodejs && $ASDF install nodejs latest:20 && $ASDF global nodejs latest:20) || true
 echo "Installing Golang"
