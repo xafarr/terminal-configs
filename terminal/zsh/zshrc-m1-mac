@@ -36,20 +36,22 @@ openssl_path=$(brew --prefix openssl)
 bzip2_path=$(brew --prefix bzip2)
 readline_path=$(brew --prefix readline)
 zlib_path=$(brew --prefix zlib)
+llvm_path=$(brew --prefix llvm)
 dotnet_root=$(dirname "$(which dotnet)")
 
-export PATH=$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH
-export PATH=$HOMEBREW_PREFIX/opt/apr/bin:$PATH
-export PATH=$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH
-export PATH=$HOMEBREW_PREFIX/opt/go/libexec/bin:$PATH
-export GOPATH=$HOME/Documents/Go
-export PATH=$GOPATH/bin:$PATH
+export PATH="$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/apr/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/go/libexec/bin:$PATH"
+export GOPATH="$HOME/Documents/Go"
+export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH=$HOMEBREW_PREFIX/opt/gettext/bin:$PATH
+export PATH="$HOMEBREW_PREFIX/opt/gettext/bin:$PATH"
 export PATH="$bzip2_path/bin:$PATH"
-export PATH=$HOME/.local/bin:$PATH
-export DOTNET_ROOT=$dotnet_root
-export PATH=$HOME/.dotnet/tools:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$llvm_path/bin:$PATH"
+export DOTNET_ROOT="$dotnet_root"
+export PATH="$HOME/.dotnet/tools:$PATH"
 
 # Color man pages
 export LESS_TERMCAP_mb=$'\E[01;32m'
@@ -131,8 +133,9 @@ _tty=$(tty)
 export GPG_TTY=$_tty
 
 # CPPFLAGS and LDFLAGS
-export CPPFLAGS="-I$gettext_path/include -I$openssl_path/include -I$bzip2_path/include -I$readline_path/include -I$zlib_path/include $HOMEBREW_PREFIX/include $CPPFLAGS"
-export LDFLAGS="-L$gettext_path/lib -L$openssl_path/lib -L$zlib_path/lib -L$bzip2_path/lib -L$readline_path/lib -L$HOMEBREW_PREFIX/lib $LDFLAGS"
+export CPPFLAGS="-I$llvm_path/include -I$gettext_path/include -I$openssl_path/include -I$bzip2_path/include -I$readline_path/include -I$zlib_path/include $HOMEBREW_PREFIX/include $CPPFLAGS"
+LLVM_LDFLAGS="-L$llvm_path/lib/c++ -Wl,-rpath,$llvm_path/lib/c++"
+export LDFLAGS="$LLVM_LDFLAGS -L$llvm_path/lib -L$gettext_path/lib -L$openssl_path/lib -L$zlib_path/lib -L$bzip2_path/lib -L$readline_path/lib -L$HOMEBREW_PREFIX/lib $LDFLAGS"
 export LS_OPTIONS="--color=auto"
 
 alias ls="ls $LS_OPTIONS"
