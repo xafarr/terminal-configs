@@ -124,7 +124,7 @@ _tty=$(tty)
 export GPG_TTY=$_tty
 
 # CPPFLAGS and LDFLAGS
-export CPPFLAGS="-I$llvm_path/include -I$gettext_path/include -I$openssl_path/include -I$bzip2_path/include -I$readline_path/include -I$zlib_path/include $HOMEBREW_PREFIX/include $CPPFLAGS"
+export CPPFLAGS="-I$llvm_path/include -I$gettext_path/include -I$openssl_path/include -I$bzip2_path/include -I$readline_path/include -I$zlib_path/include -I$HOMEBREW_PREFIX/include $CPPFLAGS"
 LLVM_LDFLAGS="-L$llvm_path/lib/c++ -Wl,-rpath,$llvm_path/lib/c++"
 export LDFLAGS="$LLVM_LDFLAGS -L$llvm_path/lib -L$gettext_path/lib -L$openssl_path/lib -L$zlib_path/lib -L$bzip2_path/lib -L$readline_path/lib -L$HOMEBREW_PREFIX/lib $LDFLAGS"
 export LS_OPTIONS="--color=auto"
