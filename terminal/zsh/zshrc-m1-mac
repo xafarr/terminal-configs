@@ -231,7 +231,7 @@ _fzf_compgen_dir() {
 }
 
 # FZF Completion
-[ -f "$HOME/.fzf.zsh" ] && source "$HOME/.fzf.zsh"
+eval "$(fzf --zsh)"
 
 # For oraganization specific extra configuration
 if [ -f ~/.additional-env-config ]; then

@@ -214,7 +214,7 @@ _fzf_compgen_dir() {
 [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
 
 # FZF Completion
-[ -f "$HOME/.fzf.bash" ] && source "$HOME/.fzf.bash"
+eval "$(fzf --bash)"
 
 # For oraganization specific extra configuration
 if [ -f "$HOME/.additional-env-config" ]; then
