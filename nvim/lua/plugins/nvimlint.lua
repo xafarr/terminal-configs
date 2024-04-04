@@ -29,7 +29,7 @@ return {
           source = "markdownlint",
           severity = vim.diagnostic.severity.WARN,
         }),
-        args = { "--config", neoconfigs.stdConfigPath .. "/markdownlint.json" },
+        args = { "--config", neoconfigs.stdConfigPath .. "/.markdownlint.jsonc" },
       }
     end
   end,

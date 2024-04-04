@@ -40,7 +40,7 @@ return {
         },
         formatters = {
           markdownlint = {
-            prepend_args = { "--config", neoconfigs.stdConfigPath .. "/markdownlint.json" },
+            prepend_args = { "--config", neoconfigs.stdConfigPath .. "/.markdownlint.jsonc" },
           },
           shfmt = {
             prepend_args = { "-i", "4" },
