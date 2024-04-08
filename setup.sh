@@ -84,9 +84,14 @@ if ! [ -f "$BREW" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
+# Install SDKMAN and Java
+if ! command -v sdk >/dev/null; then
+    echo "Installing SDKMAN"
+    curl -s "https://get.sdkman.io" | bash || true
+fi
+
 BREW_BIN="$HOMEBREW_PREFIX/bin"
 BREW="$BREW_BIN/brew"
-export PATH="$BREW_BIN:$PATH"
 
 if ! [ -f "$BREW_BIN/git" ]; then
     $BREW install git || true
@@ -166,17 +171,6 @@ fi
 if [[ $($BREW list | grep -iwc bash-completion@2) -eq 0 ]]; then
     $BREW install bash-completion@2 || true
 fi
-
-# Library paths
-gettext_path=$($BREW --prefix gettext)
-openssl_path=$($BREW --prefix openssl)
-bzip2_path=$($BREW --prefix bzip2)
-readline_path=$($BREW --prefix readline)
-zlib_path=$($BREW --prefix zlib)
-llvm_path=$($BREW --prefix llvm)
-
-# Prepend LLVM binaries to PATH
-export PATH="$llvm_path/bin:$PATH"
 
 # Clone terminal-configs
 PROJECTS_DIR="$HOME/Documents/Projects"
@@ -267,18 +261,46 @@ elif [ -d "$XDG_CONFIG_HOME/lazygit" ]; then
 fi
 ln -s "$PROJECTS_DIR/terminal-configs/git/lazygit" "$XDG_CONFIG_HOME/lazygit" && echo "lazygit link created"
 
-# Export CPPFLAGS and LDGLIBS for compiling C programs
-export CPPFLAGS="-I$gettext_path/include -I$openssl_path/include -I$bzip2_path/include -I$readline_path/include -I$zlib_path/include -I$llvm_path/include -I$HOMEBREW_PREFIX/include $CPPFLAGS"
-# LLVM bundled libc++ LDFLAGS
-LLVM_LDFLAGS="-L$llvm_path/lib/c++ -Wl,-rpath,$llvm_path/lib/c++"
-export LDFLAGS="-L$gettext_path/lib -L$openssl_path/lib -L$zlib_path/lib -L$bzip2_path/lib -L$readline_path/lib -L$llvm_path/lib $LLVM_LDFLAGS -L$HOMEBREW_PREFIX/lib $LDFLAGS"
+export LDFLAGS="-L$HOMEBREW_PREFIX/opt/llvm/lib/c++ -Wl,\
+-rpath,$HOMEBREW_PREFIX/opt/llvm/lib/c++ \
+-L$HOMEBREW_PREFIX/lib \
+-L$HOMEBREW_PREFIX/opt/curl/lib \
+-L$HOMEBREW_PREFIX/opt/gettext/lib \
+-L$HOMEBREW_PREFIX/opt/bzip2/lib \
+-L$HOMEBREW_PREFIX/opt/zlib/lib \
+-L$HOMEBREW_PREFIX/opt/readline/lib \
+-L$HOMEBREW_PREFIX/opt/openssl@1.1/lib \
+-L$HOMEBREW_PREFIX/opt/openssl@3/lib \
+-L$HOMEBREW_PREFIX/opt/libffi/lib"
 
-# Install SDKMAN and Java
-echo "Installing SDKMAN"
-curl -s "https://get.sdkman.io" | bash || true
+export CPPFLAGS="-I$HOMEBREW_PREFIX/include \
+-I$HOMEBREW_PREFIX/opt/llvm/include \
+-I$HOMEBREW_PREFIX/opt/curl/include \
+-I$HOMEBREW_PREFIX/opt/gettext/include \
+-I$HOMEBREW_PREFIX/opt/bzip2/include \
+-I$HOMEBREW_PREFIX/opt/zlib/include \
+-I$HOMEBREW_PREFIX/opt/readline/include \
+-I$HOMEBREW_PREFIX/opt/openssl@1.1/include \
+-I$HOMEBREW_PREFIX/opt/openssl@3/include \
+-I$HOMEBREW_PREFIX/opt/libffi/include"
+
+export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/libffi/lib/pkgconfig \
+$HOMEBREW_PREFIX/opt/openssl@1.1/lib/pkgconfig \
+$HOMEBREW_PREFIX/opt/openssl@3/lib/pkgconfig \
+$HOMEBREW_PREFIX/opt/curl/lib/pkgconfig \
+$HOMEBREW_PREFIX/opt/zlib/lib/pkgconfig \
+$HOMEBREW_PREFIX/opt/readline/lib/pkgconfig \
+$HOMEBREW_PREFIX/share/pkgconfig"
+
+# Prepend Homebrew bin and LLVM binaries to PATH
+export PATH="$BREW_BIN:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
+
+echo "Initializing SDKMAN"
 source "$HOME/.sdkman/bin/sdkman-init.sh"
+echo "SDKMAN version"
 sdk version || true
-echo "Installing Java"
+echo "Installing Java using SDKMAN"
 sdk install java || true
 
 # Installing Python, nodejs and Golang using asdf
