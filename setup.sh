@@ -159,6 +159,12 @@ fi
 if [[ $($BREW list | grep -iwc llvm) -eq 0 ]]; then
     $BREW install llvm || true
 fi
+if [[ $($BREW list | grep -iwc font-jetbrains-mono-nerd-font) -eq 0 ]]; then
+    $BREW install font-jetbrains-mono-nerd-font || true
+fi
+if [[ $($BREW list | grep -iwc font-fira-code-nerd-font) -eq 0 ]]; then
+    $BREW install font-fira-code-nerd-font || true
+fi
 
 # For zsh
 if [[ $($BREW list | grep -iwc zsh-syntax-highlighting) -eq 0 ]]; then
