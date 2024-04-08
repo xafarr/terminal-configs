@@ -33,12 +33,6 @@ export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
 export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 
 # Library paths
-gettext_path=$(brew --prefix gettext)
-openssl_path=$(brew --prefix openssl)
-bzip2_path=$(brew --prefix bzip2)
-readline_path=$(brew --prefix readline)
-zlib_path=$(brew --prefix zlib)
-llvm_path=$(brew --prefix llvm)
 dotnet_root=$(dirname "$(which dotnet)")
 
 export PATH="$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH"
@@ -49,9 +43,9 @@ export GOPATH="$HOME/Documents/Go"
 export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gettext/bin:$PATH"
-export PATH="$bzip2_path/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/bzip2/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$llvm_path/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
 export DOTNET_ROOT="$dotnet_root"
 export PATH="$HOME/.dotnet/tools:$PATH"
 
@@ -123,10 +117,37 @@ export SSH_KEY_PATH="$HOME/.ssh/id_rsa"
 _tty=$(tty)
 export GPG_TTY=$_tty
 
-# CPPFLAGS and LDFLAGS
-export CPPFLAGS="-I$llvm_path/include -I$gettext_path/include -I$openssl_path/include -I$bzip2_path/include -I$readline_path/include -I$zlib_path/include -I$HOMEBREW_PREFIX/include $CPPFLAGS"
-LLVM_LDFLAGS="-L$llvm_path/lib/c++ -Wl,-rpath,$llvm_path/lib/c++"
-export LDFLAGS="$LLVM_LDFLAGS -L$llvm_path/lib -L$gettext_path/lib -L$openssl_path/lib -L$zlib_path/lib -L$bzip2_path/lib -L$readline_path/lib -L$HOMEBREW_PREFIX/lib $LDFLAGS"
+export LDFLAGS="-L$HOMEBREW_PREFIX/opt/llvm/lib/c++ -Wl,\
+-rpath,$HOMEBREW_PREFIX/opt/llvm/lib/c++ \
+-L$HOMEBREW_PREFIX/lib \
+-L$HOMEBREW_PREFIX/opt/curl/lib \
+-L$HOMEBREW_PREFIX/opt/gettext/lib \
+-L$HOMEBREW_PREFIX/opt/bzip2/lib \
+-L$HOMEBREW_PREFIX/opt/zlib/lib \
+-L$HOMEBREW_PREFIX/opt/readline/lib \
+-L$HOMEBREW_PREFIX/opt/openssl@1.1/lib \
+-L$HOMEBREW_PREFIX/opt/openssl@3/lib \
+-L$HOMEBREW_PREFIX/opt/libffi/lib"
+
+export CPPFLAGS="-I$HOMEBREW_PREFIX/include \
+-I$HOMEBREW_PREFIX/opt/llvm/include \
+-I$HOMEBREW_PREFIX/opt/curl/include \
+-I$HOMEBREW_PREFIX/opt/gettext/include \
+-I$HOMEBREW_PREFIX/opt/bzip2/include \
+-I$HOMEBREW_PREFIX/opt/zlib/include \
+-I$HOMEBREW_PREFIX/opt/readline/include \
+-I$HOMEBREW_PREFIX/opt/openssl@1.1/include \
+-I$HOMEBREW_PREFIX/opt/openssl@3/include \
+-I$HOMEBREW_PREFIX/opt/libffi/include"
+
+export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/libffi/lib/pkgconfig \
+$HOMEBREW_PREFIX/opt/openssl@1.1/lib/pkgconfig \
+$HOMEBREW_PREFIX/opt/openssl@3/lib/pkgconfig \
+$HOMEBREW_PREFIX/opt/curl/lib/pkgconfig \
+$HOMEBREW_PREFIX/opt/zlib/lib/pkgconfig \
+$HOMEBREW_PREFIX/opt/readline/lib/pkgconfig \
+$HOMEBREW_PREFIX/share/pkgconfig"
+
 export LS_OPTIONS="--color=auto"
 
 alias ls='ls $LS_OPTIONS'
@@ -222,8 +243,7 @@ if [ -f "$HOME/.additional-env-config" ]; then
 fi
 
 # For asdf
-asdf_path=$(brew --prefix asdf)
-source "$asdf_path"/libexec/asdf.sh
+[[ -r "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
