@@ -1,5 +1,5 @@
 # Import external configurations
-import = ["~/.config/alacritty/tokyonight-moon.toml"]
+import = ["~/.config/alacritty/catppuccin-macchiato.toml"]
 
 [env]
 TERM = "xterm-256color"
