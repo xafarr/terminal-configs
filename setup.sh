@@ -208,7 +208,7 @@ if [ -h "$HOME/.zshrc" ]; then
 elif [ -f "$HOME/.zshrc" ]; then
     mv "$HOME/.zshrc" "$HOME/.zshrc.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/zsh/zshrc-m1-mac" "$HOME/.zshrc" && echo ".zshrc link created"
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/zsh/zshrc" "$HOME/.zshrc" && echo ".zshrc link created"
 
 if [ -n "${SETUP_ON_MACOS-}" ]; then
     if [ -f "$HOME/.bash_profile" ]; then
