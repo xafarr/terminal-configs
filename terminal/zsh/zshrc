@@ -82,11 +82,11 @@ export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
 #--color=marker:#c3e88d,spinner:#c3e88d,header:#c3e88d"
 
 # For Tokyonight Storm dark theme
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
---color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 \
---color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
---color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
---color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
+#export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+#--color=fg:#c0caf5,bg:#24283b,hl:#ff9e64 \
+#--color=fg+:#c0caf5,bg+:#292e42,hl+:#ff9e64 \
+#--color=info:#7aa2f7,prompt:#7dcfff,pointer:#7dcfff \
+#--color=marker:#9ece6a,spinner:#9ece6a,header:#9ece6a"
 
 # For Edge light theme
 #export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
@@ -101,6 +101,12 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 #--color=fg+:#c5cdd9,bg+:#262729,hl+:#5dbbc1
 #--color=info:#88909f,prompt:#ec7279,pointer:#d38aea
 #--color=marker:#a0c980,spinner:#ec7279,header:#5dbbc1'
+
+# For Catppuccin Macchiato dark theme
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+--color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+--color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
 
 #--------------------------------------------------
 # zsh-completions settings
