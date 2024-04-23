@@ -105,6 +105,9 @@ fi
 if ! [ -f "$BREW_BIN/rg" ]; then
     $BREW install ripgrep || true
 fi
+if ! [ -f "$BREW_BIN/tree" ]; then
+    $BREW install tree || true
+fi
 if ! [ -f "$BREW_BIN/tmux" ]; then
     $BREW install tmux || true
 fi
