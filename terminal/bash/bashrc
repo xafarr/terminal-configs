@@ -66,34 +66,48 @@ export LS_COLORS="rs=0:no=00:mi=00:mh=00:ln=01;36:or=01;31:di=01;34:ow=04;01;34:
 # FZF Settings
 ###################################################
 export FZF_BASE="$HOMEBREW_PREFIX/opt/fzf"
-FD_OPTIONS="--follow --hidden --exclude .git --exclude node_modules"
+
 # Use ripgrep to find files
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --smart-case --hidden --follow --glob "!.git" --glob "!node_modules" 2> /dev/null'
-export FZF_DEFAULT_OPTS="\
---header='Search for Files' \
---prompt='Files > ' \
---no-mouse \
---height=80% \
---layout=reverse \
---border \
---multi \
---inline-info \
---bind='f2:toggle-preview' \
---bind='ctrl-d:preview-half-page-down' \
---bind='ctrl-u:preview-half-page-up' \
---preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -500' \
---preview-window='right:60%:wrap' \
---preview-label='File Preview'"
+export FZF_DEFAULT_OPTS="
+  --color=header:italic
+  --no-mouse
+  --height=80%
+  --layout=reverse
+  --border
+  --multi
+  --inline-info
+  --bind='f2:toggle-preview'
+  --preview-window='right:65%:wrap'
+  --preview-label='Preview'"
 
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_CTRL_T_OPTS=
+export FZF_CTRL_T_OPTS="
+  --prompt='Files > '
+  --header='CTRL-T: Switch between Files/Directories'
+  --bind='ctrl-t:transform:[[ ! \$FZF_PROMPT =~ Files ]] && echo \"change-prompt(Files > )+reload(\$FZF_DEFAULT_COMMAND)\" ||
+    echo \"change-prompt(Directories > )+reload(\$FZF_ALT_C_COMMAND)\"'
+  --bind='ctrl-d:preview-half-page-down'
+  --bind='ctrl-u:preview-half-page-up'
+  --preview='[[ \$FZF_PROMPT =~ Files ]] &&
+    ([[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --style=numbers --color=always {} || cat {}) 2> /dev/null | head -500) ||
+    tree -C {}'"
 
+export FD_OPTIONS="--follow --hidden --exclude .git --exclude node_modules"
 export FZF_ALT_C_COMMAND="fd --type d $FD_OPTIONS"
-export FZF_ALT_C_OPTS="\
---header='Search for Directories' \
---prompt='Directories > ' \
---preview='tree -C {}' \
---preview-label='Directory Preview'"
+export FZF_ALT_C_OPTS="
+  --header='Search for Directories'
+  --prompt='Directories > '
+  --preview='tree -C {}'
+  --preview-label='Directory Tree'"
+
+# CTRL-Y to copy the command into clipboard using pbcopy
+export FZF_CTRL_R_OPTS="
+  --prompt='History > '
+  --preview='echo {}'
+  --preview-window=up:3:hidden:wrap
+  --bind='ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --header='Press CTRL-Y to copy command into clipboard'"
 
 export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
 
