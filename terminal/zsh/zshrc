@@ -109,6 +109,9 @@ export FZF_CTRL_R_OPTS="
   --bind='ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
   --header='Press CTRL-Y to copy command into clipboard'"
 
+# Options to fzf command
+export FZF_COMPLETION_OPTS="--border --info=inline"
+
 export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
 
 # For Tokyonight Moon dark theme
