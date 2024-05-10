@@ -29,6 +29,45 @@ gen_ssh_keys() {
     ssh-keygen -t ed25519 -C "${email:-'xafarr@gmail.com'}" || true
 }
 
+install_fonts_in_linux() {
+    declare -a fonts=(
+        "FiraCode"
+        "JetBrainsMono"
+    )
+
+    fonts_dir="${HOME}/.local/share/fonts"
+    if [[ ! -d "$fonts_dir" ]]; then
+        mkdir -p "$fonts_dir"
+    fi
+
+    latest_version=$(curl -s "https://api.github.com/repos/ryanoasis/nerd-fonts/tags" | jq -r '.[0].name')
+
+    for font in "${fonts[@]}"; do
+        zip_file="${font}.zip"
+        download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${latest_version}/${zip_file}"
+        echo "Downloading and installing '$font'..."
+        wget "$download_url" || {
+            echo "Error: Unable to download '$font'."
+            return 1
+        }
+        unzip "$zip_file" -d "$fonts_dir"
+        rm "$zip_file"
+        echo "'$font' installed successfully."
+    done
+
+    find "$fonts_dir" -name '*Windows Compatible*' -delete
+
+    if command -v fc-cache &>/dev/null; then
+        fc-cache -f >/dev/null || {
+            echo "Error: Unable to update font cache. Exiting."
+            exit 1
+        }
+        echo "Font cache updated."
+    else
+        echo "Command 'fc-cache' not found. Make sure to have the necessary dependencies installed to update the font cache."
+    fi
+}
+
 # USER isn't always set so provide a fall back for the installer and subprocesses.
 current_user="$(id -un)"
 if [[ "$current_user" = "root" ]]; then
@@ -174,12 +213,6 @@ fi
 if [[ $($BREW list | grep -iwc llvm) -eq 0 ]]; then
     $BREW install llvm || true
 fi
-if [[ $($BREW list | grep -iwc font-jetbrains-mono-nerd-font) -eq 0 ]]; then
-    $BREW install font-jetbrains-mono-nerd-font || true
-fi
-if [[ $($BREW list | grep -iwc font-fira-code-nerd-font) -eq 0 ]]; then
-    $BREW install font-fira-code-nerd-font || true
-fi
 
 # For zsh
 if [[ $($BREW list | grep -iwc zsh-syntax-highlighting) -eq 0 ]]; then
@@ -194,6 +227,18 @@ fi
 # For bash
 if [[ $($BREW list | grep -iwc bash-completion@2) -eq 0 ]]; then
     $BREW install bash-completion@2 || true
+fi
+
+# Install Fonts
+if [[ -n "${SETUP_ON_MACOS-}" ]]; then
+    if [[ $($BREW list | grep -iwc font-jetbrains-mono-nerd-font) -eq 0 ]]; then
+        $BREW install font-jetbrains-mono-nerd-font || true
+    fi
+    if [[ $($BREW list | grep -iwc font-fira-code-nerd-font) -eq 0 ]]; then
+        $BREW install font-fira-code-nerd-font || true
+    fi
+elif [[ -n "${SETUP_ON_LINUX-}" ]]; then
+    install_fonts_in_linux
 fi
 
 # Clone terminal-configs
