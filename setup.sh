@@ -35,9 +35,9 @@ install_fonts_in_linux() {
         "JetBrainsMono"
     )
 
-    fonts_dir="${HOME}/.local/share/fonts"
-    if [[ ! -d "$fonts_dir" ]]; then
-        mkdir -p "$fonts_dir"
+    local_bin="${HOME}/.local/share/fonts"
+    if [[ ! -d "$local_bin" ]]; then
+        mkdir -p "$local_bin"
     fi
 
     latest_version=$(curl -s "https://api.github.com/repos/ryanoasis/nerd-fonts/tags" | jq -r '.[0].name')
@@ -50,12 +50,12 @@ install_fonts_in_linux() {
             echo "Error: Unable to download '$font'."
             return 1
         }
-        unzip "$zip_file" -d "$fonts_dir"
+        unzip "$zip_file" -d "$local_bin"
         rm "$zip_file"
         echo "'$font' installed successfully."
     done
 
-    find "$fonts_dir" -name '*Windows Compatible*' -delete
+    find "$local_bin" -name '*Windows Compatible*' -delete
 
     if command -v fc-cache &>/dev/null; then
         fc-cache -f >/dev/null || {
@@ -198,14 +198,22 @@ else
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
     # your system-wide PATH)
-    ln -sf ~/.local/kitty.app/bin/kitty ~/.local/kitty.app/bin/kitten ~/.local/bin/
+    local_bin="${HOME}/.local/bin"
+    local_share_app="${HOME}/.local/share/applications"
+    if [[ ! -d "$local_bin" ]]; then
+        mkdir -p "$local_bin"
+    fi
+    if [[ ! -d "$local_share_app" ]]; then
+        mkdir -p "$local_share_app"
+    fi
+    ln -sf "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/kitty.app/bin/kitten" "$local_bin"
     # Place the kitty.desktop file somewhere it can be found by the OS
-    cp ~/.local/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
+    cp "$HOME/.local/kitty.app/share/applications/kitty.desktop" "$HOME/.local/share/applications/"
     # If you want to open text files and images in kitty via your file manager also add the kitty-open.desktop file
-    cp ~/.local/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
+    cp "$HOME/.local/kitty.app/share/applications/kitty-open.desktop" "$HOME/.local/share/applications/"
     # Update the paths to the kitty and its icon in the kitty desktop file(s)
-    sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-    sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+    sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" "$HOME/.local/share/applications/kitty*.desktop"
+    sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" "$HOME/.local/share/applications/kitty*.desktop"
 fi
 if [[ $($BREW list | grep -iwc bzip2) -eq 0 ]]; then
     $BREW install bzip2 || true
