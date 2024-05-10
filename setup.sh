@@ -70,7 +70,10 @@ if ! command -v curl >/dev/null; then
 fi
 
 # Generate SSH keypairs
-gen_ssh_keys
+read -r -p "Would you like to generate ssh keypairs? [Y/n]: " response
+if [[ $response =~ ^(y|Y| ) ]] || [[ -z $response ]]; then
+    gen_ssh_keys
+fi
 
 # Required installation paths.
 if [[ -n "${SETUP_ON_MACOS-}" ]]; then
