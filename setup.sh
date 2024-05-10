@@ -185,6 +185,9 @@ fi
 if [[ $($BREW list | grep -iwc zsh-autosuggestions) -eq 0 ]]; then
     $BREW install zsh-autosuggestions || true
 fi
+if [[ $($BREW list | grep -iwc z) -eq 0 ]]; then
+    $BREW install z || true
+fi
 # For bash
 if [[ $($BREW list | grep -iwc bash-completion@2) -eq 0 ]]; then
     $BREW install bash-completion@2 || true
