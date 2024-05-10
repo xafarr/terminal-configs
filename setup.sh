@@ -50,13 +50,13 @@ fi
 if [ -n "${SETUP_ON_LINUX-}" ]; then
     if [[ -x "$(command -v apt-get)" ]]; then
         (sudo apt-get update && sudo apt-get upgrade -y) || true
-        (sudo apt-get install -y build-essential zip unzip make curl wget git libssl-dev zlib1g-dev \
+        (sudo apt-get install -y build-essential zip unzip make curl wget git fontconfig tar jq libssl-dev zlib1g-dev \
             libbz2-dev libreadline-dev libsqlite3-dev libncursesw5-dev xz-utils tk-dev \
             libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev) || true
     elif [[ -x "$(command -v yum)" ]]; then
         sudo yum upgrade -y || true
         sudo yum groupinstall 'Development Tools' || true
-        sudo yum install zip unzip curl wget git || true
+        sudo yum install zip unzip curl wget git fontconfig tar jq || true
     elif [[ -x "$(command -v pacman)" ]]; then
         sudo pacman -S base-devel || true
     elif [[ -x "$(command -v apk)" ]]; then
