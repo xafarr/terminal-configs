@@ -10,7 +10,7 @@ if ! [[ -d "${XDG_CONFIG_HOME-}" ]]; then
 fi
 
 abort() {
-    printf "%s\n" "$@" >&2
+    error "$@"
     exit 1
 }
 
@@ -20,8 +20,44 @@ if [ -z "${BASH_VERSION:-}" ]; then
     abort "Bash is required to interpret this script."
 fi
 
+# string formatters
+if [[ -t 1 ]]; then
+    tty_escape() { printf "\033[%sm" "$1"; }
+else
+    tty_escape() { :; }
+fi
+tty_mkbold() { tty_escape "1;$1"; }
+tty_underline="$(tty_escape "4;39")"
+tty_blue="$(tty_mkbold 34)"
+tty_red="$(tty_mkbold 31)"
+tty_yellow="$(tty_mkbold 33)"
+tty_bold="$(tty_mkbold 39)"
+tty_reset="$(tty_escape 0)"
+
+shell_join() {
+    local arg
+    printf "%s" "$1"
+    shift
+    for arg in "$@"; do
+        printf " "
+        printf "%s" "${arg// /\ }"
+    done
+}
+
 chomp() {
     printf "%s" "${1/"$'\n'"/}"
+}
+
+info() {
+    printf "${tty_blue}==>${tty_bold} %s${tty_reset}\n" "$(shell_join "$@")"
+}
+
+warn() {
+    printf "${tty_yellow}==> ${tty_underline}${tty_yellow}Warning${tty_reset}${tty_bold}: %s\n" "$(chomp "$1")" >&2
+}
+
+error() {
+    printf "${tty_red}==> ${tty_underline}${tty_red}Error${tty_reset}${tty_bold}: %s\n" "$(chomp "$1")" >&2
 }
 
 gen_ssh_keys() {
@@ -29,16 +65,16 @@ gen_ssh_keys() {
 
     case "${algo}" in
     rsa)
-        echo "Using RSA algorithm"
+        info "Using RSA algorithm"
         ssh_keygen_str="ssh-keygen -t rsa -b 4096 -C"
         ;;
     *)
-        echo "Using ED25519 algorithm"
+        info "Using ED25519 algorithm"
         ssh_keygen_str="ssh-keygen -t ed25519 -C"
         ;;
     esac
     read -rp "Enter the email to generate ssh keypairs [xafarr@gmail.com]: " email
-    $ssh_keygen_str "${email:-'xafarr@gmail.com'}" || true
+    $ssh_keygen_str "${email:-'xafarr@gmail.com'}" || error "Failed to generate ssh keypair"
 }
 
 install_fonts_in_linux() {
@@ -57,26 +93,20 @@ install_fonts_in_linux() {
     for font in "${fonts[@]}"; do
         zip_file="${font}.zip"
         download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${latest_version}/${zip_file}"
-        echo "Downloading and installing '$font'..."
-        wget "$download_url" || {
-            echo "Error: Unable to download '$font'."
-            return 1
-        }
+        info "Downloading and installing '$font'..."
+        wget "$download_url" || error "Unable to download '$font'."
         unzip "$zip_file" -d "$local_bin"
         rm "$zip_file"
-        echo "'$font' installed successfully."
+        info "'$font' installed successfully."
     done
 
     find "$local_bin" -name '*Windows Compatible*' -delete
 
     if command -v fc-cache &>/dev/null; then
-        fc-cache -f >/dev/null || {
-            echo "Error: Unable to update font cache. Exiting."
-            exit 1
-        }
-        echo "Font cache updated."
+        fc-cache -f >/dev/null || error "Unable to update font cache."
+        info "Font cache updated."
     else
-        echo "Command 'fc-cache' not found. Make sure to have the necessary dependencies installed to update the font cache."
+        warn "Command 'fc-cache' not found. Make sure to have the necessary dependencies installed to update the font cache."
     fi
 }
 
@@ -100,18 +130,18 @@ fi
 # Install dev tools in linux
 if [ -n "${SETUP_ON_LINUX-}" ]; then
     if [[ -x "$(command -v apt-get)" ]]; then
-        (sudo apt-get update && sudo apt-get upgrade -y) || true
+        (sudo apt-get update && sudo apt-get upgrade -y) || error "Failed to update apt packages."
         (sudo apt-get install -y build-essential zip unzip make curl wget git fontconfig tar jq libssl-dev zlib1g-dev \
             libbz2-dev libreadline-dev libsqlite3-dev libncursesw5-dev xz-utils tk-dev \
-            libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev) || true
+            libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev) || error "Failed to install dependencies for $(uname -s)."
     elif [[ -x "$(command -v dnf)" ]]; then
-        sudo dnf upgrade -y || true
-        sudo dnf group install -y 'Development Tools' || true
-        sudo dnf install -y zip unzip curl wget git fontconfig tar jq || true
+        sudo dnf upgrade -y || error "Failed to update dnf packages."
+        sudo dnf group install -y 'Development Tools' || error "Failed to install dnf development tools."
+        sudo dnf install -y zip unzip curl wget git fontconfig tar jq || error "Failed to install dependencies for $(uname -s)."
     elif [[ -x "$(command -v pacman)" ]]; then
-        sudo pacman -S base-devel || true
+        sudo pacman -S base-devel || error "Failed to install base-devel."
     elif [[ -x "$(command -v apk)" ]]; then
-        sudo apk add build-base || true
+        sudo apk add build-base || error "Failed to install build-base."
     fi
 fi
 
@@ -149,103 +179,103 @@ fi
 
 # Install SDKMAN and Java
 if ! command -v sdk >/dev/null; then
-    echo "Installing SDKMAN"
-    curl -s "https://get.sdkman.io" | bash || true
+    info "Installing SDKMAN"
+    curl -s "https://get.sdkman.io" | bash || error "Failed to install SDKMAN."
 fi
 
 BREW_BIN="$HOMEBREW_PREFIX/bin"
 BREW="$BREW_BIN/brew"
 
 if ! [ -f "$BREW_BIN/git" ]; then
-    $BREW install git || true
+    $BREW install git || error "Failed to install git."
 fi
-if ! echo "$BREW_BIN/gcc-*" &>/dev/null; then
-    $BREW install gcc || true
+if ! echo $BREW_BIN/gcc-* &>/dev/null; then
+    $BREW install gcc || error "Failed to install gcc."
 fi
 if ! [ -f "$BREW_BIN/fd" ]; then
-    $BREW install fd || true
+    $BREW install fd || error "Failed to install fd."
 fi
 if ! [ -f "$BREW_BIN/rg" ]; then
-    $BREW install ripgrep || true
+    $BREW install ripgrep || error "Failed to install ripgrep."
 fi
 if ! [ -f "$BREW_BIN/tree" ]; then
-    $BREW install tree || true
+    $BREW install tree || error "Failed to install tree."
 fi
 if ! [ -f "$BREW_BIN/tmux" ]; then
-    $BREW install tmux || true
+    $BREW install tmux || error "Failed to install tmux."
 fi
 if ! [ -f "$BREW_BIN/fzf" ]; then
-    $BREW install fzf || true
+    $BREW install fzf || error "Failed to install fzf."
 fi
 if ! [ -f "$BREW_BIN/jq" ]; then
-    $BREW install jq || true
+    $BREW install jq || error "Failed to install jq."
 fi
 if ! [ -f "$BREW_BIN/bash" ]; then
-    $BREW install bash || true
+    $BREW install bash || error "Failed to install bash."
 fi
 if ! [ -f "$BREW_BIN/zsh" ]; then
-    $BREW install zsh || true
+    $BREW install zsh || error "Failed to install zsh."
 fi
 if ! [ -f "$BREW_BIN/delta" ]; then
-    $BREW install git-delta || true
+    $BREW install git-delta || error "Failed to install git-delta."
 fi
 if ! [ -f "$BREW_BIN/lazygit" ]; then
-    $BREW install lazygit || true
+    $BREW install lazygit || error "Failed to install lazygit."
 fi
 if ! [ -f "$BREW_BIN/asdf" ]; then
-    $BREW install asdf || true
+    $BREW install asdf || error "Failed to install asdf."
 fi
 if ! [ -f "$BREW_BIN/starship" ]; then
-    $BREW install starship || true
+    $BREW install starship || error "Failed to install starship."
 fi
 if ! [ -f "$BREW_BIN/nvim" ]; then
-    $BREW install neovim || true
+    $BREW install neovim || error "Failed to install neovim."
 fi
 if ! [ -f "$BREW_BIN/bat" ]; then
-    $BREW install bat || true
+    $BREW install bat || error "Failed to install bat."
 fi
 if [[ $($BREW list | grep -iwc bzip2) -eq 0 ]]; then
-    $BREW install bzip2 || true
+    $BREW install bzip2 || error "Failed to install bzip2."
 fi
 if [[ $($BREW list | grep -iwc zlib) -eq 0 ]]; then
-    $BREW install zlib || true
+    $BREW install zlib || error "Failed to install zlib."
 fi
 if [[ $($BREW list | grep -iwc readline) -eq 0 ]]; then
-    $BREW install readline || true
+    $BREW install readline || error "Failed to install readline."
 fi
 if [[ $($BREW list | grep -iwc gettext) -eq 0 ]]; then
-    $BREW install gettext || true
+    $BREW install gettext || error "Failed to install gettext."
 fi
 if [[ $($BREW list | grep -iwc openssl) -eq 0 ]]; then
-    $BREW install openssl || true
+    $BREW install openssl || error "Failed to install openssl."
 fi
 if [[ $($BREW list | grep -iwc llvm) -eq 0 ]]; then
-    $BREW install llvm || true
+    $BREW install llvm || error "Failed to install llvm."
 fi
 
 # For zsh
 if [[ $($BREW list | grep -iwc zsh-syntax-highlighting) -eq 0 ]]; then
-    $BREW install zsh-syntax-highlighting || true
+    $BREW install zsh-syntax-highlighting || error "Failed to install zsh-syntax-highlighting."
 fi
 if [[ $($BREW list | grep -iwc zsh-autosuggestions) -eq 0 ]]; then
-    $BREW install zsh-autosuggestions || true
+    $BREW install zsh-autosuggestions || error "Failed to install zsh-autosuggestions."
 fi
 if [[ $($BREW list | grep -iwc z) -eq 0 ]]; then
-    $BREW install z || true
+    $BREW install z || error "Failed to install z."
 fi
 # For bash
 if [[ $($BREW list | grep -iwc bash-completion@2) -eq 0 ]]; then
-    $BREW install bash-completion@2 || true
+    $BREW install bash-completion@2 || error "Failed to install bash-completion@2."
 fi
 
 # Install Fonts
 if [[ -n "${SETUP_ON_MACOS-}" ]]; then
     $BREW tap homebrew/cask-fonts
     if [[ $($BREW list | grep -iwc font-jetbrains-mono-nerd-font) -eq 0 ]]; then
-        $BREW install font-jetbrains-mono-nerd-font || true
+        $BREW install font-jetbrains-mono-nerd-font || error "Failed to install font-jetbrains-mono-nerd-font."
     fi
     if [[ $($BREW list | grep -iwc font-fira-code-nerd-font) -eq 0 ]]; then
-        $BREW install font-fira-code-nerd-font || true
+        $BREW install font-fira-code-nerd-font || error "Failed to install font-fira-code-nerd-font."
     fi
 elif [[ -n "${SETUP_ON_LINUX-}" ]]; then
     install_fonts_in_linux
@@ -258,7 +288,7 @@ if ! [ -d "$PROJECTS_DIR" ]; then
 fi
 if ! [ -d "$PROJECTS_DIR/terminal-configs" ]; then
     git clone https://github.com/xafarr/terminal-configs.git "$PROJECTS_DIR/terminal-configs"
-    echo "terminal-configs cloned"
+    info "terminal-configs cloned"
 fi
 
 # Create symlinks in HOME directory
@@ -267,27 +297,27 @@ if [ -h "$HOME/.tmux.conf" ]; then
 elif [ -f "$HOME/.tmux.conf" ]; then
     mv "$HOME/.tmux.conf" "$HOME/.tmux.conf.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/tmux/tmux.conf" "$HOME/.tmux.conf" && echo ".tmux.conf link created"
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/tmux/tmux.conf" "$HOME/.tmux.conf" && info ".tmux.conf link created"
 
 if [ -h "$HOME/.bashrc" ]; then
     rm "$HOME/.bashrc"
 elif [ -f "$HOME/.bashrc" ]; then
     mv "$HOME/.bashrc" "$HOME/.bashrc.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/bash/bashrc" "$HOME/.bashrc" && echo ".bashrc link created"
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/bash/bashrc" "$HOME/.bashrc" && info ".bashrc link created"
 
 if [ -h "$HOME/.zshrc" ]; then
     rm "$HOME/.zshrc"
 elif [ -f "$HOME/.zshrc" ]; then
     mv "$HOME/.zshrc" "$HOME/.zshrc.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/zsh/zshrc" "$HOME/.zshrc" && echo ".zshrc link created"
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/zsh/zshrc" "$HOME/.zshrc" && info ".zshrc link created"
 
 if [ -n "${SETUP_ON_MACOS-}" ]; then
     if [ -f "$HOME/.bash_profile" ]; then
         mv "$HOME/.bash_profile" "$HOME/.bash_profile.bak"
     fi
-    ln -s "$PROJECTS_DIR/terminal-configs/terminal/bash/bash_profile" "$HOME/.bash_profile" && echo ".bash_profile link created"
+    ln -s "$PROJECTS_DIR/terminal-configs/terminal/bash/bash_profile" "$HOME/.bash_profile" && info ".bash_profile link created"
 fi
 
 # Create symlinks in .config directory
@@ -296,42 +326,42 @@ if [ -h "$XDG_CONFIG_HOME/nvim" ]; then
 elif [ -d "$XDG_CONFIG_HOME/nvim" ]; then
     mv "$XDG_CONFIG_HOME/nvim" "$XDG_CONFIG_HOME/nvim.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/nvim" "$XDG_CONFIG_HOME/nvim" && echo "neovim link created"
+ln -s "$PROJECTS_DIR/terminal-configs/nvim" "$XDG_CONFIG_HOME/nvim" && info "neovim link created"
 
 if [ -h "$XDG_CONFIG_HOME/starship.toml" ]; then
     rm "$XDG_CONFIG_HOME/starship.toml"
 elif [ -f "$XDG_CONFIG_HOME/starship.toml" ]; then
     mv "$XDG_CONFIG_HOME/starship.toml" "$XDG_CONFIG_HOME/starship.toml.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/starship/starship.toml" "$XDG_CONFIG_HOME/starship.toml" && echo "starship.toml link created"
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/starship/starship.toml" "$XDG_CONFIG_HOME/starship.toml" && info "starship.toml link created"
 
 if [ -h "$XDG_CONFIG_HOME/get_git_host.py" ]; then
     rm "$XDG_CONFIG_HOME/get_git_host.py"
 elif [ -f "$XDG_CONFIG_HOME/get_git_host.py" ]; then
     mv "$XDG_CONFIG_HOME/get_git_host.py" "$XDG_CONFIG_HOME/get_git_host.py.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/starship/get_git_host.py" "$XDG_CONFIG_HOME/get_git_host.py" && echo "get_git_host.py link created"
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/starship/get_git_host.py" "$XDG_CONFIG_HOME/get_git_host.py" && info "get_git_host.py link created"
 
 if [ -h "$XDG_CONFIG_HOME/kitty" ]; then
     rm "$XDG_CONFIG_HOME/kitty"
 elif [ -d "$XDG_CONFIG_HOME/kitty" ]; then
     mv "$XDG_CONFIG_HOME/kitty" "$XDG_CONFIG_HOME/kitty.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/kitty" "$XDG_CONFIG_HOME/kitty" && echo "kitty link created"
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/kitty" "$XDG_CONFIG_HOME/kitty" && info "kitty link created"
 
 if [ -h "$XDG_CONFIG_HOME/delta" ]; then
     rm "$XDG_CONFIG_HOME/delta"
 elif [ -d "$XDG_CONFIG_HOME/delta" ]; then
     mv "$XDG_CONFIG_HOME/delta" "$XDG_CONFIG_HOME/delta.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/delta" "$XDG_CONFIG_HOME/delta" && echo "delta link created"
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/delta" "$XDG_CONFIG_HOME/delta" && info "delta link created"
 
 if [ -h "$XDG_CONFIG_HOME/bat" ]; then
     rm "$XDG_CONFIG_HOME/bat"
 elif [ -d "$XDG_CONFIG_HOME/bat" ]; then
     mv "$XDG_CONFIG_HOME/bat" "$XDG_CONFIG_HOME/bat.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/bat" "$XDG_CONFIG_HOME/bat" && echo "bat link created"
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/bat" "$XDG_CONFIG_HOME/bat" && info "bat link created"
 $BREW_BIN/bat cache --build
 
 if [ -h "$XDG_CONFIG_HOME/lazygit" ]; then
@@ -339,7 +369,7 @@ if [ -h "$XDG_CONFIG_HOME/lazygit" ]; then
 elif [ -d "$XDG_CONFIG_HOME/lazygit" ]; then
     mv "$XDG_CONFIG_HOME/lazygit" "$XDG_CONFIG_HOME/lazygit.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/git/lazygit" "$XDG_CONFIG_HOME/lazygit" && echo "lazygit link created"
+ln -s "$PROJECTS_DIR/terminal-configs/git/lazygit" "$XDG_CONFIG_HOME/lazygit" && info "lazygit link created"
 
 export LDFLAGS="-L$HOMEBREW_PREFIX/opt/llvm/lib/c++ -Wl,\
 -rpath,$HOMEBREW_PREFIX/opt/llvm/lib/c++ \
@@ -376,24 +406,24 @@ $HOMEBREW_PREFIX/share/pkgconfig"
 export PATH="$BREW_BIN:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
 
-echo "Initializing SDKMAN"
+info "Initializing SDKMAN"
 source "$HOME/.sdkman/bin/sdkman-init.sh"
-echo "SDKMAN version"
-sdk version || true
-echo "Installing Java using SDKMAN"
-sdk install java || true
+info "SDKMAN version"
+sdk version || error "Failed to get SDKMAN version"
+info "Installing Java using SDKMAN"
+sdk install java || error "Failed to install Java using SDKMAN"
 
 # Installing Python, nodejs and Golang using asdf
 ASDF="$BREW_BIN/asdf"
-echo "Installing NodeJS"
-($ASDF plugin-add nodejs && $ASDF install nodejs latest:20 && $ASDF global nodejs latest:20) || true
-echo "Installing Golang"
-($ASDF plugin-add golang && $ASDF install golang latest && $ASDF global golang latest) || true
+info "Installing NodeJS"
+($ASDF plugin-add nodejs && $ASDF install nodejs latest:20 && $ASDF global nodejs latest:20) || error "Failed to install NodeJS using asdf"
+info "Installing Golang"
+($ASDF plugin-add golang && $ASDF install golang latest && $ASDF global golang latest) || error "Failed to install Golang using asdf"
 
 # Install Kitty terminal emulator
-echo "Installing Kitty terminal emulator..."
+info "Installing Kitty terminal emulator..."
 if ! [ -f "$BREW_BIN/kitty" ] && [ -n "${SETUP_ON_MACOS-}" ]; then
-    $BREW install --cask kitty || true
+    $BREW install --cask kitty || error "Failed to install Kitty terminal emulator."
 else
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
