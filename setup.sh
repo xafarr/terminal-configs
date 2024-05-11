@@ -25,8 +25,20 @@ chomp() {
 }
 
 gen_ssh_keys() {
+    read -rp "Enter the key algorithm (ed25519|rsa) [default: ed25519]: " algo
+
+    case "${algo}" in
+    rsa)
+        echo "Using RSA algorithm"
+        ssh_keygen_str="ssh-keygen -t rsa -b 4096 -C"
+        ;;
+    *)
+        echo "Using ED25519 algorithm"
+        ssh_keygen_str="ssh-keygen -t ed25519 -C"
+        ;;
+    esac
     read -rp "Enter the email to generate ssh keypairs [xafarr@gmail.com]: " email
-    ssh-keygen -t ed25519 -C "${email:-'xafarr@gmail.com'}" || true
+    $ssh_keygen_str "${email:-'xafarr@gmail.com'}" || true
 }
 
 install_fonts_in_linux() {
