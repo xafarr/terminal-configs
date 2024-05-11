@@ -11,13 +11,13 @@ command_timeout = 5000
 # Change the default prompt format
 format = """\
 [╭─](244)$os\
+$battery\
 $directory\
 ${custom.git_host}\
 $git_branch\
 $git_commit\
 $git_status\
-$git_state\
-$battery $fill\
+$git_state $fill\
 $ansible\
 $java\
 $kotlin\
