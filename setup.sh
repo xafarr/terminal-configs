@@ -320,6 +320,7 @@ elif [ -d "$XDG_CONFIG_HOME/bat" ]; then
     mv "$XDG_CONFIG_HOME/bat" "$XDG_CONFIG_HOME/bat.bak"
 fi
 ln -s "$PROJECTS_DIR/terminal-configs/terminal/bat" "$XDG_CONFIG_HOME/bat" && echo "bat link created"
+$BREW_BIN/bat cache --build
 
 if [ -h "$XDG_CONFIG_HOME/lazygit" ]; then
     rm "$XDG_CONFIG_HOME/lazygit"
