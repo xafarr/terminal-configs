@@ -425,11 +425,10 @@ info "Installing Kitty terminal emulator..."
 if [ -n "${SETUP_ON_MACOS-}" ]; then
     if ! [ -f "$BREW_BIN/kitty" ]; then
         $BREW install --cask kitty || error "Failed to install Kitty terminal emulator."
+    else
+        info "Kitty is already installed. Skipping installation."
     fi
 else
-    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-    # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
-    # your system-wide PATH)
     local_bin="${HOME}/.local/bin"
     local_share_app="${HOME}/.local/share/applications"
     if [[ ! -d "$local_bin" ]]; then
@@ -438,6 +437,10 @@ else
     if [[ ! -d "$local_share_app" ]]; then
         mkdir -p "$local_share_app"
     fi
+    # Install kitty
+    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+    # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
+    # your system-wide PATH)
     ln -sf "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/kitty.app/bin/kitten" "$local_bin"
     # Place the kitty.desktop file somewhere it can be found by the OS
     cp "$HOME/.local/kitty.app/share/applications/kitty.desktop" "$HOME/.local/share/applications/"
