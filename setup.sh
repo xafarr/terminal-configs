@@ -456,3 +456,28 @@ else
     sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
     sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
 fi
+
+# Add shell installed through homebrew and change the current user shell
+info "Adding shell installed through Homebrew in /etc/shells"
+sudo tee -a ./test-file.txt <<EOF
+$HOMEBREW_PREFIX/bin/zsh
+$HOMEBREW_PREFIX/bin/bash
+EOF
+
+info "Changing the current user shell to Homebrew installed shells"
+read -rp "Choose your shell (zsh|bash) [default: zsh]: " shell
+case "$shell" in
+bash)
+    shell=$HOMEBREW_PREFIX/bin/bash
+    ;;
+*)
+    shell=$HOMEBREW_PREFIX/bin/zsh
+    ;;
+esac
+
+sudo chsh -s "$shell" "$USER"
+info "User shell changed to $shell"
+
+echo
+info "*** END ***"
+echo
