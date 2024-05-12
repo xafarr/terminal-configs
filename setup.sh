@@ -459,19 +459,19 @@ fi
 
 # Add shell installed through homebrew and change the current user shell
 info "Adding shell installed through Homebrew in /etc/shells"
-sudo tee -a ./test-file.txt <<EOF
-$HOMEBREW_PREFIX/bin/zsh
-$HOMEBREW_PREFIX/bin/bash
-EOF
+zsh_shell="$HOMEBREW_PREFIX/bin/zsh"
+bash_shell="$HOMEBREW_PREFIX/bin/bash"
+grep -xF -- "$zsh_shell" /etc/shells || echo "$zsh_shell" | sudo tee -a /etc/shells
+grep -xF -- "$bash_shell" /etc/shells || echo "$bash_shell" | sudo tee -a /etc/shells
 
 info "Changing the current user shell to Homebrew installed shells"
 read -rp "Choose your shell (zsh|bash) [default: zsh]: " shell
 case "$shell" in
 bash)
-    shell=$HOMEBREW_PREFIX/bin/bash
+    shell=$bash_shell
     ;;
 *)
-    shell=$HOMEBREW_PREFIX/bin/zsh
+    shell=$zsh_shell
     ;;
 esac
 
