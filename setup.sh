@@ -316,7 +316,9 @@ fi
 ln -s "$PROJECTS_DIR/terminal-configs/terminal/zsh/zshrc" "$HOME/.zshrc" && info ".zshrc link created"
 
 if [ -n "${SETUP_ON_MACOS-}" ]; then
-    if [ -f "$HOME/.bash_profile" ]; then
+    if [ -h "$HOME/.bashrc_profile" ]; then
+        rm "$HOME/.bashrc_profile"
+    elif [ -f "$HOME/.bash_profile" ]; then
         mv "$HOME/.bash_profile" "$HOME/.bash_profile.bak"
     fi
     ln -s "$PROJECTS_DIR/terminal-configs/terminal/bash/bash_profile" "$HOME/.bash_profile" && info ".bash_profile link created"
