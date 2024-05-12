@@ -422,8 +422,10 @@ info "Installing Golang"
 
 # Install Kitty terminal emulator
 info "Installing Kitty terminal emulator..."
-if ! [ -f "$BREW_BIN/kitty" ] && [ -n "${SETUP_ON_MACOS-}" ]; then
-    $BREW install --cask kitty || error "Failed to install Kitty terminal emulator."
+if [ -n "${SETUP_ON_MACOS-}" ]; then
+    if ! [ -f "$BREW_BIN/kitty" ]; then
+        $BREW install --cask kitty || error "Failed to install Kitty terminal emulator."
+    fi
 else
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
