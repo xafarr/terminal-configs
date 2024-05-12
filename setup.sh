@@ -423,6 +423,8 @@ info "Installing NodeJS"
 ($ASDF plugin-add nodejs && $ASDF install nodejs latest:20 && $ASDF global nodejs latest:20) || error "Failed to install NodeJS using asdf"
 info "Installing Golang"
 ($ASDF plugin-add golang && $ASDF install golang latest && $ASDF global golang latest) || error "Failed to install Golang using asdf"
+info "Installing DotNet Core"
+($ASDF plugin-add dotnet-core && $ASDF install dotnet-core latest && $ASDF global dotnet-core latest) || error "Failed to install DotNet Core using asdf"
 
 # Install Kitty terminal emulator
 info "Installing Kitty terminal emulator..."
