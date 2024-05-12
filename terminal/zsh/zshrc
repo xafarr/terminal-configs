@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+
 # Platform and architecture
 system=$(uname -ms)
 platform=$(echo "$system" | awk '{print $1}')
@@ -30,9 +32,6 @@ export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin${PATH+:$PATH}"
 export MANPATH="$HOMEBREW_PREFIX/share/man${MANPATH+:$MANPATH}:"
 export INFOPATH="$HOMEBREW_PREFIX/share/info:${INFOPATH:-}"
 
-# Library paths
-dotnet_root=$(dirname "$(which dotnet)")
-
 export PATH="$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/apr/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH"
@@ -44,6 +43,12 @@ export PATH="$HOMEBREW_PREFIX/opt/gettext/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/bzip2/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
+
+# For asdf shims to be in the PATH
+[[ -r "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
+
+# Dotnet paths
+dotnet_root=$(dirname "$(which dotnet)")
 export DOTNET_ROOT="$dotnet_root"
 export PATH="$HOME/.dotnet/tools:$PATH"
 
@@ -304,9 +309,6 @@ eval "$(fzf --zsh)"
 if [ -f ~/.additional-env-config ]; then
     source "$HOME/.additional-env-config"
 fi
-
-# For asdf
-[[ -r "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
