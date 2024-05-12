@@ -289,6 +289,8 @@ fi
 if ! [ -d "$PROJECTS_DIR/terminal-configs" ]; then
     git clone https://github.com/xafarr/terminal-configs.git "$PROJECTS_DIR/terminal-configs"
     info "terminal-configs cloned"
+else
+    git --work-tree="$PROJECTS_DIR/terminal-configs" --git-dir="$PROJECTS_DIR/terminal-configs/.git" pull
 fi
 
 # Create symlinks in HOME directory
