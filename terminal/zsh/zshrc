@@ -217,7 +217,7 @@ alias ltr="ls -altrh"
 alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules,.yarn}"
 alias vim="nvim"
 alias vimdiff="nvim -d"
-alias brew-update="brew update; brew doctor; brew upgrade; brew upgrade --cask; brew cleanup"
+alias brew-update="brew update; brew doctor; brew upgrade; if [[ \$platform = Darwin ]]; then brew upgrade --cask; fi; brew cleanup"
 # Kubernetes aliases
 alias k="kubectl"
 
