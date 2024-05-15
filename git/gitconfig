@@ -60,6 +60,7 @@
 
 [include]
   path = ~/.config/delta/themes/catppuccin-macchiato.gitconfig
+  path = ~/.additional.gitconfig
 
 [delta]
   features = catppuccin-macchiato
