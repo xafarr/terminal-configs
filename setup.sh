@@ -177,12 +177,6 @@ if ! [ -f "$BREW" ]; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-# Install SDKMAN and Java
-if ! command -v sdk >/dev/null; then
-    info "Installing SDKMAN"
-    curl -s "https://get.sdkman.io" | bash || error "Failed to install SDKMAN."
-fi
-
 BREW_BIN="$HOMEBREW_PREFIX/bin"
 BREW="$BREW_BIN/brew"
 
@@ -417,14 +411,7 @@ $HOMEBREW_PREFIX/share/pkgconfig"
 export PATH="$BREW_BIN:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
 
-info "Initializing SDKMAN"
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-info "SDKMAN version"
-sdk version || error "Failed to get SDKMAN version"
-info "Installing Java using SDKMAN"
-sdk install java || error "Failed to install Java using SDKMAN"
-
-# Installing Python, nodejs and Golang using asdf
+# Installing nodejs, Golang, dotnet-core and Java using asdf
 ASDF="$BREW_BIN/asdf"
 info "Installing NodeJS"
 ($ASDF plugin-add nodejs && $ASDF install nodejs latest:20 && $ASDF global nodejs latest:20) || error "Failed to install NodeJS using asdf"
@@ -432,6 +419,7 @@ info "Installing Golang"
 ($ASDF plugin-add golang && $ASDF install golang latest && $ASDF global golang latest) || error "Failed to install Golang using asdf"
 info "Installing DotNet Core"
 ($ASDF plugin-add dotnet-core && $ASDF install dotnet-core latest && $ASDF global dotnet-core latest) || error "Failed to install DotNet Core using asdf"
+($ASDF plugin-add java && $ASDF install java latest && $ASDF global java latest) || error "Failed to install Java using asdf"
 
 # Install Kitty terminal emulator
 info "Installing Kitty terminal emulator..."
