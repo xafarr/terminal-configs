@@ -315,6 +315,13 @@ elif [ -f "$HOME/.zshrc" ]; then
 fi
 ln -s "$PROJECTS_DIR/terminal-configs/terminal/zsh/zshrc" "$HOME/.zshrc" && info ".zshrc link created"
 
+if [ -h "$HOME/.asdfrc" ]; then
+    rm "$HOME/.asdfrc"
+elif [ -f "$HOME/.asdfrc" ]; then
+    mv "$HOME/.asdfrc" "$HOME/.asdfrc.bak"
+fi
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/asdf/asdfrc" "$HOME/.asdfrc" && info ".asdfrc link created"
+
 if [ -n "${SETUP_ON_MACOS-}" ]; then
     if [ -h "$HOME/.bashrc_profile" ]; then
         rm "$HOME/.bashrc_profile"
