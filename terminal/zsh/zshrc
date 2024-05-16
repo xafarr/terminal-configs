@@ -301,7 +301,7 @@ fi
 [[ -r "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
 [[ -r "$HOME/.asdf/plugins/java/set-java-home.zsh" ]] && source "$HOME/.asdf/plugins/java/set-java-home.zsh"
 [[ -r "$HOME/.asdf/plugins/golang/set-env.zsh" ]] && source "$HOME/.asdf/plugins/golang/set-env.zsh"
-[[ -r "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh" ]] && source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh"
+[[ -r "$HOME/.asdf/plugins/dotnet/set-dotnet-env.zsh" ]] && source "$HOME/.asdf/plugins/dotnet/set-dotnet-env.zsh"
 
 # Starship terminal prompt
 eval "$(starship init zsh)"
