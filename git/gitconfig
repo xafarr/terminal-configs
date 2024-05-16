@@ -22,7 +22,6 @@
 [user]
   email = xafarr@gmail.com
   name = Muhammad Zafar
-  signingkey = <gpg-key-id>
 [pull]
   rebase = true
 [push]
@@ -30,8 +29,6 @@
 [core]
   editor = nvim
   pager = delta
-[commit]
-  gpgsign = true
 [merge]
   ff = only
   conflictstyle = diff3

@@ -316,6 +316,13 @@ elif [ -f "$HOME/.asdfrc" ]; then
 fi
 ln -s "$PROJECTS_DIR/terminal-configs/terminal/asdf/asdfrc" "$HOME/.asdfrc" && info ".asdfrc link created"
 
+if [ -h "$HOME/.gitconfig" ]; then
+    rm "$HOME/.gitconfig"
+elif [ -f "$HOME/.gitconfig" ]; then
+    mv "$HOME/.gitconfig" "$HOME/.gitconfig.bak"
+fi
+ln -s "$PROJECTS_DIR/terminal-configs/git/gitconfig" "$HOME/.gitconfig" && info ".gitconfig link created"
+
 if [ -n "${SETUP_ON_MACOS-}" ]; then
     if [ -h "$HOME/.bashrc_profile" ]; then
         rm "$HOME/.bashrc_profile"
