@@ -36,22 +36,11 @@ export PATH="$HOMEBREW_PREFIX/opt/ncurses/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/apr/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/go/libexec/bin:$PATH"
-export GOPATH="$HOME/Documents/Go"
-export PATH="$GOPATH/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gettext/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/bzip2/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
-
-# For asdf shims to be in the PATH
-[[ -r "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
-[[ -r "$HOME/.asdf/plugins/java/set-java-home.zsh" ]] && source "$HOME/.asdf/plugins/java/set-java-home.zsh"
-
-# Dotnet paths
-dotnet_root=$(dirname "$(which dotnet)")
-export DOTNET_ROOT="$dotnet_root"
-export PATH="$HOME/.dotnet/tools:$PATH"
 
 # Color man pages
 export LESS_TERMCAP_mb=$'\E[01;32m'
@@ -307,6 +296,12 @@ eval "$(fzf --zsh)"
 if [ -f ~/.additional-env-config ]; then
     source "$HOME/.additional-env-config"
 fi
+
+# For asdf shims to be in the PATH
+[[ -r "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
+[[ -r "$HOME/.asdf/plugins/java/set-java-home.zsh" ]] && source "$HOME/.asdf/plugins/java/set-java-home.zsh"
+[[ -r "$HOME/.asdf/plugins/golang/set-env.zsh" ]] && source "$HOME/.asdf/plugins/golang/set-env.zsh"
+[[ -r "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh" ]] && source "$HOME/.asdf/plugins/dotnet-core/set-dotnet-home.zsh"
 
 # Starship terminal prompt
 eval "$(starship init zsh)"
