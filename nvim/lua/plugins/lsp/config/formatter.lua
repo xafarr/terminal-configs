@@ -6,7 +6,7 @@ function M.format(bufnr, range)
   if have_nls then
     vim.lsp.buf.format({
       bufnr = bufnr,
-      async = false,
+      async = true,
       range = range,
       filter = function(client)
         if have_nls then
@@ -18,8 +18,7 @@ function M.format(bufnr, range)
   else
     require("conform").format({
       bufnr = bufnr,
-      async = false,
-      timeout_ms = 500,
+      async = true,
       lsp_fallback = true,
       range = range,
     })
