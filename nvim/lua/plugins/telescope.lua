@@ -9,7 +9,6 @@ return {
       "ahmedkhalf/project.nvim",
       "cljoly/telescope-repo.nvim",
       "stevearc/aerial.nvim",
-      "nvim-telescope/telescope-frecency.nvim",
       "kkharji/sqlite.lua",
       "aaronhallaert/advanced-git-search.nvim",
     },
@@ -24,11 +23,6 @@ return {
         "<leader>fg",
         neoutils.git_files,
         desc = "Find Within Git Repository",
-      },
-      {
-        "<leader>fo",
-        "<cmd>Telescope frecency<cr>",
-        desc = "Recent",
       },
       {
         '<leader>f"',
@@ -98,11 +92,6 @@ return {
       local trouble = require("trouble.providers.telescope")
       local icons = require("config.icons")
       local actions_layout = require("telescope.actions.layout")
-
-      -- Path to sqlite3.dll in Windows (Required for Frecency)
-      if neoutils.IS_WINDOWS() then
-        vim.g.sqlite_clib_path = "C:\\ProgramData\\chocolatey\\lib\\SQLite\\tools\\sqlite3.dll"
-      end
 
       local mappings = {
         i = {
@@ -213,7 +202,6 @@ return {
       telescope.load_extension("projects")
       telescope.load_extension("aerial")
       --      telescope.load_extension "dap"
-      telescope.load_extension("frecency")
       telescope.load_extension("advanced_git_search")
       telescope.load_extension("neoclip")
       telescope.load_extension("macroscope")
