@@ -183,6 +183,15 @@ BREW="$BREW_BIN/brew"
 if ! [ -f "$BREW_BIN/git" ]; then
     $BREW install git || error "Failed to install git."
 fi
+if ! [ -f "$BREW_BIN/curl" ]; then
+    $BREW install curl || error "Failed to install curl."
+fi
+if ! [ -f "$BREW_BIN/wget" ]; then
+    $BREW install wget || error "Failed to install wget."
+fi
+if ! [ -f "$BREW_BIN/gpg" ]; then
+    $BREW install gnupg || error "Failed to install gnupg."
+fi
 if ! echo $BREW_BIN/gcc-* &>/dev/null; then
     $BREW install gcc || error "Failed to install gcc."
 fi
