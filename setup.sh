@@ -273,7 +273,6 @@ fi
 
 # Install Fonts
 if [[ -n "${SETUP_ON_MACOS-}" ]]; then
-    $BREW tap homebrew/cask-fonts
     if [[ $($BREW list | grep -iwc font-jetbrains-mono-nerd-font) -eq 0 ]]; then
         $BREW install font-jetbrains-mono-nerd-font || error "Failed to install font-jetbrains-mono-nerd-font."
     fi
