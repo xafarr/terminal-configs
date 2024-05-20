@@ -42,26 +42,13 @@ return {
       end,
       settings = {
         java = {
-          home = "~/.sdkman/candidates/java/current",
+          home = os.getenv("JAVA_HOME"),
           eclipse = {
             downloadSources = true,
           },
           configuration = {
             updateBuildConfiguration = "interactive",
-            runtimes = {
-              {
-                name = "JavaSE-1.8",
-                path = "~/.sdkman/candidates/java/8.0.402-amzn",
-              },
-              {
-                name = "JavaSE-17",
-                path = "~/.sdkman/candidates/java/17.0.7-tem",
-              },
-              {
-                name = "JavaSE-21",
-                path = "~/.sdkman/candidates/java/21.0.2-tem",
-              },
-            },
+            runtimes = {},
           },
           maven = {
             downloadSources = true,
