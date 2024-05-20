@@ -52,7 +52,6 @@ M.language_servers = {
   "gopls",
   "gradle_ls",
   "graphql",
-  "groovyls",
   "html",
   "jdtls", -- Java Language Server
   "jsonls",
