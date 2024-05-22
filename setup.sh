@@ -189,6 +189,9 @@ fi
 if ! [ -f "$BREW_BIN/wget" ]; then
     $BREW install wget || error "Failed to install wget."
 fi
+if ! [ -f "$BREW_BIN/coreutils" ]; then
+    $BREW install coreutils || error "Failed to install coreutils."
+fi
 if ! [ -f "$BREW_BIN/gpg" ]; then
     $BREW install gnupg || error "Failed to install gnupg."
 fi
