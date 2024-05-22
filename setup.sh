@@ -195,6 +195,9 @@ fi
 if ! [ -f "$BREW_BIN/gpg" ]; then
     $BREW install gnupg || error "Failed to install gnupg."
 fi
+if ! [ -f "$BREW_BIN/vivid" ]; then
+    $BREW install vivid || error "Failed to install vivid."
+fi
 if ! echo $BREW_BIN/gcc-* &>/dev/null; then
     $BREW install gcc || error "Failed to install gcc."
 fi
