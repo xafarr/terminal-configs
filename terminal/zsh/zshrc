@@ -52,8 +52,10 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 
 # Ensure LESS doesn't wrap long lines
+export CURRENT_THEME="catppuccin-macchiato"
 export LESS="--MOUSE -rR"
-export LS_COLORS="rs=0:no=00:mi=00:mh=00:ln=01;36:or=01;31:di=01;34:ow=04;01;34:st=34:tw=04;34:pi=01;33:so=01;33:do=01;33:bd=01;33:cd=01;33:su=01;35:sg=01;35:ca=01;35:ex=01;32:"
+LS_COLORS="$(vivid generate $CURRENT_THEME)"
+export LS_COLORS
 
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters
 
@@ -198,9 +200,9 @@ $HOMEBREW_PREFIX/opt/zlib/lib/pkgconfig \
 $HOMEBREW_PREFIX/opt/readline/lib/pkgconfig \
 $HOMEBREW_PREFIX/share/pkgconfig"
 
-export LS_OPTIONS="--color=auto"
+export LS_OPTIONS="--color"
 
-alias ls="ls $LS_OPTIONS"
+alias ls="gls $LS_OPTIONS"
 alias ld="ls -ld"
 alias l="ls -alh"
 alias ltr="ls -altrh"
