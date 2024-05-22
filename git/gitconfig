@@ -65,4 +65,5 @@
   max-line-length = 0
   width = variable
   navigate = true
+  paging = never
 
