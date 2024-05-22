@@ -56,7 +56,7 @@
   useBuiltin = false # required for git 2.37.0
 
 [include]
-  path = ~/.config/delta/themes/catppuccin-macchiato.gitconfig
+  path = ~/.config/delta/themes/catppuccin.gitconfig
   path = ~/.additional.gitconfig
 
 [delta]
