@@ -12,6 +12,8 @@ return {
         library = { plugins = { "neotest", "nvim-dap-ui" }, types = true },
       },
     },
+    -- Useful status updates for LSP
+    { "j-hui/fidget.nvim", opts = {} },
     "WhoIsSethDaniel/mason-tool-installer.nvim",
   },
   config = function()
@@ -54,10 +56,6 @@ return {
       },
     })
 
-    mason_tool_installer.setup({
-      ensure_installed = neoconfigs.formatters_and_linters,
-    })
-
     mason_lspconfig.setup({
       ensure_installed = neoconfigs.language_servers,
       automatic_installation = false,
@@ -80,13 +78,23 @@ return {
           if extend then
             opts = vim.tbl_deep_extend("force", opts, user_config.setup_and_get_config())
           end
-
-          lspconfig[server].setup(opts)
-        end,
-        ["jdtls"] = function()
-          return true
+          if server ~= "jdtls" then
+            lspconfig[server].setup(opts)
+          end
         end,
       },
     })
+
+    mason_tool_installer.setup({
+      ensure_installed = neoconfigs.mason_tools,
+    })
+
+    -- Globally configure all LSP floating preview popups (like hover, signature help, etc)
+    local open_floating_preview = vim.lsp.util.open_floating_preview
+    function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+      opts = opts or {}
+      opts.border = opts.border or "rounded" -- Set border to rounded
+      return open_floating_preview(contents, syntax, opts, ...)
+    end
   end,
 }

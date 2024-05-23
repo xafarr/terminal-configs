@@ -68,18 +68,20 @@ M.language_servers = {
   "yamlls",
 }
 
-M.formatters_and_linters = {
+M.mason_tools = {
   -- List formatters and linters here, when available in mason.
   "ansible-lint",
   "black",
   "clang-format",
   "eslint_d",
   "flake8",
-  "goimports",
   "gofumpt",
+  "goimports",
   "golangci-lint",
   "google-java-format",
   "isort",
+  "java-debug-adapter",
+  "java-test",
   "jq",
   "ktlint",
   "markdownlint",
