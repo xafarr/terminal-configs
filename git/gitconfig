@@ -40,6 +40,8 @@
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [branch "master"]
   mergeOptions = --ff-only
+[branch "main"]
+  mergeOptions = --ff-only
 [diff]
   tool = vimdiff
   colorMoved = default
