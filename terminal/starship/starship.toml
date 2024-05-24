@@ -128,14 +128,14 @@ tag_disabled = false
 [git_status]
 format = "[$all_status$ahead_behind]($style)"
 style = "green"
-untracked = " [?${count}](blue0)"
+untracked = " [?${count}](blue)"
 ahead = " ⇡${count}"
 diverged = " ⇡${ahead_count} ⇣${behind_count}"
 behind = " ⇣${count}"
 stashed = " 󰏗 ${count}"
 modified = " [!${count}](yellow)"
 staged = " [+${count}](yellow)"
-renamed = " [»${count}](blue0)"
+renamed = " [»${count}](blue)"
 deleted = " [✗${count}](red)"
 
 # Configure the SSH prompt
