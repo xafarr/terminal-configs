@@ -203,6 +203,8 @@ alias brew-update="brew update; brew doctor; brew upgrade; if [[ \$platform = Da
 alias k="kubectl"
 # Terraform aliases
 alias tf="terraform"
+# Lazygit
+alias lg="lazygit"
 
 # Preferred editor for local and remote sessions
 export VISUAL=nvim
