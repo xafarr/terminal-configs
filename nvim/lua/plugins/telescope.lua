@@ -9,7 +9,6 @@ return {
           return vim.fn.executable("cmake") == 1
         end,
       },
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
       "nvim-telescope/telescope-file-browser.nvim",
       "nvim-telescope/telescope-project.nvim",
       "nvim-telescope/telescope-ui-select.nvim",
