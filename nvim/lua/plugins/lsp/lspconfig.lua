@@ -27,7 +27,6 @@ return {
     local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
     local diagnostics = require("plugins.lsp.config.diagnostics")
-    local keymaps = require("plugins.lsp.config.keymaps")
     local formatter = require("plugins.lsp.config.formatter")
 
     -- Setup diagnostics
@@ -62,9 +61,8 @@ return {
       handlers = {
         function(server)
           local opts = {
-            -- Attach keymaps and formatter to LSP
+            -- Attach formatter to LSP
             on_attach = neoutils.on_attach(function(client, bufnr)
-              keymaps.on_attach(client, bufnr)
               formatter.on_attach(client, bufnr)
             end),
             capabilities = capabilities,

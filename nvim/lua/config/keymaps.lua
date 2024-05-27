@@ -1,7 +1,7 @@
 local opts = { noremap = true, silent = true }
 
 -- Shorten function name
-local keymap = vim.api.nvim_set_keymap
+local keymap = vim.keymap
 
 -- Modes
 --   normal_mode = "n",
@@ -11,124 +11,197 @@ local keymap = vim.api.nvim_set_keymap
 --   term_mode = "t",
 --   command_mode = "c",
 
+local function get_opts(props)
+  local keymap_opts = { noremap = true, silent = true }
+  for k, v in pairs(props) do
+    keymap_opts[k] = v
+  end
+  return keymap_opts
+end
+
+local function diagnostic_goto(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go({ severity = severity })
+  end
+end
+
 -- Keymaps
 -- Any mode
-keymap("", "<C-a>", "<esc>ggVG<CR>", opts)
+keymap.set("", "<C-a>", "<esc>ggVG<CR>", opts)
 
+--- General Keymaps
 -- Normal
-
 -- Format file or range keymap
-vim.keymap.set(
-  { "n", "v" },
-  "<leader>,",
-  ":Format<CR>",
-  { noremap = true, silent = true, desc = "Format file or range (in Visual mode)" }
-)
+keymap.set({ "n", "v" }, "<leader>,", ":Format<CR>", get_opts({ desc = "Format file or range (in Visual mode)" }))
 
 -- Troggle lazygit in terminal
-keymap("n", "<leader>lg", ":lua neoutils.lazygit_toggle()<CR>", opts)
+keymap.set("n", "<leader>lg", ":lua neoutils.lazygit_toggle()<CR>", opts)
 
 -- Open new line below and above current line
-keymap("n", "<leader>o", "o<Esc>", opts)
-keymap("n", "<leader>O", "O<Esc>", opts)
+keymap.set("n", "<leader>o", "o<Esc>", opts)
+keymap.set("n", "<leader>O", "O<Esc>", opts)
 
-keymap("n", "*", "*zz", opts)
+keymap.set("n", "*", "*zz", opts)
 
 -- Delete a word backwards
-keymap("n", "<M-BS>", "<Esc>db", opts)
-keymap("n", "<M-BS>", "<Esc>db", opts)
+keymap.set("n", "<M-BS>", "<Esc>db", opts)
+keymap.set("n", "<M-BS>", "<Esc>db", opts)
 
 -- Better viewing
-keymap("n", "n", "nzzzv", opts)
-keymap("n", "N", "Nzzzv", opts)
-keymap("n", "g,", "g,zvzz", opts)
-keymap("n", "g;", "g;zvzz", opts)
+keymap.set("n", "n", "nzzzv", opts)
+keymap.set("n", "N", "Nzzzv", opts)
+keymap.set("n", "g,", "g,zvzz", opts)
+keymap.set("n", "g;", "g;zvzz", opts)
 
 -- Paste over currently selected text without yanking it
-keymap("v", "p", '"_dP', opts)
+keymap.set("v", "p", '"_dP', opts)
 
 -- Faster scrolling
-keymap("n", "<C-e>", "3<C-e>", opts)
-keymap("n", "<C-y>", "3<C-y>", opts)
+keymap.set("n", "<C-e>", "3<C-e>", opts)
+keymap.set("n", "<C-y>", "3<C-y>", opts)
 
 -- search occurrence count in file
-keymap("n", "<leader>*", "*<C-O>:%s///gn<CR>``", opts)
+keymap.set("n", "<leader>*", "*<C-O>:%s///gn<CR>``", opts)
 
 -- Copy until end of line
-keymap("n", "Y", "y$", opts)
+keymap.set("n", "Y", "y$", opts)
 
 -- Do not write to last register when deleting with x
-keymap("n", "x", '"_x', opts)
-keymap("n", "X", '"_X', opts)
+keymap.set("n", "x", '"_x', opts)
+keymap.set("n", "X", '"_X', opts)
 
 -- Move text up and down
-keymap("n", "∆", ":m .+1<CR>==", opts)
-keymap("n", "˚", ":m .-2<CR>==", opts)
-keymap("n", "<M-j>", ":m .+1<CR>==", opts)
-keymap("n", "<M-k>", ":m .-2<CR>==", opts)
+keymap.set("n", "∆", ":m .+1<CR>==", opts)
+keymap.set("n", "˚", ":m .-2<CR>==", opts)
+keymap.set("n", "<M-j>", ":m .+1<CR>==", opts)
+keymap.set("n", "<M-k>", ":m .-2<CR>==", opts)
 
 -- search occurrence count in file
-keymap("n", "<leader>*", "*<C-O>:%s///gn<CR>``", opts)
+keymap.set("n", "<leader>*", "*<C-O>:%s///gn<CR>``", opts)
 
 -- Windows navigation
 -- keymap("n", "<S-Tab>", "<C-w>W", opts)
 -- keymap("n", "<Tab>", "<C-w>w", opts)
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+keymap.set("n", "<C-h>", "<C-w>h", opts)
+keymap.set("n", "<C-j>", "<C-w>j", opts)
+keymap.set("n", "<C-k>", "<C-w>k", opts)
+keymap.set("n", "<C-l>", "<C-w>l", opts)
 
 -- Jump to last changed position across buffers
 -- Refer to autocommands.lua for InsertChange event
-keymap("n", "<BS>", "`I", opts)
+keymap.set("n", "<BS>", "`I", opts)
 
 -- vim help for word under cursor
-keymap("n", "<F1>", ":h <C-r><C-w><cr>", opts)
+keymap.set("n", "<F1>", ":h <C-r><C-w><cr>", opts)
 
 -- Insert --
 -- move line up and down in insert mode
-keymap("i", "∆", "<Esc>:m .+1<CR>==gi", opts)
-keymap("i", "˚", "<Esc>:m .-2<CR>==gi", opts)
-keymap("i", "<M-j>", "<Esc>:m .+1<CR>==gi", opts)
-keymap("i", "<M-k>", "<Esc>:m .-2<CR>==gi", opts)
+keymap.set("i", "∆", "<Esc>:m .+1<CR>==gi", opts)
+keymap.set("i", "˚", "<Esc>:m .-2<CR>==gi", opts)
+keymap.set("i", "<M-j>", "<Esc>:m .+1<CR>==gi", opts)
+keymap.set("i", "<M-k>", "<Esc>:m .-2<CR>==gi", opts)
 
 -- Movement in insert mode
-keymap("i", "<C-h>", "<C-o>h", opts)
-keymap("i", "<C-l>", "<C-o>a", opts)
-keymap("i", "<C-j>", "<C-o>j", opts)
-keymap("i", "<C-k>", "<C-o>k", opts)
+keymap.set("i", "<C-h>", "<C-o>h", opts)
+keymap.set("i", "<C-l>", "<C-o>a", opts)
+keymap.set("i", "<C-j>", "<C-o>j", opts)
+keymap.set("i", "<C-k>", "<C-o>k", opts)
 
 -- Visual --
 -- Stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
+keymap.set("v", "<", "<gv", opts)
+keymap.set("v", ">", ">gv", opts)
 
 -- Move text up and down
-keymap("v", "∆", ":m '>+1<CR>gv=gv", opts)
-keymap("v", "˚", ":m '<-2<CR>gv=gv", opts)
-keymap("v", "<M-j>", ":m '>+1<CR>gv=gv", opts)
-keymap("v", "<M-k>", ":m '<-2<CR>gv=gv", opts)
+keymap.set("v", "∆", ":m '>+1<CR>gv=gv", opts)
+keymap.set("v", "˚", ":m '<-2<CR>gv=gv", opts)
+keymap.set("v", "<M-j>", ":m '>+1<CR>gv=gv", opts)
+keymap.set("v", "<M-k>", ":m '<-2<CR>gv=gv", opts)
 
 -- Do not overwrite clipboard when pasting
-keymap("v", "p", '"_dP', opts)
+keymap.set("v", "p", '"_dP', opts)
 
 -- Visual Block --
 -- Move text up and down
-keymap("x", "∆", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "˚", ":move '<-2<CR>gv-gv", opts)
-keymap("x", "<M-j>", ":move '>+1<CR>gv-gv", opts)
-keymap("x", "<M-k>", ":move '<-2<CR>gv-gv", opts)
+keymap.set("x", "∆", ":move '>+1<CR>gv-gv", opts)
+keymap.set("x", "˚", ":move '<-2<CR>gv-gv", opts)
+keymap.set("x", "<M-j>", ":move '>+1<CR>gv-gv", opts)
+keymap.set("x", "<M-k>", ":move '<-2<CR>gv-gv", opts)
 
 -- Termianl --
 -- Cursor movement among windows in terminal mode
-keymap("t", "<C-h>", "<C-\\><C-n><C-w>h", opts)
-keymap("t", "<C-j>", "<C-\\><C-n><C-w>j", opts)
-keymap("t", "<C-k>", "<C-\\><C-n><C-w>k", opts)
-keymap("t", "<C-l>", "<C-\\><C-n><C-w>l", opts)
+keymap.set("t", "<C-h>", "<C-\\><C-n><C-w>h", opts)
+keymap.set("t", "<C-j>", "<C-\\><C-n><C-w>j", opts)
+keymap.set("t", "<C-k>", "<C-\\><C-n><C-w>k", opts)
+keymap.set("t", "<C-l>", "<C-\\><C-n><C-w>l", opts)
 
 -- Command --
 
 -- Esc in the command mode act as Enter (Accepts the command)
 -- Look at the following link for more info
 -- https://github.com/neovim/neovim/issues/21585
-keymap("c", "<Esc>", "<C-c>", opts)
+keymap.set("c", "<Esc>", "<C-c>", opts)
+
+-- Telescope keymaps --
+keymap.set("n", "<leader><space>", neoutils.find_files, get_opts({ desc = "Find Files" }))
+keymap.set("n", "<leader>fg", neoutils.git_files, get_opts({ desc = "Find Within Git Repository" }))
+keymap.set("n", '<leader>f"', "<cmd>Telescope neoclip<cr>", get_opts({ desc = "Clipboard" }))
+keymap.set("n", "<leader>fq", "<cmd>Telescope macroscope<cr>", get_opts({ desc = "Macros" }))
+keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", get_opts({ desc = "Buffers" }))
+keymap.set("n", "<leader>fe", "<cmd>Telescope file_browser<cr>", get_opts({ desc = "Browser" }))
+keymap.set("n", "<leader>ps", "<cmd>Telescope repo list<cr>", get_opts({ desc = "Search" }))
+keymap.set("n", "<leader>vh", "<cmd>Telescope help_tags<cr>", get_opts({ desc = "Search" }))
+keymap.set("n", "<leader>pp", function()
+  require("telescope").extensions.project.project({ display_type = "minimal" })
+end, get_opts({ desc = "List" }))
+keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<cr>", get_opts({ desc = "Workspace" }))
+keymap.set("n", "<leader>sb", function()
+  require("telescope.builtin").current_buffer_fuzzy_find()
+end, get_opts({ desc = "Buffer" }))
+keymap.set("n", "<leader>vo", "<cmd>Telescope aerial<cr>", get_opts({ desc = "Code Outline" }))
+keymap.set("n", "<leader>fc", function()
+  require("telescope.builtin").colorscheme({ enable_preview = true })
+end, get_opts({ desc = "Colorscheme" }))
+
+-- LSP Keymaps
+-- show definition, references
+keymap.set("n", "gR", "<cmd>Telescope lsp_references<CR>", get_opts({ desc = "Show LSP references" }))
+-- go to declaration
+keymap.set("n", "gD", vim.lsp.buf.declaration, get_opts({ desc = "Go to declaration" }))
+-- show lsp definitions
+keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", get_opts({ desc = "Show LSP definitions" }))
+-- show lsp implementations
+keymap.set("n", "gi", "<cmd>Telescope lsp_implementations<CR>", get_opts({ desc = "Show LSP implementations" }))
+-- show lsp type definitions
+keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", get_opts({ desc = "Show LSP type definitions" }))
+-- see available code actions, in visual mode will apply to selection
+keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, get_opts({ desc = "See available code actions" }))
+-- smart rename
+keymap.set("n", "<leader>rn", vim.lsp.buf.rename, get_opts({ desc = "Smart rename" }))
+-- show  diagnostics for file
+keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", get_opts({ desc = "Show buffer diagnostics" }))
+-- show diagnostics for line
+keymap.set("n", "<leader>d", vim.diagnostic.open_float, get_opts({ desc = "Show line diagnostics" }))
+keymap.set("n", "]d", diagnostic_goto(true), get_opts({ desc = "Next Diagnostic" }))
+keymap.set("n", "[d", diagnostic_goto(false), get_opts({ desc = "Prev Diagnostic" }))
+keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), get_opts({ desc = "Next Error" }))
+keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), get_opts({ desc = "Prev Error" }))
+keymap.set("n", "[w", diagnostic_goto(false, "WARNING"), get_opts({ desc = "Prev Warning" }))
+-- show documentation for what is under cursor
+keymap.set("n", "K", vim.lsp.buf.hover, get_opts({ desc = "Show documentation for what is under cursor" }))
+-- mapping to restart lsp if necessary   keymap("gd", "Telescope lsp_definitions", opts)
+keymap.set("n", "<leader>rs", ":LspRestart<CR>", get_opts({ desc = "Restart LSP" }))
+keymap.set(
+  "n",
+  "<leader>ds",
+  require("telescope.builtin").lsp_document_symbols,
+  get_opts({ desc = "Document Symbols" })
+)
+keymap.set(
+  "n",
+  "<leader>ws",
+  require("telescope.builtin").lsp_dynamic_workspace_symbols,
+  get_opts({ desc = "Workspace Symbols" })
+)

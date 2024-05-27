@@ -6,9 +6,6 @@ return {
     local lint = require("lint")
     local bufnr = vim.api.nvim_get_current_buf()
 
-    -- Attach LSP Keymaps
-    require("plugins.lsp.config.keymaps").on_attach(nil, bufnr)
-
     lint.linters_by_ft = {
       javascript = { "eslint_d" },
       typescript = { "eslint_d" },

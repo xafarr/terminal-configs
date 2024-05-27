@@ -160,7 +160,6 @@ local config = {
 
 -- Needed for debugging
 config["on_attach"] = function(client, bufnr)
-  local keymaps = require("plugins.lsp.config.keymaps")
   local formatter = require("plugins.lsp.config.formatter")
   local wk = require("which-key")
   local mason_registry = require("mason-registry")
