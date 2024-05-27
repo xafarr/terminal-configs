@@ -47,7 +47,7 @@ return {
         desc = "Buffers",
       },
       {
-        "<leader>fr",
+        "<leader>fe",
         "<cmd>Telescope file_browser<cr>",
         desc = "Browser",
       },
