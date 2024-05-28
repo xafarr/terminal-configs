@@ -205,3 +205,27 @@ keymap.set(
   require("telescope.builtin").lsp_dynamic_workspace_symbols,
   get_opts({ desc = "Workspace Symbols" })
 )
+
+-- DAP Keymaps --
+
+ -- stylua: ignore
+keymap.set("n", "<leader>dR", function() require("dap").run_to_cursor() end, get_opts({desc = "Run to Cursor"}))
+keymap.set("n", "<leader>dE", function() require("dapui").eval(vim.fn.input "[Expression] > ") end, get_opts({desc = "Evaluate Input"}))
+keymap.set("n", "<leader>dC", function() require("dap").set_breakpoint(vim.fn.input "[Condition] > ") end, get_opts({desc = "Conditional Breakpoint"}))
+keymap.set("n", "<leader>dU", function() require("dapui").toggle() end, get_opts({desc = "Toggle UI"}))
+keymap.set("n", "<leader>db", function() require("dap").step_back() end, get_opts({desc = "Step Back"}))
+keymap.set("n", "<F9>", function() require("dap").continue() end, get_opts({desc = "Continue"}))
+keymap.set("n", "<leader>dd", function() require("dap").disconnect() end, get_opts({desc = "Disconnect"}))
+keymap.set({"n", "v"}, "<leader>de", function() require("dapui").eval() end, get_opts({desc = "Evaluate"}))
+keymap.set("n", "<leader>dg", function() require("dap").session() end, get_opts({desc = "Get Session"}))
+keymap.set("n", "<leader>dh", function() require("dap.ui.widgets").hover() end, get_opts({desc = "Hover Variables"}))
+keymap.set("n", "<leader>dS", function() require("dap.ui.widgets").scopes() end, get_opts({desc = "Scopes"}))
+keymap.set("n", "<F7>", function() require("dap").step_into() end, get_opts({desc = "Step Into"}))
+keymap.set("n", "<F8>", function() require("dap").step_over() end, get_opts({desc = "Step Over"}))
+keymap.set("n", "<leader>dp", function() require("dap").pause.toggle() end, get_opts({desc = "Pause"}))
+keymap.set("n", "<leader>dq", function() require("dap").close() end, get_opts({desc = "Quit"}))
+keymap.set("n", "<leader>dr", function() require("dap").repl.toggle() end, get_opts({desc = "Toggle REPL"}))
+keymap.set("n", "<leader>ds", function() require("dap").continue() end, get_opts({desc = "Start"}))
+keymap.set("n", "<leader>dt", function() require("dap").toggle_breakpoint() end, get_opts({desc = "Toggle Breakpoint"}))
+keymap.set("n", "<leader>dx", function() require("dap").terminate() end, get_opts({desc = "Terminate"}))
+keymap.set("n", "<leader>du", function() require("dap").step_out() end, get_opts({desc = "Step Out"}))
