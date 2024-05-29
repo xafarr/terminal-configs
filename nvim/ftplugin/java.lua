@@ -164,7 +164,6 @@ config["on_attach"] = function(client, bufnr)
   local wk = require("which-key")
   local mason_registry = require("mason-registry")
 
-  keymaps.on_attach(client, bufnr)
   formatter.on_attach(client, bufnr)
 
   wk.register({
