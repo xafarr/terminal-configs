@@ -19,8 +19,8 @@ return {
           javascriptreact = { "prettier" },
           json = { "prettier" },
           lua = { "stylua" },
-          markdown = { "markdownlint" },
-          mdx = { "markdownlint" },
+          markdown = { "markdownlint-cli2" },
+          mdx = { "markdownlint-cli2" },
           python = { "isort", "black" },
           sql = { "sql_formatter" },
           svelte = { "prettier" },
@@ -39,7 +39,7 @@ return {
           kt = { "ktlint" },
         },
         formatters = {
-          markdownlint = {
+          ["markdownlint-cli2"] = {
             prepend_args = { "--config", neoconfigs.stdConfigPath .. "/.markdownlint.jsonc" },
           },
           shfmt = {

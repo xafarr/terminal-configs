@@ -11,15 +11,15 @@ return {
       typescript = { "eslint_d" },
       javascriptreact = { "eslint_d" },
       typescriptreact = { "eslint_d" },
-      markdown = { "markdownlint" },
-      mdx = { "markdownlint" },
+      markdown = { "markdownlint-cli2" },
+      mdx = { "markdownlint-cli2" },
       go = { "golangcilint" },
     }
 
-    lint.linters.markdownlint = function()
+    lint.linters["markdownlint-cli2"] = function()
       local efm = "%f:%l:%c %m,%f:%l %m"
       return {
-        cmd = neoutils.IS_WINDOWS() and "markdownlint.cmd" or "markdownlint",
+        cmd = neoutils.IS_WINDOWS() and "markdownlint-cli2.cmd" or "markdownlint-cli2",
         ignore_exitcode = true,
         stream = "stderr",
         parser = require("lint.parser").from_errorformat(efm, {

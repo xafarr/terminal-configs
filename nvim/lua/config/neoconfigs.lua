@@ -84,7 +84,7 @@ M.mason_tools = {
   "java-test",
   "jq",
   "ktlint",
-  "markdownlint",
+  "markdownlint-cli2",
   "prettier",
   "pylint",
   "shellcheck",
