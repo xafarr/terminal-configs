@@ -29,6 +29,7 @@ return {
       local mappings = {
         i = {
           ["<Esc>"] = actions.close,
+          ["<C-a>"] = actions.select_all,
           ["<C-j>"] = actions.move_selection_next,
           ["<C-k>"] = actions.move_selection_previous,
           ["<C-u>"] = actions.preview_scrolling_up,
