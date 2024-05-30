@@ -60,6 +60,19 @@ export LS_COLORS
 export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters
 
 ###################################################
+# Almost unlimited history
+###################################################
+HISTFILE="$HOME/.eternal_history"
+HISTSIZE=500000
+SAVEHIST="$HISTSIZE"
+unsetopt EXTENDED_HISTORY
+setopt appendhistory
+setopt INC_APPEND_HISTORY  
+setopt SHARE_HISTORY
+setopt HIST_SAVE_NO_DUPS
+setopt HIST_REDUCE_BLANKS
+
+###################################################
 # FZF Settings
 ###################################################
 export FZF_BASE="$HOMEBREW_PREFIX/opt/fzf"
