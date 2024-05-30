@@ -52,7 +52,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 
 # Ensure LESS doesn't wrap long lines
-export CURRENT_THEME="catppuccin-macchiato"
+export CURRENT_THEME="catppuccin-mocha"
 export LESS="--mouse --RAW-CONTROL-CHARS"
 LS_COLORS="$(vivid generate $CURRENT_THEME)"
 export LS_COLORS
