@@ -237,12 +237,12 @@ export EDITOR=$VISUAL
 # For Z for completion
 . $(brew --prefix)/etc/profile.d/z.sh
 
-# For Syntax Highlighting
-source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
 # For Auto Suggestions
 source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=247'
+
+# For Syntax Highlighting
+source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # -------------------------------------------------------------------
 # Functions for convenience
