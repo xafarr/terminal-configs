@@ -232,8 +232,12 @@ function java_props() {
 # Function to get git host icon
 # -------------------------------------------------------------------
 function get_git_host_icon() {
-    if [[ -d .git ]] && [[ $(git rev-parse --is-inside-work-tree) = true ]]; then
-        URL=$(git ls-remote --get-url 2>/dev/null)
+    git_path="$1"
+    if [[ -z $git_path ]] || [[ ! -d $git_path ]]; then
+        git_path=$(pwd)
+    fi
+    if [[ $(git -C "$git_path" rev-parse --is-inside-work-tree) = true ]]; then
+        URL=$(git -C "$git_path" ls-remote --get-url 2>/dev/null)
         if [[ $URL = *'github.com'* ]]; then
             ICON=" "
         elif [[ $URL = *'gitlab.com'* ]]; then
