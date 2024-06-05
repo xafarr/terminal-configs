@@ -15,7 +15,7 @@ def get_host_icon(url):
     elif any([host in url for host in ["azure.com", "visualstudio.com"]]):
         icon = "󰿕 "
     elif "git" in url:
-        icon = " "
+        icon = " "
     return icon
 
 
