@@ -1,0 +1,72 @@
+#!/usr/bin/env bash
+
+# -------------------------------------------------------------------
+# Functions for convenience
+# -------------------------------------------------------------------
+function java_props() {
+    java_props=$(java -XshowSettings:properties -version)
+    echo "$java_props"
+}
+
+# -------------------------------------------------------------------
+# Function to get git host icon
+# -------------------------------------------------------------------
+function get_git_host_icon() {
+    git_path="$1"
+    if [[ -z $git_path ]] || [[ ! -d $git_path ]]; then
+        git_path=$(pwd)
+    fi
+    if [[ $(git -C "$git_path" rev-parse --is-inside-work-tree) = true ]]; then
+        URL=$(git -C "$git_path" ls-remote --get-url 2>/dev/null)
+        if [[ $URL = *'github.com'* ]]; then
+            ICON=" "
+        elif [[ $URL = *'gitlab.com'* ]]; then
+            ICON="󰮠 "
+        elif [[ $URL = *'bitbucket.com'* ]]; then
+            ICON=" "
+        elif [[ $URL = *'azure.com'* ]] || [[ $URL = *'visualstudio.com'* ]]; then
+            ICON="󰿕 "
+        elif [[ $URL = *'oracle'* ]]; then
+            ICON="󰮠 "
+        elif [[ $URL = *'kernel'* ]]; then
+            ICON=" "
+        elif [[ $URL = *'archlinux'* ]]; then
+            ICON=" "
+        elif [[ $URL = *'gnu'* ]]; then
+            ICON=" "
+        elif [[ $URL = *'git'* ]]; then
+            ICON=" "
+        else
+            ICON=" "
+            URL="localhost"
+        fi
+        for PATTERN in "https" "http" "git" "://" "@"; do
+            [[ "$URL" == "$PATTERN"* ]] && URL="${URL##"$PATTERN"}"
+        done
+        for PATTERN in "/" ".git"; do
+            [[ "$URL" == *"$PATTERN" ]] && URL="${URL%%"$PATTERN"}"
+        done
+        echo "$ICON"
+    fi
+}
+
+# -------------------------------------------------------------------
+# Function to check if local port is used
+# -------------------------------------------------------------------
+function port() {
+    lsof -n -i4TCP:$1 | grep LISTEN
+}
+
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+_fzf_compgen_path() {
+    fd --hidden --follow --exclude ".git" --exclude "node_modules" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+_fzf_compgen_dir() {
+    fd --type d --hidden --follow --exclude ".git" --exclude "node_modules" . "$1"
+}
+

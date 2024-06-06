@@ -309,6 +309,20 @@ elif [ -f "$HOME/.tmux.conf" ]; then
 fi
 ln -s "$PROJECTS_DIR/terminal-configs/terminal/tmux/tmux.conf" "$HOME/.tmux.conf" && info ".tmux.conf link created"
 
+if [ -h "$HOME/.commonrc" ]; then
+    rm "$HOME/.commonrc"
+elif [ -f "$HOME/.commonrc" ]; then
+    mv "$HOME/.commonrc" "$HOME/.commonrc.bak"
+fi
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/common/commonrc" "$HOME/.commonrc" && info ".commonrc link created"
+
+if [ -h "$HOME/.shell_functions" ]; then
+    rm "$HOME/.shell_functions"
+elif [ -f "$HOME/.shell_functions" ]; then
+    mv "$HOME/.shell_functions" "$HOME/.shell_functions.bak"
+fi
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/common/shell_functions" "$HOME/.shell_functions" && info ".shell_functions link created"
+
 if [ -h "$HOME/.bashrc" ]; then
     rm "$HOME/.bashrc"
 elif [ -f "$HOME/.bashrc" ]; then
@@ -360,13 +374,6 @@ elif [ -f "$XDG_CONFIG_HOME/starship.toml" ]; then
     mv "$XDG_CONFIG_HOME/starship.toml" "$XDG_CONFIG_HOME/starship.toml.bak"
 fi
 ln -s "$PROJECTS_DIR/terminal-configs/terminal/starship/starship.toml" "$XDG_CONFIG_HOME/starship.toml" && info "starship.toml link created"
-
-if [ -h "$XDG_CONFIG_HOME/get_git_host.py" ]; then
-    rm "$XDG_CONFIG_HOME/get_git_host.py"
-elif [ -f "$XDG_CONFIG_HOME/get_git_host.py" ]; then
-    mv "$XDG_CONFIG_HOME/get_git_host.py" "$XDG_CONFIG_HOME/get_git_host.py.bak"
-fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/starship/get_git_host.py" "$XDG_CONFIG_HOME/get_git_host.py" && info "get_git_host.py link created"
 
 if [ -h "$XDG_CONFIG_HOME/kitty" ]; then
     rm "$XDG_CONFIG_HOME/kitty"
