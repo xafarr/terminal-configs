@@ -1,6 +1,7 @@
 [alias]
-  hist-all = log --all --graph --decorate --pretty=format:'%C(cyan)%ad %C(yellow)%h %C(auto)%d %Creset%s%C(dim normal) - %aN' --date=format:'%Y-%m-%d %H:%M'
-  hist = log --graph --decorate --pretty=format:'%C(cyan)%ad %C(yellow)%h %C(auto)%d %Creset%s%C(dim normal) - %aN' --date=format:'%Y-%m-%d %H:%M'
+  hist = "!f() { \
+    git log $1 --graph --decorate --pretty=format:'%C(cyan)%ad %C(yellow)%h %C(auto)%d %Creset%s%C(dim normal) - %aN' --date=format:'%Y-%m-%d %H:%M'; \
+  }; f"
   show-files = diff-tree --no-commit-id --name-only -r
   unstage = reset HEAD --
   st = status
