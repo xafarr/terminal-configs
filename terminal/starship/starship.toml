@@ -194,7 +194,7 @@ format = "[  $context](blue bold)"
 format = "[  $version](bold purple)"
 
 [python]
-format = "[ 󰌠 $version ($virtualenv)]($style)"
+format = "[ 󰌠 $version($virtualenv)]($style)"
 
 [ruby]
 format = "[  $version]($style)"
