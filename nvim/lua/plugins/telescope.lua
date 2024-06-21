@@ -22,7 +22,7 @@ return {
     config = function(_, _)
       local telescope = require("telescope")
       local actions = require("telescope.actions")
-      local trouble = require("trouble.providers.telescope")
+      local trouble = require("trouble.sources.telescope")
       local icons = require("config.icons")
       local actions_layout = require("telescope.actions.layout")
 
