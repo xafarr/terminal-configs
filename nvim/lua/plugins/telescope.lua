@@ -40,10 +40,10 @@ return {
           ["<C-x]"] = actions.select_horizontal,
           ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
           ["?"] = actions_layout.toggle_preview,
-          ["<C-t>"] = trouble.open_with_trouble,
+          ["<C-t>"] = trouble.open,
         },
         n = {
-          ["<C-t>"] = trouble.open_with_trouble,
+          ["<C-t>"] = trouble.open,
         },
       }
 
