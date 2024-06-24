@@ -29,7 +29,8 @@ return {
       end
 
       local has_words_before = function()
-        if vim.api.nvim_buf_get_option(0, "buftype") == "prompt" then
+        local bufnr = vim.api.nvim_get_current_buf()
+        if vim.api.nvim_get_option_value("buftype", { buf = bufnr }) == "prompt" then
           return false
         end
         table.unpack = table.unpack or unpack -- Lua 5.1 compatibility

@@ -113,7 +113,8 @@ return {
       end
 
       local spaces = function()
-        return "spaces:" .. vim.api.nvim_buf_get_option(0, "shiftwidth")
+        local bufnr = vim.api.nvim_get_current_buf()
+        return "spaces:" .. vim.api.nvim_get_option_value("shiftwidth", { buf = bufnr })
       end
 
       local recording = {
