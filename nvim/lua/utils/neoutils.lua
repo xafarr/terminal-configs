@@ -257,4 +257,25 @@ function M.lazygit_toggle()
   lazygit:toggle()
 end
 
+local started = false
+function M.codeium_status()
+  local name = "codeium"
+  if not package.loaded["cmp"] then
+    return
+  end
+  for _, s in ipairs(require("cmp").core.sources) do
+    if s.name == name then
+      if s.source:is_available() then
+        started = true
+      else
+        return started and "unknown" or nil
+      end
+      if s.status == s.SourceStatus.FETCHING then
+        return "warning"
+      end
+      return "enabled"
+    end
+  end
+end
+
 _G.neoutils = M

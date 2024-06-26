@@ -123,6 +123,10 @@ return {
         color = { fg = "#ff9e64" },
       }
 
+      local codeium = {
+        "codeium",
+      }
+
       lualine.setup({
         options = {
           icons_enabled = true,
@@ -144,7 +148,7 @@ return {
           lualine_a = { mode },
           lualine_b = { branch, diff },
           lualine_c = { filename },
-          lualine_x = { recording, diagnostics, spaces, filetype },
+          lualine_x = { recording, diagnostics, codeium, spaces, filetype },
           lualine_y = { location },
           lualine_z = { progress },
         },
