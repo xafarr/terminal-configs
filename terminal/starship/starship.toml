@@ -145,7 +145,9 @@ format = "[ $ssh_symbol$hostname]($style)"
 
 # Configure the background jobs
 [jobs]
-symbol = " "
+number_threshold = 1
+symbol_threshold = 1
+format = "[  $number]($style)"
 
 # Configure the package version
 [package]
