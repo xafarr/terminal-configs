@@ -36,9 +36,9 @@ setopt HIST_REDUCE_BLANKS
 ###################################################
 if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-    autoload -Uz compinit
-    compinit
 fi
+autoload -Uz compinit && compinit
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 # For Z for completion
 . $(brew --prefix)/etc/profile.d/z.sh
