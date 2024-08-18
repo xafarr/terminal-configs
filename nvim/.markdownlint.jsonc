@@ -28,5 +28,12 @@
     "start_indented": true,
     // Spaces for first level indent (when start_indented is set)
     "start_indent": 2
+  },
+  "MD033": {
+    "allowed_elements": [
+      "nobr",
+      "sup",
+      "a"
+    ]
   }
 }
