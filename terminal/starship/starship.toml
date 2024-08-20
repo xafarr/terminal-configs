@@ -152,13 +152,13 @@ format = "[  $number]($style)"
 # Configure the package version
 [package]
 format = "[  $version]($style)"
-style = "dimmed white"
+style = "bold dimmed white"
 disabled = true
 
 # Configure the Node.js module
 [nodejs]
 format = "[ 󰎙 $version]($style)"
-style = "dimmed green"
+style = "bold dimmed green"
 
 # Configure the golang module
 [golang]
@@ -167,17 +167,17 @@ format = "[  $version]($style)"
 # Configure the .NET module
 [dotnet]
 format = "[  $version]($style)"
-style = "dimmed blue"
+style = "bold dimmed blue"
   
 # Configure the Rust module
 [rust]
 format = "[  $version]($style)"
-style = "dimmed red"
+style = "bold dimmed red"
 
 # Configure the Java module
 [java]
 format = "[  $version]($style)"
-style = "dimmed purple"
+style = "bold dimmed purple"
 
 [aws]
 disabled = true
@@ -190,10 +190,10 @@ format = "[ 󱁢 $version]($style)"
 format = "[ V vagrant $version]($style)"
 
 [docker_context]
-format = "[  $context](blue bold)"
+format = "[  $context](dimmed blue bold)"
 
 [helm]
-format = "[  $version](bold purple)"
+format = "[  $version](bold dimmed purple)"
 
 [python]
 format = "[ 󰌠 $version($virtualenv)]($style)"
@@ -202,7 +202,7 @@ format = "[ 󰌠 $version($virtualenv)]($style)"
 format = "[  $version]($style)"
 
 [kubernetes]
-format = "[ 󱃾 $context](bold purple)"
+format = "[ 󱃾 $context](bold dimmed purple)"
 disabled = true
 
 [cmd_duration]
@@ -211,6 +211,7 @@ style = "244"
 format = "[  $duration]($style)"
 
 [kotlin]
+style = "bold dimmed blue"
 format = "[ 󱈙 $version]($style)"
 
 [custom.git_host]
