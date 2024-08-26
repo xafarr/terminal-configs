@@ -42,7 +42,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 
 # Ensure LESS doesn't wrap long lines
-export CURRENT_THEME="catppuccin-mocha"
+export CURRENT_THEME="catppuccin-macchiato"
 export LESS="--mouse --RAW-CONTROL-CHARS"
 LS_COLORS="$(vivid generate $CURRENT_THEME)"
 export LS_COLORS
@@ -128,16 +128,16 @@ export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
 #--color=marker:#a0c980,spinner:#ec7279,header:#5dbbc1'
 
 # For Catppuccin Macchiato dark theme
-#export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
-#--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
-#--color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
-#--color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+--color=bg+:#363a4f,bg:#24273a,spinner:#f4dbd6,hl:#ed8796 \
+--color=fg:#cad3f5,header:#ed8796,info:#c6a0f6,pointer:#f4dbd6 \
+--color=marker:#f4dbd6,fg+:#cad3f5,prompt:#c6a0f6,hl+:#ed8796"
 
 # For Catppuccin Mocha dark theme
-export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
---color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
---color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
---color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
+#export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+#--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+#--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+#--color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8"
 
 # User configuration
 # You may need to manually set your language environment
