@@ -162,7 +162,6 @@ export LDFLAGS="-L$HOMEBREW_PREFIX/opt/llvm/lib/c++ -Wl,\
 -L$HOMEBREW_PREFIX/opt/bzip2/lib \
 -L$HOMEBREW_PREFIX/opt/zlib/lib \
 -L$HOMEBREW_PREFIX/opt/readline/lib \
--L$HOMEBREW_PREFIX/opt/openssl@1.1/lib \
 -L$HOMEBREW_PREFIX/opt/openssl@3/lib \
 -L$HOMEBREW_PREFIX/opt/libffi/lib"
 
@@ -173,12 +172,10 @@ export CPPFLAGS="-I$HOMEBREW_PREFIX/include \
 -I$HOMEBREW_PREFIX/opt/bzip2/include \
 -I$HOMEBREW_PREFIX/opt/zlib/include \
 -I$HOMEBREW_PREFIX/opt/readline/include \
--I$HOMEBREW_PREFIX/opt/openssl@1.1/include \
 -I$HOMEBREW_PREFIX/opt/openssl@3/include \
 -I$HOMEBREW_PREFIX/opt/libffi/include"
 
 export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/libffi/lib/pkgconfig \
-$HOMEBREW_PREFIX/opt/openssl@1.1/lib/pkgconfig \
 $HOMEBREW_PREFIX/opt/openssl@3/lib/pkgconfig \
 $HOMEBREW_PREFIX/opt/curl/lib/pkgconfig \
 $HOMEBREW_PREFIX/opt/zlib/lib/pkgconfig \
