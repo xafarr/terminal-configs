@@ -184,7 +184,7 @@ $HOMEBREW_PREFIX/share/pkgconfig"
 
 export LS_OPTIONS="--color"
 
-alias ls="gls $LS_OPTIONS"
+alias ls='gls $LS_OPTIONS'
 alias ld="ls -ld"
 alias l="ls -alh"
 alias ltr="ls -altrh"
@@ -205,6 +205,7 @@ export EDITOR=$VISUAL
 
 # For oraganization specific extra configuration
 if [[ -f $HOME/.additional-env-config ]]; then
+    # shellcheck source=/dev/null
     source "$HOME/.additional-env-config"
 fi
 
