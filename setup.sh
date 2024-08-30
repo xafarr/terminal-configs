@@ -77,30 +77,32 @@ gen_ssh_keys() {
     $ssh_keygen_str "${email:-'xafarr@gmail.com'}" || error "Failed to generate ssh keypair"
 }
 
+linux_font_install_dir="${HOME}/.local/share/fonts"
 install_fonts_in_linux() {
-    declare -a fonts=(
+    declare -a nerd_fonts=(
         "FiraCode"
         "JetBrainsMono"
+        "NerdFontsSymbolsOnly"
     )
 
-    local_bin="${HOME}/.local/share/fonts"
-    if [[ ! -d "$local_bin" ]]; then
-        mkdir -p "$local_bin"
+    if [[ ! -d "$linux_font_install_dir" ]]; then
+        mkdir -p "$linux_font_install_dir"
     fi
 
-    latest_version=$(curl -s "https://api.github.com/repos/ryanoasis/nerd-fonts/tags" | jq -r '.[0].name')
+    jetbrains_orig_download_url=$(curl -s "https://api.github.com/repos/JetBrains/JetBrainsMono/tags" | jq -r '.[0].zipball_url')
+    firacode_orig_download_url=$(curl -s "https://api.github.com/repos/tonsky/FiraCode/tags" | jq -r '.[0].zipball_url')
+    latest_nerd_fonts_version=$(curl -s "https://api.github.com/repos/ryanoasis/nerd-fonts/tags" | jq -r '.[0].name')
 
-    for font in "${fonts[@]}"; do
-        zip_file="${font}.zip"
-        download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${latest_version}/${zip_file}"
-        info "Downloading and installing '$font'..."
-        wget "$download_url" || error "Unable to download '$font'."
-        unzip "$zip_file" -d "$local_bin"
-        rm "$zip_file"
-        info "'$font' installed successfully."
+    install_font "JetBrains Mono" "$jetbrains_orig_download_url"
+    install_font "FiraCode" "$firacode_orig_download_url"
+
+    for font_name in "${nerd_fonts[@]}"; do
+        zip_file="${font_name}.zip"
+        download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${latest_nerd_fonts_version}/${zip_file}"
+        install_font "$font_name Nerd Font" "$download_url"
     done
 
-    find "$local_bin" -name '*Windows Compatible*' -delete
+    find "$linux_font_install_dir" -name '*Windows Compatible*' -delete
 
     if command -v fc-cache &>/dev/null; then
         fc-cache -f >/dev/null || error "Unable to update font cache."
@@ -108,6 +110,18 @@ install_fonts_in_linux() {
     else
         warn "Command 'fc-cache' not found. Make sure to have the necessary dependencies installed to update the font cache."
     fi
+}
+
+install_font() {
+    font_name=$1
+    download_url=$2
+    zip_file="$font_name.zip"
+    info "Downloading and installing '$font_name'..."
+    wget -O "$zip_file" "$download_url" || error "Unable to download '$font_name'."
+    unzip "$zip_file" -d "$linux_font_install_dir"
+    rm "$zip_file"
+    info "'$font_name' installed successfully."
+
 }
 
 # USER isn't always set so provide a fall back for the installer and subprocesses.
@@ -279,11 +293,20 @@ fi
 
 # Install Fonts
 if [[ -n "${SETUP_ON_MACOS-}" ]]; then
-    if [[ $($BREW list | grep -iwc font-jetbrains-mono-nerd-font) -eq 0 ]]; then
+    if [[ $($BREW list | grep -iwxc font-jetbrains-mono-nerd-font) -eq 0 ]]; then
         $BREW install font-jetbrains-mono-nerd-font || error "Failed to install font-jetbrains-mono-nerd-font."
     fi
-    if [[ $($BREW list | grep -iwc font-fira-code-nerd-font) -eq 0 ]]; then
+    if [[ $($BREW list | grep -iwxc font-fira-code-nerd-font) -eq 0 ]]; then
         $BREW install font-fira-code-nerd-font || error "Failed to install font-fira-code-nerd-font."
+    fi
+    if [[ $($BREW list | grep -iwxc font-symbols-only-nerd-font) -eq 0 ]]; then
+        $BREW install font-symbols-only-nerd-font || error "Failed to install font-symbols-only-nerd-font."
+    fi
+    if [[ $($BREW list | grep -iwxc font-fira-code) -eq 0 ]]; then
+        $BREW install font-fira-code || error "Failed to install font-fira-code."
+    fi
+    if [[ $($BREW list | grep -iwxc font-jetbrains-mono) -eq 0 ]]; then
+        $BREW install font-jetbrains-mono || error "Failed to install font-jetbrains-mono."
     fi
 elif [[ -n "${SETUP_ON_LINUX-}" ]]; then
     install_fonts_in_linux
@@ -459,10 +482,10 @@ if [ -n "${SETUP_ON_MACOS-}" ]; then
         info "Kitty is already installed. Skipping installation."
     fi
 else
-    local_bin="${HOME}/.local/bin"
+    linux_font_install_dir="${HOME}/.local/bin"
     local_share_app="${HOME}/.local/share/applications"
-    if [[ ! -d "$local_bin" ]]; then
-        mkdir -p "$local_bin"
+    if [[ ! -d "$linux_font_install_dir" ]]; then
+        mkdir -p "$linux_font_install_dir"
     fi
     if [[ ! -d "$local_share_app" ]]; then
         mkdir -p "$local_share_app"
@@ -471,7 +494,7 @@ else
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
     # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
     # your system-wide PATH)
-    ln -sf "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/kitty.app/bin/kitten" "$local_bin"
+    ln -sf "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/kitty.app/bin/kitten" "$linux_font_install_dir"
     # Place the kitty.desktop file somewhere it can be found by the OS
     cp "$HOME/.local/kitty.app/share/applications/kitty.desktop" "$HOME/.local/share/applications/"
     # If you want to open text files and images in kitty via your file manager also add the kitty-open.desktop file
