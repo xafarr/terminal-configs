@@ -14,6 +14,13 @@ return {
   },
   config = function()
     require("noice").setup({
+      cmdline = {
+        format = {
+          cmdline = { icon = " " },
+          filter = { icon = "󰈲 " },
+          help = { icon = "󰋖" },
+        },
+      },
       lsp = {
         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
         override = {
