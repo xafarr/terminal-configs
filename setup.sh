@@ -89,16 +89,21 @@ install_fonts_in_linux() {
         mkdir -p "$linux_font_install_dir"
     fi
 
-    jetbrains_orig_download_url=$(curl -s "https://api.github.com/repos/JetBrains/JetBrainsMono/tags" | jq -r '.[0].zipball_url')
-    firacode_orig_download_url=$(curl -s "https://api.github.com/repos/tonsky/FiraCode/tags" | jq -r '.[0].zipball_url')
-    latest_nerd_fonts_version=$(curl -s "https://api.github.com/repos/ryanoasis/nerd-fonts/tags" | jq -r '.[0].name')
+    # https://github.com/JetBrains/JetBrainsMono/releases/download/v<version>/JetBrainsMono-<version>.zip
+    # https://github.com/tonsky/FiraCode/releases/download/<version>/Fira_Code_v<version>.zip
+    jetbrains_latest_version=$(curl -s "https://api.github.com/repos/JetBrains/JetBrainsMono/tags" | jq -r '.[0].name' | tr -d v)
+    firacode_latest_version=$(curl -s "https://api.github.com/repos/tonsky/FiraCode/tags" | jq -r '.[0].name')
+    nerd_fonts_latest_version=$(curl -s "https://api.github.com/repos/ryanoasis/nerd-fonts/tags" | jq -r '.[0].name')
 
-    install_font "JetBrains Mono" "$jetbrains_orig_download_url"
-    install_font "FiraCode" "$firacode_orig_download_url"
+    jetbrains_download_url="https://github.com/JetBrains/JetBrainsMono/releases/download/v$jetbrains_latest_version/JetBrainsMono-$jetbrains_latest_version.zip"
+    firacode_download_url="https://github.com/tonsky/FiraCode/releases/download/$firacode_latest_version/Fira_Code_v$firacode_latest_version.zip"
+
+    install_font "JetBrains Mono" "$jetbrains_download_url"
+    install_font "FiraCode" "$firacode_download_url"
 
     for font_name in "${nerd_fonts[@]}"; do
         zip_file="${font_name}.zip"
-        download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${latest_nerd_fonts_version}/${zip_file}"
+        download_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${nerd_fonts_latest_version}/${zip_file}"
         install_font "$font_name Nerd Font" "$download_url"
     done
 
@@ -118,7 +123,7 @@ install_font() {
     zip_file="$font_name.zip"
     info "Downloading and installing '$font_name'..."
     wget -O "$zip_file" "$download_url" || error "Unable to download '$font_name'."
-    unzip "$zip_file" -d "$linux_font_install_dir"
+    unzip -jq "$zip_file" "ttf/*.ttf" "*/ttf/*.ttf" -d "$linux_font_install_dir" > /dev/null 2>&1
     rm "$zip_file"
     info "'$font_name' installed successfully."
 
