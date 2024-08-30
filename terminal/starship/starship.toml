@@ -49,8 +49,8 @@ format = " [$state($progress_current$progress_total)]($style)"
 
 # Change the default prompt characters
 [character]
-success_symbol = " [➜ ](bold green)"
-error_symbol = " [➜ ](bold red)"
+success_symbol = " [ ](bold green)"
+error_symbol = " [ ](bold red)"
 
 # No need for env variables as starship provides a way to show your current distro
 [os]
