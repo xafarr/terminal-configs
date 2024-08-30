@@ -467,17 +467,6 @@ $HOMEBREW_PREFIX/share/pkgconfig"
 export PATH="$BREW_BIN:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
 
-# Installing nodejs, Golang, dotnet-core and Java using asdf
-ASDF="$BREW_BIN/asdf"
-LATEST_JAVA_LTS="corretto-21.0.3.9.1"
-info "Installing NodeJS"
-($ASDF plugin-add nodejs && $ASDF install nodejs latest:20 && $ASDF global nodejs latest:20) || error "Failed to install NodeJS using asdf"
-info "Installing Golang"
-($ASDF plugin-add golang && $ASDF install golang latest && $ASDF global golang latest) || error "Failed to install Golang using asdf"
-info "Installing DotNet Core"
-($ASDF plugin-add dotnet && $ASDF install dotnet latest && $ASDF global dotnet latest) || error "Failed to install DotNet Core using asdf"
-($ASDF plugin-add java && $ASDF install java "$LATEST_JAVA_LTS" && $ASDF global java "$LATEST_JAVA_LTS") || error "Failed to install Java using asdf"
-
 # Install Kitty terminal emulator
 info "Installing Kitty terminal emulator..."
 if [ -n "${SETUP_ON_MACOS-}" ]; then
