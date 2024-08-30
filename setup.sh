@@ -208,9 +208,6 @@ fi
 if ! [ -f "$BREW_BIN/wget" ]; then
     $BREW install wget || error "Failed to install wget."
 fi
-if ! [ -f "$BREW_BIN/coreutils" ]; then
-    $BREW install coreutils || error "Failed to install coreutils."
-fi
 if ! [ -f "$BREW_BIN/gpg" ]; then
     $BREW install gnupg || error "Failed to install gnupg."
 fi
@@ -261,6 +258,9 @@ if ! [ -f "$BREW_BIN/nvim" ]; then
 fi
 if ! [ -f "$BREW_BIN/bat" ]; then
     $BREW install bat || error "Failed to install bat."
+fi
+if [[ $($BREW list | grep -iwc coreutils) -eq 0 ]]; then
+    $BREW install coreutils || error "Failed to install coreutils."
 fi
 if [[ $($BREW list | grep -iwc bzip2) -eq 0 ]]; then
     $BREW install bzip2 || error "Failed to install bzip2."
