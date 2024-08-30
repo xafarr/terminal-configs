@@ -123,7 +123,7 @@ install_font() {
     zip_file="$font_name.zip"
     info "Downloading and installing '$font_name'..."
     wget -O "$zip_file" "$download_url" || error "Unable to download '$font_name'."
-    unzip -jq "$zip_file" "ttf/*.ttf" "*/ttf/*.ttf" -d "$linux_font_install_dir" > /dev/null 2>&1
+    unzip -j "$zip_file" "*.ttf" -d "$linux_font_install_dir"
     rm "$zip_file"
     info "'$font_name' installed successfully."
 
