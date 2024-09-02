@@ -319,6 +319,12 @@ fi
 
 # Clone terminal-configs
 PROJECTS_DIR="$HOME/Documents/Projects"
+
+read -r -p "Please enter the directory to clone terminal-configs to [${PROJECTS_DIR}]: " response
+if [[ -n $response ]]; then
+    PROJECTS_DIR=$response
+fi
+
 if ! [ -d "$PROJECTS_DIR" ]; then
     mkdir -p "$PROJECTS_DIR"
 fi
