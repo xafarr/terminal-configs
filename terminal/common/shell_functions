@@ -20,14 +20,12 @@ function get_git_host_icon() {
         URL=$(git -C "$git_path" ls-remote --get-url 2>/dev/null)
         if [[ $URL = *'github.com'* ]]; then
             ICON=" "
-        elif [[ $URL = *'gitlab.com'* ]]; then
+        elif [[ $URL = *'gitlab.com'* ]] || [[ $URL = *'cloudlab.us.oracle.com'* ]]; then
             ICON="󰮠 "
-        elif [[ $URL = *'bitbucket.com'* ]]; then
+        elif [[ $URL = *'bitbucket.com'* ]] || [[ $URL = *'bitbucket.oci.oraclecorp.com'* ]]; then
             ICON=" "
         elif [[ $URL = *'azure.com'* ]] || [[ $URL = *'visualstudio.com'* ]]; then
             ICON="󰿕 "
-        elif [[ $URL = *'oracle'* ]]; then
-            ICON="󰮠 "
         elif [[ $URL = *'kernel'* ]]; then
             ICON=" "
         elif [[ $URL = *'archlinux'* ]]; then
