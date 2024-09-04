@@ -438,6 +438,13 @@ elif [ -d "$XDG_CONFIG_HOME/lazygit" ]; then
 fi
 ln -s "$PROJECTS_DIR/terminal-configs/terminal/lazygit" "$XDG_CONFIG_HOME/lazygit" && info "lazygit link created"
 
+if [ -h "$XDG_CONFIG_HOME/git" ]; then
+    rm "$XDG_CONFIG_HOME/git"
+elif [ -d "$XDG_CONFIG_HOME/git" ]; then
+    mv "$XDG_CONFIG_HOME/git" "$XDG_CONFIG_HOME/git.bak"
+fi
+ln -s "$PROJECTS_DIR/terminal-configs/terminal/git" "$XDG_CONFIG_HOME/git" && info "git link created"
+
 export LDFLAGS="-L$HOMEBREW_PREFIX/opt/llvm/lib/c++ -Wl,\
 -rpath,$HOMEBREW_PREFIX/opt/llvm/lib/c++ \
 -L$HOMEBREW_PREFIX/lib \
