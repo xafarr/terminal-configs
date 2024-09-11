@@ -62,7 +62,7 @@ M.language_servers = {
   "rust_analyzer",
   "sqlls",
   "terraformls",
-  "tsserver",
+  "ts_ls",
   "vimls",
   "vuels",
   "yamlls",
