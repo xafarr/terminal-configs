@@ -166,30 +166,21 @@ config["on_attach"] = function(client, bufnr)
 
   formatter.on_attach(client, bufnr)
 
-  wk.register({
-    ["<leader>cx"] = { name = "+extract" },
-    ["<leader>cxv"] = { jdtls.extract_variable_all, "Extract Variable" },
-    ["<leader>cxc"] = { jdtls.extract_constant, "Extract Constant" },
-    ["gs"] = { jdtls.super_implementation, "Goto Super" },
-    ["gS"] = { require("jdtls.tests").goto_subjects, "Goto Subjects" },
-    ["<leader>co"] = { jdtls.organize_imports, "Organize Imports" },
-  }, { mode = "n", buffer = bufnr })
-  wk.register({
-    ["<leader>c"] = { name = "+code" },
-    ["<leader>cx"] = { name = "+extract" },
-    ["<leader>cxm"] = {
-      [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
-      "Extract Method",
+  wk.add({
+    { "<leader>co", jdtls.organize_imports, desc = "Organize Imports" },
+    { "<leader>cx", group = "+extract", mode = { "n", "v" } }, -- group
+    { "<leader>cxv", jdtls.extract_variable_all, desc = "Extract Variable" },
+    { "<leader>cxc", jdtls.extract_constant, desc = "Extract Constant" },
+    { "<leader>cxm", jdtls.extract_method, desc = "Extract Method" },
+    { "<leader>gs", jdtls.goto_super_class, desc = "Goto Super" },
+    { "<leader>gS", jdtls.goto_super_method, desc = "Goto Super" },
+    {
+      mode = { "v" },
+      { "<leader>cxm", "<ESC><CMD>lua require('jdtls').extract_method(true)<CR>", desc = "Extract Method" },
+      { "<leader>cxv", "<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>", desc = "Extract Variable" },
+      { "<leader>cxc", "<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>", desc = "Extract Constant" },
     },
-    ["<leader>cxv"] = {
-      [[<ESC><CMD>lua require('jdtls').extract_variable_all(true)<CR>]],
-      "Extract Variable",
-    },
-    ["<leader>cxc"] = {
-      [[<ESC><CMD>lua require('jdtls').extract_constant(true)<CR>]],
-      "Extract Constant",
-    },
-  }, { mode = "v", buffer = bufnr })
+  })
 
   if neoutils.has("nvim-dap") and mason_registry.is_installed("java-debug-adapter") then
     -- custom init for Java debugger
@@ -198,13 +189,14 @@ config["on_attach"] = function(client, bufnr)
 
     -- Java Test require Java debugger to work
     if mason_registry.is_installed("java-test") then
+      local jdap = require("jdtls.dap")
       -- custom keymaps for Java test runner (not yet compatible with neotest)
-      wk.register({
-        ["<leader>t"] = { name = "+test" },
-        ["<leader>tt"] = { require("jdtls.dap").test_class, "Run All Test" },
-        ["<leader>tr"] = { require("jdtls.dap").test_nearest_method, "Run Nearest Test" },
-        ["<leader>tT"] = { require("jdtls.dap").pick_test, "Run Test" },
-      }, { mode = "n", buffer = bufnr })
+      wk.add({
+        { "<leader>t", group = "+test" },
+        { "<leader>tt", jdap.test_class, desc = "Run All Test" },
+        { "<leader>tr", jdap.test_nearest_method, desc = "Run Nearest Test" },
+        { "<leader>tT", jdap.pick_test, desc = "Run Test" },
+      })
     end
   end
 end
