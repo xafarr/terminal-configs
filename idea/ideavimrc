@@ -1,6 +1,9 @@
 nnoremap <SPACE> <Nop>
 let mapleader = " "
+
 set nocompatible
+set idearafactormode=keep
+set ideajoin
 set encoding=utf8
 " set number relativenumber
 set matchpairs+=<:>
@@ -40,25 +43,21 @@ set nowritebackup
 set noswapfile
 
 " search occurrence count in file
-nnoremap <Leader>* *<C-O>:%s///gn<CR>``
+nnoremap <leader>* *<C-O>:%s///gn<CR>``
 " toggle hlsearch
-nnoremap <silent> <Leader><space> :set hls!<cr>
+nnoremap <silent> <leader><space> :set hls!<cr>
 
-" Clear search
-nnoremap <Leader>, :let @/=''<cr>:noh<cr>
 " Faster scrolling
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-" toggle relative line number
-nnoremap <silent> <Leader>rn :set rnu!<cr>
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
 nnoremap N Nzzzv
 " Split horizontally with new file
-nnoremap <silent> <Leader>h :split<CR>
-nnoremap <silent> <Leader>v :vsplit<CR>
-nnoremap <silent> <Leader>w :close<CR>
+nnoremap <silent> <leader>h :split<CR>
+nnoremap <silent> <leader>v :vsplit<CR>
+nnoremap <silent> <leader>w :close<CR>
 " Faster scrolling
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
@@ -75,10 +74,10 @@ nnoremap <tab>   <C-w>w
 nnoremap <S-tab> <C-w>W
 
 " Rotate split windows
-nnoremap <Leader><C-h> <C-w>H
-nnoremap <Leader><C-j> <C-w>J
-nnoremap <Leader><C-k> <C-w>K
-nnoremap <Leader><C-l> <C-w>L
+nnoremap <leader><C-h> <C-w>H
+nnoremap <leader><C-j> <C-w>J
+nnoremap <leader><C-k> <C-w>K
+nnoremap <leader><C-l> <C-w>L
 
 " Move between splits (windows)
 nnoremap <C-h> <C-w>h
@@ -100,3 +99,25 @@ inoremap ∆ <Esc>:m .+1<CR>==gi
 inoremap ˚ <Esc>:m .-2<CR>==gi
 vnoremap ∆ :m '>+1<CR>gv=gv
 vnoremap ˚ :m '<-2<CR>gv=gv
+
+" IntelliJ Action Mappings
+map ]c <Action>(VcsShowNextChangeMarker)
+map [c <Action>(VcsShowPrevChangeMarker)
+map ]d <Action>(GotoNextError)
+map [d <Action>(GotoPreviousError)
+map <leader>rn <Action>(RenameElement)
+map <leader>Rn <Action>(ChangeTypeSignature)
+map <leader>/ <Action>(FindInPath)
+map <leader>ff <Action>(GotoFile)
+map <leader>fo <Action>(GotoClass)
+map <leader>f" <Action>(PasteMultiple)
+map <leader>fb <Action>(RecentFiles)
+" Format Code
+map <leader>, <Action>(ReformatCode)
+map <leader><space> <Action>(SearchEverywhere)
+
+" IntelliJ Extension
+set NERDTree
+let g:NERDTreeMapActivateNode='l'
+let g:NERDTreeMapJumpParent='h'
+
