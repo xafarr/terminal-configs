@@ -44,8 +44,6 @@ set noswapfile
 
 " search occurrence count in file
 nnoremap <leader>* *<C-O>:%s///gn<CR>``
-" toggle hlsearch
-nnoremap <silent> <leader><space> :set hls!<cr>
 
 " Faster scrolling
 nnoremap <C-e> 3<C-e>
@@ -112,9 +110,19 @@ map <leader>ff <Action>(GotoFile)
 map <leader>fo <Action>(GotoClass)
 map <leader>f" <Action>(PasteMultiple)
 map <leader>fb <Action>(RecentFiles)
-" Format Code
 map <leader>, <Action>(ReformatCode)
 map <leader><space> <Action>(SearchEverywhere)
+map gi <Action>(GotoImplementation)
+map <C-Up> <Action>(ShowNavBar)
+map <leader>xm <Action>(ExtractMethod)
+map <leader>ca <Action>(ShowIntentionActions)
+map <leader>e <Action>(ActivateProjectToolWindow)
+map <leader>rc <Action>(RedesignedRunConfigurationSelector)
+map <leader>rd <Action>(Debug)
+map <leader>rr <Action>(Run)
+map <leader>rs <Action>(Stop)
+map <C-o> <Action>(Back)
+map <C-i> <Action>(Forward)
 
 " IntelliJ Extension
 set NERDTree
