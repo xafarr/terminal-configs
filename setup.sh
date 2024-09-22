@@ -385,13 +385,6 @@ elif [ -f "$HOME/.gitconfig" ]; then
 fi
 ln -s "$PROJECTS_DIR/terminal-configs/git/gitconfig" "$HOME/.gitconfig" && info ".gitconfig link created"
 
-if [ -h "$HOME/.ideavimrc" ]; then
-    rm "$HOME/.ideavimrc"
-elif [ -f "$HOME/.ideavimrc" ]; then
-    mv "$HOME/.ideavimrc" "$HOME/.ideavimrc.bak"
-fi
-ln -s "$PROJECTS_DIR/terminal-configs/idea/ideavimrc" "$HOME/.ideavimrc" && info ".ideavimrc link created"
-
 if [ -n "${SETUP_ON_MACOS-}" ]; then
     if [ -h "$HOME/.bashrc_profile" ]; then
         rm "$HOME/.bashrc_profile"
@@ -451,6 +444,13 @@ elif [ -d "$XDG_CONFIG_HOME/git" ]; then
     mv "$XDG_CONFIG_HOME/git" "$XDG_CONFIG_HOME/git.bak"
 fi
 ln -s "$PROJECTS_DIR/terminal-configs/terminal/git" "$XDG_CONFIG_HOME/git" && info "git link created"
+
+if [ -h "$XDG_CONFIG_HOME/ideavim" ]; then
+    rm "$XDG_CONFIG_HOME/ideavim"
+elif [ -d "$XDG_CONFIG_HOME/ideavim" ]; then
+    mv "$XDG_CONFIG_HOME/ideavim" "$XDG_CONFIG_HOME/ideavim.bak"
+fi
+ln -s "$PROJECTS_DIR/terminal-configs/ideavim" "$XDG_CONFIG_HOME/ideavim" && info "ideavim link created"
 
 export LDFLAGS="-L$HOMEBREW_PREFIX/opt/llvm/lib/c++ -Wl,\
 -rpath,$HOMEBREW_PREFIX/opt/llvm/lib/c++ \
