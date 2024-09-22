@@ -53,9 +53,9 @@ nnoremap <C-y> 3<C-y>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 " Split horizontally with new file
-nnoremap <silent> <leader>h :split<CR>
-nnoremap <silent> <leader>v :vsplit<CR>
-nnoremap <silent> <leader>w :close<CR>
+nnoremap <silent> <leader>sh :split<CR>
+nnoremap <silent> <leader>sv :vsplit<CR>
+nnoremap <silent> <leader>bd :close<CR>
 " Faster scrolling
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
@@ -89,14 +89,27 @@ inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 
-" Alt-j <A-j> mapped to ∆
-" Alt-k <A-k> mapped to ˚
-nnoremap ∆ :m .+1<CR>==
-nnoremap ˚ :m .-2<CR>==
-inoremap ∆ <Esc>:m .+1<CR>==gi
-inoremap ˚ <Esc>:m .-2<CR>==gi
-vnoremap ∆ :m '>+1<CR>gv=gv
-vnoremap ˚ :m '<-2<CR>gv=gv
+if has("mac")
+  " Alt-j <A-j> mapped to ∆
+  " Alt-k <A-k> mapped to ˚
+  nnoremap ∆ :m .+1<CR>==
+  nnoremap ˚ :m .-2<CR>==
+  inoremap ∆ <Esc>:m .+1<CR>==gi
+  inoremap ˚ <Esc>:m .-2<CR>==gi
+  vnoremap ∆ :m '>+1<CR>gv=gv
+  vnoremap ˚ :m '<-2<CR>gv=gv
+endif
+
+if has("linux")
+  " Alt-j <A-j> mapped to J
+  " Alt-k <A-k> mapped to K
+  nnoremap j :m .+1<CR>==
+  nnoremap k :m .-2<CR>==
+  inoremap j <Esc>:m .+1<CR>==gi
+  inoremap k <Esc>:m .-2<CR>==gi
+  vnoremap j :m '>+1<CR>gv=gv
+  vnoremap k :m '<-2<CR>gv=gv
+endif
 
 " IntelliJ Action Mappings
 map ]c <Action>(VcsShowNextChangeMarker)
@@ -123,6 +136,8 @@ map <leader>rr <Action>(Run)
 map <leader>rs <Action>(Stop)
 map <C-o> <Action>(Back)
 map <C-i> <Action>(Forward)
+map <leader>hr <Action>(Vcs.RollbackChangedLines)
+map <leader>hb <Action>(Annotate)
 
 " IntelliJ Extension
 set NERDTree
