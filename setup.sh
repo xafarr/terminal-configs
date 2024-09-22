@@ -385,6 +385,13 @@ elif [ -f "$HOME/.gitconfig" ]; then
 fi
 ln -s "$PROJECTS_DIR/terminal-configs/git/gitconfig" "$HOME/.gitconfig" && info ".gitconfig link created"
 
+if [ -h "$HOME/.ideavimrc" ]; then
+    rm "$HOME/.ideavimrc"
+elif [ -f "$HOME/.ideavimrc" ]; then
+    mv "$HOME/.ideavimrc" "$HOME/.ideavimrc.bak"
+fi
+ln -s "$PROJECTS_DIR/terminal-configs/idea/ideavimrc" "$HOME/.ideavimrc" && info ".ideavimrc link created"
+
 if [ -n "${SETUP_ON_MACOS-}" ]; then
     if [ -h "$HOME/.bashrc_profile" ]; then
         rm "$HOME/.bashrc_profile"
