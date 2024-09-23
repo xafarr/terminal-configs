@@ -30,8 +30,7 @@ set laststatus=2
 " set hlsearch
 set visualbell
 set noerrorbells
-" IntelliJ specific
-set ideajoin
+set timeoutlen=1000
 
 " Open new line below and above current line
 nnoremap <leader>o o<esc>
