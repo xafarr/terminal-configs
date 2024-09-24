@@ -111,32 +111,42 @@ if has("linux")
 endif
 
 " IntelliJ Action Mappings
-map ]c <Action>(VcsShowNextChangeMarker)
-map [c <Action>(VcsShowPrevChangeMarker)
-map ]d <Action>(GotoNextError)
-map [d <Action>(GotoPreviousError)
+" Refactor
 map <leader>rn <Action>(RenameElement)
 map <leader>Rn <Action>(ChangeTypeSignature)
+map <leader>xm <Action>(ExtractMethod)
+" Search
 map <leader>/ <Action>(FindInPath)
 map <leader>ff <Action>(GotoFile)
 map <leader>fo <Action>(GotoClass)
 map <leader>f" <Action>(PasteMultiple)
 map <leader>fb <Action>(RecentFiles)
-map <leader>, <Action>(ReformatCode)
 map <leader><space> <Action>(SearchEverywhere)
+" Format
+map <leader>, <Action>(ReformatCode)
+" Goto
 map gi <Action>(GotoImplementation)
-map <C-Up> <Action>(ShowNavBar)
-map <leader>xm <Action>(ExtractMethod)
+" Intentions/Suggestions
 map <leader>ca <Action>(ShowIntentionActions)
-map <leader>e <Action>(ActivateProjectToolWindow)
+" Run/Debug
 map <leader>rc <Action>(RedesignedRunConfigurationSelector)
-map <leader>rd <Action>(Debug)
+map <leader>dd <Action>(Debug)
 map <leader>rr <Action>(Run)
+map <leader>rt <Action>(RunClass)
+map <leader>dt <Action>(DebugClass)
 map <leader>rs <Action>(Stop)
+" Navigation
 map <C-o> <Action>(Back)
 map <C-i> <Action>(Forward)
+map <C-Up> <Action>(ShowNavBar)
+map <leader>e <Action>(ActivateProjectToolWindow)
+map ]d <Action>(GotoNextError)
+map [d <Action>(GotoPreviousError)
+" Git
 map <leader>hr <Action>(Vcs.RollbackChangedLines)
 map <leader>hb <Action>(Annotate)
+map ]c <Action>(VcsShowNextChangeMarker)
+map [c <Action>(VcsShowPrevChangeMarker)
 
 " IntelliJ Extension
 set NERDTree
