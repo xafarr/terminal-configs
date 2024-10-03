@@ -336,54 +336,48 @@ else
 fi
 
 # Create symlinks in HOME directory
+TERMINAL_DIR="$PROJECTS_DIR/terminal-configs/terminal"
 if [ -h "$HOME/.tmux.conf" ]; then
     rm "$HOME/.tmux.conf"
 elif [ -f "$HOME/.tmux.conf" ]; then
     mv "$HOME/.tmux.conf" "$HOME/.tmux.conf.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/tmux/tmux.conf" "$HOME/.tmux.conf" && info ".tmux.conf link created"
+ln -s "$TERMINAL_DIR/tmux/tmux.conf" "$HOME/.tmux.conf" && info ".tmux.conf link created"
 
 if [ -h "$HOME/.commonrc" ]; then
     rm "$HOME/.commonrc"
 elif [ -f "$HOME/.commonrc" ]; then
     mv "$HOME/.commonrc" "$HOME/.commonrc.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/common/commonrc" "$HOME/.commonrc" && info ".commonrc link created"
+ln -s "$TERMINAL_DIR/common/commonrc" "$HOME/.commonrc" && info ".commonrc link created"
 
 if [ -h "$HOME/.shell_functions" ]; then
     rm "$HOME/.shell_functions"
 elif [ -f "$HOME/.shell_functions" ]; then
     mv "$HOME/.shell_functions" "$HOME/.shell_functions.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/common/shell_functions" "$HOME/.shell_functions" && info ".shell_functions link created"
+ln -s "$TERMINAL_DIR/common/shell_functions" "$HOME/.shell_functions" && info ".shell_functions link created"
 
 if [ -h "$HOME/.bashrc" ]; then
     rm "$HOME/.bashrc"
 elif [ -f "$HOME/.bashrc" ]; then
     mv "$HOME/.bashrc" "$HOME/.bashrc.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/bash/bashrc" "$HOME/.bashrc" && info ".bashrc link created"
+ln -s "$TERMINAL_DIR/bash/bashrc" "$HOME/.bashrc" && info ".bashrc link created"
 
 if [ -h "$HOME/.zshrc" ]; then
     rm "$HOME/.zshrc"
 elif [ -f "$HOME/.zshrc" ]; then
     mv "$HOME/.zshrc" "$HOME/.zshrc.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/zsh/zshrc" "$HOME/.zshrc" && info ".zshrc link created"
+ln -s "$TERMINAL_DIR/zsh/zshrc" "$HOME/.zshrc" && info ".zshrc link created"
 
 if [ -h "$HOME/.asdfrc" ]; then
     rm "$HOME/.asdfrc"
 elif [ -f "$HOME/.asdfrc" ]; then
     mv "$HOME/.asdfrc" "$HOME/.asdfrc.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/asdf/asdfrc" "$HOME/.asdfrc" && info ".asdfrc link created"
-
-if [ -h "$HOME/.gitconfig" ]; then
-    rm "$HOME/.gitconfig"
-elif [ -f "$HOME/.gitconfig" ]; then
-    mv "$HOME/.gitconfig" "$HOME/.gitconfig.bak"
-fi
-ln -s "$PROJECTS_DIR/terminal-configs/git/gitconfig" "$HOME/.gitconfig" && info ".gitconfig link created"
+ln -s "$TERMINAL_DIR/asdf/asdfrc" "$HOME/.asdfrc" && info ".asdfrc link created"
 
 if [ -n "${SETUP_ON_MACOS-}" ]; then
     if [ -h "$HOME/.bashrc_profile" ]; then
@@ -391,7 +385,7 @@ if [ -n "${SETUP_ON_MACOS-}" ]; then
     elif [ -f "$HOME/.bash_profile" ]; then
         mv "$HOME/.bash_profile" "$HOME/.bash_profile.bak"
     fi
-    ln -s "$PROJECTS_DIR/terminal-configs/terminal/bash/bash_profile" "$HOME/.bash_profile" && info ".bash_profile link created"
+    ln -s "$TERMINAL_DIR/bash/bash_profile" "$HOME/.bash_profile" && info ".bash_profile link created"
 fi
 
 # Create symlinks in .config directory
@@ -407,28 +401,28 @@ if [ -h "$XDG_CONFIG_HOME/starship.toml" ]; then
 elif [ -f "$XDG_CONFIG_HOME/starship.toml" ]; then
     mv "$XDG_CONFIG_HOME/starship.toml" "$XDG_CONFIG_HOME/starship.toml.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/starship/starship.toml" "$XDG_CONFIG_HOME/starship.toml" && info "starship.toml link created"
+ln -s "$TERMINAL_DIR/starship/starship.toml" "$XDG_CONFIG_HOME/starship.toml" && info "starship.toml link created"
 
 if [ -h "$XDG_CONFIG_HOME/kitty" ]; then
     rm "$XDG_CONFIG_HOME/kitty"
 elif [ -d "$XDG_CONFIG_HOME/kitty" ]; then
     mv "$XDG_CONFIG_HOME/kitty" "$XDG_CONFIG_HOME/kitty.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/kitty" "$XDG_CONFIG_HOME/kitty" && info "kitty link created"
+ln -s "$TERMINAL_DIR/kitty" "$XDG_CONFIG_HOME/kitty" && info "kitty link created"
 
 if [ -h "$XDG_CONFIG_HOME/delta" ]; then
     rm "$XDG_CONFIG_HOME/delta"
 elif [ -d "$XDG_CONFIG_HOME/delta" ]; then
     mv "$XDG_CONFIG_HOME/delta" "$XDG_CONFIG_HOME/delta.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/delta" "$XDG_CONFIG_HOME/delta" && info "delta link created"
+ln -s "$TERMINAL_DIR/delta" "$XDG_CONFIG_HOME/delta" && info "delta link created"
 
 if [ -h "$XDG_CONFIG_HOME/bat" ]; then
     rm "$XDG_CONFIG_HOME/bat"
 elif [ -d "$XDG_CONFIG_HOME/bat" ]; then
     mv "$XDG_CONFIG_HOME/bat" "$XDG_CONFIG_HOME/bat.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/bat" "$XDG_CONFIG_HOME/bat" && info "bat link created"
+ln -s "$TERMINAL_DIR/bat" "$XDG_CONFIG_HOME/bat" && info "bat link created"
 $BREW_BIN/bat cache --build
 
 if [ -h "$XDG_CONFIG_HOME/lazygit" ]; then
@@ -436,14 +430,14 @@ if [ -h "$XDG_CONFIG_HOME/lazygit" ]; then
 elif [ -d "$XDG_CONFIG_HOME/lazygit" ]; then
     mv "$XDG_CONFIG_HOME/lazygit" "$XDG_CONFIG_HOME/lazygit.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/lazygit" "$XDG_CONFIG_HOME/lazygit" && info "lazygit link created"
+ln -s "$TERMINAL_DIR/lazygit" "$XDG_CONFIG_HOME/lazygit" && info "lazygit link created"
 
 if [ -h "$XDG_CONFIG_HOME/git" ]; then
     rm "$XDG_CONFIG_HOME/git"
 elif [ -d "$XDG_CONFIG_HOME/git" ]; then
     mv "$XDG_CONFIG_HOME/git" "$XDG_CONFIG_HOME/git.bak"
 fi
-ln -s "$PROJECTS_DIR/terminal-configs/terminal/git" "$XDG_CONFIG_HOME/git" && info "git link created"
+ln -s "$TERMINAL_DIR/git" "$XDG_CONFIG_HOME/git" && info "git link created"
 
 if [ -h "$XDG_CONFIG_HOME/ideavim" ]; then
     rm "$XDG_CONFIG_HOME/ideavim"
