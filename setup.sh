@@ -423,7 +423,6 @@ elif [ -d "$XDG_CONFIG_HOME/bat" ]; then
     mv "$XDG_CONFIG_HOME/bat" "$XDG_CONFIG_HOME/bat.bak"
 fi
 ln -s "$TERMINAL_DIR/bat" "$XDG_CONFIG_HOME/bat" && info "bat link created"
-$BREW_BIN/bat cache --build || error "Failed to build bat cache."
 
 if [ -h "$XDG_CONFIG_HOME/lazygit" ]; then
     rm "$XDG_CONFIG_HOME/lazygit"
