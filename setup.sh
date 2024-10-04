@@ -337,12 +337,6 @@ fi
 
 # Create symlinks in HOME directory
 TERMINAL_DIR="$PROJECTS_DIR/terminal-configs/terminal"
-if [ -h "$HOME/.tmux.conf" ]; then
-    rm "$HOME/.tmux.conf"
-elif [ -f "$HOME/.tmux.conf" ]; then
-    mv "$HOME/.tmux.conf" "$HOME/.tmux.conf.bak"
-fi
-ln -s "$TERMINAL_DIR/tmux/tmux.conf" "$HOME/.tmux.conf" && info ".tmux.conf link created"
 
 if [ -h "$HOME/.commonrc" ]; then
     rm "$HOME/.commonrc"
@@ -388,7 +382,14 @@ if [ -n "${SETUP_ON_MACOS-}" ]; then
     ln -s "$TERMINAL_DIR/bash/bash_profile" "$HOME/.bash_profile" && info ".bash_profile link created"
 fi
 
-# Create symlinks in .config directory
+# Create symlinks in XDG_CONFIG_HOME directory
+if [ -h "$XDG_CONFIG_HOME/tmux" ]; then
+    rm "$XDG_CONFIG_HOME/tmux"
+elif [ -d "$XDG_CONFIG_HOME/tmux" ]; then
+    mv "$XDG_CONFIG_HOME/tmux" "$XDG_CONFIG_HOME/tmux.bak"
+fi
+ln -s "$TERMINAL_DIR/tmux" "$XDG_CONFIG_HOME/tmux" && info "tmux link created"
+
 if [ -h "$XDG_CONFIG_HOME/nvim" ]; then
     rm "$XDG_CONFIG_HOME/nvim"
 elif [ -d "$XDG_CONFIG_HOME/nvim" ]; then

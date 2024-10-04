@@ -2,3 +2,4 @@
 nvim/plugin
 **/lazy-lock.json
 .idea/
+**/tmux/plugins
