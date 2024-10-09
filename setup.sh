@@ -383,6 +383,13 @@ if [ -n "${SETUP_ON_MACOS-}" ]; then
 fi
 
 # Create symlinks in XDG_CONFIG_HOME directory
+if [ -h "$XDG_CONFIG_HOME/commonrc" ]; then
+    rm "$XDG_CONFIG_HOME/commonrc"
+elif [ -d "$XDG_CONFIG_HOME/commonrc" ]; then
+    mv "$XDG_CONFIG_HOME/commonrc" "$XDG_CONFIG_HOME/commonrc.bak"
+fi
+ln -s "$TERMINAL_DIR/commonrc" "$XDG_CONFIG_HOME/commonrc" && info "commonrc link created"
+
 if [ -h "$XDG_CONFIG_HOME/tmux" ]; then
     rm "$XDG_CONFIG_HOME/tmux"
 elif [ -d "$XDG_CONFIG_HOME/tmux" ]; then

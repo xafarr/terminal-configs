@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 
+# Default location for user configuration
+export XDG_CONFIG_HOME="$HOME/.config"
+
 ##################################################
 # Source Common Files
 ##################################################
-source "$HOME/.commonrc"
-source "$HOME/.shell_functions"
+source "$XDG_CONFIG_HOME/commonrc/common"
+source "$XDG_CONFIG_HOME/commonrc/shell_functions"
 
 # alt left/right in bash
 builtin bind '^[[1;3C:forward-word'

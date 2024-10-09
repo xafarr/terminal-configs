@@ -5,9 +5,6 @@ system=$(uname -ms)
 platform=$(echo "$system" | awk '{print $1}')
 arch=$(echo "$system" | awk '{print $2}')
 
-# Default location for user configuration
-export XDG_CONFIG_HOME="$HOME/.config"
-
 if [ "$platform" = "Linux" ]; then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
 else

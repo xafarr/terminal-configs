@@ -216,7 +216,7 @@ format = "[ 󱈙 $version]($style)"
 
 [custom.git_host]
 command = """
-source ~/.shell_functions && get_git_host_icon
+source $XDG_CONFIG_HOME/commonrc/shell_functions && get_git_host_icon
 """
 directories = [".git"]
 when = "git rev-parse --is-inside-work-tree"

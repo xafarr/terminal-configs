@@ -52,7 +52,7 @@ function get_git_host_icon() {
 # Function to check if local port is used
 # -------------------------------------------------------------------
 function port() {
-    lsof -n -i4TCP:$1 | grep LISTEN
+    lsof -n -i4TCP:"$1" | grep LISTEN
 }
 
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
