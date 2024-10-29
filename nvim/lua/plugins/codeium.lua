@@ -1,14 +1,12 @@
 return {
   {
     "Exafunction/codeium.nvim",
-    event = { "BufEnter" },
     cmd = { "Codeium" },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
     config = function()
-      require("codeium").setup({ enable_chat = true })
+      require("codeium").setup({
+        enable_chat = true,
+        enable_cmp_source = true,
+      })
     end,
   },
 }

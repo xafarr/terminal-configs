@@ -1,6 +1,7 @@
 return {
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     dependencies = {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-buffer",
@@ -12,6 +13,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
       "rafamadriz/friendly-snippets", -- Collection of snippet
       "windwp/nvim-autopairs",
+      "Exafunction/codeium.nvim",
     },
     config = function()
       local cmp = require("cmp")
