@@ -135,6 +135,7 @@ map <leader>rr <Action>(Run)
 map <leader>rt <Action>(RunClass)
 map <leader>dt <Action>(DebugClass)
 map <leader>rs <Action>(Stop)
+map <leader>gs <Action>(GotoSuperMethod)
 " Navigation
 map <C-o> <Action>(Back)
 map <C-i> <Action>(Forward)
