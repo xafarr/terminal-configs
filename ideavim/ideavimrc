@@ -126,8 +126,10 @@ map <leader><space> <Action>(SearchEverywhere)
 map <leader>, <Action>(ReformatCode)
 " Goto
 map gi <Action>(GotoImplementation)
+map gs <Action>(GotoSuperMethod)
 " Intentions/Suggestions
 map <leader>ca <Action>(ShowIntentionActions)
+map <C-p> <Action>(ParameterInfo)
 " Run/Debug
 map <leader>rc <Action>(RedesignedRunConfigurationSelector)
 map <leader>dd <Action>(Debug)
@@ -135,7 +137,6 @@ map <leader>rr <Action>(Run)
 map <leader>rt <Action>(RunClass)
 map <leader>dt <Action>(DebugClass)
 map <leader>rs <Action>(Stop)
-map <leader>gs <Action>(GotoSuperMethod)
 " Navigation
 map <C-o> <Action>(Back)
 map <C-i> <Action>(Forward)
