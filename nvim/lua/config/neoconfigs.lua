@@ -74,6 +74,7 @@ M.mason_tools = {
   "ansible-lint",
   "black",
   "clang-format",
+  "csharpier",
   "eslint_d",
   "flake8",
   "gofumpt",
@@ -94,6 +95,7 @@ M.mason_tools = {
   "sql-formatter",
   "stylua",
   "tflint",
+  "yamlfmt",
   "xmlformatter",
 }
 
