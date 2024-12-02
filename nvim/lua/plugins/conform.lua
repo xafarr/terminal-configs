@@ -13,6 +13,7 @@ return {
           css = { "prettier" },
           go = { "goimports", "gofumpt" },
           graphql = { "prettier" },
+          groovy = { "npm-groovy-lint" },
           html = { "prettier" },
           java = { "google-java-format" },
           javascript = { "prettier" },

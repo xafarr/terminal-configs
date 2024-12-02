@@ -51,6 +51,7 @@ M.language_servers = {
   "dockerls",
   "gopls",
   "gradle_ls",
+  "groovyls",
   "graphql",
   "html",
   "jdtls", -- Java Language Server
@@ -85,6 +86,7 @@ M.mason_tools = {
   "jq",
   "ktlint",
   "markdownlint-cli2",
+  "npm-groovy-lint",
   "prettier",
   "pylint",
   "shellcheck",
