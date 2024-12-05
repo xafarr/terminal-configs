@@ -146,6 +146,7 @@ keymap.set("c", "<Esc>", "<C-c>", opts)
 
 -- Telescope keymaps --
 keymap.set("n", "<leader><space>", neoutils.find_files, get_opts({ desc = "Find Files" }))
+keymap.set("n", "<leader>ff", neoutils.find_files, get_opts({ desc = "Find Files" }))
 keymap.set("n", "<leader>fg", neoutils.git_files, get_opts({ desc = "Find Within Git Repository" }))
 keymap.set("n", '<leader>f"', "<cmd>Telescope neoclip<cr>", get_opts({ desc = "Clipboard" }))
 keymap.set("n", "<leader>fq", "<cmd>Telescope macroscope<cr>", get_opts({ desc = "Macros" }))
