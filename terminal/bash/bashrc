@@ -9,20 +9,24 @@ export XDG_CONFIG_HOME="$HOME/.config"
 source "$XDG_CONFIG_HOME/commonrc/common"
 source "$XDG_CONFIG_HOME/commonrc/shell_functions"
 
-# alt left/right in bash
-builtin bind '^[[1;3C:forward-word'
-builtin bind '^[[1;3D:backward-word'
-# ctrl a/e bash
-builtin bind '^A:beginning-of-line'
-builtin bind '^E:end-of-line'
-# alt backspace in bash
-builtin bind '^[^H:backward-kill-word'
-builtin bind '^[^?:backward-kill-word'
+if [ "$PS1" ]; then
+    # only for interactive shell
+    # alt left/right in bash
+    builtin bind '^[[1;3C:forward-word'
+    builtin bind '^[[1;3D:backward-word'
+    # ctrl a/e bash
+    builtin bind '^A:beginning-of-line'
+    builtin bind '^E:end-of-line'
+    # alt backspace in bash
+    builtin bind '^[^H:backward-kill-word'
+    builtin bind '^[^?:backward-kill-word'
 
-################################################
-# Case Insensitive completion
-################################################
-bind -s 'set completion-ignore-case on'
+    ################################################
+    # Case Insensitive completion
+    ################################################
+    bind -s 'set completion-ignore-case on'
+
+fi
 
 ################################################
 # Almost unlimited history
