@@ -46,6 +46,9 @@ return {
           shfmt = {
             prepend_args = { "-i", "4" },
           },
+          yamlfmt = {
+            prepend_args = { "-conf", neoconfigs.stdConfigPath .. "/.yamlfmt.yaml" },
+          },
         },
       })
     end,
