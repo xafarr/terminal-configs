@@ -140,6 +140,7 @@ return {
       telescope.load_extension("neoclip")
       telescope.load_extension("macroscope")
       telescope.load_extension("ui-select")
+      telescope.load_extension("noice")
     end,
   },
   {
