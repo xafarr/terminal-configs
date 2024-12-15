@@ -44,7 +44,7 @@ return {
     Folder = "󰉋 ",
     Function = "󰡱 ",
     Interface = " ",
-    Key = " ",
+    Key = " ",
     Keyword = " ",
     Method = " ",
     Module = "󰕳 ",
