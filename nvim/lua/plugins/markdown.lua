@@ -24,7 +24,9 @@ return {
       "nvim-treesitter/nvim-treesitter",
       "nvim-tree/nvim-web-devicons",
     },
-    opts = {},
+    opts = {
+      pipe_table = { preset = "round" },
+    },
   },
   {
     "iamcco/markdown-preview.nvim",
