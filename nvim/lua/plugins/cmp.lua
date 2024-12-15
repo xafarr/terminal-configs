@@ -110,8 +110,9 @@ return {
           end,
         },
         sources = cmp.config.sources({
-          { name = "copilot" },
+          -- { name = "copilot" },
           { name = "codeium" },
+          { name = "render-markdown" },
           { name = "nvim_lsp" },
           { name = "luasnip" },
         }, {
