@@ -21,6 +21,9 @@
     echo 'Deleting branch' $1 'from remote/origin'; \
     git push origin --delete $1; \
   }; f"
+  recover-stash = "!f() { \
+    git fsck --unreachable | grep commit | cut -d ' ' -f3 | xargs git log --merges --no-walk --grep=WIP; \
+  }; f"
 [user]
   email = xafarr@gmail.com
   name = Muhammad Zafar
