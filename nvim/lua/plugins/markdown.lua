@@ -11,9 +11,21 @@ return {
       ui = { enable = false },
       workspaces = {
         {
-          name = "Notes",
-          path = vim.fn.expand("~") .. "/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian/Notes",
+          name = "Personal",
+          path = vim.fn.expand("~/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian/Wiki"),
         },
+        {
+          name = "Work",
+          path = vim.fn.expand("~/Documents/Obsidian/Work"),
+        },
+      },
+      templates = {
+        subdir = "templates",
+        date_format = "%Y-%m-%d",
+        time_format = "%H:%M:%S",
+      },
+      completion = {
+        nvim_cmp = true,
       },
     },
   },
