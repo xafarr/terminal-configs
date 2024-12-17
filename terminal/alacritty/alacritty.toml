@@ -1,6 +1,6 @@
 # Import external configurations
 [general]
-import = ["$XDG_CONFIG_HOME/.config/alacritty/catppuccin-macchiato.toml"]
+import = ["themes/catppuccin-macchiato.toml"]
 
 [font]
 normal = { family="JetBrainsMono Nerd Font", style="Regular" }
