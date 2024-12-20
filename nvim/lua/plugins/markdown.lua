@@ -12,11 +12,11 @@ return {
       workspaces = {
         {
           name = "Personal",
-          path = vim.fn.expand("~/Library/Mobile Documents/com~apple~CloudDocs/Documents/Obsidian/Wiki"),
+          path = vim.fn.expand("~/Documents/second-brain/Personal"),
         },
         {
           name = "Work",
-          path = vim.fn.expand("~/Documents/Obsidian/Work"),
+          path = vim.fn.expand("~/Documents/second-brain/Work"),
         },
       },
       templates = {
