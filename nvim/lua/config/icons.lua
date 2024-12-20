@@ -24,7 +24,7 @@ return {
     Text = "󰊄 ",
     TypeParameter = " ",
     Unit = " ",
-    Value = "",
+    Value = " ",
     Variable = "󰫧 ",
   },
   kind = {
@@ -62,7 +62,7 @@ return {
     Text = "󰊄 ",
     TypeParameter = " ",
     Unit = " ",
-    Value = "",
+    Value = " ",
     Variable = "󰫧 ",
   },
   copilot = {
