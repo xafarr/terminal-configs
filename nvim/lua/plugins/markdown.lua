@@ -38,6 +38,8 @@ return {
     },
     opts = {
       pipe_table = { preset = "round" },
+      sign = { enabled = false },
+      heading = { position = "inline" },
     },
   },
   {
