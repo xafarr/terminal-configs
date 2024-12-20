@@ -155,7 +155,7 @@ format = "[  $number]($style)"
 
 # Configure the package version
 [package]
-format = "[  $version]($style)"
+format = "[  $version]($style)"
 style = "bold dimmed white"
 disabled = true
 
