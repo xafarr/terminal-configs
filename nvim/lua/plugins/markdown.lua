@@ -40,6 +40,10 @@ return {
       pipe_table = { preset = "round" },
       sign = { enabled = false },
       heading = { position = "inline" },
+      code = {
+        right_pad = 4,
+        left_pad = 2,
+      },
     },
   },
   {
