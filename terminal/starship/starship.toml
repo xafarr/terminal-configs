@@ -29,13 +29,14 @@ $golang\
 $ruby\
 $hostname\
 $jobs\
+$shell\
 $cmd_duration
 $character"""
 
 # Fill · in first row between left and right prompt
 [fill]
 symbol = "·"
-style = "244"
+style = "dimmed 244"
 
 [battery]
 format = " [$symbol$percentage]($style)"
@@ -153,6 +154,21 @@ number_threshold = 1
 symbol_threshold = 1
 format = "[  $number]($style)"
 
+[shell]
+disabled = false
+format = "[  $indicator]($style)"
+style = "bold dimmed 244"
+bash_indicator = "bash"
+zsh_indicator = "zsh"
+fish_indicator = "fish"
+powershell_indicator = "pwsh"
+cmd_indicator = "cmd"
+tcsh_indicator = "tcsh"
+elvish_indicator = "elsh"
+xonsh_indicator = "xsh"
+nu_indicator = "nush"
+ion_indicator = "ionsh"
+
 # Configure the package version
 [package]
 format = "[  $version]($style)"
@@ -211,8 +227,8 @@ disabled = true
 
 [cmd_duration]
 min_time = 10_000
-style = "244"
-format = "[  $duration]($style)"
+style = "dimmed 244"
+format = "[  $duration]($style)"
 
 [kotlin]
 style = "bold dimmed blue"
