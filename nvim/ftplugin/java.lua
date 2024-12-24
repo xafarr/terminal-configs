@@ -80,12 +80,13 @@ local config = {
         includeDecompiledSources = true,
       },
       signatureHelp = { enabled = true },
+      contentProvider = { preferred = "fernflower" },
       format = {
-        enabled = false,
+        enabled = true,
         -- Formatting works by default, but you can refer to a specific file/URL if you choose
         settings = {
           url = "https://raw.githubusercontent.com/xafarr/terminal-configs/refs/heads/master/styleguide/java-code-style.xml",
-          profile = "CustomStyle",
+          profile = "GoogleStyle",
         },
       },
       inlayHints = {
@@ -111,12 +112,12 @@ local config = {
     },
     completion = {
       favoriteStaticMembers = {
-        "org.hamcrest.MatcherAssert.assertThat",
-        "org.hamcrest.Matchers.*",
-        "org.hamcrest.CoreMatchers.*",
-        "org.junit.jupiter.api.Assertions.*",
         "java.util.Objects.requireNonNull",
         "java.util.Objects.requireNonNullElse",
+        "org.hamcrest.CoreMatchers.*",
+        "org.hamcrest.MatcherAssert.assertThat",
+        "org.hamcrest.Matchers.*",
+        "org.junit.jupiter.api.Assertions.*",
         "org.mockito.Mockito.*",
       },
       importOrder = {
