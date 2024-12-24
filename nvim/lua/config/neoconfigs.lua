@@ -80,7 +80,6 @@ M.mason_tools = {
   "gofumpt",
   "goimports",
   "golangci-lint",
-  "google-java-format",
   "isort",
   "java-debug-adapter",
   "java-test",

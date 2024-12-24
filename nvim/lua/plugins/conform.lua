@@ -15,7 +15,6 @@ return {
           graphql = { "prettier" },
           groovy = { "npm-groovy-lint" },
           html = { "prettier" },
-          java = { "google-java-format" },
           javascript = { "prettier" },
           javascriptreact = { "prettier" },
           json = { "prettier" },
