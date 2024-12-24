@@ -19,7 +19,6 @@ function M.format(bufnr, range)
     require("conform").format({
       bufnr = bufnr,
       async = true,
-      lsp_fallback = true,
       range = range,
     })
   end

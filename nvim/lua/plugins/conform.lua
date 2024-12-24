@@ -5,6 +5,9 @@ return {
     config = function()
       local conform = require("conform")
       conform.setup({
+        default_format_opts = {
+          lsp_format = "fallback",
+        },
         formatters_by_ft = {
           -- Conform will run multiple formatters sequentially
           --  go = { "goimports", "gofmt" },
