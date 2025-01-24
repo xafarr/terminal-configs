@@ -9,6 +9,10 @@ export XDG_CONFIG_HOME="$HOME/.config"
 source "$XDG_CONFIG_HOME/commonrc/common"
 source "$XDG_CONFIG_HOME/commonrc/shell_functions"
 
+# Default WORDCHARS - Characters considered part of a word
+# *?_-.[]~=/&;!#$%^(){}<>
+export WORDCHARS=
+
 # alt left/right in zsh
 builtin bindkey "^[[1;3C" forward-word
 builtin bindkey "^[[1;3D" backward-word
