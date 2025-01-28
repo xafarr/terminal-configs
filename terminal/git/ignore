@@ -1,2 +1,9 @@
 # ASDF versions file
 .tool-versions
+
+# JDTLS files
+.settings/
+.factorypath
+.classpath
+.project
+bin/
