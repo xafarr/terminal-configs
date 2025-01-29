@@ -4,6 +4,7 @@ vim.loader.enable()
 require("config.options")
 require("config.neoconfigs")
 require("utils.neoutils")
+require("config.autocmds")
 
 -- For checkhealth warning
 vim.g.loaded_node_provider = 0
@@ -71,6 +72,5 @@ vim.api.nvim_create_autocmd("User", {
   pattern = "VeryLazy",
   callback = function()
     require("config.keymaps")
-    require("config.autocmds")
   end,
 })
