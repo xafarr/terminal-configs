@@ -126,10 +126,12 @@ map <leader><space> <Action>(SearchEverywhere)
 map <leader>, <Action>(ReformatCode)
 " Goto
 map gi <Action>(GotoImplementation)
-map gs <Action>(GotoSuperMethod)
-" Intentions/Suggestions
+map gu <Action>(GotoSuperMethod)
+" Intentions/Suggestions/Generate
 map <leader>ca <Action>(ShowIntentionActions)
 map <C-p> <Action>(ParameterInfo)
+map <C-n> <Action>(Generate)
+map <leader><C-n> <Action>(NewElement)
 " Run/Debug
 map <leader>rc <Action>(RedesignedRunConfigurationSelector)
 map <leader>dd <Action>(Debug)
