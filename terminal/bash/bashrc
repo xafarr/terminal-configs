@@ -44,9 +44,9 @@ shopt -s histappend
 # FZF Completion
 eval "$(fzf --bash)"
 
-# For asdf shims to be in the PATH
-[[ -r "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
+# Set environment variables for asdf shims
 [[ -r "$HOME/.asdf/plugins/java/set-java-home.bash" ]] && source "$HOME/.asdf/plugins/java/set-java-home.bash"
+[[ -r "$HOME/.asdf/plugins/golang/set-env.bash" ]] && source "$HOME/.asdf/plugins/golang/set-env.bash"
 [[ -r "$HOME/.asdf/plugins/dotnet/set-dotnet-env.bash" ]] && source "$HOME/.asdf/plugins/dotnet/set-dotnet-env.bash"
 
 # Starship terminal prompt

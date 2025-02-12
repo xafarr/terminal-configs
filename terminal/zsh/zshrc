@@ -40,7 +40,7 @@ setopt HIST_REDUCE_BLANKS
 # zsh-completions settings
 ###################################################
 if type brew &>/dev/null; then
-    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+    fpath=("$(brew --prefix)/share/zsh/site-functions" "${fpath[@]}")
 fi
 autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
@@ -58,8 +58,7 @@ source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 # FZF Completion
 eval "$(fzf --zsh)"
 
-# For asdf shims to be in the PATH
-[[ -r "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh" ]] && source "$HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh"
+# Set environment variables for asdf shims
 [[ -r "$HOME/.asdf/plugins/java/set-java-home.zsh" ]] && source "$HOME/.asdf/plugins/java/set-java-home.zsh"
 [[ -r "$HOME/.asdf/plugins/golang/set-env.zsh" ]] && source "$HOME/.asdf/plugins/golang/set-env.zsh"
 [[ -r "$HOME/.asdf/plugins/dotnet/set-dotnet-env.zsh" ]] && source "$HOME/.asdf/plugins/dotnet/set-dotnet-env.zsh"
