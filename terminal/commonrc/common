@@ -195,6 +195,8 @@ alias k="kubectl"
 alias tf="terraform"
 # Lazygit
 alias lg="lazygit"
+# Ripgrep
+alias rg='rg --no-ignore --smart-case --hidden --follow --glob "!.git" --glob "!node_modules"'
 
 # Preferred editor for local and remote sessions
 export VISUAL=nvim
