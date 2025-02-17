@@ -62,7 +62,7 @@ set.grepprg = "rg --vimgrep"
 set.grepformat = "%f:%l:%c:%m"
 set.shortmess:append("c")
 set.ttyfast = true
-set.guifont = "FiraCodeNerdFont-Medium:h15" -- the font used in graphical neovim applications
+set.guifont = "JetBrainsMono Nerd Font Mono:h16" -- the font used in graphical neovim applications
 set.fillchars = {
   foldopen = "",
   foldclose = "",
