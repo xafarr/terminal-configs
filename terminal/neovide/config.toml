@@ -1,0 +1,37 @@
+[font]
+size = 16
+
+[font.features]
+"JetBrainsMono Nerd Font" = ["+zero", "+cv06", "+cv07", "+cv16", "+cv18", "+cv19", "+cv20"]
+
+[[font.normal]]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[[font.normal]]
+family = "Symbols Nerd Font"
+style = "Regular"
+
+[[font.bold]]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[[font.bold]]
+family = "Symbols Nerd Font"
+style = "Bold"
+
+[[font.italic]]
+family = "JetBrainsMono Nerd Font"
+style = "Regular Italic"
+
+[[font.italic]]
+family = "Symbols Nerd Font"
+style = "Regular Italic"
+
+[[font.bold_italic]]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
+[[font.bold_italic]]
+family = "Symbols Nerd Font"
+style = "Bold Italic"

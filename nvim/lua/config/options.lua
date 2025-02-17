@@ -62,7 +62,6 @@ set.grepprg = "rg --vimgrep"
 set.grepformat = "%f:%l:%c:%m"
 set.shortmess:append("c")
 set.ttyfast = true
-set.guifont = "JetBrainsMono Nerd Font Mono:h16" -- the font used in graphical neovim applications
 set.fillchars = {
   foldopen = "",
   foldclose = "",
@@ -75,6 +74,18 @@ set.fillchars = {
 
 if vim.fn.has("nvim-0.10") == 1 then
   set.smoothscroll = true
+end
+
+-- Neovide specific configuration
+if vim.g.neovide then
+  vim.g.neovide_cursor_antialiasing = false
+  vim.g.neovide_position_animation_length = 0
+  vim.g.neovide_scroll_animation_length = 0
+  vim.g.neovide_cursor_animation_length = 0
+  vim.g.neovide_cursor_animate_command_line = false
+  vim.g.neovide_scale_factor = 1.1
+else
+  set.guifont = "JetBrainsMono Nerd Font,Symbols Nerd Font:h16:b,i,u,s:liga:+zero,+cv06,+cv07,+cv16,+cv18,+cv19,+cv20" -- the font used in graphical neovim applications
 end
 
 -- Set <space> as the leader key
