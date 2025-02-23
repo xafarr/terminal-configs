@@ -359,6 +359,13 @@ elif [ -f "$HOME/.bashrc" ]; then
 fi
 ln -s "$TERMINAL_DIR/bash/bashrc" "$HOME/.bashrc" && info ".bashrc link created"
 
+if [ -h "$HOME/.zprofile" ]; then
+    rm "$HOME/.zprofile"
+elif [ -f "$HOME/.zprofile" ]; then
+    mv "$HOME/.zprofile" "$HOME/.zprofile.bak"
+fi
+ln -s "$TERMINAL_DIR/zsh/zprofile" "$HOME/.zprofile" && info ".zprofile link created"
+
 if [ -h "$HOME/.zshrc" ]; then
     rm "$HOME/.zshrc"
 elif [ -f "$HOME/.zshrc" ]; then
