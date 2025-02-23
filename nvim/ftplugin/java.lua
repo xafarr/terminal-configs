@@ -63,7 +63,7 @@ local config = {
         runtimes = {
           {
             name = "JavaSE-17",
-            path = vim.env.HOME .. "/.asdf/installs/java/oracle-17.0.10",
+            path = vim.env.JAVA_HOME,
           },
         },
       },
