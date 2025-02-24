@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # Platform and architecture
 system=$(uname -ms)
 platform=$(echo "$system" | awk '{print $1}')
@@ -179,23 +177,6 @@ $HOMEBREW_PREFIX/opt/readline/lib/pkgconfig \
 $HOMEBREW_PREFIX/share/pkgconfig"
 
 export LS_OPTIONS="--color"
-
-alias ls='gls $LS_OPTIONS'
-alias ld="ls -ld"
-alias l="ls -alh"
-alias ltr="ls -altrh"
-alias grep="grep -i --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn,node_modules,.yarn}"
-alias vim="nvim"
-alias vimdiff="nvim -d"
-alias brew-update="brew update; brew doctor; brew upgrade; if [[ \$platform = Darwin ]]; then brew upgrade --cask; fi; brew cleanup"
-# Kubernetes aliases
-alias k="kubectl"
-# Terraform aliases
-alias tf="terraform"
-# Lazygit
-alias lg="lazygit"
-# Ripgrep
-alias rg='rg --no-ignore --smart-case --hidden --follow --glob "!.git" --glob "!node_modules"'
 
 # Preferred editor for local and remote sessions
 export VISUAL=nvim

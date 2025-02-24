@@ -6,8 +6,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 ##################################################
 # Source Common Files
 ##################################################
-source "$XDG_CONFIG_HOME/commonrc/common"
-source "$XDG_CONFIG_HOME/commonrc/shell_functions"
+source "$XDG_CONFIG_HOME/commonrc/envars"
 
 # Set environment variables for asdf shims
 [[ -r "$HOME/.asdf/plugins/java/set-java-home.zsh" ]] && source "$HOME/.asdf/plugins/java/set-java-home.zsh"

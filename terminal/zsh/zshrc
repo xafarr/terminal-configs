@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
 
+###################################################
+# Add common aliases and shell functions
+###################################################
+source "$XDG_CONFIG_HOME/commonrc/aliases"
+source "$XDG_CONFIG_HOME/commonrc/shell_functions"
+
 # Default WORDCHARS - Characters considered part of a word
 # *?_-.[]~=/&;!#$%^(){}<>
 export WORDCHARS=
