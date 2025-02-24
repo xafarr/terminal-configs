@@ -1,29 +1,37 @@
--- init.lua
-vim.loader.enable()
-
-require("config.options")
-require("config.neoconfigs")
-require("utils.neoutils")
-require("config.autocmds")
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
+  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
+  if vim.v.shell_error ~= 0 then
+    vim.api.nvim_echo({
+      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
+      { out,                            "WarningMsg" },
+      { "\nPress any key to exit..." },
+    }, true, {})
+    vim.fn.getchar()
+    os.exit(1)
+  end
+end
+vim.opt.rtp:prepend(lazypath)
 
 -- For checkhealth warning
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
-local lazypath = neoconfigs.stdDataPath .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "--single-branch",
-    "https://github.com/folke/lazy.nvim.git",
-    lazypath,
-  })
-end
+require("config.options")
+require("config.neoconfigs")
+require("utils.neoutils")
 
-vim.opt.runtimepath:prepend(lazypath)
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyDone",
+  once = true,
+  callback = function()
+    require("config.autocmds")
+    require("config.keymaps")
+  end,
+})
 
 require("lazy").setup({
   spec = {
@@ -68,9 +76,3 @@ end
 -- Set the colorscheme according to config
 vim.cmd("colorscheme " .. neoconfigs.UI.colorscheme)
 
-vim.api.nvim_create_autocmd("User", {
-  pattern = "VeryLazy",
-  callback = function()
-    require("config.keymaps")
-  end,
-})

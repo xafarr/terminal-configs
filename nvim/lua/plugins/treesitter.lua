@@ -57,7 +57,6 @@ return {
           "markdown",
           "markdown_inline",
           "mermaid",
-          "org",
           "perl",
           "php",
           "puppet",
