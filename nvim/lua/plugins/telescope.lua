@@ -59,7 +59,9 @@ return {
           sorting_strategy = "ascending",
           layout_strategy = "horizontal",
           layout_config = {
-            preview_width = 0.65,
+            horizontal = {
+              preview_width = 0.65,
+            },
             scroll_speed = 5,
             prompt_position = "top",
           },
