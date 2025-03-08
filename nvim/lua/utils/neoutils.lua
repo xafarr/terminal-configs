@@ -32,6 +32,13 @@ function M.get_augroup(name)
   return vim.api.nvim_create_augroup("xafarr_" .. name, { clear = true })
 end
 
+function M.get_java_install_path(version)
+  local version_path = vim.fn.system(
+    "asdf list java | grep " .. version .. " | head -n 1 | sed 's/^[ *]*//' | xargs -I{} asdf where java {}"
+  )
+  return version_path
+end
+
 ---@param on_attach fun(client, buffer)
 function M.on_attach(on_attach)
   vim.api.nvim_create_autocmd("LspAttach", {

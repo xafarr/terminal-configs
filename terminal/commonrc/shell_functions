@@ -9,6 +9,20 @@ function java_props() {
 }
 
 # -------------------------------------------------------------------
+# Functions to get install path for Java version
+# -------------------------------------------------------------------
+function get_java_install_path() {
+    version=$1
+    version_name=$(asdf list java | grep "$version" | sed 's/^[ *]*//')
+    if [[ -z $version_name ]]; then
+        echo "Java $version does not exist" >&2
+    else
+        version_path=$(asdf where java "$version_name")
+        echo "$version_path"
+    fi
+}
+
+# -------------------------------------------------------------------
 # Function to get git host icon
 # -------------------------------------------------------------------
 function get_git_host_icon() {
@@ -67,4 +81,3 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
     fd --type d --hidden --follow --exclude ".git" --exclude "node_modules" . "$1"
 }
-

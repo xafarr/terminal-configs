@@ -63,7 +63,11 @@ local config = {
         runtimes = {
           {
             name = "JavaSE-17",
-            path = vim.env.JAVA_HOME,
+            path = neoutils.get_java_install_path(17),
+          },
+          {
+            name = "JavaSE-21",
+            path = neoutils.get_java_install_path(21),
           },
         },
       },
