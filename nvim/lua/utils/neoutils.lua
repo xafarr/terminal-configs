@@ -33,9 +33,12 @@ function M.get_augroup(name)
 end
 
 function M.get_java_install_path(version)
-  local version_path = vim.fn.system(
-    "asdf list java | grep " .. version .. " | head -n 1 | sed 's/^[ *]*//' | xargs -I{} asdf where java {}"
+  local cmd = string.format(
+    'bash -c "source %s && get_java_install_path %s"',
+    os.getenv("XDG_CONFIG_HOME") .. "/commonrc/shell_functions",
+    version
   )
+  local version_path = vim.fn.system(cmd)
   return version_path
 end
 

@@ -13,12 +13,12 @@ function java_props() {
 # -------------------------------------------------------------------
 function get_java_install_path() {
     version=$1
-    version_name=$(asdf list java | grep "$version" | sed 's/^[ *]*//')
+    version_name=$(asdf list java | grep "$version" | head -n 1 | sed 's/^[ *]*//')
     if [[ -z $version_name ]]; then
-        echo "Java $version does not exist" >&2
+        echo "Java $version is not installed in the system" >&2
     else
         version_path=$(asdf where java "$version_name")
-        echo "$version_path"
+        echo -n "$version_path"
     fi
 }
 
