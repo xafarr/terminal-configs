@@ -36,6 +36,8 @@ function get_git_host_icon() {
             ICON=" "
         elif [[ $URL = *'gitlab.com'* ]] || [[ $URL = *'cloudlab.us.oracle.com'* ]]; then
             ICON="󰮠 "
+        elif [[ $URL = *'oci.oracleiaas.com'* ]]; then
+            ICON=" "
         elif [[ $URL = *'bitbucket.com'* ]] || [[ $URL = *'bitbucket.oci.oraclecorp.com'* ]]; then
             ICON="󰂨 "
         elif [[ $URL = *'azure.com'* ]] || [[ $URL = *'visualstudio.com'* ]]; then
