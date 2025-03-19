@@ -7,11 +7,11 @@ return {
 
       gitsigns.setup({
         signs = {
-          add = { text = "█", },
-          change = { text = "█", },
-          delete = { text = "▁", },
-          topdelete = { text = "▔", },
-          changedelete = { text = "～", },
+          add = { text = "█" },
+          change = { text = "█" },
+          delete = { text = "▁" },
+          topdelete = { text = "▔" },
+          changedelete = { text = "～" },
         },
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
         numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
@@ -97,11 +97,14 @@ return {
     end,
   },
   {
-    "tpope/vim-fugitive",
-    cmd = { "Git", "GBrowse", "Gdiffsplit", "Gvdiffsplit" },
+    "NeogitOrg/neogit",
+    cmd = "Neogit",
     dependencies = {
-      "tpope/vim-rhubarb",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+      "sindrets/diffview.nvim",
     },
+    config = true,
   },
   {
     "sindrets/diffview.nvim",
