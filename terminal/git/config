@@ -67,7 +67,7 @@
   path = ~/.additional.gitconfig
 
 [delta]
-  features = catppuccin-macchiato
+  features = catppuccin-latte
   side-by-side = true
   max-line-length = 0
   width = variable

@@ -1,7 +1,7 @@
 local set = vim.opt
 
 -- Colorscheme
-set.background = "dark"
+set.background = "light"
 
 -- General Options
 set.backup = false -- creates a backup file

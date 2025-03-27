@@ -88,10 +88,10 @@ return {
     config = function()
       local catppuccin = require("catppuccin")
       catppuccin.setup({
-        flavour = "macchiato", -- latte, frappe, macchiato, mocha
+        flavour = "auto", -- latte, frappe, macchiato, mocha
         background = { -- :h background
           light = "latte",
-          dark = "mocha",
+          dark = "macchiato",
         },
         transparent_background = false, -- disables setting the background color.
         show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
@@ -130,10 +130,44 @@ return {
           gitsigns = true,
           nvimtree = true,
           treesitter = true,
-          notify = false,
+          notify = true,
           mini = {
             enabled = true,
             indentscope_color = "",
+          },
+          noice = true,
+          telescope = {
+            enabled = true,
+          },
+          which_key = true,
+          fzf = true,
+          mason = true,
+          render_markdown = true,
+          nvim_surround = true,
+          lsp_trouble = true,
+          illuminate = {
+            enabled = true,
+            lsp = true,
+          },
+          native_lsp = {
+            enabled = true,
+            virtual_text = {
+              errors = { "italic" },
+              hints = { "italic" },
+              warnings = { "italic" },
+              information = { "italic" },
+              ok = { "italic" },
+            },
+            underlines = {
+              errors = { "underline" },
+              hints = { "underline" },
+              warnings = { "underline" },
+              information = { "underline" },
+              ok = { "underline" },
+            },
+            inlay_hints = {
+              background = true,
+            },
           },
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },

@@ -1,6 +1,6 @@
 # ~/.config/starship.toml
 
-palette = "catppuccin_macchiato"
+palette = "catppuccin_latte"
 
 # Inserts a blank line between shell prompts
 add_newline = true
@@ -115,8 +115,8 @@ show_always = false
 truncation_length = 4
 truncation_symbol = "…/"
 truncate_to_repo = false
-style = "sapphire"
-repo_root_style =  "sapphire bold"
+style = "sky"
+repo_root_style =  "blue bold"
 read_only_style = "197"
 read_only = " 🔒"
 format = " [$path]($style)[$read_only]($read_only_style)"
@@ -157,7 +157,7 @@ format = "[  $number]($style)"
 [shell]
 disabled = false
 format = "[  $indicator]($style)"
-style = "bold dimmed 244"
+style = "bold 244"
 bash_indicator = "bash"
 zsh_indicator = "zsh"
 fish_indicator = "fish"
@@ -172,13 +172,13 @@ ion_indicator = "ionsh"
 # Configure the package version
 [package]
 format = "[  $version]($style)"
-style = "bold dimmed white"
+style = "bold white"
 disabled = true
 
 # Configure the Node.js module
 [nodejs]
 format = "[ 󰎙 $version]($style)"
-style = "bold dimmed green"
+style = "bold green"
 
 # Configure the golang module
 [golang]
@@ -187,17 +187,17 @@ format = "[  $version]($style)"
 # Configure the .NET module
 [dotnet]
 format = "[  $version]($style)"
-style = "bold dimmed blue"
+style = "bold blue"
   
 # Configure the Rust module
 [rust]
 format = "[  $version]($style)"
-style = "bold dimmed red"
+style = "bold red"
 
 # Configure the Java module
 [java]
 format = "[  $version]($style)"
-style = "bold dimmed purple"
+style = "bold purple"
 
 [aws]
 disabled = true
@@ -210,10 +210,10 @@ format = "[ 󱁢 $version]($style)"
 format = "[ V vagrant $version]($style)"
 
 [docker_context]
-format = "[  $context](dimmed blue bold)"
+format = "[  $context](blue bold)"
 
 [helm]
-format = "[  $version](bold dimmed purple)"
+format = "[  $version](bold purple)"
 
 [python]
 format = "[ 󰌠 $version ($virtualenv)]($style)"
@@ -222,16 +222,16 @@ format = "[ 󰌠 $version ($virtualenv)]($style)"
 format = "[  $version]($style)"
 
 [kubernetes]
-format = "[ 󱃾 $context](bold dimmed purple)"
+format = "[ 󱃾 $context](bold purple)"
 disabled = true
 
 [cmd_duration]
 min_time = 10_000
-style = "dimmed 244"
+style = "244"
 format = "[  $duration]($style)"
 
 [kotlin]
-style = "bold dimmed blue"
+style = "bold blue"
 format = "[ 󱈙 $version]($style)"
 
 [custom.git_host]
@@ -242,6 +242,35 @@ directories = [".git"]
 when = "git rev-parse --is-inside-work-tree"
 style = "green"
 format = " [$output]($style)"
+
+# Palette definitions
+[palettes.catppuccin_latte]
+rosewater = "#dc8a78"
+flamingo = "#dd7878"
+pink = "#ea76cb"
+mauve = "#8839ef"
+red = "#d20f39"
+maroon = "#e64553"
+peach = "#fe640b"
+yellow = "#df8e1d"
+green = "#40a02b"
+teal = "#179299"
+sky = "#04a5e5"
+sapphire = "#209fb5"
+blue = "#1e66f5"
+lavender = "#7287fd"
+text = "#4c4f69"
+subtext1 = "#5c5f77"
+subtext0 = "#6c6f85"
+overlay2 = "#7c7f93"
+overlay1 = "#8c8fa1"
+overlay0 = "#9ca0b0"
+surface2 = "#acb0be"
+surface1 = "#bcc0cc"
+surface0 = "#ccd0da"
+base = "#eff1f5"
+mantle = "#e6e9ef"
+crust = "#dce0e8"
 
 [palettes.catppuccin_frappe]
 rosewater = "#f2d5cf"
