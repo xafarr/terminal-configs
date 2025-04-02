@@ -29,6 +29,9 @@ function M.getOS()
 end
 
 function M.get_augroup(name)
+  if vim.fn.exists("#xafarr_" .. name) == 1 then
+    return "xafarr_" .. name
+  end
   return vim.api.nvim_create_augroup("xafarr_" .. name, { clear = true })
 end
 

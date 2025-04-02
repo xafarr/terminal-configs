@@ -120,14 +120,14 @@ api.nvim_create_autocmd("FileType", {
 })
 
 -- show cursor line only in active window
-api.nvim_create_autocmd({ "InsertLeave", "WinEnter", "BufWinEnter" }, {
+api.nvim_create_autocmd({ "InsertLeave", "WinEnter", "BufEnter" }, {
   pattern = "*",
   callback = function()
     vim.opt.cursorline = true
   end,
   group = augroup("cursorline"),
 })
-api.nvim_create_autocmd({ "InsertEnter", "WinLeave", "BufWinLeave" }, {
+api.nvim_create_autocmd({ "InsertEnter", "WinLeave", "BufLeave" }, {
   pattern = "*",
   callback = function()
     if vim.bo.filetype ~= "NvimTree" then
