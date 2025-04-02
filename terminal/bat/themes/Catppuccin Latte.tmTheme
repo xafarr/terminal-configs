@@ -18,9 +18,9 @@
         <key>settings</key>
         <dict>
           <key>background</key>
-          <string>#eff1f5</string>
+          <string>#ffffff</string>
           <key>foreground</key>
-          <string>#4c4f69</string>
+          <string>#2d2f3f</string>
           <key>caret</key>
           <string>#dc8a78</string>
           <key>lineHighlight</key>

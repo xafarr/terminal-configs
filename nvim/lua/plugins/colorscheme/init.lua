@@ -87,6 +87,7 @@ return {
     priority = 1000,
     config = function()
       local catppuccin = require("catppuccin")
+      local catppuccin_utils = require("catppuccin.utils.colors")
       catppuccin.setup({
         flavour = "auto", -- latte, frappe, macchiato, mocha
         background = { -- :h background
@@ -118,10 +119,25 @@ return {
           types = {},
           operators = {},
         },
-        color_overrides = {},
+        color_overrides = {
+          latte = {
+            base = "#ffffff",
+            text = "#2d2f3f",
+          },
+        },
+        highlight_overrides = {
+          latte = function(latte)
+            return {
+              CursorLine = { bg = catppuccin_utils.lighten(latte.blue, 0.07) },
+              CursorLineNr = { bg = catppuccin_utils.lighten(latte.blue, 0.07) },
+              CursorLineSign = { bg = catppuccin_utils.lighten(latte.blue, 0.07) },
+              NvimTreeNormal = { bg = catppuccin_utils.lighten(latte.mantle, 0.4) },
+            }
+          end,
+        },
         custom_highlights = function(colors)
           return {
-            NonText = { fg = colors.surface0 },
+            NonText = { fg = catppuccin_utils.lighten(colors.surface0, 0.8) },
             GhostText = { fg = colors.surface1 },
           }
         end,
