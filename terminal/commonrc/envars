@@ -162,6 +162,7 @@ export GPG_TTY=$_tty
 
 export LDFLAGS="-L$HOMEBREW_PREFIX/opt/llvm/lib/c++ -Wl,\
 -rpath,$HOMEBREW_PREFIX/opt/llvm/lib/c++ \
+-L$HOMEBREW_PREFIX/opt/llvm/lib/unwind -lunwind \
 -L$HOMEBREW_PREFIX/lib \
 -L$HOMEBREW_PREFIX/opt/curl/lib \
 -L$HOMEBREW_PREFIX/opt/gettext/lib \
