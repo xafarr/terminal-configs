@@ -9,17 +9,18 @@ function M.setup_diagnostics()
     { name = "DiagnosticSignInfo", text = icons.diagnostics.BoldInformation },
   }
 
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-  end
-
   local config = {
     diagnostics = {
       -- disable virtual text
       virtual_text = false,
       -- show signs
       signs = {
-        active = signs,
+        text = {
+          [vim.diagnostic.severity.ERROR] = icons.diagnostics.BoldError,
+          [vim.diagnostic.severity.WARN] = icons.diagnostics.BoldWarning,
+          [vim.diagnostic.severity.INFO] = icons.diagnostics.BoldInformation,
+          [vim.diagnostic.severity.HINT] = icons.diagnostics.BoldHint,
+        },
       },
       update_in_insert = false,
       underline = true,
