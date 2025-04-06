@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out,                            "WarningMsg" },
+      { out, "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -23,12 +23,12 @@ vim.g.loaded_ruby_provider = 0
 require("config.options")
 require("config.neoconfigs")
 require("utils.neoutils")
+require("config.autocmds")
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyDone",
   once = true,
   callback = function()
-    require("config.autocmds")
     require("config.keymaps")
   end,
 })
@@ -75,4 +75,3 @@ end
 
 -- Set the colorscheme according to config
 vim.cmd("colorscheme " .. neoconfigs.UI.colorscheme)
-

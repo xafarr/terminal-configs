@@ -204,3 +204,11 @@ api.nvim_create_user_command("AutoFormatToggle", function()
   neoconfigs.format_on_save = not neoconfigs.format_on_save
   print("Setting autoformatting to: " .. tostring(neoconfigs.format_on_save))
 end, {})
+
+api.nvim_create_autocmd("ColorScheme", {
+  group = augroup("custom_highlights_edge"),
+  pattern = "edge",
+  callback = function()
+    require("config.colorscheme.override.edge").override_highlight()
+  end,
+})

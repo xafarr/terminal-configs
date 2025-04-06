@@ -1,346 +1,243 @@
-vim.cmd([[
-    function! s:highlight_custom(group, fg, bg, ...)
-      execute 'highlight' a:group
-            \ 'guifg=' . a:fg[0]
-            \ 'guibg=' . a:bg[0]
-            \ 'ctermfg=' . a:fg[1]
-            \ 'ctermbg=' . a:bg[1]
-            \ 'gui=' . (a:0 >= 1 ?
-              \ a:1 :
-              \ 'NONE')
-            \ 'cterm=' . (a:0 >= 1 ?
-              \ a:1 :
-              \ 'NONE')
-            \ 'guisp=' . (a:0 >= 2 ?
-              \ a:2[0] :
-              \ 'NONE')
-    endfunction
+local M = {}
 
-    function! s:edge_custom() abort
-        call s:highlight_custom('Green', s:palette.green, s:palette.none)
-        call s:highlight_custom('Field', s:palette.purple, s:palette.none)
-        call s:highlight_custom('FieldItalic', s:palette.purple, s:palette.none, 'italic')
-        call s:highlight_custom('Constant', s:palette.purple, s:palette.none, 'italic')
-        call s:highlight_custom('Annotation', ['#9E880D', '134'], s:palette.none)
-        call s:highlight_custom('Method', s:palette.cyan, s:palette.none)
-        call s:highlight_custom('MethodItalic', s:palette.cyan, s:palette.none, 'italic')
-        call s:highlight_custom('Function', s:palette.purple, s:palette.none)
-        call s:highlight_custom('FuncItalic', s:palette.purple, s:palette.none, 'italic')
-        call s:highlight_custom('Number', ['#1750EB', '68'], s:palette.none)
-        call s:highlight_custom('Keyword', ['#0033B3', '134'], s:palette.none)
-        call s:highlight_custom('Attribute', ['#174AD4', '172'], s:palette.none)
-        call s:highlight_custom('Comment', s:palette.grey, s:palette.none, 'italic')
-        call s:highlight_custom('PreProc', s:palette.grey, s:palette.none, 'bold,italic')
-        call s:highlight_custom('CurrentWord', s:palette.none, ['#e5e5ff', '253'])
-        call s:highlight_custom('Visual', s:palette.none, ['#A6D2FF', '253'])
-        call s:highlight_custom('VisualNOS', s:palette.none, ['#A6D2FF', '253'], 'underline')
-        "call s:highlight_custom('SignColumn', s:palette.none, ['#f3f4f4', '253'])
-        call s:highlight_custom('VertSplit', ['#f3f4f4', '253'], ['#f3f4f4', '253'])
-        "call s:highlight_custom('LineNr', s:palette.grey, ['#f3f4f4', '253'])
-        call s:highlight_custom('CursorLine', s:palette.none, ['#fcfaed', '255'])
-        call s:highlight_custom('CursorLineNr', s:palette.none, ['#fcfaed', '255'])
-        call s:highlight_custom('CursorLineSign', s:palette.none, ['#fcfaed', '255'])
-        call s:highlight_custom('Folded', s:palette.grey, ['#e9f5e6', '172'])
-        call s:highlight_custom('Todo', s:palette.blue, s:palette.none, 'bold,italic')
-        call s:highlight_custom('StringEscape', ['#0037A6', '172'], s:palette.none)
-        call s:highlight_custom('StringRegex', s:palette.none, s:palette.diff_green)
-        call s:highlight_custom('Black', s:palette.black, s:palette.none)
-        call s:highlight_custom('BlackItalic', s:palette.black, s:palette.none, 'italic')
-        call s:highlight_custom('Link', ['#4585BE', '167'], s:palette.none)
-        call s:highlight_custom('Label', ['#4A86E8', '167'], s:palette.none)
-        call s:highlight_custom('IndentChar', ['#e6e6e6', '240'], s:palette.none)
-        call s:highlight_custom('IndentContextChar', s:palette.grey, s:palette.none, 'bold')
-        call s:highlight_custom('IndentContextStart', s:palette.none, s:palette.none, 'underline', s:palette.grey)
-        call s:highlight_custom('GreenSign', ['#C9DEC1', '107'], s:palette.none)
-        call s:highlight_custom('BlueSign', s:palette.diff_blue, s:palette.none)
-        call s:highlight_custom('RedSign', s:palette.red, s:palette.none)
-        call s:highlight_custom('YellowSign', s:palette.yellow, s:palette.none)
+local palette = {
+  black = "#2d2f3f",
+  bg_dim = "#e8ebf0",
+  bg0 = "#ffffff",
+  bg1 = "#fafafa",
+  bg2 = "#eef1f4",
+  bg3 = "#e8ebf0",
+  bg4 = "#dde2e7",
+  bg_grey = "#bcc5cf",
+  bg_red = "#e17373",
+  diff_red = "#f6e4e4",
+  bg_green = "#50A45C",
+  diff_green = "#EDFCED",
+  bg_blue = "#4CAFE7",
+  diff_blue = "#C3D6E8",
+  bg_purple = "#AB57B4",
+  diff_yellow = "#f0ece2",
+  fg = "#2d2f3f",
+  red = "#d05858",
+  yellow = "#be7e05",
+  green = "#067D17",
+  cyan = "#00627A",
+  blue = "#008DDE",
+  purple = "#871094",
+  grey = "#8C8C8C",
+  grey_dim = "#C5C5C5",
+  none = "NONE",
+}
 
-        call s:highlight_custom('TSStrong', s:palette.none, s:palette.none, 'bold')
-        call s:highlight_custom('TSEmphasis', s:palette.none, s:palette.none, 'italic')
-        call s:highlight_custom('TSUnderline', s:palette.none, s:palette.none, 'underline')
-        call s:highlight_custom('TSNote', s:palette.blue, s:palette.bg0, 'bold,italic')
-        call s:highlight_custom('TSWarning', s:palette.none, ['#F5EAC1', '172'], 'bold')
-        call s:highlight_custom('TSDanger', s:palette.none, s:palette.red, 'bold')
+function M.override_highlight()
+  local set_hl = function(group, color)
+    vim.api.nvim_set_hl(0, group, color)
+  end
 
-        " NvimTree
-        highlight! link NvimTreeGitIgnored Conceal
-        highlight! NvimTreeNormal guibg=#f3f4f4
-        highlight! NvimTreeWinSeperator guibg=#f3f4f4
+  set_hl("Search", { fg = palette.none, bg = palette.diff_blue })
+  set_hl("IncSearch", { fg = palette.none, bg = palette.diff_green })
 
-        " Indent Blankline v2
-        highlight! link IndentBlanklineChar IndentChar
-        highlight! link IndentBlanklineContextChar IndentContextChar
-        highlight! link IndentBlanklineContextStart IndentContextStart
+  set_hl("Green", { fg = palette.green, bg = palette.none })
+  set_hl("Field", { fg = palette.purple, bg = palette.none })
+  set_hl("FieldItalic", { fg = palette.purple, bg = palette.none, italic = true })
+  set_hl("Constant", { fg = palette.purple, bg = palette.none, italic = true })
+  set_hl("Annotation", { fg = "#9E880D", bg = palette.none })
+  set_hl("Method", { fg = palette.cyan, bg = palette.none })
+  set_hl("MethodItalic", { fg = palette.cyan, bg = palette.none, italic = true })
+  set_hl("Function", { fg = palette.purple, bg = palette.none })
+  set_hl("FuncItalic", { fg = palette.purple, bg = palette.none, italic = true })
+  set_hl("Number", { fg = "#1750EB", bg = palette.none })
+  set_hl("Keyword", { fg = "#0033B3", bg = palette.none })
+  set_hl("Attribute", { fg = "#174AD4", bg = palette.none })
+  set_hl("Comment", { fg = palette.grey, bg = palette.none, italic = true })
+  set_hl("PreProc", { fg = palette.grey, bg = palette.none, bold = true, italic = true })
+  set_hl("CurrentWord", { fg = palette.none, bg = "#e5e5ff" })
+  set_hl("Visual", { fg = palette.none, bg = "#A6D2FF" })
+  set_hl("VisualNOS", { fg = palette.none, bg = "#A6D2FF", underline = true })
+  --('SignColumn',{fg =  palette.none, bg = ['#f3f4f4', '253'] })
+  set_hl("VertSplit", { fg = "#f3f4f4", bg = "#f3f4f4" })
+  --('LineNr',{fg =  palette.grey, bg = ['#f3f4f4', '253'] })
+  set_hl("CursorLine", { fg = palette.none, bg = "#fcfaed" })
+  set_hl("CursorLineNr", { fg = palette.none, bg = "#fcfaed" })
+  set_hl("CursorLineSign", { fg = palette.none, bg = "#fcfaed" })
+  set_hl("Folded", { fg = palette.grey, bg = "#e9f5e6" })
+  set_hl("Todo", { fg = palette.blue, bg = palette.none, bold = true, italic = true })
+  set_hl("StringEscape", { fg = "#0037A6", bg = palette.none })
+  set_hl("StringRegex", { fg = palette.none, bg = palette.diff_green })
+  set_hl("Black", { fg = palette.black, bg = palette.none })
+  set_hl("BlackItalic", { fg = palette.black, bg = palette.none, italic = true })
+  set_hl("Link", { fg = "#4585BE", bg = palette.none })
+  set_hl("Label", { fg = "#4A86E8", bg = palette.none })
+  set_hl("IndentChar", { fg = "#e6e6e6", bg = palette.none })
+  set_hl("IndentContextChar", { fg = palette.grey, bg = palette.none, bold = true })
+  set_hl("IndentContextStart", { fg = palette.none, bg = palette.none, underline = true })
+  set_hl("GreenSign", { fg = "#C9DEC1", bg = palette.none })
+  set_hl("BlueSign", { fg = palette.diff_blue, bg = palette.none })
+  set_hl("RedSign", { fg = palette.red, bg = palette.none })
+  set_hl("YellowSign", { fg = palette.yellow, bg = palette.none })
 
-        " Indent Blankline v3
-        highlight! link IblIndent IndentBlanklineChar
-        highlight! link IblWhitespace IndentBlanklineChar
-        highlight! link IblScope IndentBlanklineContextChar
+  set_hl("TSStrong", { fg = palette.none, bg = palette.none, bold = true })
+  set_hl("TSEmphasis", { fg = palette.none, bg = palette.none, italic = true })
+  set_hl("TSUnderline", { fg = palette.none, bg = palette.none, underline = true })
+  set_hl("TSNote", { fg = palette.blue, bg = palette.bg0, bold = true, italic = true })
+  set_hl("TSWarning", { fg = palette.none, bg = "#F5EAC1", bold = true })
+  set_hl("TSDanger", { fg = palette.none, bg = palette.red, bold = true })
 
-        " Gitsigns
-        highlight! link GitSignsAdd GreenSign
-        highlight! link GitSignsChange BlueSign
-        highlight! link GitSignsDelete RedSign
-        highlight! link GitSignsAddNr GreenSign
-        highlight! link GitSignsChangeNr BlueSign
-        highlight! link GitSignsDeleteNr RedSign
-        highlight! link GitSignsAddLn DiffAdd
-        highlight! link GitSignsChangeLn DiffChange
-        highlight! link GitSignsDeleteLn DiffDelete
-        highlight! link GitSignsCurrentLineBlame Conceal
+  -- Link Highlight
 
-        " XML highlight
-        highlight! link xmlTag Black
-        highlight! link xmlEndTag Black
-        highlight! link xmlTagName Keyword
-        highlight! link xmlEqual Black
-        highlight! link xmlAttrib Attribute
-        highlight! link xmlEntity Keyword
-        highlight! link xmlEntityPunct Field
-        highlight! link xmlDocTypeDecl Comment
-        highlight! link xmlDocTypeKeyword FieldItalic
-        highlight! link xmlCdataStart Comment
-        highlight! link xmlCdataCdata Yellow
-        highlight! link xmlString Green
-        highlight! link xmlProcessingDelim BlackItalic
+  -- NvimTree
+  set_hl("NvimTreeGitIgnored", { link = "Conceal" })
+  set_hl("NvimTreeNormal", { bg = "#f3f4f4" })
+  set_hl("NvimTreeWinSeperator", { bg = "#f3f4f4" })
 
-        highlight! link TSAnnotation Annotation
-        highlight! link TSAttribute Attribute
-        highlight! link TSBoolean Keyword
-        highlight! link TSCharacter Green
-        highlight! link TSCharacterSpecial SpecialChar
-        highlight! link TSComment Comment
-        highlight! link TSConditional Keyword
-        highlight! link TSConstBuiltin Constant
-        highlight! link TSConstMacro Constant
-        highlight! link TSConstant Constant
-        highlight! link TSConstructor Black
-        highlight! link TSDebug Debug
-        highlight! link TSDefine Define
-        highlight! link TSEnvironment Macro
-        highlight! link TSEnvironmentName Type
-        highlight! link TSError Error
-        highlight! link TSException Keyword
-        highlight! link TSField Field
-        highlight! link TSFloat Number
-        highlight! link TSFuncBuiltin Keyword
-        highlight! link TSFuncMacro FuncItalic
-        highlight! link TSFunction Function
-        highlight! link TSFunctionCall FuncItalic
-        highlight! link TSInclude Keyword
-        highlight! link TSKeyword Keyword
-        highlight! link TSKeywordFunction Keyword
-        highlight! link TSKeywordOperator Keyword
-        highlight! link TSKeywordReturn Keyword
-        highlight! link TSLabel Label
-        highlight! link TSLiteral String
-        highlight! link TSMath Green
-        highlight! link TSMethod Method
-        highlight! link TSMethodCall MethodItalic
-        highlight! link TSNamespace Keyword
-        highlight! link TSNone Fg
-        highlight! link TSNumber Number
-        highlight! link TSOperator Black
-        highlight! link TSParameter Black
-        highlight! link TSParameterReference Field
-        highlight! link TSPreProc PreProc
-        highlight! link TSProperty Field
-        highlight! link TSPunctBracket Black
-        highlight! link TSPunctDelimiter Black
-        highlight! link TSPunctSpecial Black
-        highlight! link TSRepeat Keyword
-        highlight! link TSStorageClass Purple
-        highlight! link TSStorageClassLifetime Purple
-        highlight! link TSStrike Grey
-        highlight! link TSString Green
-        highlight! link TSStringEscape StringEscape
-        highlight! link TSStringRegex StringRegex
-        highlight! link TSStringSpecial SpecialChar
-        highlight! link TSSymbol Attribute
-        highlight! link TSTag Keyword
-        highlight! link TSTagAttribute Attribute
-        highlight! link TSTagDelimiter Black
-        highlight! link TSText Green
-        highlight! link TSTextReference Constant
-        highlight! link TSTitle Title
-        highlight! link TSTodo Todo
-        highlight! link TSType Black
-        highlight! link TSTypeBuiltin Keyword
-        highlight! link TSTypeDefinition Black
-        highlight! link TSTypeQualifier Purple
-        highlight! link TSURI Link
-        highlight! link TSVariable Black
-        highlight! link TSVariableBuiltin Keyword
-        if has('nvim-0.8.0')
-          highlight! link @annotation TSAnnotation
-          highlight! link @attribute TSAttribute
-          highlight! link @boolean TSBoolean
-          highlight! link @character TSCharacter
-          highlight! link @character.special TSCharacterSpecial
-          highlight! link @comment TSComment
-          highlight! link @conceal Grey
-          highlight! link @conditional TSConditional
-          highlight! link @constant TSConstant
-          highlight! link @constant.builtin TSConstBuiltin
-          highlight! link @constant.macro TSConstMacro
-          highlight! link @constructor TSConstructor
-          highlight! link @debug TSDebug
-          highlight! link @define TSDefine
-          highlight! link @error TSError
-          highlight! link @exception TSException
-          highlight! link @field TSField
-          highlight! link @float TSFloat
-          highlight! link @function TSFunction
-          highlight! link @function.builtin TSFuncBuiltin
-          highlight! link @function.call TSFunctionCall
-          highlight! link @function.macro TSFuncMacro
-          highlight! link @include TSInclude
-          highlight! link @keyword TSKeyword
-          highlight! link @keyword.function TSKeywordFunction
-          highlight! link @keyword.operator TSKeywordOperator
-          highlight! link @keyword.return TSKeywordReturn
-          highlight! link @label TSLabel
-          highlight! link @math TSMath
-          highlight! link @method TSMethod
-          highlight! link @method.call TSMethodCall
-          highlight! link @namespace TSNamespace
-          highlight! link @none TSNone
-          highlight! link @number TSNumber
-          highlight! link @operator TSOperator
-          highlight! link @parameter TSParameter
-          highlight! link @parameter.reference TSParameterReference
-          highlight! link @preproc TSPreProc
-          highlight! link @property TSProperty
-          highlight! link @punctuation.bracket TSPunctBracket
-          highlight! link @punctuation.delimiter TSPunctDelimiter
-          highlight! link @punctuation.special TSPunctSpecial
-          highlight! link @repeat TSRepeat
-          highlight! link @storageclass TSStorageClass
-          highlight! link @storageclass.lifetime TSStorageClassLifetime
-          highlight! link @strike TSStrike
-          highlight! link @string TSString
-          highlight! link @string.escape TSStringEscape
-          highlight! link @string.regex TSStringRegex
-          highlight! link @string.special TSStringSpecial
-          highlight! link @symbol TSSymbol
-          highlight! link @tag TSTag
-          highlight! link @tag.attribute TSTagAttribute
-          highlight! link @tag.delimiter TSTagDelimiter
-          highlight! link @text TSText
-          highlight! link @text.danger TSDanger
-          highlight! link @text.diff.add diffAdded
-          highlight! link @text.diff.delete diffRemoved
-          highlight! link @text.emphasis TSEmphasis
-          highlight! link @text.environment TSEnvironment
-          highlight! link @text.environment.name TSEnvironmentName
-          highlight! link @text.literal TSLiteral
-          highlight! link @text.math TSMath
-          highlight! link @text.note TSNote
-          highlight! link @text.reference TSTextReference
-          highlight! link @text.strike TSStrike
-          highlight! link @text.strong TSStrong
-          highlight! link @text.title TSTitle
-          highlight! link @text.todo TSTodo
-          highlight! link @text.todo.checked Green
-          highlight! link @text.todo.unchecked Ignore
-          highlight! link @text.underline TSUnderline
-          highlight! link @text.uri TSURI
-          highlight! link @text.warning TSWarning
-          highlight! link @todo TSTodo
-          highlight! link @type TSType
-          highlight! link @type.builtin TSTypeBuiltin
-          highlight! link @type.definition TSTypeDefinition
-          highlight! link @type.qualifier TSTypeQualifier
-          highlight! link @uri TSURI
-          highlight! link @variable TSVariable
-          highlight! link @variable.builtin TSVariableBuiltin
-        endif
-        if has('nvim-0.9.0')
-          highlight! link @lsp.type.class TSType
-          highlight! link @lsp.type.comment TSComment
-          highlight! link @lsp.type.decorator TSFunction
-          highlight! link @lsp.type.enum TSType
-          highlight! link @lsp.type.enumMember TSProperty
-          highlight! link @lsp.type.events TSLabel
-          highlight! link @lsp.type.function TSFunction
-          highlight! link @lsp.type.interface TSType
-          highlight! link @lsp.type.keyword TSKeyword
-          highlight! link @lsp.type.macro TSConstMacro
-          highlight! link @lsp.type.method TSMethod
-          highlight! link @lsp.type.modifier TSTypeQualifier
-          highlight! link @lsp.type.namespace TSNamespace
-          highlight! link @lsp.type.number TSNumber
-          highlight! link @lsp.type.operator TSOperator
-          highlight! link @lsp.type.parameter TSParameter
-          highlight! link @lsp.type.property TSProperty
-          highlight! link @lsp.type.regexp TSStringRegex
-          highlight! link @lsp.type.string TSString
-          highlight! link @lsp.type.struct TSType
-          highlight! link @lsp.type.type TSType
-          highlight! link @lsp.type.typeParameter TSTypeDefinition
-          highlight! link @lsp.type.variable TSVariable
-          highlight! link DiagnosticUnnecessary TSWarning
-        endif
-        highlight! link TSModuleInfoGood Green
-        highlight! link TSModuleInfoBad Red
-        " }}}
-        " github/copilot.vim {{{
-        highlight! link CopilotSuggestion Conceal
-        " }}}
-    endfunction
+  -- Indent Blankline v2
+  set_hl("IndentBlanklineChar", { link = "IndentChar" })
+  set_hl("IndentBlanklineContextChar", { link = "IndentContextChar" })
+  set_hl("IndentBlanklineContextStart", { link = "IndentContextStart" })
 
-    "let g:edge_better_performance = 1
-    let s:palette = {
-         \  'black':      ['#000000',   '253'],
-         \  'bg_dim':     ['#e8ebf0',   '254'],
-         \  'bg0':        ['#ffffff',   '231'],
-         \  'bg1':        ['#fafafa',   '231'],
-         \  'bg2':        ['#eef1f4',   '255'],
-         \  'bg3':        ['#e8ebf0',   '254'],
-         \  'bg4':        ['#dde2e7',   '253'],
-         \  'bg_grey':    ['#bcc5cf',   '246'],
-         \  'bg_red':     ['#e17373',   '167'],
-         \  'diff_red':   ['#f6e4e4',   '217'],
-         \  'bg_green':   ['#50A45C',   '107'],
-         \  'diff_green': ['#EDFCED',   '150'],
-         \  'bg_blue':    ['#4CAFE7',   '68'],
-         \  'diff_blue':  ['#C3D6E8',   '153'],
-         \  'bg_purple':  ['#AB57B4',   '134'],
-         \  'diff_yellow':['#f0ece2',   '183'],
-         \  'fg':         ['#000000',   '240'],
-         \  'red':        ['#d05858',   '167'],
-         \  'yellow':     ['#be7e05',   '172'],
-         \  'green':      ['#067D17',   '107'],
-         \  'cyan':       ['#00627A',   '73'],
-         \  'blue':       ['#008DDE',   '68'],
-         \  'purple':     ['#871094',   '134'],
-         \  'grey':       ['#8C8C8C',   '245'],
-         \  'grey_dim':   ['#C5C5C5',   '249'],
-         \  'none':       ['NONE',      'NONE']
-    \ }
+  -- Indent Blankline v3
+  set_hl("IblIndent", { link = "IndentBlanklineChar" })
+  set_hl("IblWhitespace", { link = "IndentBlanklineChar" })
+  set_hl("IblScope", { link = "IndentBlanklineContextChar" })
 
-    let g:edge_colors_override = {
-         \  'black':      s:palette.black,
-         \  'bg_dim':     s:palette.bg_dim,
-         \  'bg0':        s:palette.bg0,
-         \  'bg1':        s:palette.bg1,
-         \  'bg2':        s:palette.bg2,
-         \  'bg3':        s:palette.bg3,
-         \  'bg4':        s:palette.bg4,
-         \  'bg_grey':    s:palette.bg_grey,
-         \  'grey':       s:palette.grey,
-         \  'grey_dim':   s:palette.grey_dim,
-         \  'fg':         s:palette.fg,
-         \  'purple':     s:palette.purple,
-         \  'none':       s:palette.none
-    \}
+  -- Gitsigns
+  set_hl("GitSignsAdd", { link = "GreenSign" })
+  set_hl("GitSignsChange", { link = "BlueSign" })
+  set_hl("GitSignsDelete", { link = "RedSign" })
+  set_hl("GitSignsAddNr", { link = "GreenSign" })
+  set_hl("GitSignsChangeNr", { link = "BlueSign" })
+  set_hl("GitSignsDeleteNr", { link = "RedSign" })
+  set_hl("GitSignsAddLn", { link = "DiffAdd" })
+  set_hl("GitSignsChangeLn", { link = "DiffChange" })
+  set_hl("GitSignsDeleteLn", { link = "DiffDelete" })
+  set_hl("GitSignsCurrentLineBlame", { link = "Conceal" })
 
-    let g:edge_transparent_background = 1
+  -- XML highlight
+  set_hl("xmlTag", { link = "Black" })
+  set_hl("xmlEndTag", { link = "Black" })
+  set_hl("xmlTagName", { link = "Keyword" })
+  set_hl("xmlEqual", { link = "Black" })
+  set_hl("xmlAttrib", { link = "Attribute" })
+  set_hl("xmlEntity", { link = "Keyword" })
+  set_hl("xmlEntityPunct", { link = "Field" })
+  set_hl("xmlDocTypeDecl", { link = "Comment" })
+  set_hl("xmlDocTypeKeyword", { link = "FieldItalic" })
+  set_hl("xmlCdataStart", { link = "Comment" })
+  set_hl("xmlCdataCdata", { link = "Yellow" })
+  set_hl("xmlString", { link = "Green" })
+  set_hl("xmlProcessingDelim", { link = "BlackItalic" })
 
-    augroup EdgeCustom
-      autocmd!
-      autocmd ColorScheme edge call s:edge_custom()
-    augroup END
+  -- Code Syntax
+  set_hl("@annotation", { link = "Annotation" })
+  set_hl("@attribute", { link = "Attribute" })
+  set_hl("@boolean", { link = "Keyword" })
+  set_hl("@character", { link = "Green" })
+  set_hl("@character.special", { link = "SpecialChar" })
+  set_hl("@comment", { link = "Comment" })
+  set_hl("@conceal", { link = "Grey" })
+  set_hl("@conditional", { link = "Keyword" })
+  set_hl("@constant", { link = "Constant" })
+  set_hl("@constant.builtin", { link = "Constant" })
+  set_hl("@constant.macro", { link = "Constant" })
+  set_hl("@constructor", { link = "Black" })
+  set_hl("@debug", { link = "Debug" })
+  set_hl("@define", { link = "Define" })
+  set_hl("@error", { link = "Error" })
+  set_hl("@exception", { link = "Keyword" })
+  set_hl("@field", { link = "Field" })
+  set_hl("@float", { link = "Float" })
+  set_hl("@function", { link = "Function" })
+  set_hl("@function.builtin", { link = "Keyword" })
+  set_hl("@function.call", { link = "FuncItalic" })
+  set_hl("@function.macro", { link = "FuncItalic" })
+  set_hl("@include", { link = "Keyword" })
+  set_hl("@keyword", { link = "Keyword" })
+  set_hl("@keyword.function", { link = "Keyword" })
+  set_hl("@keyword.operator", { link = "Keyword" })
+  set_hl("@keyword.modifier", { link = "Keyword" })
+  set_hl("@keyword.return", { link = "Keyword" })
+  set_hl("@label", { link = "Label" })
+  set_hl("@math", { link = "Green" })
+  set_hl("@method", { link = "Method" })
+  set_hl("@method.call", { link = "MethodItalic" })
+  set_hl("@namespace", { link = "Keyword" })
+  set_hl("@none", { link = "Fg" })
+  set_hl("@number", { link = "Number" })
+  set_hl("@operator", { link = "Black" })
+  set_hl("@parameter", { link = "Black" })
+  set_hl("@parameter.reference", { link = "Field" })
+  set_hl("@preproc", { link = "PreProc" })
+  set_hl("@property", { link = "Black" })
+  set_hl("@punctuation.bracket", { link = "Black" })
+  set_hl("@punctuation.delimiter", { link = "Black" })
+  set_hl("@punctuation.special", { link = "Black" })
+  set_hl("@repeat", { link = "Keyword" })
+  set_hl("@storageclass", { link = "Purple" })
+  set_hl("@storageclass.lifetime", { link = "Purple" })
+  set_hl("@strike", { link = "Grey" })
+  set_hl("@string", { link = "Green" })
+  set_hl("@string.escape", { link = "StringEscape" })
+  set_hl("@string.regex", { link = "StringRegex" })
+  set_hl("@string.special", { link = "SpecialChar" })
+  set_hl("@symbol", { link = "Attribute" })
+  set_hl("@tag", { link = "Keyword" })
+  set_hl("@tag.attribute", { link = "Attribute" })
+  set_hl("@tag.delimiter", { link = "Black" })
+  set_hl("@text", { link = "Green" })
+  set_hl("@text.danger", { link = "TSDanger" })
+  set_hl("@text.diff.add", { link = "diffAdded" })
+  set_hl("@text.diff.delete", { link = "diffRemoved" })
+  set_hl("@text.emphasis", { link = "TSEmphasis" })
+  set_hl("@text.environment", { link = "Macro" })
+  set_hl("@text.environment.name", { link = "Type" })
+  set_hl("@text.literal", { link = "String" })
+  set_hl("@text.math", { link = "Green" })
+  set_hl("@text.note", { link = "TSNote" })
+  set_hl("@text.reference", { link = "Constant" })
+  set_hl("@text.strike", { link = "Grey" })
+  set_hl("@text.strong", { link = "TSStrong" })
+  set_hl("@text.title", { link = "Title" })
+  set_hl("@text.todo", { link = "Todo" })
+  set_hl("@text.todo.checked", { link = "Green" })
+  set_hl("@text.todo.unchecked", { link = "Ignore" })
+  set_hl("@text.underline", { link = "TSUnderline" })
+  set_hl("@text.uri", { link = "Link" })
+  set_hl("@text.warning", { link = "TSWarning" })
+  set_hl("@todo", { link = "Todo" })
+  set_hl("@type", { link = "Black" })
+  set_hl("@type.builtin", { link = "Keyword" })
+  set_hl("@type.definition", { link = "Black" })
+  set_hl("@type.qualifier", { link = "Purple" })
+  set_hl("@uri", { link = "Link" })
+  set_hl("@variable", { link = "Black" })
+  set_hl("@variable.builtin", { link = "Keyword" })
 
-]])
+  set_hl("@lsp.type.class", { link = "Black" })
+  set_hl("@lsp.type.comment", { link = "Comment" })
+  set_hl("@lsp.type.decorator", { link = "Function" })
+  set_hl("@lsp.type.enum", { link = "Black" })
+  set_hl("@lsp.type.enumMember", { link = "Field" })
+  set_hl("@lsp.type.events", { link = "Label" })
+  set_hl("@lsp.type.function", { link = "Function" })
+  set_hl("@lsp.type.interface", { link = "Black" })
+  set_hl("@lsp.type.keyword", { link = "Keyword" })
+  set_hl("@lsp.type.macro", { link = "Constant" })
+  set_hl("@lsp.type.method", { link = "Method" })
+  set_hl("@lsp.type.modifier", { link = "Purple" })
+  set_hl("@lsp.type.namespace", { link = "Keyword" })
+  set_hl("@lsp.type.number", { link = "Number" })
+  set_hl("@lsp.type.operator", { link = "Black" })
+  set_hl("@lsp.type.parameter", { link = "Black" })
+  set_hl("@lsp.type.property", { link = "Field" })
+  set_hl("@lsp.type.regexp", { link = "StringRegex" })
+  set_hl("@lsp.type.string", { link = "Green" })
+  set_hl("@lsp.type.struct", { link = "Black" })
+  set_hl("@lsp.type.type", { link = "Black" })
+  set_hl("@lsp.type.typeParameter", { link = "Black" })
+  set_hl("@lsp.type.variable", { link = "Black" })
+  set_hl("DiagnosticUnnecessary", { link = "TSWarning" })
+  set_hl("TSModuleInfoGood", { link = "Green" })
+  set_hl("TSModuleInfoBad", { link = "Red" })
+end
+
+return M
