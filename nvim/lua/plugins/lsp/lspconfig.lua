@@ -64,7 +64,7 @@ return {
             -- Attach formatter to LSP
             on_attach = neoutils.on_attach(function(client, bufnr)
               formatter.on_attach(client, bufnr)
-              if client.supports_method("textDocument/semanticTokens") then
+              if client:supports_method("textDocument/semanticTokens") then
                 client.server_capabilities.semanticTokensProvider = nil
               end
             end),
