@@ -23,12 +23,13 @@ vim.g.loaded_ruby_provider = 0
 require("config.options")
 require("config.neoconfigs")
 require("utils.neoutils")
-require("config.autocmds")
+require("utils.colorutils")
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyDone",
   once = true,
   callback = function()
+    require("config.autocmds")
     require("config.keymaps")
   end,
 })
