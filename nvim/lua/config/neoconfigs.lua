@@ -30,9 +30,6 @@ M.editor = {
 
 M.UI = {
   colorscheme = "catppuccin",
-  colors_override = {
-    enabled = false,
-  },
 }
 
 M.stdDataPath = vim.fn.stdpath("data")

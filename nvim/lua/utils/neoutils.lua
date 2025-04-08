@@ -270,4 +270,10 @@ function M.lazygit_toggle()
   lazygit:toggle()
 end
 
+--- @param group string
+--- @param style? table<string, any>
+function M.set_hl(group, style)
+  vim.api.nvim_set_hl(0, group, style)
+end
+
 _G.neoutils = M

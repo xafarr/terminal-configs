@@ -128,14 +128,6 @@ return {
             text = "#2d2f3f",
           },
         },
-        highlight_overrides = {
-          latte = function(latte)
-            return overrides.get_latte_highlight_overrides(latte)
-          end,
-        },
-        custom_highlights = function(colors)
-          return overrides.get_custom_highlights(colors)
-        end,
         integrations = {
           cmp = true,
           gitsigns = true,

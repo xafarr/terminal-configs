@@ -207,8 +207,10 @@ end, {})
 
 api.nvim_create_autocmd("ColorScheme", {
   group = augroup("custom_highlights_edge"),
-  pattern = "edge",
-  callback = function()
-    require("config.colorscheme.override.edge").override_highlight()
+  pattern = { "edge", "catppuccin" },
+  callback = function(args)
+    if vim.o.background == "light" then
+      require("config.colorscheme.override").override_highlight(args.match)
+    end
   end,
 })

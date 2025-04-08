@@ -65,14 +65,5 @@ require("lazy").setup({
   -- debug = true,
 })
 
--- Override colors of colorscheme if enabled and available
-if neoconfigs.UI.colors_override.enabled then
-  local colors_override_config = "config.colorscheme.override" .. neoconfigs.UI.colorscheme
-  local ok, _ = pcall(require, colors_override_config)
-  if not ok then
-    error(string.format('Colors override config "%s" does not exist', colors_override_config))
-  end
-end
-
 -- Set the colorscheme according to config
 vim.cmd("colorscheme " .. neoconfigs.UI.colorscheme)
