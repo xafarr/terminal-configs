@@ -16,11 +16,12 @@ function M.override_highlight(palette)
   set_hl("Comment", { fg = palette.grey, bg = palette.none, italic = true })
   set_hl("PreProc", { fg = palette.grey, bg = palette.none, bold = true, italic = true })
   set_hl("Black", { fg = palette.black, bg = palette.none })
-  set_hl("Black", { fg = palette.black, bg = palette.none, italic = true })
+  set_hl("BlackItalic", { fg = palette.black, bg = palette.none, italic = true })
   set_hl("String", { fg = palette.green, bg = palette.none })
   set_hl("Operator", { link = "Attribute" })
   set_hl("Boolean", { link = "Keyword" })
   set_hl("Special", { fg = colorutils.darken(palette.maroon, 0.3), bg = palette.none })
+  set_hl("Type", { fg = palette.text })
 
   -- XML highlight
   set_hl("xmlTag", { link = "Black" })
@@ -71,7 +72,7 @@ function M.override_highlight(palette)
 
   -- Types
   set_hl("@type", { link = "Type" }) -- For types.
-  set_hl("@type.builtin", { fg = palette.yellow, italic = true }) -- For builtin types.
+  set_hl("@type.builtin", { fg = palette.text, italic = true }) -- For builtin types.
   set_hl("@type.definition", { link = "Type" }) -- type definitions (e.g. `typedef` in palette)
   set_hl("@type.qualifier", { link = "Type" })
   set_hl("@attribute", { link = "Attribute" }) -- attribute annotations (e.g. Python decorators)
