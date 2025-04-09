@@ -206,7 +206,7 @@ api.nvim_create_user_command("AutoFormatToggle", function()
 end, {})
 
 api.nvim_create_autocmd("ColorScheme", {
-  group = augroup("custom_highlights_edge"),
+  group = augroup("custom_highlights_colorscheme"),
   pattern = { "edge", "catppuccin" },
   callback = function(args)
     if vim.o.background == "light" then

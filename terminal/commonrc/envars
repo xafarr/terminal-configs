@@ -36,6 +36,8 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 
 # Ensure LESS doesn't wrap long lines
+export THEME_BACKGROUND="light"
+export BAT_THEME="GitHub"
 export CURRENT_THEME="catppuccin-latte"
 export LESS="--mouse --RAW-CONTROL-CHARS"
 LS_COLORS="$(vivid generate $CURRENT_THEME)"
