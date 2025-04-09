@@ -88,7 +88,7 @@ export FZF_CTRL_R_OPTS="
   --preview='echo {}'
   --preview-window=up:3:hidden:wrap
   --bind='ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
-  --header='Press CTRL-Y to copy command into clipboard'"
+  --header='Press CTRL-Y to copy command into clipboard' $FZF_DEFAULT_OPTS"
 
 # Options to fzf command
 export FZF_COMPLETION_OPTS="--border --info=inline"
