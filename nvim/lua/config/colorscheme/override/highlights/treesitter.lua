@@ -113,9 +113,10 @@ function M.override_highlight(palette)
   set_hl("@keyword.export", { link = "Keyword" })
 
   -- Punctuation
-  set_hl("@punctuation.delimiter", { fg = palette.black })
-  set_hl("@punctuation.bracket", { fg = palette.black })
-  set_hl("@punctuation.special", { link = "Special" })
+  local punctuation_hl = colorutils.darken(palette.cyan, 0.5)
+  set_hl("@punctuation.delimiter", { fg = punctuation_hl })
+  set_hl("@punctuation.bracket", { fg = punctuation_hl })
+  set_hl("@punctuation.special", { fg = punctuation_hl })
 
   -- Comment
   set_hl("@comment", { link = "Comment" })
