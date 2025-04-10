@@ -20,10 +20,9 @@ local function get_opts(props)
 end
 
 local function diagnostic_goto(next, severity)
-  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
   severity = severity and vim.diagnostic.severity[severity] or nil
   return function()
-    go({ severity = severity })
+    vim.diagnostic.jump({ count = next, severity = severity, float = true })
   end
 end
 
@@ -184,12 +183,14 @@ keymap.set("n", "<leader>rn", vim.lsp.buf.rename, get_opts({ desc = "Smart renam
 -- show  diagnostics for file
 keymap.set("n", "<leader>D", "<cmd>Telescope diagnostics bufnr=0<CR>", get_opts({ desc = "Show buffer diagnostics" }))
 -- show diagnostics for line
+-- 1 = next, -1 = previous
 keymap.set("n", "<leader>d", vim.diagnostic.open_float, get_opts({ desc = "Show line diagnostics" }))
-keymap.set("n", "]d", diagnostic_goto(true), get_opts({ desc = "Next Diagnostic" }))
-keymap.set("n", "[d", diagnostic_goto(false), get_opts({ desc = "Prev Diagnostic" }))
-keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), get_opts({ desc = "Next Error" }))
-keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), get_opts({ desc = "Prev Error" }))
-keymap.set("n", "[w", diagnostic_goto(false, "WARNING"), get_opts({ desc = "Prev Warning" }))
+keymap.set("n", "]d", diagnostic_goto(1), get_opts({ desc = "Next Diagnostic" }))
+keymap.set("n", "[d", diagnostic_goto(-1), get_opts({ desc = "Prev Diagnostic" }))
+keymap.set("n", "]e", diagnostic_goto(1, "ERROR"), get_opts({ desc = "Next Error" }))
+keymap.set("n", "[e", diagnostic_goto(-1, "ERROR"), get_opts({ desc = "Prev Error" }))
+keymap.set("n", "]w", diagnostic_goto(1, "WARNING"), get_opts({ desc = "Next Warning" }))
+keymap.set("n", "[w", diagnostic_goto(-1, "WARNING"), get_opts({ desc = "Prev Warning" }))
 -- show documentation for what is under cursor
 keymap.set("n", "K", vim.lsp.buf.hover, get_opts({ desc = "Show documentation for what is under cursor" }))
 -- mapping to restart lsp if necessary   keymap("gd", "Telescope lsp_definitions", opts)
@@ -209,7 +210,7 @@ keymap.set(
 
 -- DAP Keymaps --
 
- -- stylua: ignore
+ -- stylua: ignore start
 keymap.set("n", "<leader>dR", function() require("dap").run_to_cursor() end, get_opts({desc = "Run to Cursor"}))
 keymap.set("n", "<leader>dE", function() require("dapui").eval(vim.fn.input "[Expression] > ") end, get_opts({desc = "Evaluate Input"}))
 keymap.set("n", "<leader>dC", function() require("dap").set_breakpoint(vim.fn.input "[Condition] > ") end, get_opts({desc = "Conditional Breakpoint"}))
@@ -230,3 +231,4 @@ keymap.set("n", "<leader>ds", function() require("dap").continue() end, get_opts
 keymap.set("n", "<leader>dt", function() require("dap").toggle_breakpoint() end, get_opts({desc = "Toggle Breakpoint"}))
 keymap.set("n", "<leader>dx", function() require("dap").terminate() end, get_opts({desc = "Terminate"}))
 keymap.set("n", "<leader>du", function() require("dap").step_out() end, get_opts({desc = "Step Out"}))
+-- stylua: ignore end
