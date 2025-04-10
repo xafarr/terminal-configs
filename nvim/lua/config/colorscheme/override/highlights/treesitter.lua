@@ -2,17 +2,28 @@ local M = {}
 local set_hl = neoutils.set_hl
 
 function M.override_highlight(palette)
+  -- Varaible
   set_hl("Field", { fg = palette.purple, bg = palette.none })
   set_hl("FieldItalic", { fg = palette.purple, bg = palette.none, italic = true })
   set_hl("Constant", { fg = palette.purple, bg = palette.none, italic = true })
   set_hl("Annotation", { fg = colorutils.blend(palette.yellow, palette.green, 0.25), bg = palette.none })
-  set_hl("Method", { fg = palette.cyan, bg = palette.none })
-  set_hl("MethodItalic", { fg = palette.cyan, bg = palette.none, italic = true })
+
+  -- Method
+  local method_hl = colorutils.darken(palette.cyan, 0.2)
+  set_hl("Method", { fg = method_hl })
+  set_hl("MethodItalic", { fg = method_hl, italic = true })
+
+  -- Function
   set_hl("Function", { fg = palette.purple, bg = palette.none })
   set_hl("FunctionItalic", { fg = palette.purple, bg = palette.none, italic = true })
+
   set_hl("Number", { fg = palette.blue, bg = palette.none })
   set_hl("Keyword", { fg = colorutils.darken(palette.blue, 0.4), bg = palette.none })
-  set_hl("Attribute", { fg = colorutils.darken(palette.blue, 0.2), bg = palette.none })
+
+  -- Attrubute
+  local attribute_hl = colorutils.darken(palette.blue, 0.2)
+  set_hl("Attribute", { fg = attribute_hl, bg = palette.none })
+
   set_hl("Comment", { fg = palette.grey, bg = palette.none, italic = true })
   set_hl("PreProc", { fg = palette.grey, bg = palette.none, bold = true, italic = true })
   set_hl("Black", { fg = palette.black, bg = palette.none })
@@ -103,7 +114,8 @@ function M.override_highlight(palette)
   set_hl("@keyword.debug", { link = "Keyword" }) -- For keywords related to debugging
   set_hl("@keyword.exception", { link = "Keyword" }) -- For exception related keywords.
 
-  set_hl("@keyword.conditional", { fg = colorutils.darken(palette.blue, 0.3), italic = true }) -- For keywords related to conditionnals.
+  local tag_cond_hl = colorutils.darken(palette.blue, 0.3)
+  set_hl("@keyword.conditional", { fg = tag_cond_hl, italic = true }) -- For keywords related to conditionnals.
   set_hl("@keyword.conditional.ternary", { link = "Operator" }) -- For ternary operators (e.g. `?` / `:`)
 
   set_hl("@keyword.directive", { link = "PreProc" }) -- various preprocessor directives & shebangs
@@ -122,11 +134,11 @@ function M.override_highlight(palette)
   set_hl("@comment", { link = "Comment" })
   set_hl("@comment.documentation", { link = "Comment" })
 
-  set_hl("@comment.error", { fg = palette.base, bg = palette.red })
-  set_hl("@comment.warning", { fg = palette.base, bg = palette.yellow })
-  set_hl("@comment.hint", { fg = palette.base, bg = palette.blue })
-  set_hl("@comment.todo", { fg = palette.base, bg = palette.flamingo })
-  set_hl("@comment.note", { fg = palette.base, bg = palette.rosewater })
+  set_hl("@comment.error", { link = "TSError" })
+  set_hl("@comment.warning", { link = "TSWarning" })
+  set_hl("@comment.hint", { link = "TSHint" })
+  set_hl("@comment.todo", { link = "TSTodo" })
+  set_hl("@comment.note", { link = "TSNote" })
 
   -- Markup
   set_hl("@markup", { fg = palette.text })
@@ -159,7 +171,7 @@ function M.override_highlight(palette)
 
   -- Tags
   set_hl("@tag", { link = "Keyword" })
-  set_hl("@tag.builtin", { fg = colorutils.darken(palette.blue, 0.3), italic = true })
+  set_hl("@tag.builtin", { fg = tag_cond_hl, italic = true })
   set_hl("@tag.attribute", { link = "Attribute" })
   set_hl("@tag.delimiter", { fg = palette.black })
 
@@ -206,7 +218,7 @@ function M.override_highlight(palette)
 
   -- TSX (Typescript React)
   set_hl("@constructor.tsx", { link = "@constructor" })
-  set_hl("@tag.attribute.tsx", { fg = colorutils.darken(palette.blue, 0.2), italic = true })
+  set_hl("@tag.attribute.tsx", { fg = attribute_hl, italic = true })
 
   -- yaml
   set_hl("@variable.member.yaml", { link = "Field" })
@@ -257,8 +269,6 @@ function M.override_highlight(palette)
 
   set_hl("@text.todo.checked", { link = "@markup.list.checked" })
   set_hl("@text.todo.unchecked", { link = "@markup.list.unchecked" })
-
-  set_hl("@comment.note", { link = "@comment.hint" })
 
   -- @text.todo is now for todo comments, not todo notes like in markdown
   set_hl("@text.todo", { link = "@comment.todo" })
