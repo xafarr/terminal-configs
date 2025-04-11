@@ -124,6 +124,10 @@ api.nvim_create_autocmd({ "InsertLeave", "WinEnter", "BufEnter" }, {
   pattern = "*",
   callback = function()
     vim.opt.cursorline = true
+    vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { link = "NvimTreeCursorLineInactive" })
+    if vim.bo.filetype == "NvimTree" then
+      vim.api.nvim_set_hl(0, "NvimTreeCursorLine", { link = "NvimTreeCursorLineActive" })
+    end
   end,
   group = augroup("cursorline"),
 })

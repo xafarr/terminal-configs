@@ -56,6 +56,11 @@ function M.override_highlight(palette)
   set_hl("VertSplit", { fg = window_hl, bg = window_hl })
   set_hl("NvimTreeNormal", { bg = window_hl })
   set_hl("NvimTreeWinSeperator", { bg = window_hl })
+  set_hl("NvimTreeCursorLineInactive", { bg = colorutils.lighten(palette.grey, 0.7) })
+  set_hl("NvimTreeCursorLineActive", { bg = colorutils.lighten(palette.blue, 0.85) })
+  set_hl("NvimTreeCursorLine", { link = "NvimTreeCursorLineInactive" })
+  set_hl("NvimTreeCursorLineNr", { link = "NvimTreeCursorLine" })
+  set_hl("NvimTreeGitNewIcon", { fg = palette.green, bg = palette.none })
 
   -- Indent Blankline v2
   local indentchar_hl = colorutils.lighten(palette.grey, 0.8)
