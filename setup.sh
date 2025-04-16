@@ -280,6 +280,9 @@ fi
 if [[ $($BREW list | grep -iwc llvm) -eq 0 ]]; then
     $BREW install llvm || error "Failed to install llvm."
 fi
+if [[ $($BREW list | grep -iwc libffi) -eq 0 ]]; then
+    $BREW install libffi || error "Failed to install libffi."
+fi
 
 # For zsh
 if [[ $($BREW list | grep -iwc zsh-syntax-highlighting) -eq 0 ]]; then
@@ -462,13 +465,13 @@ ln -s "$PROJECTS_DIR/terminal-configs/ideavim" "$XDG_CONFIG_HOME/ideavim" && inf
 
 export LDFLAGS="-L$HOMEBREW_PREFIX/opt/llvm/lib/c++ -Wl,\
 -rpath,$HOMEBREW_PREFIX/opt/llvm/lib/c++ \
+-L$HOMEBREW_PREFIX/opt/llvm/lib/unwind -lunwind \
 -L$HOMEBREW_PREFIX/lib \
 -L$HOMEBREW_PREFIX/opt/curl/lib \
 -L$HOMEBREW_PREFIX/opt/gettext/lib \
 -L$HOMEBREW_PREFIX/opt/bzip2/lib \
 -L$HOMEBREW_PREFIX/opt/zlib/lib \
 -L$HOMEBREW_PREFIX/opt/readline/lib \
--L$HOMEBREW_PREFIX/opt/openssl@1.1/lib \
 -L$HOMEBREW_PREFIX/opt/openssl@3/lib \
 -L$HOMEBREW_PREFIX/opt/libffi/lib"
 
@@ -479,20 +482,20 @@ export CPPFLAGS="-I$HOMEBREW_PREFIX/include \
 -I$HOMEBREW_PREFIX/opt/bzip2/include \
 -I$HOMEBREW_PREFIX/opt/zlib/include \
 -I$HOMEBREW_PREFIX/opt/readline/include \
--I$HOMEBREW_PREFIX/opt/openssl@1.1/include \
 -I$HOMEBREW_PREFIX/opt/openssl@3/include \
 -I$HOMEBREW_PREFIX/opt/libffi/include"
 
 export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/libffi/lib/pkgconfig \
-$HOMEBREW_PREFIX/opt/openssl@1.1/lib/pkgconfig \
 $HOMEBREW_PREFIX/opt/openssl@3/lib/pkgconfig \
 $HOMEBREW_PREFIX/opt/curl/lib/pkgconfig \
 $HOMEBREW_PREFIX/opt/zlib/lib/pkgconfig \
 $HOMEBREW_PREFIX/opt/readline/lib/pkgconfig \
+$HOMEBREW_PREFIX/opt/libffi/lib/pkgconfig \
 $HOMEBREW_PREFIX/share/pkgconfig"
 
 # Prepend Homebrew bin and LLVM binaries to PATH
 export PATH="$BREW_BIN:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/gcc/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
 
 # Install Kitty terminal emulator
