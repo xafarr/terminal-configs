@@ -502,19 +502,22 @@ export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
 ASDF="$BREW_BIN/asdf"
 # Install latest nodejs LTS
 nodejs_version=$(curl https://nodejs.org/download/release/index.json | jq -r '[.[] | select(.lts != false)][0] | .version' | sed 's/^v//')
-$ASDF plugin add nodejs
-$ASDF install nodejs "$nodejs_version"
+$ASDF plugin remove nodejs || error "Plugin \'nodejs\' is not installed"
+$ASDF plugin add nodejs || error "Could not add nodejs plugin"
+$ASDF install nodejs "$nodejs_version" || "Error installing nodejs version $nodejs_version"
 $ASDF set -u nodejs "$nodejs_version"
 
 # Install latest stable python
 python_version=$(curl https://www.python.org/ftp/python/ | grep -Eo '[0-9]\.[0-9]+.[0-9]' | sort -V | tail -1)
-$ASDF plugin add python
-$ASDF install python "$python_version"
+$ASDF plugin remove python || error "Plugin \'python\' is not installed"
+$ASDF plugin add python || error "Could not add python plugin"
+$ASDF install python "$python_version" || error "Error installing python version $python_version"
 $ASDF set -u python "$python_version"
 
 # Install latest yarn
-$ASDF plugin add yarn
-$ASDF install yarn latest
+$ASDF plugin remove yarn || error "Plugin \'yarn\' is not installed"
+$ASDF plugin add yarn || error "Could not add yarn plugin"
+$ASDF install yarn latest || error "Error installing yarn version latest"
 $ASDF set -u yarn latest
 
 # Install Kitty terminal emulator
