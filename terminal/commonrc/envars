@@ -23,6 +23,7 @@ export PATH="$HOMEBREW_PREFIX/opt/apr-util/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gettext/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/bzip2/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/gcc/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
@@ -189,6 +190,7 @@ $HOMEBREW_PREFIX/opt/openssl@3/lib/pkgconfig \
 $HOMEBREW_PREFIX/opt/curl/lib/pkgconfig \
 $HOMEBREW_PREFIX/opt/zlib/lib/pkgconfig \
 $HOMEBREW_PREFIX/opt/readline/lib/pkgconfig \
+$HOMEBREW_PREFIX/opt/libffi/lib/pkgconfig \
 $HOMEBREW_PREFIX/share/pkgconfig"
 
 export LS_OPTIONS="--color"
