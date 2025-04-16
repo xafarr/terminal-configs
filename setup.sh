@@ -498,6 +498,25 @@ export PATH="$BREW_BIN:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gcc/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/llvm/bin:$PATH"
 
+# Install Development tools
+ASDF="$BREW_BIN/asdf"
+# Install latest nodejs LTS
+nodejs_version=$(curl https://nodejs.org/download/release/index.json | jq -r '[.[] | select(.lts != false)][0] | .version' | sed 's/^v//')
+$ASDF plugin add nodejs
+$ASDF install nodejs "$nodejs_version"
+$ASDF set -u nodejs "$nodejs_version"
+
+# Install latest stable python
+python_version=$(curl https://www.python.org/ftp/python/ | grep -Eo '[0-9]\.[0-9]+.[0-9]' | sort -V | tail -1)
+$ASDF plugin add python
+$ASDF install python "$python_version"
+$ASDF set -u python "$python_version"
+
+# Install latest yarn
+$ASDF plugin add yarn
+$ASDF install yarn latest
+$ASDF set -u yarn latest
+
 # Install Kitty terminal emulator
 info "Installing Kitty terminal emulator..."
 if [ -n "${SETUP_ON_MACOS-}" ]; then
