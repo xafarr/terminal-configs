@@ -11,7 +11,16 @@ return {
           change = { text = "█" },
           delete = { text = "▁" },
           topdelete = { text = "▔" },
-          changedelete = { text = "～" },
+          changedelete = { text = "󰜥 " },
+          untracked = { text = "┇" },
+        },
+        signs_staged = {
+          add = { text = "█" },
+          change = { text = "█" },
+          delete = { text = "▁" },
+          topdelete = { text = "▔" },
+          changedelete = { text = "󰜥 " },
+          untracked = { text = "┇" },
         },
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
         numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
