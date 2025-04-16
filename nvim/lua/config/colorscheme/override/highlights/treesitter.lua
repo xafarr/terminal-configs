@@ -193,6 +193,7 @@ function M.override_highlight(palette)
   -- java
   set_hl("@constant.java", { link = "Constant" })
   set_hl("@attribute.java", { link = "Annotation" })
+  set_hl("@attribute.typescript", { link = "Annotation" })
 
   -- css
   set_hl("@property.css", { fg = palette.lavender })
