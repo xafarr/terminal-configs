@@ -27,6 +27,8 @@
 [user]
   email = xafarr@gmail.com
   name = Muhammad Zafar
+[init]
+  defaultBranch = main
 [pull]
   rebase = true
 [push]
