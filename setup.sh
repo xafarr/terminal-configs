@@ -508,7 +508,7 @@ $ASDF install nodejs "$nodejs_version" || "Error installing nodejs version $node
 $ASDF set -u nodejs "$nodejs_version"
 
 # Install latest stable python
-python_version=$(curl https://www.python.org/ftp/python/ | grep -Eo '[0-9]\.[0-9]+.[0-9]' | sort -V | tail -1)
+python_version=$(curl https://endoflife.date/api/python.json | jq -r '.[].latest' | sort -V | tail -1)
 $ASDF plugin remove python || error "Plugin \'python\' is not installed"
 $ASDF plugin add python || error "Could not add python plugin"
 $ASDF install python "$python_version" || error "Error installing python version $python_version"
