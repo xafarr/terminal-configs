@@ -6,3 +6,7 @@
 .factorypath
 .classpath
 .project
+
+# JetBrains IDE files
+.idea/
+*.iml
