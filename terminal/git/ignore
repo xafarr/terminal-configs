@@ -1,12 +1,25 @@
+# System files
+.DS_Store
+
+# Nvim files and plugins
+**/nvim/plugin
+**/lazy-lock.json
+
+# Tmux plugins
+**/tmux/plugins
+
 # ASDF versions file
 .tool-versions
 
 # JDTLS files
-.settings/
+.settings
 .factorypath
 .classpath
 .project
 
 # JetBrains IDE files
-.idea/
+.idea
 *.iml
+
+# Node files
+node_modules
