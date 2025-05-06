@@ -6,11 +6,11 @@ size = 16
 
 [[font.normal]]
 family = "JetBrainsMono Nerd Font"
-style = "Regular"
+style = "Medium"
 
 [[font.normal]]
 family = "Symbols Nerd Font"
-style = "Regular"
+style = "Medium"
 
 [[font.bold]]
 family = "JetBrainsMono Nerd Font"
@@ -22,11 +22,11 @@ style = "Bold"
 
 [[font.italic]]
 family = "JetBrainsMono Nerd Font"
-style = "Regular Italic"
+style = "Medium Italic"
 
 [[font.italic]]
 family = "Symbols Nerd Font"
-style = "Regular Italic"
+style = "Medium Italic"
 
 [[font.bold_italic]]
 family = "JetBrainsMono Nerd Font"
