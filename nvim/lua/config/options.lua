@@ -5,9 +5,9 @@ set.background = os.getenv("THEME_BACKGROUND") or "light"
 
 -- General Options
 set.backup = false -- creates a backup file
-set.clipboard = { "unnamed", "unnamedplus" } -- allows neovim to access the system clipboard
+set.clipboard = "unnamed,unnamedplus" -- allows neovim to access the system clipboard
 set.cmdheight = 2 -- more space in the neovim command line for displaying messages
-set.completeopt = { "menu", "menuone", "noselect" } -- mostly just for cmp
+set.completeopt = "menu,menuone,noselect" -- mostly just for cmp
 set.conceallevel = 0 -- so that `` is visible in markdown files
 set.fileencoding = "utf-8" -- the encoding written to a file
 set.compatible = false
@@ -45,9 +45,9 @@ set.hidden = true
 set.showmatch = true
 set.magic = true
 set.textwidth = 120
-set.backspace = { "indent", "eol", "start" }
+set.backspace = "indent,eol,start"
 set.list = true
-set.listchars = { tab = "..", eol = "↩" }
+set.listchars = "tab:..,eol:↩"
 set.wildmode = "longest:full,full"
 set.showbreak = "\\"
 set.spelllang = "en_us"
@@ -62,15 +62,7 @@ set.grepprg = "rg --vimgrep"
 set.grepformat = "%f:%l:%c:%m"
 set.shortmess:append("c")
 set.ttyfast = true
-set.fillchars = {
-  foldopen = "",
-  foldclose = "",
-  -- fold = "⸱",
-  fold = " ",
-  foldsep = " ",
-  diff = "╱",
-  eob = " ",
-}
+set.fillchars = "foldopen:,foldclose:,fold:⸱,foldsep: ,diff:╱,eob: "
 
 if vim.fn.has("nvim-0.10") == 1 then
   set.smoothscroll = true
