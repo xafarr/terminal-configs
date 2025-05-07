@@ -1,4 +1,4 @@
-# System files
+# OS files
 .DS_Store
 
 # Nvim files and plugins
@@ -21,5 +21,40 @@
 .idea
 *.iml
 
-# Node files
+# Sublime files
+*.sublime-workspace
+
+# VSCode
+.vscode
+
+.c9
+*.launch
+
+# Build Directories
+build
+dist
+
+# Temp directory
+.temp
+.tmp
+
+# Node modules
 node_modules
+
+# Log files
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Diagnostic reports (https://nodejs.org/api/report.html)
+report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
