@@ -22,8 +22,9 @@ local config = {
       workspace = {
         checkThirdParty = false,
         library = {
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [neoconfigs.stdConfigPath .. "/lua"] = true,
+          vim.env.VIMRUNTIME,
+          neoconfigs.stdConfigPath,
+          neoconfigs.stdDataPath .. "/lazy", -- lazy.nvim plugin path
         },
       },
       -- Do not send telemetry data containing a randomized but unique identifier
