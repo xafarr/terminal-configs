@@ -3,7 +3,7 @@ local M = {}
 -- Disable autoformat on save by default
 M.format_on_save = false
 
-M.uname = vim.loop.os_uname()
+M.uname = vim.uv.os_uname()
 M.OS = M.uname.sysname
 M.ARCH = M.uname.machine
 
