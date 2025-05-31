@@ -1,27 +1,11 @@
 local M = {}
 
 function M.format(bufnr, range)
-  local have_nls, _ = pcall(require, "nvimtools/none-ls.nvim")
-
-  if have_nls then
-    vim.lsp.buf.format({
-      bufnr = bufnr,
-      async = true,
-      range = range,
-      filter = function(client)
-        if have_nls then
-          return client.name == "null-ls"
-        end
-        return client.name ~= "null-ls"
-      end,
-    })
-  else
-    require("conform").format({
-      bufnr = bufnr,
-      async = true,
-      range = range,
-    })
-  end
+  require("conform").format({
+    bufnr = bufnr,
+    async = true,
+    range = range,
+  })
 end
 
 -- Autoformat on save
