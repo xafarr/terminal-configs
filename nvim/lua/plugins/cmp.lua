@@ -110,6 +110,7 @@ return {
           end,
         },
         sources = cmp.config.sources({
+          { name = "lazydev", group_index = 0 },
           -- { name = "copilot" },
           { name = "codeium" },
           { name = "render-markdown" },

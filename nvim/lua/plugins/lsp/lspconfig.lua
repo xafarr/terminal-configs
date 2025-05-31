@@ -17,12 +17,6 @@ return {
     "mason-org/mason-lspconfig.nvim",
     "hrsh7th/cmp-nvim-lsp",
     { "antosha417/nvim-lsp-file-operations", config = true },
-    {
-      "folke/neodev.nvim",
-      opts = {
-        library = { plugins = { "neotest", "nvim-dap-ui" }, types = true },
-      },
-    },
     -- Useful status updates for LSP
     { "j-hui/fidget.nvim", opts = {} },
     "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -67,11 +61,6 @@ return {
         vim.lsp.config(server, user_config.setup_and_get_config())
       end
     end
-
-    -- Setup neodev lua configuration
-    require("neodev").setup({
-      library = { plugins = { "nvim-dap-ui" }, types = true },
-    })
 
     mason_lspconfig.setup({
       ensure_installed = neoconfigs.language_servers,
