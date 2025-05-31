@@ -51,11 +51,13 @@ keymap.set("n", "<M-BS>", "<Esc>db", opts)
 -- Better viewing
 keymap.set("n", "n", "nzzzv", opts)
 keymap.set("n", "N", "Nzzzv", opts)
+keymap.set("n", "<C-d>", "<C-d>zz", opts)
+keymap.set("n", "<C-u>", "<C-u>zz", opts)
 keymap.set("n", "g,", "g,zvzz", opts)
 keymap.set("n", "g;", "g;zvzz", opts)
 
 -- Paste over currently selected text without yanking it
-keymap.set("v", "p", '"_dP', opts)
+keymap.set({ "v", "x" }, "<leader>p", '"_dP', opts)
 
 -- Faster scrolling
 keymap.set("n", "<C-e>", "3<C-e>", opts)
