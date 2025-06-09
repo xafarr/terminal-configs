@@ -90,7 +90,6 @@ return {
     priority = 1000,
     config = function()
       local catppuccin = require("catppuccin")
-      local overrides = require("config.colorscheme.override.catppuccin")
       catppuccin.setup({
         flavour = "auto", -- latte, frappe, macchiato, mocha
         background = { -- :h background
