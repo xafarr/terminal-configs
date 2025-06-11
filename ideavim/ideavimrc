@@ -153,6 +153,9 @@ map <leader>hr <Action>(Vcs.RollbackChangedLines)
 map <leader>hb <Action>(Annotate)
 map ]c <Action>(VcsShowNextChangeMarker)
 map [c <Action>(VcsShowPrevChangeMarker)
+" Comment
+map <leader>cc <Action>(CommentByLineComment)
+map <leader>co <Action>(CommentByBlockComment)
 
 " IntelliJ Extension
 set NERDTree
