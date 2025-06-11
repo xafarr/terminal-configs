@@ -146,6 +146,8 @@ map <C-Up> <Action>(ShowNavBar)
 map <leader>e <Action>(ActivateProjectToolWindow)
 map ]d <Action>(GotoNextError)
 map [d <Action>(GotoPreviousError)
+map <M-k> <Action>(MoveLineUp)
+map <M-j> <Action>(MoveLineDown)
 " Git
 map <leader>hr <Action>(Vcs.RollbackChangedLines)
 map <leader>hb <Action>(Annotate)
