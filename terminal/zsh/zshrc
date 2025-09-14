@@ -20,40 +20,5 @@ builtin bindkey "^E" end-of-line
 builtin bindkey "^[^H" backward-kill-word
 builtin bindkey "^[^?" backward-kill-word
 
-export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters
-
-###################################################
-# Almost unlimited history
-###################################################
-HISTFILE="$HOME/.eternal_history"
-HISTSIZE=500000
-SAVEHIST="$HISTSIZE"
-unsetopt EXTENDED_HISTORY
-setopt INC_APPEND_HISTORY
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_REDUCE_BLANKS
-
-###################################################
-# zsh-completions settings
-###################################################
-if type brew &>/dev/null; then
-    fpath=("$(brew --prefix)/share/zsh/site-functions" "${fpath[@]}")
-fi
-autoload -Uz compinit && compinit
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
-
-# For Z for completion
-. $(brew --prefix)/etc/profile.d/z.sh
-
-# For Auto Suggestions
-source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=247'
-
-# For Syntax Highlighting
-source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# FZF Completion
-eval "$(fzf --zsh)"
-
 # Starship terminal prompt
 eval "$(starship init zsh)"

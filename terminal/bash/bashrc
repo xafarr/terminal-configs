@@ -3,13 +3,6 @@
 # Default location for user configuration
 export XDG_CONFIG_HOME="$HOME/.config"
 
-##################################################
-# Source Common Files
-##################################################
-source "$XDG_CONFIG_HOME/commonrc/envars"
-source "$XDG_CONFIG_HOME/commonrc/aliases"
-source "$XDG_CONFIG_HOME/commonrc/shell_functions"
-
 if [ "$PS1" ]; then
     # only for interactive shell
     # alt left/right in bash
@@ -29,26 +22,12 @@ if [ "$PS1" ]; then
 
 fi
 
-################################################
-# Almost unlimited history
-################################################
-# Change the file location because certain bash sessions truncate .bash_history file upon close.
-# http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
-export HISTFILE="$HOME/.eternal_history"
-export HISTFILESIZE=
-export HISTSIZE=
-shopt -s histappend
-
-# Bash completion
-[[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
-
-# FZF Completion
-eval "$(fzf --bash)"
-
-# Set environment variables for asdf shims
-[[ -r "$HOME/.asdf/plugins/java/set-java-home.bash" ]] && source "$HOME/.asdf/plugins/java/set-java-home.bash"
-[[ -r "$HOME/.asdf/plugins/golang/set-env.bash" ]] && source "$HOME/.asdf/plugins/golang/set-env.bash"
-[[ -r "$HOME/.asdf/plugins/dotnet/set-dotnet-env.bash" ]] && source "$HOME/.asdf/plugins/dotnet/set-dotnet-env.bash"
+##################################################
+# Source Common Files
+##################################################
+source "$XDG_CONFIG_HOME/commonrc/envars"
+source "$XDG_CONFIG_HOME/commonrc/aliases"
+source "$XDG_CONFIG_HOME/commonrc/shell_functions"
 
 # Starship terminal prompt
 eval "$(starship init bash)"

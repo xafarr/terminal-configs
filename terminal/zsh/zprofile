@@ -8,8 +8,3 @@ export XDG_CONFIG_HOME="$HOME/.config"
 ##################################################
 source "$XDG_CONFIG_HOME/commonrc/envars"
 
-# Set environment variables for asdf shims
-[[ -r "$HOME/.asdf/plugins/java/set-java-home.zsh" ]] && source "$HOME/.asdf/plugins/java/set-java-home.zsh"
-[[ -r "$HOME/.asdf/plugins/golang/set-env.zsh" ]] && source "$HOME/.asdf/plugins/golang/set-env.zsh"
-[[ -r "$HOME/.asdf/plugins/dotnet/set-dotnet-env.zsh" ]] && source "$HOME/.asdf/plugins/dotnet/set-dotnet-env.zsh"
-

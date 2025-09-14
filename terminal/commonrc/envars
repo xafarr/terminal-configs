@@ -2,6 +2,7 @@
 system=$(uname -ms)
 platform=$(echo "$system" | awk '{print $1}')
 arch=$(echo "$system" | awk '{print $2}')
+cur_shell=$(ps -p $$ -o comm=)
 
 if [ "$platform" = "Linux" ]; then
     export HOMEBREW_PREFIX="/home/linuxbrew/.linuxbrew"
@@ -199,9 +200,88 @@ export LS_OPTIONS="--color"
 export VISUAL=nvim
 export EDITOR=$VISUAL
 
+# Command History File
+export HISTFILE="$HOME/.eternal_history"
+
+if [[ $cur_shell = *'zsh' ]]; then
+
+    export ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR=$HOMEBREW_PREFIX/share/zsh-syntax-highlighting/highlighters
+
+    ###################################################
+    # Almost unlimited history
+    ###################################################
+    export HISTSIZE=500000
+    export SAVEHIST="$HISTSIZE"
+    unsetopt EXTENDED_HISTORY
+    setopt INC_APPEND_HISTORY
+    setopt HIST_SAVE_NO_DUPS
+    setopt HIST_REDUCE_BLANKS
+
+    ###################################################
+    # zsh-completions settings
+    ###################################################
+    if type brew &>/dev/null; then
+        fpath=("$(brew --prefix)/share/zsh/site-functions" "${fpath[@]}")
+    fi
+    autoload -Uz compinit && compinit
+    zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
+    # For Z for completion
+    . "$(brew --prefix)/etc/profile.d/z.sh"
+
+    # For Auto Suggestions
+    source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=247'
+
+    # For Syntax Highlighting
+    source $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+    # Terraform completion
+    if [[ -f "$HOMEBREW_PREFIX/bin/terraform" ]]; then
+        autoload -U +X bashcompinit && bashcompinit
+        complete -o nospace -C $HOMEBREW_PREFIX/bin/terraform terraform
+    fi
+
+    # FZF Completion
+    eval "$(fzf --zsh)"
+
+    # Set environment variables for asdf shims
+    [[ -r "$HOME/.asdf/plugins/java/set-java-home.zsh" ]] && source "$HOME/.asdf/plugins/java/set-java-home.zsh"
+    [[ -r "$HOME/.asdf/plugins/golang/set-env.zsh" ]] && source "$HOME/.asdf/plugins/golang/set-env.zsh"
+    [[ -r "$HOME/.asdf/plugins/dotnet/set-dotnet-env.zsh" ]] && source "$HOME/.asdf/plugins/dotnet/set-dotnet-env.zsh"
+
+elif [[ $cur_shell = *'bash' ]]; then
+
+    ################################################
+    # Almost unlimited history
+    ################################################
+    # Change the file location because certain bash sessions truncate .bash_history file upon close.
+    # http://superuser.com/questions/575479/bash-history-truncated-to-500-lines-on-each-login
+    export HISTFILESIZE=
+    export HISTSIZE=
+    shopt -s histappend
+
+    ###################################################
+    # bash-completions settings
+    ###################################################
+    [[ -r "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh" ]] && . "$HOMEBREW_PREFIX/etc/profile.d/bash_completion.sh"
+
+    # FZF Completion
+    eval "$(fzf --bash)"
+
+    # Terraform completion
+    if [[ -f "$HOMEBREW_PREFIX/bin/terraform" ]]; then
+        complete -o nospace -C $HOMEBREW_PREFIX/bin/terraform terraform
+    fi
+
+    # Set environment variables for asdf shims
+    [[ -r "$HOME/.asdf/plugins/java/set-java-home.bash" ]] && source "$HOME/.asdf/plugins/java/set-java-home.bash"
+    [[ -r "$HOME/.asdf/plugins/golang/set-env.bash" ]] && source "$HOME/.asdf/plugins/golang/set-env.bash"
+    [[ -r "$HOME/.asdf/plugins/dotnet/set-dotnet-env.bash" ]] && source "$HOME/.asdf/plugins/dotnet/set-dotnet-env.bash"
+fi
+
 # For oraganization specific extra configuration
 if [[ -f $HOME/.additional-env-config ]]; then
     # shellcheck source=/dev/null
     source "$HOME/.additional-env-config"
 fi
-
