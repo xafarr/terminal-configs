@@ -58,6 +58,8 @@
   prompt = false
 [http]
   sslVerify = true
+[rerere]
+  enabled = true
 
 [interactive]
   diffFilter = delta --color-only
