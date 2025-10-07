@@ -36,6 +36,7 @@
 [core]
   editor = nvim
   pager = delta
+  longpaths = true
 [merge]
   ff = only
   conflictstyle = diff3
@@ -60,7 +61,6 @@
   sslVerify = true
 [rerere]
   enabled = true
-
 [interactive]
   diffFilter = delta --color-only
 [add.interactive]
