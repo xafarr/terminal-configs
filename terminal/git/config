@@ -37,6 +37,7 @@
   editor = nvim
   pager = delta
   longpaths = true
+  abbrev = 8
 [merge]
   ff = only
   conflictstyle = diff3
