@@ -1,6 +1,6 @@
 # ~/.config/starship.toml
 
-palette = "catppuccin_latte"
+palette = "catppuccin_mocha"
 
 # Inserts a blank line between shell prompts
 add_newline = true

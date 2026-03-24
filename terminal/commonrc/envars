@@ -38,9 +38,9 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 
 # Ensure LESS doesn't wrap long lines
-export THEME_BACKGROUND="light"
-export BAT_THEME="GitHub"
-export CURRENT_THEME="catppuccin-latte"
+export THEME_BACKGROUND="dark"
+export BAT_THEME="Catpuccin Mocha"
+export CURRENT_THEME="catppuccin-mocha"
 export LESS="--mouse --RAW-CONTROL-CHARS"
 LS_COLORS="$(vivid generate $CURRENT_THEME)"
 export LS_COLORS
@@ -134,20 +134,20 @@ export PS_FORMAT="pid,ppid,user,pri,ni,vsz,rss,pcpu,pmem,tty,stat,args"
 #--color=border:#363a4f,label:#cad3f5"
 
 # For Catppuccin Mocha dark theme
-#export FZF_DEFAULT_OPTS=" \
-#--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
-#--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
-#--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
-#--color=selected-bg:#45475a \
-#--color=border:#313244,label:#cdd6f4"
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
+--color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc \
+--color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8 \
+--color=selected-bg:#45475a \
+--color=border:#313244,label:#cdd6f4"
 
 # For Catppuccin Latte light theme
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
---color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
---color=marker:#7287fd,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39 \
---color=selected-bg:#bcc0cc \
---color=border:#ccd0da,label:#4c4f69"
+#export FZF_DEFAULT_OPTS=" \
+#--color=bg+:#ccd0da,bg:#eff1f5,spinner:#dc8a78,hl:#d20f39 \
+#--color=fg:#4c4f69,header:#d20f39,info:#8839ef,pointer:#dc8a78 \
+#--color=marker:#7287fd,fg+:#4c4f69,prompt:#8839ef,hl+:#d20f39 \
+#--color=selected-bg:#bcc0cc \
+#--color=border:#ccd0da,label:#4c4f69"
 
 # User configuration
 # You may need to manually set your language environment

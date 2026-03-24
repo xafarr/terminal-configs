@@ -1,5 +1,6 @@
+---
 git:
-  paging:
-    colorArg: always
-    pager: delta --${THEME_BACKGROUND} --paging=never
+  pagers:
+    - colorArg: always
+      pager: delta --${THEME_BACKGROUND} --paging=never
   autoForwardBranches: none

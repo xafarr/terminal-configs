@@ -29,7 +29,7 @@ M.editor = {
 }
 
 M.UI = {
-  colorscheme = "catppuccin",
+  colorscheme = "catppuccin-nvim",
 }
 
 M.stdDataPath = vim.fn.stdpath("data")

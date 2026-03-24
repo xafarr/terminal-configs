@@ -2,6 +2,9 @@
   hist = "!f() { \
     git log --graph --decorate --pretty=format:'%C(cyan)%ad %C(yellow)%h %C(dim blue)%<(15,trunc)%an %C(reset)-%C(auto)%d %Creset%s' --date=format:'%Y-%m-%d %H:%M' $@; \
   }; f"
+  diff-rev = "!f() { \
+    git log --decorate --no-merges --pretty=format:'%C(cyan)%ad %C(yellow)%h %C(dim blue)%<(15,trunc)%an %C(reset)-%C(auto)%d %Creset%s' --date=format:'%Y-%m-%d %H:%M' $@; \
+  }; f"
   show-files = diff-tree --no-commit-id --name-only -r
   unstage = reset HEAD --
   st = status
@@ -16,10 +19,10 @@
     git push origin :refs/tags/$1; \
   }; f"
   delete-branch = "!f() { \
-    echo 'Deleting branch' $1 'from local'; \
-    git branch -D $1; \
-    echo 'Deleting branch' $1 'from remote/origin'; \
-    git push origin --delete $1; \
+    echo 'Deleting branch' $@ 'from local'; \
+    git branch -D $@; \
+    echo 'Deleting branch' $@ 'from remote/origin'; \
+    git push origin --delete $@; \
   }; f"
   recover-stash = "!f() { \
     git fsck --unreachable | grep commit | cut -d ' ' -f3 | xargs git log --merges --no-walk --grep=WIP; \
