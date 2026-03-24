@@ -29,7 +29,7 @@ M.editor = {
 }
 
 M.UI = {
-  colorscheme = "catppuccin-nvim",
+  colorscheme = os.getenv("NVIM_COLORSCHEME") or "catppuccin-nvim"
 }
 
 M.stdDataPath = vim.fn.stdpath("data")

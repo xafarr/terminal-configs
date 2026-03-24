@@ -39,8 +39,14 @@ export LESS_TERMCAP_us=$'\E[01;36m'
 
 # Ensure LESS doesn't wrap long lines
 export THEME_BACKGROUND="dark"
-export BAT_THEME="Catpuccin Mocha"
-export CURRENT_THEME="catppuccin-mocha"
+export NVIM_COLORSCHEME="catppuccin-nvim"
+if [ "$THEME_BACKGROUND" = "dark" ]; then
+    export BAT_THEME="Catppuccin Mocha"
+    export CURRENT_THEME="catppuccin-mocha"
+else
+    export BAT_THEME="Catppuccin Latte"
+    export CURRENT_THEME="catppuccin-latte"
+fi
 export LESS="--mouse --RAW-CONTROL-CHARS"
 LS_COLORS="$(vivid generate $CURRENT_THEME)"
 export LS_COLORS
