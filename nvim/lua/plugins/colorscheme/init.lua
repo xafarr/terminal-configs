@@ -96,6 +96,7 @@ return {
           light = "latte",
           dark = "mocha",
         },
+        auto_integrations = true,
         transparent_background = false, -- disables setting the background color.
         show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
         term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
@@ -128,7 +129,7 @@ return {
           },
         },
         integrations = {
-          cmp = true,
+          --[[ cmp = true,
           gitsigns = true,
           nvimtree = true,
           -- treesitter = true,
@@ -170,7 +171,7 @@ return {
             inlay_hints = {
               background = true,
             },
-          },
+          }, ]]
           -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
         },
       })

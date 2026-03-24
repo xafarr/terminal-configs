@@ -127,8 +127,12 @@ return {
           select = false,
         },
         window = {
-          completion = cmp_window.bordered(),
-          documentation = cmp_window.bordered(),
+          completion = cmp.config.window.bordered({
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+          }),
+          documentation = cmp.config.window.bordered({
+            winhighlight = "Normal:NormalFloat,FloatBorder:FloatBorder,CursorLine:PmenuSel",
+          }),
         },
         experimental = {
           ghost_text = { hl_group = "GhostText" },
