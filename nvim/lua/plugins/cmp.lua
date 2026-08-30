@@ -14,6 +14,7 @@ return {
       "rafamadriz/friendly-snippets", -- Collection of snippet
       "windwp/nvim-autopairs",
       "Exafunction/codeium.nvim",
+      "greggh/claude-code.nvim",
     },
     config = function()
       local cmp = require("cmp")

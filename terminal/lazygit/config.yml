@@ -1,6 +1,6 @@
 ---
 git:
-  pagers:
+  diffRenderers:
     - colorArg: always
-      pager: delta --${THEME_BACKGROUND} --paging=never
+      command: delta --${THEME_BACKGROUND} --paging=never
   autoForwardBranches: none

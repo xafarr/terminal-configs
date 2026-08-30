@@ -30,6 +30,7 @@ return {
   kind = {
     Array = " ",
     Boolean = " ",
+    Claude = " ",
     Codeium = "󰘦  ",
     Class = " ",
     Color = " ",
