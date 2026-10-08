@@ -421,12 +421,12 @@ elif [ -f "$XDG_CONFIG_HOME/starship.toml" ]; then
 fi
 ln -s "$TERMINAL_DIR/starship/starship.toml" "$XDG_CONFIG_HOME/starship.toml" && info "starship.toml link created"
 
-if [ -h "$XDG_CONFIG_HOME/kitty" ]; then
-    rm "$XDG_CONFIG_HOME/kitty"
-elif [ -d "$XDG_CONFIG_HOME/kitty" ]; then
-    mv "$XDG_CONFIG_HOME/kitty" "$XDG_CONFIG_HOME/kitty.bak"
+if [ -h "$XDG_CONFIG_HOME/wezterm" ]; then
+    rm "$XDG_CONFIG_HOME/wezterm"
+elif [ -d "$XDG_CONFIG_HOME/wezterm" ]; then
+    mv "$XDG_CONFIG_HOME/wezterm" "$XDG_CONFIG_HOME/wezterm.bak"
 fi
-ln -s "$TERMINAL_DIR/kitty" "$XDG_CONFIG_HOME/kitty" && info "kitty link created"
+ln -s "$TERMINAL_DIR/wezterm" "$XDG_CONFIG_HOME/wezterm" && info "wezterm link created"
 
 if [ -h "$XDG_CONFIG_HOME/delta" ]; then
     rm "$XDG_CONFIG_HOME/delta"
@@ -520,13 +520,13 @@ $ASDF plugin add yarn || error "Could not add yarn plugin"
 $ASDF install yarn latest || error "Error installing yarn version latest"
 $ASDF set -u yarn latest
 
-# Install Kitty terminal emulator
-info "Installing Kitty terminal emulator..."
+# Install WezTerm terminal emulator
+info "Installing WezTerm terminal emulator..."
 if [ -n "${SETUP_ON_MACOS-}" ]; then
-    if ! [ -f "$BREW_BIN/kitty" ]; then
-        $BREW install --cask kitty || error "Failed to install Kitty terminal emulator."
+    if ! [ -f "$BREW_BIN/wezterm" ]; then
+        $BREW install --cask wezterm || error "Failed to install WezTerm terminal emulator."
     else
-        info "Kitty is already installed. Skipping installation."
+        info "WezTerm is already installed. Skipping installation."
     fi
 else
     linux_font_install_dir="${HOME}/.local/bin"
@@ -537,18 +537,11 @@ else
     if [[ ! -d "$local_share_app" ]]; then
         mkdir -p "$local_share_app"
     fi
-    # Install kitty
-    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
-    # Create symbolic links to add kitty and kitten to PATH (assuming ~/.local/bin is in
-    # your system-wide PATH)
-    ln -sf "$HOME/.local/kitty.app/bin/kitty" "$HOME/.local/kitty.app/bin/kitten" "$linux_font_install_dir"
-    # Place the kitty.desktop file somewhere it can be found by the OS
-    cp "$HOME/.local/kitty.app/share/applications/kitty.desktop" "$HOME/.local/share/applications/"
-    # If you want to open text files and images in kitty via your file manager also add the kitty-open.desktop file
-    cp "$HOME/.local/kitty.app/share/applications/kitty-open.desktop" "$HOME/.local/share/applications/"
-    # Update the paths to the kitty and its icon in the kitty desktop file(s)
-    sed -i "s|Icon=kitty|Icon=/home/$USER/.local/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-    sed -i "s|Exec=kitty|Exec=/home/$USER/.local/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+
+    # Install WezTerm
+    info "Installing WezTerm terminal emulator..."
+    $BREW tap wezterm/wezterm-linuxbrew
+    $BREW install wezterm/wezterm-linuxbrew/wezterm
 fi
 
 # Add shell installed through homebrew and change the current user shell
